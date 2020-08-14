@@ -5,6 +5,21 @@ function love.load()
   math.randomseed(os.time())
   love.keyboard.keysPressed = {}
   debug = false
+
+  panel = Panel:init(
+    {},
+    {
+      x= 100,
+      y= 100,
+      width= 100,
+      height= 100
+    }
+  )
+
+  character = Character:init(
+    gCharacterTypes.knight
+  )
+
 end
 
 function love.keypressed(key)
@@ -30,8 +45,9 @@ end
 function love.draw()
   push:apply('start')
 
-  love.graphics.draw(portraits, gPortraits['1'], VIRTUAL_WIDTH/2, VIRTUAL_HEIGHT/2-20)
-  love.graphics.draw(icons, gIcons['1'], VIRTUAL_WIDTH/2, VIRTUAL_HEIGHT/2)
+  love.graphics.draw(icons, gIcons['knight'], VIRTUAL_WIDTH/2, VIRTUAL_HEIGHT/2)
+
+  panel:render(100, 100, 100, 100)
 
   push:apply('end')
 end

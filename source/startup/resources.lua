@@ -8,10 +8,21 @@ require 'source/utils/StateStack'
 require 'source/utils/animation'
 require 'source/utils/PrintTable'
 
+-- UI
+require 'source/panel'
+
+require 'source/character'
+require 'source/party'
+require 'source/names'
+
 gFonts = {
   ['default'] = love.graphics.newFont('source/assets/fonts/Reactor7.ttf', 16),
   ['default-large'] = love.graphics.newFont('source/assets/fonts/Reactor7.ttf', 32),
   ['default-small'] = love.graphics.newFont('source/assets/fonts/Reactor7.ttf', 8)
+}
+
+gPanels = {
+  ['panel'] = love.graphics.newImage('source/assets/ui/panel.png')
 }
 
 portraits = love.graphics.newImage('source/assets/spritesheets/portraits.png')
@@ -28,10 +39,13 @@ gPortraits =  {
 icons = love.graphics.newImage('source/assets/spritesheets/char-icons.png')
 
 gIcons =  {
-  ['1'] = love.graphics.newQuad(0,0,16,16, icons:getDimensions()),
+  ['knight'] = love.graphics.newQuad(32,96,16,16, icons:getDimensions()),
   ['2'] = love.graphics.newQuad(16,0,16,16, icons:getDimensions()),
   ['3'] = love.graphics.newQuad(32,0,16,16, icons:getDimensions()),
   ['4'] = love.graphics.newQuad(64,0,16,16, icons:getDimensions()),
   ['5'] = love.graphics.newQuad(0,16,16,16, icons:getDimensions()),
   ['6'] = love.graphics.newQuad(16,16,16,16, icons:getDimensions()),
 }
+
+require 'source/characterTypes'
+
