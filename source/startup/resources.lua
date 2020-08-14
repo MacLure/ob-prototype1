@@ -12,6 +12,7 @@ require 'source/utils/PrintTable'
 require 'source/panel'
 
 require 'source/character'
+require 'source/unit'
 require 'source/party'
 require 'source/names'
 
@@ -40,7 +41,7 @@ icons = love.graphics.newImage('source/assets/spritesheets/char-icons.png')
 
 gIcons =  {
   ['knight'] = love.graphics.newQuad(32,96,16,16, icons:getDimensions()),
-  ['2'] = love.graphics.newQuad(16,0,16,16, icons:getDimensions()),
+  ['mage'] = love.graphics.newQuad(0,112,16,16, icons:getDimensions()),
   ['3'] = love.graphics.newQuad(32,0,16,16, icons:getDimensions()),
   ['4'] = love.graphics.newQuad(64,0,16,16, icons:getDimensions()),
   ['5'] = love.graphics.newQuad(0,16,16,16, icons:getDimensions()),

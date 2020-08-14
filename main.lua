@@ -16,9 +16,24 @@ function love.load()
     }
   )
 
-  character = Character:init(
+  character1 = Character:init(
     gCharacterTypes.knight
   )
+
+  character2 = Character:init(
+    gCharacterTypes.mage
+  )
+
+  unit = Unit:init()
+  unit:addCharacter(character1)
+  unit:addCharacter(character2)
+  unit:assignLeader(character1)
+
+  print(unit.characters[1].name, unit.characters[1].class)
+  print(unit.characters[2].name, unit.characters[2].class)
+  print(unit:remainingCapacity())
+  print(unit.leader.name)
+
 
 end
 
