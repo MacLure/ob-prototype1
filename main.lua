@@ -24,15 +24,17 @@ function love.load()
     gCharacterTypes.mage
   )
 
+  party = Party:init()
   unit = Unit:init()
   unit:addCharacter(character1)
   unit:addCharacter(character2)
   unit:assignLeader(character1)
+  party:addUnit(unit)
 
-  print(unit.characters[1].name, unit.characters[1].class)
-  print(unit.characters[2].name, unit.characters[2].class)
-  print(unit:remainingCapacity())
-  print(unit.leader.name)
+  print(party.units[1].characters[1].name, party.units[1].characters[1].class)
+  print(party.units[1].characters[2].name, party.units[1].characters[2].class)
+  print(party.units[1]:remainingCapacity())
+  print(party.units[1].leader.name)
 
 
 end

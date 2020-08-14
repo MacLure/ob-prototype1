@@ -1,11 +1,12 @@
 Unit = Class{}
 
-function Unit:init(def)
+function Unit:init(def, party)
   local this = {
     characters = {},
     leader = {},
     capacity = 5,
-    size = 0
+    size = 0,
+    party = party
   }
 
   this.mapIcon = this.leader.icon
@@ -26,4 +27,9 @@ end
 
 function Unit:assignLeader(leader)
   self.leader = leader
+end
+
+function Unit:removeCharacter(character)
+  -- TODO: remove character from unit
+  self.party:addReserveCharacter(character)
 end
