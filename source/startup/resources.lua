@@ -24,3 +24,14 @@ gPortraits =  {
   ['5'] = love.graphics.newQuad(0,248,64,63, portraits:getDimensions()),
   ['6'] = love.graphics.newQuad(0,312,64,63, portraits:getDimensions()),
 }
+
+icons = love.graphics.newImage('source/assets/spritesheets/char-icons.png')
+
+gIcons =  {
+  ['1'] = love.graphics.newQuad(0,0,16,16, icons:getDimensions()),
+  ['2'] = love.graphics.newQuad(16,0,16,16, icons:getDimensions()),
+  ['3'] = love.graphics.newQuad(32,0,16,16, icons:getDimensions()),
+  ['4'] = love.graphics.newQuad(64,0,16,16, icons:getDimensions()),
+  ['5'] = love.graphics.newQuad(0,16,16,16, icons:getDimensions()),
+  ['6'] = love.graphics.newQuad(16,16,16,16, icons:getDimensions()),
+}
