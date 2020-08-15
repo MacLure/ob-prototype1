@@ -1,11 +1,12 @@
 Panel = Class{}
 
-function Panel:init(params, layoutParams)
+function Panel:init(params, dimensions, color)
   local this = {
     quads = {},
     tiles = {},
     gradientData = love.image.newImageData(1, 2),
-    name = layoutParams
+    name = dimensions,
+    color = color or {0.05,0.05,0.5}
   }
   if params.texture then
     this.texture = params.texture
@@ -17,7 +18,7 @@ function Panel:init(params, layoutParams)
   this.textureHeight = this.texture:getHeight()
   this.tileSize = this.texture:getWidth() / 3
 
-  this.gradientData:setPixel(0, 0, 0.05,0.05,0.5,1)
+  this.gradientData:setPixel(0, 0, this.color ,1)
   this.gradientData:setPixel(0, 1, 0,0,0,1)
   this.gradient = love.graphics.newImage(this.gradientData)
   this.gradient:setFilter("linear")

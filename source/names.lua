@@ -38,8 +38,8 @@ gNames.randomJapanesePlace = function()
   }
 
   local suffixes = {
-    "kawa","gawa","sawa","zawa","saki","zaki",
-    "hama","yama","machi","do","shima","tani"
+    "kawa","gawa","sawa","zawa","saki","zaki","do",
+    "hama","yama","machi","shima","jima","tani"
   }
 
   local length = math.random(2,4)

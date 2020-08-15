@@ -1,12 +1,12 @@
 -- STATES: GAME
-require 'source/states/game/BaseState'
+require 'source/states/game/baseState'
 
 -- UTILITIES & HELPERS
 require 'source/utils/helpers'
-require 'source/utils/StateMachine'
-require 'source/utils/StateStack'
+require 'source/utils/stateMachine'
+require 'source/utils/stateStack'
 require 'source/utils/animation'
-require 'source/utils/PrintTable'
+require 'source/utils/printTable'
 
 -- UI
 require 'source/panel'
