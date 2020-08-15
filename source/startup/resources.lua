@@ -1,5 +1,6 @@
 -- STATES: GAME
 require 'source/states/game/baseState'
+require 'source/states/game/battleState'
 
 -- UTILITIES & HELPERS
 require 'source/utils/helpers'

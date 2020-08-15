@@ -6,26 +6,7 @@ function love.load()
   love.keyboard.keysPressed = {}
   debug = false
 
-  panel = Panel:init(
-    {},
-    {
-      x= 100,
-      y= 100,
-      width= 100,
-      height= 100
-    }
-  )
-
-  panel2 = Panel:init(
-    {},
-    {
-      x= 200,
-      y= 100,
-      width= 100,
-      height= 100
-    },
-    {0.5,0.01,0.01}
-  )
+  stack = StateStack:init()
 
   character1 = Character:init(
     gCharacterTypes.knight
@@ -98,6 +79,8 @@ function love.load()
   print(gNames.randomJapanesePlace())
 
   push:resize(love.graphics.getDimensions( ))
+
+  stack:push(BattleState:init())
 end
 
 function love.keypressed(key)
@@ -113,6 +96,8 @@ function love.keyboard.wasPressed(key)
 end
 
 function love.update()
+  stack:update(dt)
+
   if love.keyboard.wasPressed('escape') then   
     love.event.quit()
   end
@@ -123,37 +108,7 @@ end
 function love.draw()
   push:apply('start')
 
-  love.graphics.draw(gBattleSpriteSheets['knight'], gBattleSprites['knight2'], 265, 030)
-  love.graphics.draw(gBattleSpriteSheets['knight'], gBattleSprites['knight2'], 225, 050)
-  love.graphics.draw(gBattleSpriteSheets['cleric'], gBattleSprites['cleric2'], 335, 070)
-  love.graphics.draw(gBattleSpriteSheets['dragon'], gBattleSprites['dragon2'], 275, 080)
-  love.graphics.draw(gBattleSpriteSheets['ninja'], gBattleSprites['ninja2'], 250, 80)
-
-  love.graphics.draw(gBattleSpriteSheets['knight'], gBattleSprites['knight1'], 115, 130)
-  love.graphics.draw(gBattleSpriteSheets['knight'], gBattleSprites['knight1'], 75, 150)
-  love.graphics.draw(gBattleSpriteSheets['cleric'], gBattleSprites['cleric1'], 186, 170)
-  love.graphics.draw(gBattleSpriteSheets['dragon'], gBattleSprites['dragon1'], 125, 180)
-  love.graphics.draw(gBattleSpriteSheets['ninja'], gBattleSprites['ninja1'], 100, 180)
-
-  panel:render(300, 150, 200, 110)
-
-  local ySpacing = 0
-  love.graphics.setFont(gFonts['default'])
-
-  for i in ipairs(party.units[1].characters) do
-    love.graphics.draw(icons, party.units[1].characters[i].icon, 310, 160 + ySpacing)
-    printWithShadow(party.units[1].characters[i].name, 332, 160 + ySpacing, 100, "left")
-    ySpacing = ySpacing + 20
-  end
-
-  panel2:render(400, 25, 100, 110)
-  ySpacing = 0
-
-  for i in ipairs(unit2.characters) do
-    love.graphics.draw(icons, unit2.characters[i].icon, 410, 35 + ySpacing)
-    printWithShadow(unit2.characters[i].name, 432, 35 + ySpacing, 100, "left")
-    ySpacing = ySpacing + 20
-  end
+  stack:render(dt)
 
   push:apply('end')
 end
