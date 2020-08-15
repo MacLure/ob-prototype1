@@ -19,23 +19,48 @@ function love.load()
   character1 = Character:init(
     gCharacterTypes.knight
   )
-
   character2 = Character:init(
     gCharacterTypes.mage
   )
 
+  character3 = Character:init(
+    gCharacterTypes.knight
+  )
+  character4 = Character:init(
+    gCharacterTypes.mage
+  )
+
   party = Party:init()
-  unit = Unit:init()
-  unit:addCharacter(character1)
-  unit:addCharacter(character2)
-  unit:assignLeader(character1)
-  party:addUnit(unit)
 
-  print(party.units[1].characters[1].name, party.units[1].characters[1].class)
-  print(party.units[1].characters[2].name, party.units[1].characters[2].class)
-  print(party.units[1]:remainingCapacity())
-  print(party.units[1].leader.name)
+  unit1 = Unit:init(party)
+  unit2 = Unit:init(party)
 
+  unit1:addCharacter(character1)
+  unit1:addCharacter(character2)
+  unit1:assignLeader(character1)
+
+  unit2:addCharacter(character3)
+  unit2:addCharacter(character4)
+  unit2:assignLeader(character4)
+
+  party:addUnit(unit1)
+  party:addUnit(unit2)
+
+  unit2:removeCharacter(character3)
+
+    -- print(#party.units[2].characters)
+    -- print(#party.reserveCharacters)
+
+  -- print(party.units[1].leader.name)
+  -- print(party.units[2].leader.name)
+  print(randomJapanesePlaceName())
+  print(randomJapanesePlaceName())
+  print(randomJapanesePlaceName())
+  print(randomJapanesePlaceName())
+  print(randomJapanesePlaceName())
+  print(randomJapanesePlaceName())
+  print(randomJapanesePlaceName())
+  print(randomJapanesePlaceName())
 
 end
 
@@ -61,8 +86,6 @@ end
 
 function love.draw()
   push:apply('start')
-
-  love.graphics.draw(icons, gIcons['knight'], VIRTUAL_WIDTH/2, VIRTUAL_HEIGHT/2)
 
   panel:render(100, 100, 100, 100)
 

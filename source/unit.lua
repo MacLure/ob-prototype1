@@ -1,6 +1,6 @@
 Unit = Class{}
 
-function Unit:init(def, party)
+function Unit:init(party)
   local this = {
     characters = {},
     leader = {},
@@ -30,6 +30,8 @@ function Unit:assignLeader(leader)
 end
 
 function Unit:removeCharacter(character)
-  -- TODO: remove character from unit
+  local characterIndex = getIndex(self.characters, character)
+  table.remove(self.characters, characterIndex)
+
   self.party:addReserveCharacter(character)
 end
