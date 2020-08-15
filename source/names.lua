@@ -1,19 +1,22 @@
-gHumanNames = {
+gNames = {}
+
+gNames.randomHuman = {
   "George", "Judy", "Rania", "Samia", "Alphonse"
 }
 
-gPlaceNames = {
-  "George", "Judy", "Rania", "Samia", "Alphonse"
-}
+gNames.pickRandomHuman = function()
+  local name = gNames.randomHuman[math.random(#gNames.randomHuman)]
+  local nameIndex = getIndex(gNames.randomHuman, name)
+  
+  return name
+end
+  
+gNames.vowels = {"a","e","i","o","u"}
+gNames.consonants = {"b","c","d","f","g","h","j","k","l","m","n","p","q","r","s","t","v","w","x","y","z"}
+gNames.punctuation = {"'","-"}
+gNames.dipthongs = {}
 
-
-vowels = {"a","e","i","o","u"}
-consonants = {"b","c","d","f","g","h","j","k","l","m","n","p","q","r","s","t","v","w","x","y","z"}
-punctuation = {"'","-"}
-dipthongs = {}
-
-
-function randomJapanesePlaceName()
+gNames.randomJapanesePlace = function()
   local syllables = {
     "a","i","u","e","o",
     "ka","ki","ku","ke","ko",
@@ -28,12 +31,13 @@ function randomJapanesePlaceName()
     "cha","chu","cho",
     -- "nya","nyu","nyo",
     -- "mya","myu","myo",
-    "rya","ryu","ryo"
+    -- "rya",
+    "ryu","ryo"
   }
 
   local suffixes = {
     "kawa","gawa","sawa","zawa","saki","zaki",
-    "hama","yama","machi","do","shima"
+    "hama","yama","machi","do","shima","tani"
   }
 
   local length = math.random(2,4)

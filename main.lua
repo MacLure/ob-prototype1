@@ -53,14 +53,14 @@ function love.load()
 
   -- print(party.units[1].leader.name)
   -- print(party.units[2].leader.name)
-  print(randomJapanesePlaceName())
-  print(randomJapanesePlaceName())
-  print(randomJapanesePlaceName())
-  print(randomJapanesePlaceName())
-  print(randomJapanesePlaceName())
-  print(randomJapanesePlaceName())
-  print(randomJapanesePlaceName())
-  print(randomJapanesePlaceName())
+  print(gNames.randomJapanesePlace())
+  print(gNames.randomJapanesePlace())
+  print(gNames.randomJapanesePlace())
+  print(gNames.randomJapanesePlace())
+  print(gNames.randomJapanesePlace())
+  print(gNames.randomJapanesePlace())
+  print(gNames.randomJapanesePlace())
+  print(gNames.randomJapanesePlace())
 
 end
 
