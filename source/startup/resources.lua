@@ -42,10 +42,29 @@ icons = love.graphics.newImage('source/assets/spritesheets/char-icons.png')
 gIcons =  {
   ['knight'] = love.graphics.newQuad(32,96,16,16, icons:getDimensions()),
   ['mage'] = love.graphics.newQuad(0,112,16,16, icons:getDimensions()),
-  ['3'] = love.graphics.newQuad(32,0,16,16, icons:getDimensions()),
-  ['4'] = love.graphics.newQuad(64,0,16,16, icons:getDimensions()),
-  ['5'] = love.graphics.newQuad(0,16,16,16, icons:getDimensions()),
+  ['dragon'] = love.graphics.newQuad(48,64,16,16, icons:getDimensions()),
+  ['cleric'] = love.graphics.newQuad(32,64,16,16, icons:getDimensions()),
+  ['ninja'] = love.graphics.newQuad(64,64,16,16, icons:getDimensions()),
   ['6'] = love.graphics.newQuad(16,16,16,16, icons:getDimensions()),
+}
+
+gBattleSpriteSheets = {
+  ['knight'] = love.graphics.newImage('source/assets/spritesheets/knight.png'),
+  ['cleric'] = love.graphics.newImage('source/assets/spritesheets/cleric.png'),
+  ['dragon'] = love.graphics.newImage('source/assets/spritesheets/dragon.png'),
+  ['ninja'] = love.graphics.newImage('source/assets/spritesheets/ninja.png'),
+}
+
+gBattleSprites = {
+  ['knight1'] = love.graphics.newQuad(0,0,gBattleSpriteSheets['knight']:getWidth()/2,gBattleSpriteSheets['knight']:getHeight(), gBattleSpriteSheets['knight']:getDimensions()),
+  ['cleric1'] = love.graphics.newQuad(0,0,gBattleSpriteSheets['cleric']:getWidth()/2,gBattleSpriteSheets['cleric']:getHeight(), gBattleSpriteSheets['cleric']:getDimensions()),
+  ['dragon1'] = love.graphics.newQuad(0,0,gBattleSpriteSheets['dragon']:getWidth()/2,gBattleSpriteSheets['dragon']:getHeight(), gBattleSpriteSheets['dragon']:getDimensions()),
+  ['ninja1'] = love.graphics.newQuad(0,0,gBattleSpriteSheets['ninja']:getWidth()/2,gBattleSpriteSheets['ninja']:getHeight(), gBattleSpriteSheets['ninja']:getDimensions()),
+
+  ['knight2'] = love.graphics.newQuad(gBattleSpriteSheets['knight']:getWidth()/2,0,gBattleSpriteSheets['knight']:getWidth()/2,gBattleSpriteSheets['knight']:getHeight(), gBattleSpriteSheets['knight']:getDimensions()),
+  ['cleric2'] = love.graphics.newQuad(gBattleSpriteSheets['cleric']:getWidth()/2,0,gBattleSpriteSheets['cleric']:getWidth()/2,gBattleSpriteSheets['cleric']:getHeight(), gBattleSpriteSheets['cleric']:getDimensions()),
+  ['dragon2'] = love.graphics.newQuad(gBattleSpriteSheets['dragon']:getWidth()/2,0,gBattleSpriteSheets['dragon']:getWidth()/2,gBattleSpriteSheets['dragon']:getHeight(), gBattleSpriteSheets['dragon']:getDimensions()),
+  ['ninja2'] = love.graphics.newQuad(gBattleSpriteSheets['ninja']:getWidth()/2,0,gBattleSpriteSheets['ninja']:getWidth()/2,gBattleSpriteSheets['ninja']:getHeight(), gBattleSpriteSheets['ninja']:getDimensions()),
 }
 
 require 'source/characterTypes'

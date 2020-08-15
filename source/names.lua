@@ -1,7 +1,9 @@
 gNames = {}
 
 gNames.randomHuman = {
-  "George", "Judy", "Rania", "Samia", "Alphonse"
+  "George", "Judy", "Rania", "Samia", "Alphonse",
+  "Carlos", "Stella", "Grace", "Sheldon", "Harietta",
+
 }
 
 gNames.pickRandomHuman = function()
@@ -24,14 +26,14 @@ gNames.randomJapanesePlace = function()
     "ta","chi","tsu","te","to",
     "na","ni","nu","ne","no",
     "ma","mi","mu","me","mo",
-    "ya","yu","yo","wa","n",
+    "ya","yu","yo","wa",
     "ra","ri","ru","re","ro",
     "kya","kyu","kyo",
     -- "sha","shu","sho",
     "cha","chu","cho",
     -- "nya","nyu","nyo",
     -- "mya","myu","myo",
-    -- "rya",
+    -- "rya","n",
     "ryu","ryo"
   }
 
@@ -56,5 +58,5 @@ gNames.randomJapanesePlace = function()
     nameString = nameString .. suffixes[math.random(#suffixes)]
   end
 
-  return nameString
+  return capitalize(nameString)
 end

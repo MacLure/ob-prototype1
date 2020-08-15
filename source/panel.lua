@@ -17,7 +17,7 @@ function Panel:init(params, layoutParams)
   this.textureHeight = this.texture:getHeight()
   this.tileSize = this.texture:getWidth() / 3
 
-  this.gradientData:setPixel(0, 0, 0.33,0.1,0.1,1)
+  this.gradientData:setPixel(0, 0, 0.05,0.05,0.5,1)
   this.gradientData:setPixel(0, 1, 0,0,0,1)
   this.gradient = love.graphics.newImage(this.gradientData)
   this.gradient:setFilter("linear")
