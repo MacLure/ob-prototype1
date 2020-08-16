@@ -284,12 +284,15 @@ end
 
 gNames.randomArabicPlace = function()
   -- UNNATURAL NAMES
-  -- Wadi-iiiisz
   --Fitunnm
   --Bikkj
+  --Al-ra'aaat, Wadi-iiiisz : too many consecutive same vowels
   local adjab = {"a","i","b","d","f","g","gh","h","j","k","kh","l","m","n","q","r","s","t","w","z"}
   local initialDiacritics = {"a","i","u"}
-  local diacritics = {"a","i","u","double","circle"}
+  local diacritics = {"a","i","u","double","circle", "hamza"}
+  local suffixes = {"ah","iyyah"}
+  local prefixes = {"al-"}
+
 
   local nameString = ""
 
@@ -325,11 +328,18 @@ gNames.randomArabicPlace = function()
       syllables[i] = syllable .. diacritic
     elseif diacritic == "double" then
       if string.len(syllable) > 1 then
-        syllable[i] = syllable
+        syllables[i] = syllable
       else
         syllables[i] = syllable .. syllable
       end
     elseif diacritic == "circle" then
+      syllables[i] = syllable
+    elseif diacritic == "hamza" then
+      if syllable == "a" then
+        syllable = "'a"
+      elseif syllable == "i" then
+        syllable = "'i"
+      end
       syllables[i] = syllable
     end
 
@@ -343,22 +353,15 @@ gNames.randomArabicPlace = function()
     nameString = nameString .. adjab[math.random(#adjab)]
   end
 
-  if math.random(2) > 1 then
-    local prefixes = {"wadi-"}
-
-    -- DOESN'T WORK
-    if string.sub(nameString, 1) == "n" or
-      string.sub(nameString, 1) == "z" or
-      string.sub(nameString, 1) == "s" or
-      string.sub(nameString, 1) == "f" or 
-      string.sub(nameString, 1) == "d"
-    then
-      table.insert(prefixes, "a" .. string.sub(nameString, 1) .. "-")
-    else
-      table.insert(prefixes, "al-")
-    end
-    nameString = prefixes[math.random(#prefixes)] .. nameString
+  if math.random(3) == 1 then
+    nameString = nameString .. suffixes[math.random(#suffixes)]
   end
+
+  if math.random(3) == 1 then
+    nameString =  prefixes[math.random(#prefixes)] .. nameString
+  end
+
+  
 
   return capitalize(nameString)
 end
