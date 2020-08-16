@@ -73,14 +73,33 @@ function love.load()
   print(gNames.randomJapanesePlace())
   print(gNames.randomJapanesePlace())
   print(gNames.randomJapanesePlace())
-  print(gNames.randomJapanesePlace())
-  print(gNames.randomJapanesePlace())
-  print(gNames.randomJapanesePlace())
-  print(gNames.randomJapanesePlace())
+  print "--------------------------"
+  print(gNames.randomChinesePlace())
+  print(gNames.randomChinesePlace())
+  print(gNames.randomChinesePlace())
+  print(gNames.randomChinesePlace())
+  print "--------------------------"
+  print(gNames.randomGreekPlace())
+  print(gNames.randomGreekPlace())
+  print(gNames.randomGreekPlace())
+  print(gNames.randomGreekPlace())
+  print(gNames.randomGreekPlace())
+  print(gNames.randomGreekPlace())
+  print(gNames.randomGreekPlace())
+  print(gNames.randomGreekPlace())
+  print "--------------------------"
+  print(gNames.randomKoreanPlace())
+  print(gNames.randomKoreanPlace())
+  print(gNames.randomKoreanPlace())
+  print(gNames.randomKoreanPlace())
+  print(gNames.randomKoreanPlace())
 
+  
   push:resize(love.graphics.getDimensions( ))
 
-  stack:push(BattleState:init())
+  -- stack:push(BattleState:init())
+  stack:push(EncounterState:init())
+
 end
 
 function love.keypressed(key)

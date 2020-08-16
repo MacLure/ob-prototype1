@@ -51,11 +51,11 @@ function BattleState:render(dt)
   love.graphics.draw(gBattleSpriteSheets['dragon'], gBattleSprites['dragon2'], 275, 080)
   love.graphics.draw(gBattleSpriteSheets['ninja'], gBattleSprites['ninja2'], 250, 80)
 
-  love.graphics.draw(gBattleSpriteSheets['knight'], gBattleSprites['knight1'], 115, 130)
-  love.graphics.draw(gBattleSpriteSheets['knight'], gBattleSprites['knight1'], 75, 150)
-  love.graphics.draw(gBattleSpriteSheets['cleric'], gBattleSprites['cleric1'], 186, 170)
-  love.graphics.draw(gBattleSpriteSheets['dragon'], gBattleSprites['dragon1'], 125, 180)
-  love.graphics.draw(gBattleSpriteSheets['ninja'], gBattleSprites['ninja1'], 100, 180)
+  love.graphics.draw(gBattleSpriteSheets['knight'], gBattleSprites['knight1'], 115, 150)
+  love.graphics.draw(gBattleSpriteSheets['knight'], gBattleSprites['knight1'], 75, 170)
+  love.graphics.draw(gBattleSpriteSheets['cleric'], gBattleSprites['cleric1'], 186, 190)
+  love.graphics.draw(gBattleSpriteSheets['dragon'], gBattleSprites['dragon1'], 125, 200)
+  love.graphics.draw(gBattleSpriteSheets['ninja'], gBattleSprites['ninja1'], 100, 200)
 
   self.enemyPanel:render(300, 150, 200, 110)
 
