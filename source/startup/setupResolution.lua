@@ -1,6 +1,6 @@
 love.graphics.setDefaultFilter('nearest', 'nearest')
 
-local pixelScaleIndex = 2
+local pixelScaleIndex = 1
 local pixelScales = {
   {640, 360},
   {512, 288},

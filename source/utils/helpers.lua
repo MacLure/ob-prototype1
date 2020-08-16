@@ -24,6 +24,15 @@ function getIndex(table, item)
   return index[item]
 end
 
+function contains(table, value)
+  for index, v in ipairs(table) do
+    if v == value then
+      return true
+    end
+  end
+  return false
+end
+
 function printWithShadow(text, x, y, width, alignment, color)
   local textColor = color or {1,1,1}
   love.graphics.setColor( 0,0,0,0.5 )

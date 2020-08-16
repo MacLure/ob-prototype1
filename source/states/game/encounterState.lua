@@ -13,6 +13,18 @@ function EncounterState:init(stack, def)
     }
   )
 
+  this.storyPanel = Panel:init(
+    {},
+    {
+      x= 100,
+      y= 100,
+      width= 100,
+      height= 100
+    },
+    {0.3,0.3,0.3}
+  )
+
+
   setmetatable(this, self)
   return this
 end
@@ -50,5 +62,9 @@ function EncounterState:render(dt)
     printWithShadow(party.units[1].characters[i].name, 332, 160 + ySpacing, 100, "left")
     ySpacing = ySpacing + 20
   end
+
+  self.storyPanel:render(80, 25, 300, 110)
+
+  love.graphics.draw(portraits, gPortraits['1'], 320, 36)
 
 end

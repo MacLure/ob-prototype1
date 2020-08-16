@@ -1,7 +1,3 @@
--- STATES: GAME
-require 'source/states/game/baseState'
-require 'source/states/game/battleState'
-require 'source/states/game/encounterState'
 
 -- UTILITIES & HELPERS
 require 'source/utils/helpers'
@@ -9,6 +5,12 @@ require 'source/utils/stateMachine'
 require 'source/utils/stateStack'
 require 'source/utils/animation'
 require 'source/utils/printTable'
+
+-- STATES: GAME
+require 'source/states/game/baseState'
+require 'source/states/game/battleState'
+require 'source/states/game/encounterState'
+require 'source/states/game/worldMapState'
 
 -- UI
 require 'source/panel'
@@ -28,15 +30,26 @@ gPanels = {
   ['panel'] = love.graphics.newImage('source/assets/ui/panel.png')
 }
 
+worldTiles = love.graphics.newImage('source/assets/tilesets/worldMap.png')
+mapEdge = love.graphics.newImage('source/assets/tilesets/mapEdge.png')
+
+hud = love.graphics.newImage('source/assets/ui/hud.png')
+
 portraits = love.graphics.newImage('source/assets/spritesheets/portraits.png')
 
 gPortraits =  {
   ['1'] = love.graphics.newQuad(0,0,64,63, portraits:getDimensions()),
-  ['2'] = love.graphics.newQuad(0,64,64,63, portraits:getDimensions()),
-  ['3'] = love.graphics.newQuad(0,128,64,63, portraits:getDimensions()),
-  ['4'] = love.graphics.newQuad(0,192,64,63, portraits:getDimensions()),
-  ['5'] = love.graphics.newQuad(0,248,64,63, portraits:getDimensions()),
-  ['6'] = love.graphics.newQuad(0,312,64,63, portraits:getDimensions()),
+  ['2'] = love.graphics.newQuad(64,0,64,63, portraits:getDimensions()),
+  ['3'] = love.graphics.newQuad(128,0,64,63, portraits:getDimensions()),
+  ['4'] = love.graphics.newQuad(192,0,64,63, portraits:getDimensions()),
+  ['5'] = love.graphics.newQuad(256,0,64,63, portraits:getDimensions()),
+  ['6'] = love.graphics.newQuad(320,0,64,63, portraits:getDimensions()),
+
+  ['7'] = love.graphics.newQuad(0,63,64,63, portraits:getDimensions()),
+  ['8'] = love.graphics.newQuad(0,126,64,63, portraits:getDimensions()),
+  ['9'] = love.graphics.newQuad(0,189,64,63, portraits:getDimensions()),
+  ['10'] = love.graphics.newQuad(0,252,64,63, portraits:getDimensions()),
+  ['11'] = love.graphics.newQuad(0,315,64,63, portraits:getDimensions()),
 }
 
 icons = love.graphics.newImage('source/assets/spritesheets/char-icons.png')

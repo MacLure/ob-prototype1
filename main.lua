@@ -93,12 +93,44 @@ function love.load()
   print(gNames.randomKoreanPlace())
   print(gNames.randomKoreanPlace())
   print(gNames.randomKoreanPlace())
+  print "--------------------------"
+  print(gNames.randomNahuatlPlace())
+  print(gNames.randomNahuatlPlace())
+  print(gNames.randomNahuatlPlace())
+  print(gNames.randomNahuatlPlace())
+  print(gNames.randomNahuatlPlace())
+  print "--------------------------"
+  print(gNames.randomGermanPlace())
+  print(gNames.randomGermanPlace())
+  print(gNames.randomGermanPlace())
+  print(gNames.randomGermanPlace())
+  print(gNames.randomGermanPlace())
+  print "--------------------------"
+  print(gNames.randomEnglishPlace())
+  print(gNames.randomEnglishPlace())
+  print(gNames.randomEnglishPlace())
+  print(gNames.randomEnglishPlace())
+  print(gNames.randomEnglishPlace())
+  print "--------------------------"
+  print(gNames.randomFrenchPlace())
+  print(gNames.randomFrenchPlace())
+  print(gNames.randomFrenchPlace())
+  print(gNames.randomFrenchPlace())
+  print(gNames.randomFrenchPlace())
+  print "--------------------------"
+  print(gNames.randomArabicPlace())
+  print(gNames.randomArabicPlace())
+  print(gNames.randomArabicPlace())
+  print(gNames.randomArabicPlace())
+  print(gNames.randomArabicPlace())
 
+  
   
   push:resize(love.graphics.getDimensions( ))
 
   -- stack:push(BattleState:init())
-  stack:push(EncounterState:init())
+  -- stack:push(EncounterState:init())
+  stack:push(WorldMapState:init())
 
 end
 
