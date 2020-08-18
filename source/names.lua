@@ -256,7 +256,7 @@ gNames.randomFrenchPlace = function()
   local initialConsonants = {"ch","d","f","fr","g","l","m","s","t","tr","p","pr","v"}
   local vowels = {"a","o","ou","u","i","ie"}
   local finalConsonants = {"n","r","rs","s","n","nt","vr","tr","pr","cr"}
-  local prefixes = {"saint-","mont"}
+  -- local prefixes = {"saint-","mont"}
   local vowelSuffixes = {
     "y","e","es","eau","eaux","eille","eilles",
     "ien","ienne","iennes","on","ac",
@@ -264,7 +264,6 @@ gNames.randomFrenchPlace = function()
   local consonantSuffixes = {
     "s","chy","ry","lly","gne","gnon","tes","te"
   }
-
 
   local nameString = ""
 
@@ -274,11 +273,16 @@ gNames.randomFrenchPlace = function()
     local syllable = ""
     local initial = ""
 
-    if i == i and math.random(2) == 1 then
-      initial = initialConsonants[math.random(#initialConsonants)]
+    if i == i then
+      if math.random(2) == 1 then
+        initial = initialConsonants[math.random(#initialConsonants)]
+        syllable = syllable .. initial .. vowels[math.random(#vowels)]
+      else
+        local initialVowels = {"a","o","ou","u","i"}
+        syllable = syllable .. initialVowels[math.random(#initialVowels)]
+      end
     end
-    
-    syllable = syllable .. initial .. vowels[math.random(#vowels)]
+
     if i < length or math.random(2) == 1 then
       syllable = syllable .. finalConsonants[math.random(#finalConsonants)]
     end
@@ -302,6 +306,14 @@ gNames.randomFrenchPlace = function()
     local final = {"s","tes","y"}
     nameString = nameString .. final[math.random(#final)]
   end
+
+  -- if math.random(3) == 1 then
+  --   prefix = prefixes[math.random(#prefixes)]
+  --   if string.sub(prefix, -1) == "-" then
+  --     nameString = capitalize(nameString)
+  --   end
+  --   nameString = prefix .. nameString
+  -- end
 
   return capitalize(nameString)
 end
@@ -390,10 +402,24 @@ gNames.randomArabicPlace = function()
 end
 
 gNames.randomKoreanPlace = function()
-  local initials = {"g","n","d","r","m","b","s","j","ch","k","t","p","h"}
-  local medials = {"a","ya","eo","yeo","o","yo","yu","yu","eu","i","yae"}
+  local initials = {
+    "ga","gya","geo","gyeo","go","gyo","gyu","geu","gi","gae",
+    "na","nya","neo","nyeo","no","nyo","nyu","neu","ni","nae",
+    "da","dya","deo","dyeo","do","dyo","dyu","deu","di","dae",
+    "ra","rya","reo","ryeo","ro","ryo","ryu","reu","ri","rae",
+    "ma","mya","meo","myeo","mo","myo","myu","meu","mi","mae",
+    "ba","bya","beo","byeo","bo","byo","byu","beu","bi","bae",
+    "sa","sya","seo","syeo","so","syo","syu","seu","si","sae",
+    "ya","yeo","yo","yu","yeu","yi","yae",
+    "ja","jeo","jo","ju","jeu","ji","jae",
+    "cha","cheo","cho","chu","cheu","chi","chae",
+    "ka","kya","keo","kyeo","ko","kyo","kyu","keu","ki","kae",
+    "ta","tya","teo","tyeo","to","tyo","tyu","teu","ti","tae",
+    "pa","pya","peo","pyeo","po","pyo","pyu","peu","pi","pae",
+    "ha","hya","heo","hyeo","ho","hyo","hyu","heu","hi","hae",
+  }
   local finals = {"k","ng","n","p","l","m"}
-
+  
   local syllables = {"",""}
 
   for i = 1, 2 do
@@ -402,16 +428,14 @@ gNames.randomKoreanPlace = function()
     if math.random(3) > 2 then
       initial = ""
     end
-    
-    local medial = medials[math.random(#medials)]
-  
+      
     local final = finals[math.random(#finals)]
     
     if math.random(3) > 2 then
       final = ""
     end
 
-    syllables[i] = initial .. medial .. final
+    syllables[i] = initial .. final
   end
 
   local nameString = syllables[1] .. syllables[2]
@@ -421,6 +445,7 @@ end
 
 gNames.randomBrazilianPlace = function()
   -- OFs occuring multiple times in a single name
+  -- too many short syllables, especially with "do.de"
   local prefixes = {"sao ","santa "}
   local consonants = {"b","c","d","j","l","m","p"}
   local vowels = {"oa","ao","a","e","i","o","oe"}
@@ -451,7 +476,7 @@ gNames.randomBrazilianPlace = function()
     end
   end
 
-  if math.random(2) == 1 then
+  if math.random(3) == 1 then
     nameString = nameString .. suffixes[math.random(#suffixes)]
   end
 
