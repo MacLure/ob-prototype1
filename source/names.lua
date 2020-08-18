@@ -70,6 +70,7 @@ end
 gNames.randomChinesePlace = function()
   --UNNATURAL NAMES:
   --Suele
+  --Chaonuan - how ua is handled, not after N
 
   local initials = {"j","h","zh","z","x","sh","s","ch","ts","q","g","n","m","t","d","p","l","w","y"}
   local finals = {"ai","an","ang","ao","iao","i","ian","iang","ing","iu","u","ua","uan","uang","ung","ui","ou","ue","oung","e","ei","eng","en","eng","ong"}
@@ -220,14 +221,14 @@ gNames.randomEnglishPlace = function()
   local vowels = {"o","e","a","i","igh","o","u","ugh","ea","ou","ough","oa","ear"}
   local finalConsonants = {"n","nt","th","r","p","s","st","rst","t","tt","tts"}
   local suffixes = {
-    "ford","shire","ton","borough","wich",
+    "ford","shire","ton","sborough","wich",
     "mouth","ham","thorpe","bury","hurst","hearst",
-    "ville", "bridge"
+    "ville","bridge","wood","thwait"
   }
 
   local nameString = ""
 
-  local length = math.random(2,3)
+  local length = math.random(1,2)
 
   for i = 1, length do
     local syllable = ""
@@ -237,11 +238,14 @@ gNames.randomEnglishPlace = function()
 
     if math.random(2) > 1 then
       syllable = syllable .. finalConsonants[math.random(#finalConsonants)]
+      if math.random(2) > 1 then
+        syllable = syllable .. "ing"
+      end
     end
     nameString = nameString .. syllable
   end
 
-  if length < 3 and math.random(2) > 1 then
+  if length < 2 and math.random(2) > 1 then
     nameString = nameString .. suffixes[math.random(#suffixes)]
   end
 
@@ -287,6 +291,7 @@ gNames.randomArabicPlace = function()
   --Fitunnm
   --Bikkj
   --Al-ra'aaat, Wadi-iiiisz : too many consecutive same vowels
+  -- ending on "jk"
   local adjab = {"a","i","b","d","f","g","gh","h","j","k","kh","l","m","n","q","r","s","t","w","z"}
   local initialDiacritics = {"a","i","u"}
   local diacritics = {"a","i","u","double","circle", "hamza"}
@@ -361,11 +366,8 @@ gNames.randomArabicPlace = function()
     nameString =  prefixes[math.random(#prefixes)] .. nameString
   end
 
-  
-
   return capitalize(nameString)
 end
-
 
 gNames.randomKoreanPlace = function()
   local initials = {"g","n","d","r","m","b","s","j","ch","k","t","p","h"}
@@ -393,6 +395,45 @@ gNames.randomKoreanPlace = function()
   end
 
   local nameString = syllables[1] .. syllables[2]
+
+  return capitalize(nameString)
+end
+
+gNames.randomBrazilianPlace = function()
+  -- OFs occuring multiple times in a single name
+  local prefixes = {"sao ","santa "}
+  local consonants = {"b","c","d","j","l","m","p"}
+  local vowels = {"oa","ao","a","e","i","o","oe"}
+  local suffixes = {"nha","nhao","lhao","lha","cao","sso","oso","hia","oas","aria","ania","minhas","eiro","eira","as"}
+  local ofs = {" do ", " de "}
+
+  local nameString = ""
+
+  length = math.random(2)
+
+  for i = 1, length do
+    local syllable = consonants[math.random(#consonants)] ..
+      vowels[math.random(#vowels)]
+      nameString = nameString .. syllable
+  end
+
+  if math.random(2) == 1 then
+    if math.random(2) == 1 then
+      local length2 = math.random(2)
+  
+      for i = 1, length2 do
+        local syllable2 = consonants[math.random(#consonants)] ..
+          vowels[math.random(#vowels)]
+          nameString = nameString .. ofs[math.random(#ofs)] .. syllable2
+      end
+    else
+      nameString = prefixes[math.random(#prefixes)] .. nameString
+    end
+  end
+
+  if math.random(2) == 1 then
+    nameString = nameString .. suffixes[math.random(#suffixes)]
+  end
 
   return capitalize(nameString)
 end
