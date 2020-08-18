@@ -410,11 +410,12 @@ gNames.randomKoreanPlace = function()
     "ma","mya","meo","myeo","mo","myo","myu","meu","mi","mae",
     "ba","bya","beo","byeo","bo","byo","byu","beu","bi","bae",
     "sa","sya","seo","syeo","so","syo","syu","seu","si","sae",
+    "a","i","o","u",
     "ya","yeo","yo","yu","yeu","yi","yae",
     "ja","jeo","jo","ju","jeu","ji","jae",
     "cha","cheo","cho","chu","cheu","chi","chae",
+    "ta","teo","to","teu","ti","tae",
     "ka","kya","keo","kyeo","ko","kyo","kyu","keu","ki","kae",
-    "ta","tya","teo","tyeo","to","tyo","tyu","teu","ti","tae",
     "pa","pya","peo","pyeo","po","pyo","pyu","peu","pi","pae",
     "ha","hya","heo","hyeo","ho","hyo","hyu","heu","hi","hae",
   }
@@ -424,14 +425,9 @@ gNames.randomKoreanPlace = function()
 
   for i = 1, 2 do
     local initial = initials[math.random(#initials)]
-
-    if math.random(3) > 2 then
-      initial = ""
-    end
-      
     local final = finals[math.random(#finals)]
     
-    if math.random(3) > 2 then
+    if math.random(3) == 1 then
       final = ""
     end
 
