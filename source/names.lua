@@ -255,32 +255,52 @@ end
 gNames.randomFrenchPlace = function()
   local initialConsonants = {"ch","d","f","fr","g","l","m","s","t","tr","p","pr","v"}
   local vowels = {"a","o","ou","u","i","ie"}
-  local finalConsonants = {"n","r","rs","s","n","te"}
+  local finalConsonants = {"n","r","rs","s","n","nt","vr","tr","pr","cr"}
   local prefixes = {"saint-","mont"}
-  local suffixes = {
-    "s","es","y","ien","ienne","iennes","eille","eilles","e",
+  local vowelSuffixes = {
+    "y","e","es","eau","eaux","eille","eilles",
+    "ien","ienne","iennes","on","ac",
   }
+  local consonantSuffixes = {
+    "s","chy","ry","lly","gne","gnon","tes","te"
+  }
+
 
   local nameString = ""
 
-  local length = math.random(2,3)
+  local length = math.random(1,2)
 
   for i = 1, length do
     local syllable = ""
-    syllable = syllable .. 
-      initialConsonants[math.random(#initialConsonants)] ..
-      vowels[math.random(#vowels)]
+    local initial = ""
 
-    if math.random(2) > 1 then
+    if i == i and math.random(2) == 1 then
+      initial = initialConsonants[math.random(#initialConsonants)]
+    end
+    
+    syllable = syllable .. initial .. vowels[math.random(#vowels)]
+    if i < length or math.random(2) == 1 then
       syllable = syllable .. finalConsonants[math.random(#finalConsonants)]
     end
     nameString = nameString .. syllable
   end
 
-  if length < 3 and math.random(2) > 1 then
-    if math.random(2) > 1 then
-      nameString = nameString .. suffixes[math.random(#suffixes)]
+  -- take last syllable (if "l",), double it and add "e"
+  -- randomly add "r" or "t" to a consonant
+  -- too many consecutive consonants
+
+  if length == 1 or math.random(2) == 1 then
+    local vowels = {"a","e","i","o","u"}
+    if contains(vowels, string.sub(nameString, -1)) then
+      nameString = nameString .. consonantSuffixes[math.random(#consonantSuffixes)]
+    else
+      nameString = nameString .. vowelSuffixes[math.random(#vowelSuffixes)]
     end
+  end
+
+  if string.sub(nameString, -1) == "r" then
+    local final = {"s","tes","y"}
+    nameString = nameString .. final[math.random(#final)]
   end
 
   return capitalize(nameString)
