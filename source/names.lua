@@ -7,7 +7,7 @@ gNames.randomHuman = {
 }
 
 gNames.pickRandomHuman = function()
-  local name = gNames.randomHuman[math.random(#gNames.randomHuman)]
+  local name = random(gNames.randomHuman)
   local nameIndex = getIndex(gNames.randomHuman, name)
   
   return name
@@ -52,7 +52,7 @@ gNames.randomJapanesePlace = function()
   local nameString = ""
 
   for i = 1, length do
-    nameString = nameString .. syllables[math.random(#syllables)]
+    nameString = nameString .. random(syllables)
     if string.sub(nameString, -1) == "a" or string.sub(nameString, -1) == "e" then
       if math.random(3) > 2 then
         nameString = nameString .. "i"
@@ -61,7 +61,7 @@ gNames.randomJapanesePlace = function()
   end
 
   if length < 3 and math.random(2) > 1 then
-    nameString = nameString .. suffixes[math.random(#suffixes)]
+    nameString = nameString .. random(suffixes)
   end
 
   return capitalize(nameString)
@@ -79,19 +79,17 @@ gNames.randomChinesePlace = function()
   local syllables = {"",""}
 
   for i = 1, 2 do
-    syllables[i] = finals[math.random(#finals)]
+    syllables[i] = random(finals)
 
     local noW = {"ao","iao", "ian","iang","iu","ua","uan","uang","ui","ou","oung"}
   
     if contains(noW, syllable1) then
+      removeByValue(initials, "w")
+      syllables[i] = random(initials) .. syllables[i]
       table.insert(initials, "w")
+    else
+      syllables[i] = random(initials) ..syllables[i]
     end
-
-    syllables[i] = initials[math.random(#initials)] .. syllables[i]
-  
-    local wIndex = getIndex(initials, "w")
-    table.remove(initials, wIndex)
-
   end
   
   nameString = syllables[1] .. syllables[2]
@@ -99,37 +97,34 @@ gNames.randomChinesePlace = function()
   return capitalize(nameString)
 end
 
-gNames.randomIndianPlace = function()
-  -- Needs Improving
-  local suffixes = {"now","pur","uru","ore","abad","shwar","atnam","swar"}
+-- gNames.randomIndianPlace = function()
+--   -- Needs Improving
+--   local suffixes = {"now","pur","uru","ore","abad","shwar","atnam","swar"}
 
-  local nameString = ""
+--   local nameString = ""
 
-  if math.random(2) > 1 then
-    nameString = nameString .. gNames.vowels[math.random(#gNames.vowels)]
-  end
+--   if math.random(2) > 1 then
+--     nameString = nameString .. random(gNames.vowels)
+--   end
 
-  nameString = nameString .. gNames.consonants[math.random(#gNames.consonants)]
-  nameString = nameString .. gNames.consonants[math.random(#gNames.consonants)]
-  nameString = nameString .. gNames.vowels[math.random(#gNames.vowels)]
-  nameString = nameString .. gNames.consonants[math.random(#gNames.consonants)]
+--   nameString = nameString .. random(gNames.consonants)
+--   nameString = nameString .. random(gNames.consonants)
+--   nameString = nameString .. random(gNames.vowels)
+--   nameString = nameString .. random(gNames.consonants)
 
-  if math.random(2) > 1 then
-    nameString = nameString .. suffixes[math.random(#suffixes)]
-  end
+--   if math.random(2) > 1 then
+--     nameString = nameString .. random(suffixes)
+--   end
   
-  return capitalize(nameString)
-end
+--   return capitalize(nameString)
+-- end
 
 gNames.randomGreekPlace = function()
   local vowels = {"a","e","i","o","u","ai","ae","eo","ea","ei","io","ia","ua","ui","uo"}
   local consonants = {"t","th","ts","tr","k","kr","kl","kt","m","n","ch","c","cr","s","st","sp","sk","sp","sth","x","p","pr","l","v","vr","r","rt","d","dr"}
   local suffixes = {
-    "polis","os","poli","ia","a","i","ki","na","ka","ta", -- greek
-    "now","pur","uru","ore","abad","shwar","atnam","swar", -- indian
+    "polis","os","ios","poli","ia","a","i","ki","na","ka","ta", -- greek
     "etto","ino","onia","um","ium", -- italian
-    "s","es","y", -- french
-    "sk", -- slavic
   }
 
   local length = math.random(1,2)
@@ -137,21 +132,21 @@ gNames.randomGreekPlace = function()
 
   for i = 1, length do
     if math.random(2) > 1 then
-      nameString = nameString .. vowels[math.random(#vowels)]
+      nameString = nameString .. random(vowels)
     end
 
-    local consonant = consonants[math.random(#consonants)]
+    local consonant = random(consonants)
 
     if i > 1 and string.len(consonant) == 1 then
       consonant = consonant .. consonant
     end
 
-    local syllable = consonant .. vowels[math.random(#vowels)]
+    local syllable = consonant .. random(vowels)
     nameString = nameString .. syllable
   end
   
   if math.random(2) > 1 then
-    nameString = nameString .. suffixes[math.random(#suffixes)]
+    nameString = nameString .. random(suffixes)
   end
 
   return capitalize(nameString)
@@ -159,8 +154,8 @@ end
 
 gNames.randomNahuatlPlace = function()
   local syllables = {
-    "xo","xi","xa","xi","chi","o","a","hui","hua",
-    "te","to","teo","ti","ca","co","me","mi",
+    "xo","xi","xa","xi","chi","o","a","hui","hua","la",
+    "te","to","teo","ti","tla","tu","ca","co","me","mi",
     "po","zi","za"
   }
   local syllableEndings = {"t","x","c","z"}
@@ -171,17 +166,17 @@ gNames.randomNahuatlPlace = function()
   local nameString = ""
 
   for i = 1, length do
-    nameString = nameString .. syllables[math.random(#syllables)]
+    nameString = nameString .. random(syllables)
 
     if i < length and math.random(2) > 1 then
       if math.random(2) > 1 then
-        nameString = nameString .. syllableEndings[math.random(#syllableEndings)]
+        nameString = nameString .. random(syllableEndings)
       end  
     end
   end
 
   if length < 3 and math.random(2) > 1 then
-    nameString = nameString .. suffixes[math.random(#suffixes)]
+    nameString = nameString .. random(suffixes)
   end
 
   return capitalize(nameString)
@@ -189,8 +184,8 @@ end
 
 gNames.randomGermanPlace = function()
   local initialConsonants = {"k","kr","l","g","gr","h","b","br","z","zw","st","sp","str","shw","sw","oh","on","m","n","w"}
-  local vowels = {"o","eu","ei","i","a","au","oe"}
-  local finalConsonants = {"g","s","ss","st","n","ln","nn","cht"}
+  local vowels = {"o","eu","ei","i","a","u","au","oe"}
+  local finalConsonants = {"g","s","ss","st","n","ln","nn","ch","cht"}
   local suffixes = {"burg","berg","heim","wald"}
 
   local nameString = ""
@@ -200,17 +195,16 @@ gNames.randomGermanPlace = function()
   for i = 1, length do
     local syllable = ""
     syllable = syllable .. 
-      initialConsonants[math.random(#initialConsonants)] ..
-      vowels[math.random(#vowels)]
+      random(initialConsonants) .. random(vowels)
 
     if math.random(2) > 1 then
-      syllable = syllable .. finalConsonants[math.random(#finalConsonants)]
+      syllable = syllable .. random(finalConsonants)
     end
     nameString = nameString .. syllable
   end
 
   if length < 3 and math.random(2) > 1 then
-    nameString = nameString .. suffixes[math.random(#suffixes)]
+    nameString = nameString .. random(suffixes)
   end
 
   return capitalize(nameString)
@@ -220,11 +214,13 @@ gNames.randomEnglishPlace = function()
   local initialConsonants = {"l","m","n","t","th","sc","sh","ch","p","d","b","br","tr"}
   local vowels = {"o","e","a","i","igh","o","u","ugh","ea","ou","ough","oa","ear"}
   local finalConsonants = {"n","nt","th","r","p","s","st","rst","t","tt","tts"}
+  local componentAppends = {"ing","ster"}
   local suffixes = {
     "ford","shire","ton","sborough","wich",
     "mouth","ham","thorpe","bury","hurst","hearst",
     "ville","bridge","wood","thwait"
   }
+
 
   local nameString = ""
 
@@ -233,20 +229,19 @@ gNames.randomEnglishPlace = function()
   for i = 1, length do
     local syllable = ""
     syllable = syllable .. 
-      initialConsonants[math.random(#initialConsonants)] ..
-      vowels[math.random(#vowels)]
+      random(initialConsonants) .. random(vowels)
 
     if math.random(2) > 1 then
-      syllable = syllable .. finalConsonants[math.random(#finalConsonants)]
+      syllable = syllable .. random(finalConsonants)
       if math.random(2) > 1 then
-        syllable = syllable .. "ing"
+        syllable = syllable .. random(componentAppends)
       end
     end
     nameString = nameString .. syllable
   end
 
   if length < 2 and math.random(2) > 1 then
-    nameString = nameString .. suffixes[math.random(#suffixes)]
+    nameString = nameString .. random(suffixes)
   end
 
   return capitalize(nameString)
@@ -255,7 +250,7 @@ end
 gNames.randomFrenchPlace = function()
   local initialConsonants = {"ch","d","f","fr","g","l","m","s","t","tr","p","pr","v"}
   local vowels = {"a","o","ou","u","i","ie"}
-  local finalConsonants = {"n","r","rs","s","n","nt","vr","tr","pr","cr"}
+  local finalConsonants = {"n","r","rs","s","n","nt","vr","tr","pr","cr","gn"}
   -- local prefixes = {"saint-","mont"}
   local vowelSuffixes = {
     "y","e","es","eau","eaux","eille","eilles",
@@ -275,16 +270,16 @@ gNames.randomFrenchPlace = function()
 
     if i == i then
       if math.random(2) == 1 then
-        initial = initialConsonants[math.random(#initialConsonants)]
-        syllable = syllable .. initial .. vowels[math.random(#vowels)]
+        initial = random(initialConsonants)
+        syllable = syllable .. initial .. random(vowels)
       else
         local initialVowels = {"a","o","ou","u","i"}
-        syllable = syllable .. initialVowels[math.random(#initialVowels)]
+        syllable = syllable .. random(initialVowels)
       end
     end
 
     if i < length or math.random(2) == 1 then
-      syllable = syllable .. finalConsonants[math.random(#finalConsonants)]
+      syllable = syllable .. random(finalConsonants)
     end
     nameString = nameString .. syllable
   end
@@ -296,19 +291,19 @@ gNames.randomFrenchPlace = function()
   if length == 1 or math.random(2) == 1 then
     local vowels = {"a","e","i","o","u"}
     if contains(vowels, string.sub(nameString, -1)) then
-      nameString = nameString .. consonantSuffixes[math.random(#consonantSuffixes)]
+      nameString = nameString .. random(consonantSuffixes)
     else
-      nameString = nameString .. vowelSuffixes[math.random(#vowelSuffixes)]
+      nameString = nameString .. random(vowelSuffixes)
     end
   end
 
   if string.sub(nameString, -1) == "r" then
     local final = {"s","tes","y"}
-    nameString = nameString .. final[math.random(#final)]
+    nameString = nameString .. random(final)
   end
 
   -- if math.random(3) == 1 then
-  --   prefix = prefixes[math.random(#prefixes)]
+  --   prefix = random(prefixes)
   --   if string.sub(prefix, -1) == "-" then
   --     nameString = capitalize(nameString)
   --   end
@@ -324,12 +319,11 @@ gNames.randomArabicPlace = function()
   --Bikkj
   --Al-ra'aaat, Wadi-iiiisz : too many consecutive same vowels
   -- ending on "jk"
-  local adjab = {"a","i","b","d","f","g","gh","h","j","k","kh","l","m","n","q","r","s","t","w","z"}
+  local adjab = {"a","i","b","d","dh","f","g","gh","h","j","k","kh","l","m","n","q","r","s","sh","t","w","z"}
   local initialDiacritics = {"a","i","u"}
   local diacritics = {"a","i","u","double","circle", "hamza"}
   local suffixes = {"ah","iyyah"}
   local prefixes = {"al-"}
-
 
   local nameString = ""
 
@@ -337,12 +331,12 @@ gNames.randomArabicPlace = function()
   local length = math.random(2, 3)
 
   for i = 1, length do
-    local syllable = adjab[math.random(#adjab)]
+    local syllable = random(adjab)
     local diacritic = ""
     if i == 1 then
-      diacritic = initialDiacritics[math.random(#initialDiacritics)]
+      diacritic = random(initialDiacritics)
     else
-      diacritic = diacritics[math.random(#diacritics)]
+      diacritic = random(diacritics)
     end
     if diacritic == "a" then
       if syllable == "u" then
@@ -385,17 +379,17 @@ gNames.randomArabicPlace = function()
 
   if math.random(2) > 1 then
     local lastLetter = string.sub(nameString, -1)
-    local duplicateLetterIndex = getIndex(adjab, lastLetter)
-    table.remove(adjab, duplicateLetterIndex)
-    nameString = nameString .. adjab[math.random(#adjab)]
+
+    removeByValue(adjab, lastLetter)
+    nameString = nameString .. random(adjab)
   end
 
   if math.random(3) == 1 then
-    nameString = nameString .. suffixes[math.random(#suffixes)]
+    nameString = nameString .. random(suffixes)
   end
 
   if math.random(3) == 1 then
-    nameString =  prefixes[math.random(#prefixes)] .. nameString
+    nameString = "al-" .. nameString
   end
 
   return capitalize(nameString)
@@ -424,8 +418,8 @@ gNames.randomKoreanPlace = function()
   local syllables = {"",""}
 
   for i = 1, 2 do
-    local initial = initials[math.random(#initials)]
-    local final = finals[math.random(#finals)]
+    local initial = random(initials)
+    local final = random(finals)
     
     if math.random(3) == 1 then
       final = ""
@@ -453,8 +447,7 @@ gNames.randomBrazilianPlace = function()
   length = math.random(2)
 
   for i = 1, length do
-    local syllable = consonants[math.random(#consonants)] ..
-      vowels[math.random(#vowels)]
+    local syllable = random(consonants) .. random(vowels)
       nameString = nameString .. syllable
   end
 
@@ -463,17 +456,16 @@ gNames.randomBrazilianPlace = function()
       local length2 = math.random(2)
   
       for i = 1, length2 do
-        local syllable2 = consonants[math.random(#consonants)] ..
-          vowels[math.random(#vowels)]
-          nameString = nameString .. ofs[math.random(#ofs)] .. syllable2
+        local syllable2 = random(consonants) .. random(vowels)
+          nameString = nameString .. random(ofs) .. syllable2
       end
     else
-      nameString = prefixes[math.random(#prefixes)] .. nameString
+      nameString = random(prefixes) .. nameString
     end
   end
 
   if math.random(3) == 1 then
-    nameString = nameString .. suffixes[math.random(#suffixes)]
+    nameString = nameString .. random(suffixes)
   end
 
   return capitalize(nameString)

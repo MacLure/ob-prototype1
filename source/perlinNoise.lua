@@ -16,10 +16,12 @@ perlinNoise.generateNoise = function(size, scale)
     
     if (h<8) then u = x else u = y end
     if (h<4) then v = y elseif (h==12 or h==14) then v=x else v=z end
+
     local r
     
     if ((h%2) == 0) then r=u else r=-u end
     if ((h%4) == 0) then r=r+v else r=r-v end
+  
     return r
   end
 
@@ -60,13 +62,13 @@ perlinNoise.generateNoise = function(size, scale)
     BB  = p[B+1]+Z
 
     return lerp(w, lerp(v, lerp(u, grad(p[AA  ], x  , y  , z   ), 
-                                  grad(p[BA  ], x-1, y  , z   )), 
-                          lerp(u, grad(p[AB  ], x  , y-1, z   ), 
-                                  grad(p[BB  ], x-1, y-1, z   ))),
-                  lerp(v, lerp(u, grad(p[AA+1], x  , y  , z-1 ),  
-                                  grad(p[BA+1], x-1, y  , z-1 )),
-                          lerp(u, grad(p[AB+1], x  , y-1, z-1 ),
-                                  grad(p[BB+1], x-1, y-1, z-1 )))
+                                   grad(p[BA  ], x-1, y  , z   )), 
+                           lerp(u, grad(p[AB  ], x  , y-1, z   ), 
+                                   grad(p[BB  ], x-1, y-1, z   ))),
+                   lerp(v, lerp(u, grad(p[AA+1], x  , y  , z-1 ),  
+                                   grad(p[BA+1], x-1, y  , z-1 )),
+                           lerp(u, grad(p[AB+1], x  , y-1, z-1 ),
+                                   grad(p[BB+1], x-1, y-1, z-1 )))
     )
   end
 
@@ -81,12 +83,59 @@ perlinNoise.generateNoise = function(size, scale)
   local offsetY = 1
   local perlinMap = love.image.newImageData(gridSize,gridSize)
 
-  for x=1,gridSize-1 do
-    for y=1,gridSize-1 do
+  for x=0,gridSize-1 do
+    for y=0,gridSize-1 do
       local value = noise(x/mapScale + offsetX, y/mapScale + offsetY,0) + 0.5
       perlinMap:setPixel(x, y, value,value,value)
     end
   end
 
-  return love.graphics.newImage(perlinMap)
+  return perlinMap
+end
+
+perlinNoise.createImage = function(noise)
+  return love.graphics.newImage(noise)
+end
+
+perlinNoise.addLandFeature = function(ImageData)
+  local height = ImageData:getHeight()
+  local width = ImageData:getWidth()
+
+  local numPoints = math.random(10,100)
+  local pointValue = {0,0,1,1}
+
+  for i = 1, numPoints do
+    local pointX = math.random(width-1)
+    local pointY = math.random(height-1)
+    local pointR, pointG, pointB, pointA = ImageData:getPixel(pointX, pointY)
+    local targetValue = pointR
+    if targetValue > 0.53 then
+      ImageData:setPixel(pointX, pointY,pointValue)
+    end
+  end
+end
+
+perlinNoise.addRivers = function (ImageData, size)
+  local numPoints = math.random(10,100)
+  local pointValue = 0.56
+  for i = 1, numPoints do
+    local pointX = math.random(size-1)
+    local pointY = math.random(size-1)
+    local pointR, pointG, pointB, pointA = ImageData:getPixel(pointX, pointY)
+    local targetValue = pointR
+    if pointR >= 0.7 then
+      -- ImageData:setPixel(pointX, pointY,pointValue,pointValue,pointValue,1)
+      local directions = {1 ,0, -1}
+      local directionX = directions[math.random(#directions)]
+      local directionY = directions[math.random(#directions)]
+      while targetValue > pointValue do
+
+        if pointX < size-1 and pointX >= 1 then pointX = pointX + directionX end
+        if pointY < size-1 and pointY >= 1 then pointY = pointY + directionY end
+        
+        pointR, pointG, pointB, pointA = ImageData:getPixel(pointX, pointY)
+        targetValue = pointR
+      end
+    end
+  end
 end

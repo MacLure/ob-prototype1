@@ -153,4 +153,12 @@ function shuffle(array)
 
   return output
 end
-  
+
+function random(array)
+  return array[math.random(#array)]
+end
+
+function removeByValue(array, value)
+  local index = getIndex(array, value)
+  table.remove(array, index)
+end

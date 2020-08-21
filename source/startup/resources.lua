@@ -35,6 +35,7 @@ worldTiles = love.graphics.newImage('source/assets/tilesets/worldMap.png')
 mapEdge = love.graphics.newImage('source/assets/tilesets/mapEdge.png')
 
 hud = love.graphics.newImage('source/assets/ui/hud.png')
+worldMapSwords = love.graphics.newImage('source/assets/ui/world-map-swords.png')
 
 portraits = love.graphics.newImage('source/assets/spritesheets/portraits.png')
 
