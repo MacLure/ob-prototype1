@@ -457,10 +457,10 @@ gNames.randomBrazilianPlace = function()
   
       for i = 1, length2 do
         local syllable2 = random(consonants) .. random(vowels)
-          nameString = nameString .. random(ofs) .. syllable2
+          nameString = nameString .. random(ofs) .. capitalize(syllable2)
       end
     else
-      nameString = random(prefixes) .. nameString
+      nameString = random(prefixes) .. capitalize(nameString)
     end
   end
 

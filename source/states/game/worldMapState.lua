@@ -11,6 +11,8 @@ function WorldMapState:init(stack, def)
     {
       vec4 pixel = Texel(texture, uvs);
 
+      pixel.r = pixel.r + 0.2;
+
       if (pixel.r < 0.33) {
         pixel.r = 0.87;
         pixel.g = 0.87;
@@ -77,6 +79,8 @@ function WorldMapState:init(stack, def)
 
   this.mapSize = 220
 
+  this.map = perlinNoise.generateNoise()
+
   setmetatable(this, self)
   
   this:generateMap()
@@ -103,11 +107,10 @@ function WorldMapState:handleInput(dt)
 end
 
 function WorldMapState:generateMap()
-  self.noise = perlinNoise.generateNoise(self.mapSize, 50)
-  -- perlinNoise.addLandFeature(self.noise)
-  self.mapImage = perlinNoise.createImage(self.noise)
+  self.map = perlinNoise.generateNoise()
+  perlinNoise.addRivers(self.map)
+  self.mapImage = perlinNoise.createImage(self.map)
 end
-
 
 function WorldMapState:render(dt)
   local worldMapX = 200
@@ -123,6 +126,5 @@ function WorldMapState:render(dt)
     
   love.graphics.setShader(self.shader)
   love.graphics.draw(self.mapImage, worldMapX, worldMapY)
-
   love.graphics.setShader()
 end
