@@ -110,6 +110,4 @@ function BattleState:render(dt)
   printWithShadow("Retreat", optionsX, optionsY+20, 100, "left")
 
   love.graphics.draw(hud, 10, 10)
-
-
 end

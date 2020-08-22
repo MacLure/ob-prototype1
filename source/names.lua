@@ -221,7 +221,6 @@ gNames.randomEnglishPlace = function()
     "ville","bridge","wood","thwait"
   }
 
-
   local nameString = ""
 
   local length = math.random(1,2)

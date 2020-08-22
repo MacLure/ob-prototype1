@@ -2,10 +2,24 @@ WorldMapState = Class{}
 
 function WorldMapState:init(stack, def)
   local this = {
-    grid = {},
-    -- markers = {}
+    worldMapX = 200,
+    worldMapY = 100,
+    mapSize = 220,
+    hoverIndex = nil,
+    placeName = gNames.randomJapanesePlace(),
+    placeTypes = {
+      "Frontier Lands",
+      "Unclaimed Lands",
+      "Abandoned Lands",
+      "Pilgrimmage Lands",
+      "Cursed Lands",
+      "Bandit-Controlled Territory",
+      "Empire-Controlled Territory"
+    },
+    markers = {}
   }
 
+  this.map = perlinNoise.generateNoise()
   this.shader = love.graphics.newShader[[
     vec4 effect(vec4 color, Image texture, vec2 uvs, vec2 pixcoord)
     {
@@ -77,13 +91,10 @@ function WorldMapState:init(stack, def)
     }
   ]]
 
-  this.mapSize = 220
-
-  this.map = perlinNoise.generateNoise()
-
   setmetatable(this, self)
   
   this:generateMap()
+  this:generateLocations()
 
   return this
 end
@@ -103,6 +114,21 @@ end
 function WorldMapState:handleInput(dt)
   if love.keyboard.wasPressed('space') then
     self:generateMap()
+    self:generateLocations()
+  end
+
+  local worldMapX = self.worldMapX
+  local worldMapY = self.worldMapY
+  local mouseX, mouseY = mousePosition()
+
+  for k,v in pairs(self.markers) do
+    if mouseX > v.x and mouseX < v.x+16 and
+    mouseY > v.y and mouseY < v.y+16 then
+      self.hoverIndex = k
+      return
+    else
+      self.hoverIndex = nil
+    end
   end
 end
 
@@ -110,11 +136,27 @@ function WorldMapState:generateMap()
   self.map = perlinNoise.generateNoise()
   perlinNoise.addRivers(self.map)
   self.mapImage = perlinNoise.createImage(self.map)
+  self.placeType = random(self.placeTypes)
+  self.placeName = gNames.randomJapanesePlace()
+end
+
+function WorldMapState:generateLocations()
+  self.markers = {}
+
+  for i = 1, 10 do
+    local marker = {
+      name = gNames.randomJapanesePlace(),
+      territory = random(self.placeTypes),
+      x = self.worldMapX+math.random(20,self.mapSize-50),
+      y = self.worldMapY+math.random(20,self.mapSize-50)
+    }
+    table.insert(self.markers, marker)
+  end
 end
 
 function WorldMapState:render(dt)
-  local worldMapX = 200
-  local worldMapY = 100
+  local worldMapX = self.worldMapX
+  local worldMapY = self.worldMapY
   local tileSize = 36
   local mapSize = 5
   local mapSize = self.mapSize
@@ -127,4 +169,17 @@ function WorldMapState:render(dt)
   love.graphics.setShader(self.shader)
   love.graphics.draw(self.mapImage, worldMapX, worldMapY)
   love.graphics.setShader()
+
+  -- love.graphics.draw(worldMapSwords, worldMapX+50, worldMapY+50)
+  -- love.graphics.draw(worldMapSwords, worldMapX+mapSize-50, worldMapY+mapSize-50)
+
+  for k,v in pairs(self.markers) do
+    love.graphics.draw(worldMapSwords, v.x, v.y)
+  end
+
+  if self.hoverIndex ~= nil then
+    love.graphics.setFont(gFonts['default'])
+    printWithShadow(self.markers[self.hoverIndex].name, worldMapX,worldMapY-32,200,"center")
+    printWithShadow(self.markers[self.hoverIndex].territory, worldMapX,worldMapY-16,200,"center", {0.5,0.5,0.5,1})
+  end
 end

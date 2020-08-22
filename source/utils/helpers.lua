@@ -162,3 +162,7 @@ function removeByValue(array, value)
   local index = getIndex(array, value)
   table.remove(array, index)
 end
+
+function mousePosition()
+  return push:toGame(love.mouse.getPosition())
+end
