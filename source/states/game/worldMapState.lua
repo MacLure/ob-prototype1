@@ -4,22 +4,38 @@ function WorldMapState:init(stack, def)
   local this = {
     worldMapX = 200,
     worldMapY = 100,
-    mapSize = 220,
+    mapSize = 200,
     hoverIndex = nil,
     placeName = gNames.randomJapanesePlace(),
     placeTypes = {
       "Frontier Lands",
       "Unclaimed Lands",
       "Abandoned Lands",
-      "Pilgrimmage Lands",
+      "Pilgrimmage Route",
       "Cursed Lands",
       "Bandit-Controlled Territory",
-      "Empire-Controlled Territory"
+      "Empire-Held Territory",
+      "Imperial Heartland",
+      "Independent Kingdom",
+      "The Holy City",
     },
-    markers = {}
+    randomPlaceNames = {
+      gNames.randomJapanesePlace,
+      gNames.randomChinesePlace,
+      gNames.randomKoreanPlace,
+      gNames.randomNahuatlPlace,
+      gNames.randomGermanPlace,
+      gNames.randomEnglishPlace,
+      gNames.randomFrenchPlace,
+      gNames.randomArabicPlace
+    },
+    markers = {},
+    nodes = {}
   }
 
-  this.map = perlinNoise.generateNoise()
+  this.map = perlinNoise.generateNoise(200,200)
+
+  -- this.map = perlinNoise.voronoi(200,200, 20)
   this.shader = love.graphics.newShader[[
     vec4 effect(vec4 color, Image texture, vec2 uvs, vec2 pixcoord)
     {
@@ -122,8 +138,8 @@ function WorldMapState:handleInput(dt)
   local mouseX, mouseY = mousePosition()
 
   for k,v in pairs(self.markers) do
-    if mouseX > v.x and mouseX < v.x+16 and
-    mouseY > v.y and mouseY < v.y+16 then
+    if mouseX > v.x and mouseX < v.x+14 and
+    mouseY > v.y and mouseY < v.y+14 then
       self.hoverIndex = k
       return
     else
@@ -133,25 +149,101 @@ function WorldMapState:handleInput(dt)
 end
 
 function WorldMapState:generateMap()
-  self.map = perlinNoise.generateNoise()
-  perlinNoise.addRivers(self.map)
+  self.map = perlinNoise.generateNoise(200,200)
+  -- perlinNoise.addRivers(self.map)
   self.mapImage = perlinNoise.createImage(self.map)
-  self.placeType = random(self.placeTypes)
-  self.placeName = gNames.randomJapanesePlace()
 end
 
 function WorldMapState:generateLocations()
+  self.nodes = {}
   self.markers = {}
 
-  for i = 1, 10 do
-    local marker = {
-      name = gNames.randomJapanesePlace(),
-      territory = random(self.placeTypes),
-      x = self.worldMapX+math.random(20,self.mapSize-50),
-      y = self.worldMapY+math.random(20,self.mapSize-50)
-    }
-    table.insert(self.markers, marker)
+  local configurations = {
+    {x = true, y = true},
+    {x = true, y = false},
+    {x = false, y = true},
+    {x = false, y = false}
+  }
+  local configuration = random(configurations)
+
+  for k,v in pairs(configuration) do
+    if v then configuration[k] = 1 else configuration[k] = -1 end
   end
+
+  self.start = {
+    x = self.worldMapX + self.mapSize/2 + (configuration.x * (self.mapSize/2-20))-8,
+    y = self.worldMapY + self.mapSize/2 + (configuration.y * (self.mapSize/2-20))-8,
+    name = random(self.randomPlaceNames)(),
+    territory = "Frontier",
+  }
+
+  for k,v in pairs(configuration) do
+    if v == 1 then configuration[k] = -1 else configuration[k] = 1 end
+  end
+
+  self.finish = {
+    x = self.worldMapX + self.mapSize/2 + (configuration.x * (self.mapSize/2-20))-8,
+    y = self.worldMapY + self.mapSize/2 + (configuration.y * (self.mapSize/2-20))-8,
+    name = random(self.randomPlaceNames)(),
+    territory = "The Imperial Capital",
+  }
+
+  local lastX = self.start.x
+  local lastY = self.start.y
+
+  local nodeNum = 4
+  local spacing = distance(self.start.x, self.start.y, self.finish.x, self.finish.y)/nodeNum/1.75
+  local subSpacing = spacing / 1.5
+
+  for i = 1, nodeNum do
+    table.insert(self.nodes, {
+      x = lastX + spacing * i * configuration.x +4,
+      y = lastY + spacing * i * configuration.y +4,
+      subNodeNum = math.random(2,4),
+      subNodes = {},
+      dirX = configuration.x,
+      dirY = configuration.y
+    })
+
+    for j = 1, self.nodes[i].subNodeNum do
+      local subNode = {
+        x = self.nodes[i].x + subSpacing * (self.nodes[i].subNodeNum/1.5 - j) * -configuration.x,
+        y = self.nodes[i].y + subSpacing * (self.nodes[i].subNodeNum/1.5 - j) * configuration.y,
+        name = random(self.randomPlaceNames)(),
+        territory = random(self.placeTypes),
+      }
+      table.insert(self.nodes[i].subNodes, subNode)
+      table.insert(self.markers, subNode)
+
+    end
+  end
+
+
+  -- for i = 1, nodeNum do
+  --   local marker = {
+  --     name = random(self.randomPlaceNames)(),
+  --     territory = random(self.placeTypes),
+  --     x = lastX + spacing * i * configuration.x,
+  --     y = lastY + spacing * i * configuration.y
+  --   }
+  --   table.insert(self.markers, marker)
+  -- end
+
+
+
+
+  table.insert(self.markers, self.start)
+  table.insert(self.markers, self.finish)
+
+  -- for i = 1, 18 do
+  --   local marker = {
+  --     name = random(self.randomPlaceNames)(),
+  --     territory = random(self.placeTypes),
+  --     x = self.worldMapX+math.random(20,self.mapSize-50),
+  --     y = self.worldMapY+math.random(20,self.mapSize-50)
+  --   }
+  --   table.insert(self.markers, marker)
+  -- end
 end
 
 function WorldMapState:render(dt)
@@ -170,12 +262,26 @@ function WorldMapState:render(dt)
   love.graphics.draw(self.mapImage, worldMapX, worldMapY)
   love.graphics.setShader()
 
-  -- love.graphics.draw(worldMapSwords, worldMapX+50, worldMapY+50)
-  -- love.graphics.draw(worldMapSwords, worldMapX+mapSize-50, worldMapY+mapSize-50)
-
   for k,v in pairs(self.markers) do
     love.graphics.draw(worldMapSwords, v.x, v.y)
   end
+
+  -- love.graphics.draw(worldMapSwords, self.start.x, self.start.y)
+  -- love.graphics.draw(worldMapSwords, self.finish.x, self.finish.y)
+
+  -- love.graphics.setColor(0,0,0)
+
+  -- for i = 1, #self.nodes do
+  --   for j = 1, #self.nodes[i].subNodes do
+  --     local x = self.nodes[i].subNodes[j].x
+  --     local y = self.nodes[i].subNodes[j].y
+  --     love.graphics.draw(worldMapSwords, x, y)
+  --   end
+
+  --   -- love.graphics.line(self.nodes[i].x, self.nodes[i].y, self.nodes[i].x+10, self.nodes[i].y+10)
+  -- end
+  -- love.graphics.setColor(1,1,1)
+
 
   if self.hoverIndex ~= nil then
     love.graphics.setFont(gFonts['default'])

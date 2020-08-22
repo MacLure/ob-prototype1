@@ -115,10 +115,10 @@ perlinNoise.addLandFeature = function(ImageData)
   end
 end
 
-perlinNoise.generateNoise = function()
+perlinNoise.generateNoise = function(width, height)
   local random = math.random()
   local noise = love.math.noise
-  local SIZE = 200
+  -- local SIZE = 200
   local dots = {}		-- build the noise dots here
 
   local V_adj = 0.1		-- arrow keys adjust the tl corner position in 2D noise space
@@ -130,21 +130,21 @@ perlinNoise.generateNoise = function()
   local V_span = 1				--  this is the number span of image
   local H_span = 1
 
-  local V_inc = V_span/SIZE
-  local H_inc = H_span/SIZE
+  local V_inc = V_span/height
+  local H_inc = H_span/width
 
   local X_pos = 44			-- indent the active draw space
   local Y_pos = 44
 
 
-    for i=1, SIZE*SIZE do 											-- points is a table of tables {x_init, y_init, r, g, b}
+    for i=1, width*height do 											-- points is a table of tables {x_init, y_init, r, g, b}
       dots[i] = {X_pos,Y_pos,0,0,0} 			-- create once and reuse
     end
     
     local rgb, index -- start drawing at beginning of buffer
-    for y = 1,SIZE do
-      for x = 1,SIZE do
-        index = (y-1)*SIZE + x
+    for y = 1,height do
+      for x = 1,width do
+        index = (y-1)*height + x
         rgb = noise( (x*H_inc + H_start), (y*V_inc + V_start) ) * 0.55   			-- greyscale value in noise space
             + noise( 2.7*(x*H_inc + H_start), 2.7*(y*V_inc + V_start) ) * 0.54	-- add some higher order "harmonics"
             + noise( 3.7*(x*H_inc + H_start), 3.7*(y*V_inc + V_start) ) * 0.10
@@ -157,10 +157,10 @@ perlinNoise.generateNoise = function()
     end
     
     love.graphics.setColor(1,1,1,1)
-    local perlinMap = love.image.newImageData(SIZE,SIZE)
-    for x=0,SIZE-1 do
-      for y=0,SIZE-1 do
-        local index = x + y*SIZE +1
+    local perlinMap = love.image.newImageData(width,height)
+    for x=0,width-1 do
+      for y=0,height-1 do
+        local index = x + y*height +1
         perlinMap:setPixel(x, y, dots[index][3],dots[index][3],dots[index][3])
       end
     end
@@ -170,6 +170,8 @@ end
 
 perlinNoise.addRivers = function (ImageData)
   local riverNoise = perlinNoise.generateNoise()
+  -- local riverNoise = perlinNoise.voronoi(ImageData:getWidth(),ImageData:getHeight(), 20)
+
   SIZE = ImageData:getWidth()
 
   for x=0,SIZE-1 do
@@ -190,3 +192,37 @@ perlinNoise.addRivers = function (ImageData)
   end
 end
 
+perlinNoise.voronoi = function(width, height, numPoints)
+  local noiseMap = love.image.newImageData(width, height)
+  local points = {}
+  local numPoints = numPoints or 2
+  
+  for i = 1, numPoints do
+    table.insert(points, {math.random(width-1), math.random(height-1)})
+  end
+
+  local lowest, highest = 1,0
+
+  for x = 0, width -1 do
+    for y = 0, height -1 do
+        local distances = {}
+      for j = 1, #points do
+        local value = distance(x, y, points[j][1], points[j][2])
+        table.insert(distances, value)
+      end
+
+      table.sort(distances)
+      local n = 1
+  
+      if distances[1] < lowest then lowest = distances[1] end
+      if distances[#distances] > highest then highest = distances[#distances] end
+
+      local noise = distances[n]/highest*3
+
+      local index = y * width + x +1
+      noiseMap:setPixel(x, y, noise, noise, noise)
+    end
+  end
+
+  return noiseMap
+end

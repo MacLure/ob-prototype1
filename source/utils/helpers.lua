@@ -166,3 +166,20 @@ end
 function mousePosition()
   return push:toGame(love.mouse.getPosition())
 end
+
+function randomFloat(min, max, precision)
+	local range = max - min
+	local offset = range * math.random()
+	local unrounded = min + offset
+
+	if not precision then
+		return unrounded
+	end
+
+	local powerOfTen = 10 ^ precision
+	return math.floor(unrounded * powerOfTen + 0.5) / powerOfTen
+end
+
+function distance(x1,y1,x2,y2)
+  return math.sqrt((x2 - x1) ^ 2 + (y2 - y1) ^ 2)
+end
