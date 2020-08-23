@@ -192,58 +192,36 @@ function WorldMapState:generateLocations()
   local lastY = self.start.y
 
   local nodeNum = 4
+  subNodes = {2,4,4,3}
   local spacing = distance(self.start.x, self.start.y, self.finish.x, self.finish.y)/nodeNum/1.75
-  local subSpacing = spacing / 1.5
 
   for i = 1, nodeNum do
     table.insert(self.nodes, {
       x = lastX + spacing * i * configuration.x +4,
       y = lastY + spacing * i * configuration.y +4,
-      subNodeNum = math.random(2,4),
+      subNodeNum = subNodes[i],
       subNodes = {},
       dirX = configuration.x,
       dirY = configuration.y
     })
 
     for j = 1, self.nodes[i].subNodeNum do
+      local adjustment = 1 + self.nodes[i].subNodeNum * 0.1
+      local subSpacing = spacing / 2 * (self.nodes[i].subNodeNum - math.abs((nodeNum / 2) - self.nodes[i].subNodeNum))
+
       local subNode = {
-        x = self.nodes[i].x + subSpacing * (self.nodes[i].subNodeNum/1.5 - j) * -configuration.x,
-        y = self.nodes[i].y + subSpacing * (self.nodes[i].subNodeNum/1.5 - j) * configuration.y,
+        x = self.nodes[i].x + subSpacing * (self.nodes[i].subNodeNum/adjustment - j) * -configuration.x,
+        y = self.nodes[i].y + subSpacing * (self.nodes[i].subNodeNum/adjustment - j) * configuration.y,
         name = random(self.randomPlaceNames)(),
         territory = random(self.placeTypes),
       }
       table.insert(self.nodes[i].subNodes, subNode)
       table.insert(self.markers, subNode)
-
     end
   end
 
-
-  -- for i = 1, nodeNum do
-  --   local marker = {
-  --     name = random(self.randomPlaceNames)(),
-  --     territory = random(self.placeTypes),
-  --     x = lastX + spacing * i * configuration.x,
-  --     y = lastY + spacing * i * configuration.y
-  --   }
-  --   table.insert(self.markers, marker)
-  -- end
-
-
-
-
   table.insert(self.markers, self.start)
   table.insert(self.markers, self.finish)
-
-  -- for i = 1, 18 do
-  --   local marker = {
-  --     name = random(self.randomPlaceNames)(),
-  --     territory = random(self.placeTypes),
-  --     x = self.worldMapX+math.random(20,self.mapSize-50),
-  --     y = self.worldMapY+math.random(20,self.mapSize-50)
-  --   }
-  --   table.insert(self.markers, marker)
-  -- end
 end
 
 function WorldMapState:render(dt)
@@ -265,23 +243,11 @@ function WorldMapState:render(dt)
   for k,v in pairs(self.markers) do
     love.graphics.draw(worldMapSwords, v.x, v.y)
   end
-
-  -- love.graphics.draw(worldMapSwords, self.start.x, self.start.y)
-  -- love.graphics.draw(worldMapSwords, self.finish.x, self.finish.y)
-
-  -- love.graphics.setColor(0,0,0)
-
-  -- for i = 1, #self.nodes do
-  --   for j = 1, #self.nodes[i].subNodes do
-  --     local x = self.nodes[i].subNodes[j].x
-  --     local y = self.nodes[i].subNodes[j].y
-  --     love.graphics.draw(worldMapSwords, x, y)
-  --   end
-
-  --   -- love.graphics.line(self.nodes[i].x, self.nodes[i].y, self.nodes[i].x+10, self.nodes[i].y+10)
-  -- end
-  -- love.graphics.setColor(1,1,1)
-
+  
+  love.graphics.setColor(1,0,0)
+  local curve = love.math.newBezierCurve( 10,10,20,20,30,03,40,40,50,50 )
+  curve:render(2)
+  love.graphics.setColor(1,1,1)
 
   if self.hoverIndex ~= nil then
     love.graphics.setFont(gFonts['default'])

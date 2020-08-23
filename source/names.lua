@@ -72,7 +72,7 @@ gNames.randomChinesePlace = function()
   --Suele
   --Chaonuan - how ua is handled, not after N
 
-  local initials = {"j","h","zh","z","x","sh","s","ch","ts","q","g","n","m","t","d","p","l","w","y"}
+  local initials = {"j","h","zh","z","x","sh","s","ch","ts","f","q","g","n","m","t","d","p","l","w","y"}
   local finals = {"ai","an","ang","ao","iao","i","ian","iang","ing","iu","u","ua","uan","uang","ung","ui","ou","ue","oung","e","ei","eng","en","eng","ong"}
 
   local nameString = ""
@@ -322,7 +322,7 @@ gNames.randomArabicPlace = function()
   local initialDiacritics = {"a","i","u"}
   local diacritics = {"a","i","u","double","circle", "hamza"}
   local suffixes = {"ah","iyyah"}
-  local prefixes = {"al-"}
+  -- local prefixes = {"al-"}
 
   local nameString = ""
 
@@ -388,7 +388,7 @@ gNames.randomArabicPlace = function()
   end
 
   if math.random(3) == 1 then
-    nameString = "al-" .. nameString
+    nameString = "al-" .. capitalize(nameString)
   end
 
   return capitalize(nameString)

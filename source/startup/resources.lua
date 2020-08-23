@@ -6,12 +6,14 @@ require 'source/utils/stateStack'
 require 'source/utils/animation'
 require 'source/utils/printTable'
 require 'source/perlinNoise'
+require 'source/camera'
 
 -- STATES: GAME
 require 'source/states/game/baseState'
 require 'source/states/game/battleState'
 require 'source/states/game/encounterState'
 require 'source/states/game/worldMapState'
+require 'source/states/game/fieldState'
 
 -- UI
 require 'source/panel'
@@ -86,3 +88,13 @@ gBattleSprites = {
 
 require 'source/characterTypes'
 
+require 'source/map'
+require 'source/maps/map1'
+
+gTileSets = {
+  ['field'] = love.graphics.newImage('source/assets/tilesets/fieldMap.png'),
+}
+
+gMaps = {
+  ['map1'] = map1
+}
