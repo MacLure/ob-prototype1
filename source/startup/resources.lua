@@ -7,6 +7,7 @@ require 'source/utils/animation'
 require 'source/utils/printTable'
 require 'source/perlinNoise'
 require 'source/camera'
+require 'source/shaders'
 
 -- STATES: GAME
 require 'source/states/game/baseState'

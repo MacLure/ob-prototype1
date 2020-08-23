@@ -69,7 +69,9 @@ function mapBuilder(noiseMap)
     for j = 0, width-1 do
       local r,g,b = noiseMap:getPixel(j, i)
       local tile = 0
-      if r < 0.30 then
+      if r < 0.20 then
+        tile = 3
+      elseif r < 0.30 then
         tile = 2
       else
         tile = 4

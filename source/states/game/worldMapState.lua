@@ -2,14 +2,14 @@ WorldMapState = Class{}
 
 function WorldMapState:init(stack, def)
   local this = {
-    worldMapX = 200,
+    worldMapX = 350,
     worldMapY = 100,
-    mapSize = 200,
-    subMapSize = 20,
+    mapSize = 240,
+    activeMapSize = 200,
+    subMapSize = 40,
     hoverIndex = nil,
     placeName = gNames.randomJapanesePlace(),
     placeTypes = {
-      "Frontier Lands",
       "Unclaimed Lands",
       "Abandoned Lands",
       "Pilgrimmage Route",
@@ -32,81 +32,15 @@ function WorldMapState:init(stack, def)
     },
     markers = {},
     nodes = {},
+    shader = gShaders['worldMap']
   }
 
-  this.map = perlinNoise.generateNoise(200,200)
+  this.activeMapX = this.worldMapX + (this.mapSize - this.activeMapSize) / 2
+  this.activeMapY = this.worldMapY + (this.mapSize - this.activeMapSize) / 2
+
+  -- this.map = perlinNoise.generateNoise(this.mapSize, this.mapSize)
 
   -- this.map = perlinNoise.voronoi(200,200, 20)
-  this.shader = love.graphics.newShader[[
-    vec4 effect(vec4 color, Image texture, vec2 uvs, vec2 pixcoord)
-    {
-      vec4 pixel = Texel(texture, uvs);
-
-      pixel.r = pixel.r + 0.2;
-
-      if (pixel.r < 0.33) {
-        pixel.r = 0.87;
-        pixel.g = 0.87;
-        pixel.b = 0.75;
-      }
-
-      else if (pixel.r >= 0.33 && pixel.r < 0.40) {
-          pixel.r = 0.75;
-          pixel.g = 0.81;
-          pixel.b = 0.69;
-        }
-
-      else if (pixel.r >= 0.35 && pixel.r < 0.40) {
-          pixel.r = 0.69;
-          pixel.g = 0.78;
-          pixel.b = 0.62;
-        }
-
-      else if (pixel.r >= 0.40 && pixel.r < 0.47) {
-          pixel.r = 0.47;
-          pixel.g = 0.59;
-          pixel.b = 0.56;
-        }
-
-      else if (pixel.r >= 0.47 && pixel.r < 0.50) {
-          pixel.r = 0.31;
-          pixel.g = 0.43;
-          pixel.b = 0.50;
-        }
-
-      else if (pixel.r >= 0.5 && pixel.r < 0.53) {
-          pixel.r = 0.25;
-          pixel.g = 0.22;
-          pixel.b = 0.12;
-        }
-
-      else if (pixel.r >= 0.53 && pixel.r < 0.56) {
-        pixel.r = 0.47;
-        pixel.g = 0.37;
-        pixel.b = 0.18;
-      }
-
-      else if (pixel.r >= 0.56 && pixel.r < 0.59) {
-        pixel.r = 0.69;
-        pixel.g = 0.56;
-        pixel.b = 0.34;
-      }
-
-      else if (pixel.r >= 0.59 && pixel.r < 0.62) {
-        pixel.r = 0.78;
-        pixel.g = 0.69;
-        pixel.b = 0.47;
-      }
-
-      else if (pixel.r >= 0.62) {
-        pixel.r = 0.87;
-        pixel.g = 0.87;
-        pixel.b = 0.75;
-      }
-  
-      return pixel;
-    }
-  ]]
 
   setmetatable(this, self)
   
@@ -150,14 +84,15 @@ function WorldMapState:handleInput(dt)
 end
 
 function WorldMapState:generateSubMap(marker)
+  local iconOffset = math.floor(self.subMapSize / 2)
   local width, height = self.subMapSize, self.subMapSize
   local x =  marker.x - self.worldMapX
   local y =  marker.y - self.worldMapY
-  return  perlinNoise.createSubMap(self.map, x, y, width, height)
+  return  perlinNoise.createSubMap(self.map, x-iconOffset, y-iconOffset, width, height)
 end
 
 function WorldMapState:generateMap()
-  self.map = perlinNoise.generateNoise(200,200)
+  self.map = perlinNoise.generateNoise(self.mapSize,self.mapSize)
   self.mapImage = perlinNoise.createImage(self.map)
 end
 
@@ -180,8 +115,8 @@ function WorldMapState:generateLocations()
   end
 
   self.start = {
-    x = self.worldMapX + self.mapSize/2 + (configuration.x * (self.mapSize/2-20))-8,
-    y = self.worldMapY + self.mapSize/2 + (configuration.y * (self.mapSize/2-20))-8,
+    x = self.activeMapX + self.activeMapSize/2 + (configuration.x * (self.activeMapSize/2-20)),
+    y = self.activeMapY + self.activeMapSize/2 + (configuration.y * (self.activeMapSize/2-20)),
     name = random(self.randomPlaceNames)(),
     territory = "Frontier",
   }
@@ -191,8 +126,8 @@ function WorldMapState:generateLocations()
   end
 
   self.finish = {
-    x = self.worldMapX + self.mapSize/2 + (configuration.x * (self.mapSize/2-20))-8,
-    y = self.worldMapY + self.mapSize/2 + (configuration.y * (self.mapSize/2-20))-8,
+    x = self.activeMapX + self.activeMapSize/2 + (configuration.x * (self.activeMapSize/2-20)),
+    y = self.activeMapY + self.activeMapSize/2 + (configuration.y * (self.activeMapSize/2-20)),
     name = random(self.randomPlaceNames)(),
     territory = "The Imperial Capital",
   }
@@ -226,12 +161,6 @@ function WorldMapState:generateLocations()
       }
       table.insert(self.nodes[i].subNodes, subNode)
       table.insert(self.markers, subNode)
-
-      for i = 1, #self.markers do
-        local fieldNoiseMap = self:generateSubMap(self.markers[i])
-        local fieldMap = mapBuilder(fieldNoiseMap)
-        self.markers[i].subMap = Map:init(fieldMap)
-      end
     end
   end
 
@@ -239,11 +168,13 @@ function WorldMapState:generateLocations()
   table.insert(self.markers, self.finish)
 
   for i = 1, #self.markers do
+    local fieldNoiseMap = self:generateSubMap(self.markers[i])
+    local fieldMap = mapBuilder(fieldNoiseMap)
+    self.markers[i].subMap = Map:init(fieldMap)
+
     self.markers[i].iconX = self.markers[i].x - iconOffset
     self.markers[i].iconY = self.markers[i].y - iconOffset
   end
-
-
 end
 
 function WorldMapState:render(dt)
@@ -279,4 +210,15 @@ function WorldMapState:render(dt)
       self.subMapSize
     )
   end
+
+      love.graphics.rectangle(
+      "line",
+      self.activeMapX,
+      self.activeMapY,
+      self.activeMapSize,
+      self.activeMapSize
+    )
+
+
+
 end
