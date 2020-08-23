@@ -139,8 +139,8 @@ function WorldMapState:handleInput(dt)
   local mouseX, mouseY = mousePosition()
 
   for k,v in pairs(self.markers) do
-    if mouseX > v.x and mouseX < v.x+14 and
-    mouseY > v.y and mouseY < v.y+14 then
+    if mouseX > v.iconX and mouseX < v.iconX+14 and
+    mouseY > v.iconY and mouseY < v.iconY+14 then
       self.hoverIndex = k
       return
     else
@@ -154,18 +154,18 @@ function WorldMapState:generateSubMap(marker)
   local x =  marker.x - self.worldMapX
   local y =  marker.y - self.worldMapY
   return  perlinNoise.createSubMap(self.map, x, y, width, height)
-  -- self.subMapImage = perlinNoise.createImage(self.subMap)
 end
 
 function WorldMapState:generateMap()
   self.map = perlinNoise.generateNoise(200,200)
-  -- perlinNoise.addRivers(self.map)
   self.mapImage = perlinNoise.createImage(self.map)
 end
 
 function WorldMapState:generateLocations()
   self.nodes = {}
   self.markers = {}
+
+  local iconOffset = math.floor(worldMapSwords:getWidth() / 2)
 
   local configurations = {
     {x = true, y = true},
@@ -237,6 +237,13 @@ function WorldMapState:generateLocations()
 
   table.insert(self.markers, self.start)
   table.insert(self.markers, self.finish)
+
+  for i = 1, #self.markers do
+    self.markers[i].iconX = self.markers[i].x - iconOffset
+    self.markers[i].iconY = self.markers[i].y - iconOffset
+  end
+
+
 end
 
 function WorldMapState:render(dt)
@@ -248,22 +255,17 @@ function WorldMapState:render(dt)
   local y = 0
   local x = 0
 
-  love.graphics.draw(mapEdge, worldMapX -32, worldMapY-6)
-  love.graphics.draw(mapEdge, worldMapX + mapSize+32, worldMapY-6, 0, -1, 1)
+  -- love.graphics.draw(mapEdge, worldMapX -32, worldMapY-6)
+  -- love.graphics.draw(mapEdge, worldMapX + mapSize+32, worldMapY-6, 0, -1, 1)
     
   love.graphics.setShader(self.shader)
   love.graphics.draw(self.mapImage, worldMapX, worldMapY)
   love.graphics.setShader()
 
   for k,v in pairs(self.markers) do
-    love.graphics.draw(worldMapSwords, v.x, v.y)
+    love.graphics.draw(worldMapSwords, v.iconX, v.iconY)
   end
   
-  love.graphics.setColor(1,0,0)
-  local curve = love.math.newBezierCurve( 10,10,20,20,30,03,40,40,50,50 )
-  curve:render(2)
-  love.graphics.setColor(1,1,1)
-
   if self.hoverIndex ~= nil then
     love.graphics.setFont(gFonts['default'])
     printWithShadow(self.markers[self.hoverIndex].name, worldMapX,worldMapY-32,200,"center")
@@ -271,18 +273,10 @@ function WorldMapState:render(dt)
     self.markers[self.hoverIndex].subMap:render()
     love.graphics.rectangle(
       "line",
-      self.markers[self.hoverIndex].x,
-      self.markers[self.hoverIndex].y,
+      self.markers[self.hoverIndex].x - math.floor(self.subMapSize/2),
+      self.markers[self.hoverIndex].y - math.floor(self.subMapSize/2),
       self.subMapSize,
       self.subMapSize
     )
   end
-
-  -- if self.subMapImage then
-    -- love.graphics.setShader(self.shader)
-    -- love.graphics.draw(self.subMapImage, 10,10)
-
-    -- love.graphics.setShader()
-  
-
 end
