@@ -88,6 +88,8 @@ gBattleSprites = {
 
 require 'source/characterTypes'
 
+require 'source/mapBuilder'
+
 require 'source/map'
 require 'source/maps/map1'
 

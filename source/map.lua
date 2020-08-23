@@ -52,9 +52,8 @@ function Map:pointToTile(x, y)
   return tileX, tileY
 end
 
-function Map:getTile(x, y, layer)
-  local layer = layer or 1
-  local tiles = self.mMapDef.layers[layer].data
+function Map:getTile(x, y)
+  local tiles = self.mMapDef.layers[1].data
 
   return tiles[self:coordToIndex(x, y)]
 end
@@ -65,9 +64,6 @@ function Map:coordToIndex(x, y)
 end
 
 function Map:render()
-  -- mapDef layers must be: 1) base, 2) decorations, 3) collision
-  love.graphics.setColor(1,1,1,1)
-
   local tileLeft, tileBottom = self:pointToTile(camera.x, camera.y + VIRTUAL_HEIGHT)
   local tileRight, tileTop = self:pointToTile(camera.x + VIRTUAL_WIDTH, camera.y)
 
@@ -75,7 +71,7 @@ function Map:render()
 
   for i = tileTop, tileBottom do
     for j = tileLeft, tileRight do
-      local tile = self:getTile(j, i, zLayerBaseLayer)
+      local tile = self:getTile(j, i)
       if tile > 0 then
         local texture = love.graphics.newQuad(
           self.tileIndexes[tile][1],
@@ -89,10 +85,10 @@ function Map:render()
     end    
   end
 
+  love.graphics.setColor(1,1,1,1)
   love.graphics.draw(self.tilesetBatch,camera.x, camera.y)
 
   self.tilesetBatch:flush()
-
 end
 
 function Map:tileToScreen(tX, tY)

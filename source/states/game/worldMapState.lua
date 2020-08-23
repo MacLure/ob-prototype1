@@ -5,6 +5,7 @@ function WorldMapState:init(stack, def)
     worldMapX = 200,
     worldMapY = 100,
     mapSize = 200,
+    subMapSize = 20,
     hoverIndex = nil,
     placeName = gNames.randomJapanesePlace(),
     placeTypes = {
@@ -30,7 +31,7 @@ function WorldMapState:init(stack, def)
       gNames.randomArabicPlace
     },
     markers = {},
-    nodes = {}
+    nodes = {},
   }
 
   this.map = perlinNoise.generateNoise(200,200)
@@ -148,6 +149,14 @@ function WorldMapState:handleInput(dt)
   end
 end
 
+function WorldMapState:generateSubMap(marker)
+  local width, height = self.subMapSize, self.subMapSize
+  local x =  marker.x - self.worldMapX
+  local y =  marker.y - self.worldMapY
+  return  perlinNoise.createSubMap(self.map, x, y, width, height)
+  -- self.subMapImage = perlinNoise.createImage(self.subMap)
+end
+
 function WorldMapState:generateMap()
   self.map = perlinNoise.generateNoise(200,200)
   -- perlinNoise.addRivers(self.map)
@@ -217,6 +226,12 @@ function WorldMapState:generateLocations()
       }
       table.insert(self.nodes[i].subNodes, subNode)
       table.insert(self.markers, subNode)
+
+      for i = 1, #self.markers do
+        local fieldNoiseMap = self:generateSubMap(self.markers[i])
+        local fieldMap = mapBuilder(fieldNoiseMap)
+        self.markers[i].subMap = Map:init(fieldMap)
+      end
     end
   end
 
@@ -253,5 +268,21 @@ function WorldMapState:render(dt)
     love.graphics.setFont(gFonts['default'])
     printWithShadow(self.markers[self.hoverIndex].name, worldMapX,worldMapY-32,200,"center")
     printWithShadow(self.markers[self.hoverIndex].territory, worldMapX,worldMapY-16,200,"center", {0.5,0.5,0.5,1})
+    self.markers[self.hoverIndex].subMap:render()
+    love.graphics.rectangle(
+      "line",
+      self.markers[self.hoverIndex].x,
+      self.markers[self.hoverIndex].y,
+      self.subMapSize,
+      self.subMapSize
+    )
   end
+
+  -- if self.subMapImage then
+    -- love.graphics.setShader(self.shader)
+    -- love.graphics.draw(self.subMapImage, 10,10)
+
+    -- love.graphics.setShader()
+  
+
 end

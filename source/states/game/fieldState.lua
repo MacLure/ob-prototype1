@@ -46,8 +46,6 @@ function FieldState:handleInput(dt)
   if love.keyboard.isDown("right") then
     camera.x = camera.x + 100 * dt
   end
-
-
 end
 
 function FieldState:render()
@@ -56,6 +54,4 @@ function FieldState:render()
   self.map:render()
 
   camera:unset()
-
-
 end

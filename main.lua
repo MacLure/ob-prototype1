@@ -139,9 +139,8 @@ function love.load()
 
   -- stack:push(BattleState:init())
   -- stack:push(EncounterState:init())
-  -- stack:push(WorldMapState:init())
-  stack:push(FieldState:init(nil, map))
-
+  stack:push(WorldMapState:init())
+  -- stack:push(FieldState:init(nil, map))
 end
 
 function love.keypressed(key)

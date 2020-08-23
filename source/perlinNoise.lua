@@ -226,3 +226,16 @@ perlinNoise.voronoi = function(width, height, numPoints)
 
   return noiseMap
 end
+
+perlinNoise.createSubMap = function(map, x, y, width, height)
+  local newNoiseMap = love.image.newImageData(width,height)
+
+  for i = 0, height-1 do
+    for j = 0, width-1 do
+      local r,g,b = map:getPixel(x+j, y+i)
+      newNoiseMap:setPixel(j, i, r,g,b)
+    end
+  end
+
+  return newNoiseMap
+end
