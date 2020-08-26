@@ -130,8 +130,6 @@ function love.load()
   print(gNames.randomBrazilianPlace())
   print(gNames.randomBrazilianPlace())
   print(gNames.randomBrazilianPlace())
-
-  
   
   push:resize(love.graphics.getDimensions( ))
 

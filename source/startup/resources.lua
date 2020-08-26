@@ -5,7 +5,7 @@ require 'source/utils/stateMachine'
 require 'source/utils/stateStack'
 require 'source/utils/animation'
 require 'source/utils/printTable'
-require 'source/perlinNoise'
+require 'source/noise'
 require 'source/camera'
 require 'source/shaders'
 

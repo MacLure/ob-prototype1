@@ -28,7 +28,8 @@ function WorldMapState:init(stack, def)
       gNames.randomGermanPlace,
       gNames.randomEnglishPlace,
       gNames.randomFrenchPlace,
-      gNames.randomArabicPlace
+      gNames.randomArabicPlace,
+      gNames.randomBrazilianPlace
     },
     markers = {},
     nodes = {},
@@ -38,9 +39,9 @@ function WorldMapState:init(stack, def)
   this.activeMapX = this.worldMapX + (this.mapSize - this.activeMapSize) / 2
   this.activeMapY = this.worldMapY + (this.mapSize - this.activeMapSize) / 2
 
-  -- this.map = perlinNoise.generateNoise(this.mapSize, this.mapSize)
+  -- this.map = noise.perlinNoise(this.mapSize, this.mapSize)
 
-  -- this.map = perlinNoise.voronoi(200,200, 20)
+  -- this.map = noise.voronoi(200,200, 20)
 
   setmetatable(this, self)
   
@@ -88,12 +89,12 @@ function WorldMapState:generateSubMap(marker)
   local width, height = self.subMapSize, self.subMapSize
   local x =  marker.x - self.worldMapX
   local y =  marker.y - self.worldMapY
-  return  perlinNoise.createSubMap(self.map, x-iconOffset, y-iconOffset, width, height)
+  return  noise.createSubMap(self.map, x-iconOffset, y-iconOffset, width, height)
 end
 
 function WorldMapState:generateMap()
-  self.map = perlinNoise.generateNoise(self.mapSize,self.mapSize)
-  self.mapImage = perlinNoise.createImage(self.map)
+  self.map = noise.perlinNoise(self.mapSize,self.mapSize)
+  self.mapImage = noise.imageFromData(self.map)
 end
 
 function WorldMapState:generateLocations()
@@ -218,7 +219,4 @@ function WorldMapState:render(dt)
       self.activeMapSize,
       self.activeMapSize
     )
-
-
-
 end
