@@ -8,7 +8,7 @@ function Character:init(def)
   
   setmetatable(this, self)
 
-  this.name = gNames.pickRandomHuman()
+  this.name = random(gNames.humanNames)
 
   return this
 end

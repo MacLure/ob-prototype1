@@ -212,11 +212,11 @@ function WorldMapState:render(dt)
     )
   end
 
-      love.graphics.rectangle(
-      "line",
-      self.activeMapX,
-      self.activeMapY,
-      self.activeMapSize,
-      self.activeMapSize
-    )
+    --   love.graphics.rectangle(
+    --   "line",
+    --   self.activeMapX,
+    --   self.activeMapY,
+    --   self.activeMapSize,
+    --   self.activeMapSize
+    -- )
 end

@@ -75,7 +75,11 @@ function mapBuilder(noiseMap)
         tile = 2
       else
         tile = 4
+        if i == math.floor(height/2) and j == math.floor(width/2) then
+          tile = settlement.generate()
+        end
       end
+
       table.insert(tileMap, tile)
     end
   end

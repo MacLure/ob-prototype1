@@ -89,6 +89,9 @@ gBattleSprites = {
 
 require 'source/characterTypes'
 
+require 'source/settlementGenerator'
+require 'source/monikerSystem/monikerSystem'
+
 require 'source/mapBuilder'
 
 require 'source/map'
