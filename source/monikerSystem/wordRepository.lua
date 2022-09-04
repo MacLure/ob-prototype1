@@ -23,7 +23,8 @@ function WordRepository:color()
   
   function WordRepository:adjective()
     local list = {
-      "foul","fair","great","brave","wise","pious","pure","devout","divine","lost","mad"
+      "foul","fair","great","brave","wise","pious","pure","devout","divine","lost","mad",
+      "ancient","elder","forgotten","eternal"
     }
     return random(list)
   end
@@ -39,7 +40,7 @@ function WordRepository:color()
     local list = {
       "brother","sister","father","mother","son","daughter","servant","hand","keeper","scourge",
       "lord","lady","prince","princess","priest","priestess","tyrant","consort","husband","wife",
-      "butcher","heretic","defender","ward","warden","patron"
+      "butcher","heretic","defender","ward","warden","patron","brute"
     }
     return random(list)
   end
@@ -118,7 +119,9 @@ function WordRepository:relationType()
       { sp = "bury", pp = "buried", doer = "burier" },
       { sp = "bless", pp = "blessed", doer = "blesser" },
       { sp = "curse", pp = "cursed", doer = "curser" },
-  
+      { sp = "shun", pp = "shunned", doer = "shunner" },
+      { sp = "scorn", pp = "scorned", doer = "scorner" },
+
     }
     return random(list)
   end
@@ -141,14 +144,15 @@ function WordRepository:settlement()
   function WordRepository:building()
     local list = {
       "palace","university","library","tower","dungeon","tomb","manor","church","temple","chapel",
-      "shrine","mine","quarry","mill","farm","sanctuary","bridge"
+      "shrine","mine","quarry","mill","farm","sanctuary","bridge","ruins"
     }
     return random(list)
   end
   
   function WordRepository:dwelling()
     local list = {
-      "den","hovel","lair","cave"
+      "den","hovel","lair","cave","hideout","resting place","grave","gathering place","encampment",
+      "garden"
     }
     return random(list)
   end

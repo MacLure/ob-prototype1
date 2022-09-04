@@ -64,39 +64,39 @@ function love.load()
 
   words = WordRepository:init()
 
-  for i=1, 5 do
-    print(gNames.randomJapanesePlace())
-  end  print "--------------------------"
-  for i=1, 5 do
-    print(gNames.randomChinesePlace())
-  end  print "--------------------------"
-  for i=1, 5 do
-    print(gNames.randomGreekPlace())
-  end  print "--------------------------"
-  for i=1, 5 do
-    print(gNames.randomKoreanPlace())
-  end  print "--------------------------"
-  for i=1, 5 do
-    print(gNames.randomNahuatlPlace())
-  end  print "--------------------------"
-  for i=1, 5 do
-    print(gNames.randomGermanPlace())
-  end  print "--------------------------"
-  for i=1, 5 do
-    print(gNames.randomEnglishPlace())
-  end  print "--------------------------"
-  for i=1, 5 do
-    print(gNames.randomFrenchPlace())
-  end  print "--------------------------"
-  for i=1, 5 do
-    print(gNames.randomArabicPlace())
-  end  print "--------------------------"
-  for i=1, 5 do
-    print(gNames.randomBrazilianPlace())
-  end  print "--------------------------"
-  for i=1, 5 do
-    print(gNames.randomRussianPlace())
-  end  print "--------------------------"
+  -- for i=1, 5 do
+  --   print(gNames.randomJapanesePlace())
+  -- end  print "--------------------------"
+  -- for i=1, 5 do
+  --   print(gNames.randomChinesePlace())
+  -- end  print "--------------------------"
+  -- for i=1, 5 do
+  --   print(gNames.randomGreekPlace())
+  -- end  print "--------------------------"
+  -- for i=1, 5 do
+  --   print(gNames.randomKoreanPlace())
+  -- end  print "--------------------------"
+  -- for i=1, 5 do
+  --   print(gNames.randomNahuatlPlace())
+  -- end  print "--------------------------"
+  -- for i=1, 5 do
+  --   print(gNames.randomGermanPlace())
+  -- end  print "--------------------------"
+  -- for i=1, 5 do
+  --   print(gNames.randomEnglishPlace())
+  -- end  print "--------------------------"
+  -- for i=1, 5 do
+  --   print(gNames.randomFrenchPlace())
+  -- end  print "--------------------------"
+  -- for i=1, 5 do
+  --   print(gNames.randomArabicPlace())
+  -- end  print "--------------------------"
+  -- for i=1, 5 do
+  --   print(gNames.randomBrazilianPlace())
+  -- end  print "--------------------------"
+  -- for i=1, 5 do
+  --   print(gNames.randomRussianPlace())
+  -- end  print "--------------------------"
 
   -- party:addUnit(unit2)
 
@@ -122,6 +122,11 @@ function love.load()
     }
     return random(list)()
   end
+
+  function humanName()
+    return random(gNames.humanNames)
+  end
+  
 
   monikerSystem = MonikerSystem:init()
   monikerSystem:randomName()
