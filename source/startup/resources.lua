@@ -89,8 +89,11 @@ gBattleSprites = {
 
 require 'source/characterTypes'
 
+require 'source/monikerSystem/wordRepository'
 require 'source/settlementGenerator'
 require 'source/monikerSystem/monikerSystem'
+require 'source/monikerSystem/factionNameGenerator'
+require 'source/monikerSystem/placeNameGenerator'
 
 require 'source/mapBuilder'
 

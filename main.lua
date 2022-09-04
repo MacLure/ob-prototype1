@@ -61,6 +61,43 @@ function love.load()
   unit2:assignLeader(character6)
 
   party:addUnit(unit1)
+
+  words = WordRepository:init()
+
+  for i=1, 5 do
+    print(gNames.randomJapanesePlace())
+  end  print "--------------------------"
+  for i=1, 5 do
+    print(gNames.randomChinesePlace())
+  end  print "--------------------------"
+  for i=1, 5 do
+    print(gNames.randomGreekPlace())
+  end  print "--------------------------"
+  for i=1, 5 do
+    print(gNames.randomKoreanPlace())
+  end  print "--------------------------"
+  for i=1, 5 do
+    print(gNames.randomNahuatlPlace())
+  end  print "--------------------------"
+  for i=1, 5 do
+    print(gNames.randomGermanPlace())
+  end  print "--------------------------"
+  for i=1, 5 do
+    print(gNames.randomEnglishPlace())
+  end  print "--------------------------"
+  for i=1, 5 do
+    print(gNames.randomFrenchPlace())
+  end  print "--------------------------"
+  for i=1, 5 do
+    print(gNames.randomArabicPlace())
+  end  print "--------------------------"
+  for i=1, 5 do
+    print(gNames.randomBrazilianPlace())
+  end  print "--------------------------"
+  for i=1, 5 do
+    print(gNames.randomRussianPlace())
+  end  print "--------------------------"
+
   -- party:addUnit(unit2)
 
   -- unit2:removeCharacter(character3)
@@ -68,94 +105,32 @@ function love.load()
     -- print(#party.units[2].characters)
     -- print(#party.reserveCharacters)
 
-  -- print(party.units[1].leader.name)
-  -- print(party.units[2].leader.name)
-  -- print(gNames.randomJapanesePlace())
-  -- print(gNames.randomJapanesePlace())
-  -- print(gNames.randomJapanesePlace())
-  -- print(gNames.randomJapanesePlace())
-  -- print "--------------------------"
-  -- print(gNames.randomChinesePlace())
-  -- print(gNames.randomChinesePlace())
-  -- print(gNames.randomChinesePlace())
-  -- print(gNames.randomChinesePlace())
-  -- print "--------------------------"
-  -- print(gNames.randomGreekPlace())
-  -- print(gNames.randomGreekPlace())
-  -- print(gNames.randomGreekPlace())
-  -- print(gNames.randomGreekPlace())
-  -- print(gNames.randomGreekPlace())
-  -- print(gNames.randomGreekPlace())
-  -- print(gNames.randomGreekPlace())
-  -- print(gNames.randomGreekPlace())
-  -- print "--------------------------"
-  -- print(gNames.randomKoreanPlace())
-  -- print(gNames.randomKoreanPlace())
-  -- print(gNames.randomKoreanPlace())
-  -- print(gNames.randomKoreanPlace())
-  -- print(gNames.randomKoreanPlace())
-  -- print "--------------------------"
-  -- print(gNames.randomNahuatlPlace())
-  -- print(gNames.randomNahuatlPlace())
-  -- print(gNames.randomNahuatlPlace())
-  -- print(gNames.randomNahuatlPlace())
-  -- print(gNames.randomNahuatlPlace())
-  -- print "--------------------------"
-  print(gNames.randomGermanPlace())
-  print(gNames.randomGermanPlace())
-  print(gNames.randomGermanPlace())
-  print(gNames.randomGermanPlace())
-  print(gNames.randomGermanPlace())
-  print "--------------------------"
-  print(gNames.randomEnglishPlace())
-  print(gNames.randomEnglishPlace())
-  print(gNames.randomEnglishPlace())
-  print(gNames.randomEnglishPlace())
-  print(gNames.randomEnglishPlace())
-  print "--------------------------"
-  print(gNames.randomFrenchPlace())
-  print(gNames.randomFrenchPlace())
-  print(gNames.randomFrenchPlace())
-  print(gNames.randomFrenchPlace())
-  print(gNames.randomFrenchPlace())
-  print "--------------------------"
-  print(gNames.randomArabicPlace())
-  print(gNames.randomArabicPlace())
-  print(gNames.randomArabicPlace())
-  print(gNames.randomArabicPlace())
-  print(gNames.randomArabicPlace())
-  -- print "--------------------------"
-  -- print(gNames.randomBrazilianPlace())
-  -- print(gNames.randomBrazilianPlace())
-  -- print(gNames.randomBrazilianPlace())
-  -- print(gNames.randomBrazilianPlace())
-  -- print(gNames.randomBrazilianPlace())
-  print "--------------------------"
-  print(gNames.randomRussianPlace())
-  print(gNames.randomRussianPlace())
-  print(gNames.randomRussianPlace())
-  print(gNames.randomRussianPlace())
-  print(gNames.randomRussianPlace())
-  print(gNames.randomRussianPlace())
-  print(gNames.randomRussianPlace())
-  print(gNames.randomRussianPlace())
-  print(gNames.randomRussianPlace())
-  print(gNames.randomRussianPlace())
-  print(gNames.randomRussianPlace())
-  print(gNames.randomRussianPlace())
-  print(gNames.randomRussianPlace())
-  print(gNames.randomRussianPlace())
-  print(gNames.randomRussianPlace())
-  print(gNames.randomRussianPlace())
-  print(gNames.randomRussianPlace())
-  print(gNames.randomRussianPlace())
-  print(gNames.randomRussianPlace())
-  print(gNames.randomRussianPlace())
-  print "--------------------------"
-
+    
+  function placeName()
+    local list = {
+      gNames.randomJapanesePlace,
+      gNames.randomChinesePlace,
+      gNames.randomGreekPlace,
+      gNames.randomKoreanPlace,
+      gNames.randomNahuatlPlace,
+      gNames.randomGermanPlace,
+      gNames.randomEnglishPlace,
+      gNames.randomFrenchPlace,
+      gNames.randomArabicPlace,
+      gNames.randomBrazilianPlace,
+      gNames.randomRussianPlace
+    }
+    return random(list)()
+  end
 
   monikerSystem = MonikerSystem:init()
   monikerSystem:randomName()
+  print "--------------------------"
+  factionNameGenerator = FactionNameGenerator:init()
+  factionNameGenerator:randomName()
+  print "--------------------------"
+  placeNameGenerator = PlaceNameGenerator:init()
+  placeNameGenerator:randomName()
 
   push:resize(love.graphics.getDimensions( ))
 

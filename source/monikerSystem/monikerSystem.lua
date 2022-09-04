@@ -7,114 +7,44 @@ function MonikerSystem:init()
 end
 
 function MonikerSystem:randomName()
-  print(random(gNames.humanNames).." the "..self:color())
-  print(random(gNames.humanNames).." the "..self:animal())
-  print(random(gNames.humanNames).." the "..self:color().." "..self:animal())
-  print(self:color().." "..self:animal().." "..random(gNames.humanNames))
-  print(random(gNames.humanNames).." the "..self:color().." "..self:animal().." of "..self:placeName())
+  print(random(gNames.humanNames).." the "..words:color())
+  print(random(gNames.humanNames).." the "..words:animal())
+  print(random(gNames.humanNames).." the "..words:color().." "..words:animal())
+  print(words:color().." "..words:animal().." "..random(gNames.humanNames))
+  print(random(gNames.humanNames).." the "..words:color().." "..words:animal().." of "..placeName())
 
-  print(random(gNames.humanNames).." the "..self:adjective())
-  print(random(gNames.humanNames).." the "..self:adjective().." "..self:animal())
-  print(self:adjective().." "..self:animal().." "..random(gNames.humanNames))
-  print(random(gNames.humanNames).." the "..self:adjective().." "..self:animal().." of "..self:placeName())
+  print(random(gNames.humanNames).." the "..words:adjective())
+  print(random(gNames.humanNames).." the "..words:adjective().." "..words:animal())
+  print(words:adjective().." "..words:animal().." "..random(gNames.humanNames))
+  print(random(gNames.humanNames).." the "..words:adjective().." "..words:animal().." of "..placeName())
 
-  print(random(gNames.humanNames).." the "..self:landscape().." "..self:animal())
-  print(self:landscape().." "..self:animal().." "..random(gNames.humanNames))
-  print(random(gNames.humanNames).." the "..self:landscape().." "..self:animal().." of "..self:placeName())
+  print(random(gNames.humanNames).." the "..words:landscape().." "..words:animal())
+  print(words:landscape().." "..words:animal().." "..random(gNames.humanNames))
+  print(random(gNames.humanNames).." the "..words:landscape().." "..words:animal().." of "..placeName())
 
-  print(random(gNames.humanNames).." the "..self:substance().." "..self:animal())
-  print(self:substance().." "..self:animal().." "..random(gNames.humanNames))
-  print(random(gNames.humanNames).." the "..self:relation().." of "..self:substance())
-  print(random(gNames.humanNames).." the "..self:relation().." of "..self:pluralize(self:animal()))
+  print(random(gNames.humanNames).." the "..words:substance().." "..words:animal())
+  print(words:substance().." "..words:animal().." "..random(gNames.humanNames))
+  print(random(gNames.humanNames).." the "..words:relation().." of "..words:substance())
+  print(random(gNames.humanNames).." the "..words:relation().." of "..words:pluralize(words:animal()))
 
-  print(random(gNames.humanNames).." the "..self:substance().."-"..self:simplePP(self:attribute()))
-  print(random(gNames.humanNames).." the "..self:substance().."-"..self:simplePP(self:attribute()).." "..self:animal().." of "..self:placeName())
+  print(random(gNames.humanNames).." the "..words:substance().."-"..words:simplePP(words:attribute()))
+  print(random(gNames.humanNames).." the "..words:substance().."-"..words:simplePP(words:attribute()).." "..words:animal().." of "..placeName())
 
+  print(random(gNames.humanNames).." the "..words:animal().."-"..words:verb().doer)
+  print(random(gNames.humanNames).." the "..words:animal().."-"..words:verb().pp)
 
-end
+  print(words:animal().." "..words:verb().doer.." "..random(gNames.humanNames))
+  print(random(gNames.humanNames).." the "..words:animal().."-"..words:verb().pp)
 
-function MonikerSystem:placeName()
-  local list = {
-    gNames.randomJapanesePlace,
-    gNames.randomChinesePlace,
-    gNames.randomGreekPlace,
-    gNames.randomKoreanPlace,
-    gNames.randomNahuatlPlace,
-    gNames.randomGermanPlace,
-    gNames.randomEnglishPlace,
-    gNames.randomFrenchPlace,
-    gNames.randomArabicPlace,
-    gNames.randomBrazilianPlace,
-    gNames.randomRussianPlace
-  }
-  return random(list)()
-end
+  print(words:substance().." "..words:verb().doer.." "..random(gNames.humanNames))
+  print(random(gNames.humanNames).." the "..words:substance().."-"..words:verb().pp)
 
-function MonikerSystem:color()
-  local list = {
-    "red","blue","black","white","yellow","green"
-  }
-  return random(list)
-end
+  print(random(gNames.humanNames).." the ".."un"..words:verb().pp)
+  print(random(gNames.humanNames).." the ".."twice-"..words:verb().pp)
 
-function MonikerSystem:animal()
-  local list = {
-    "wolf","fox","bear","lion","tiger","maggot","snake","hound","spider"
-  }
-  return random(list)
-end
+  print(random(gNames.humanNames).." the "..words:less(words:substance()))
+  print(random(gNames.humanNames).." of the "..words:less(words:substance()).." "..words:landscape())
 
-function MonikerSystem:adjective()
-  local list = {
-    "foul","fair","great","brave","wise","pious","pure"
-  }
-  return random(list)
-end
-
-function MonikerSystem:landscape()
-  local list = {
-    "mountain","desert","forest","river"
-  }
-  return random(list)
-end
-
-function MonikerSystem:weather()
-  local list = {
-    "sun", "star","moon","wind","snow","rain","storm","winter"
-  }
-  return random(list)
-end
-
-function MonikerSystem:relation()
-  local list = {
-    "brother","sister","father","mother","son","daughter","servant","hand","keeper","scourge",
-    "lord","lady","prince","princess","priest","priestess","tyrant"
-  }
-  return random(list)
-end
-
-function MonikerSystem:pluralize(word)
-  return word.."s"
-end
-
-function MonikerSystem:substance()
-  local list = {
-    "glass","iron","stone","gold","dirt","dung","moss","ice","fire","flame"
-  }
-  return random(list)
-end
-
-function MonikerSystem:attribute()
-  local list = {
-    "heart","soul","eye","face","name","tongue"
-  }
-  return random(list)
-end
-
-function MonikerSystem:simplePP(word)
-  local output = word
-  if string.sub(output, -1) ~= "e" then
-    output = output.."e"
-  end
-  return output.."d"
+  print(random(gNames.humanNames).." the "..words:less(words:substance()).." "..words:relation())
+  print(random(gNames.humanNames).." the "..words:less(words:substance()).." "..words:animal())
 end
