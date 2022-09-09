@@ -121,6 +121,7 @@ function WordRepository:relationType()
       { sp = "curse", pp = "cursed", doer = "curser" },
       { sp = "shun", pp = "shunned", doer = "shunner" },
       { sp = "scorn", pp = "scorned", doer = "scorner" },
+      { sp = "worship", pp = "worshipped", doer = "worshipper" },
 
     }
     return random(list)
