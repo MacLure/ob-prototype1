@@ -94,10 +94,18 @@ function love.load()
   end
   
 
-  regionGenerator = RegionGenerator:init({tags={"water"}})
+  regionGenerator = RegionGenerator:init({tags={"water"}, landscape="sea"})
   regionGenerator:generateRegion()
   personalTitleGenerator = PersonalTitleGenerator:init(regionGenerator)
   personalTitleGenerator:randomName()
+
+  print "--------------------------"
+
+  regionGenerator2 = RegionGenerator:init({tags={"forest"}, landscape="forest"})
+  regionGenerator:generateRegion()
+  personalTitleGenerator = PersonalTitleGenerator:init(regionGenerator2)
+  personalTitleGenerator:randomName()
+
 
 
   print "--------------------------"
@@ -109,12 +117,8 @@ function love.load()
 
   push:resize(love.graphics.getDimensions( ))
 
-  local map = gMaps['map1']()
-
-  -- stack:push(BattleState:init())
-  -- stack:push(EncounterState:init())
+  -- local map = gMaps['map1']()
   stack:push(WorldMapState:init())
-  -- stack:push(FieldState:init(nil, map))
 end
 
 function love.keypressed(key)

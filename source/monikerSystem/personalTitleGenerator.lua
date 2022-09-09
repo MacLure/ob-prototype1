@@ -48,21 +48,21 @@ function PersonalTitleGenerator:randomName()
   local pattern2 = words:adjective()
   local pattern3 = "un"..words:verb().pp
   local pattern4 = "twice-"..words:verb().pp
-  local pattern5 = words:less(words:substance())
+  local pattern5 = words:less(random(self.region:substances(words:substances())))
   local pattern6 = random(self.region:animals(words:animals()))
   local pattern14 = random(self.region:animals(words:animals())).."-"..words:verb().pp
-  local pattern16 = words:substance().."-"..words:verb().pp
+  local pattern16 = random(self.region:substances(words:substances())).."-"..words:verb().pp
 
   local pattern7 = words:color().." "..random(self.region:animals(words:animals()))
   local pattern8 = words:adjective().." "..random(self.region:animals(words:animals()))
-  local pattern9 = words:relation().." of "..words:substance()
+  local pattern9 = words:relation().." of "..random(self.region:substances(words:substances()))
   local pattern10 = words:relation().." of "..words:pluralize(random(self.region:animals(words:animals())))
-  local pattern11 = words:substance().."-"..words:simplePP(words:attribute())
-  local pattern12 = words:substance().."-"..words:simplePP(words:attribute()).." "..random(self.region:animals(words:animals()))
+  local pattern11 = random(self.region:substances(words:substances())).."-"..words:simplePP(words:attribute())
+  local pattern12 = random(self.region:substances(words:substances())).."-"..words:simplePP(words:attribute()).." "..random(self.region:animals(words:animals()))
   local pattern13 = random(self.region:animals(words:animals())).."-"..words:verb().doer
-  local pattern15 = words:substance().." "..words:verb().doer
-  local pattern18 = words:less(words:substance()).." "..words:relation()
-  local pattern19 = words:less(words:substance()).." "..random(self.region:animals(words:animals()))
+  local pattern15 = random(self.region:substances(words:substances())).." "..words:verb().doer
+  local pattern18 = words:less(random(self.region:substances(words:substances()))).." "..words:relation()
+  local pattern19 = words:less(random(self.region:substances(words:substances()))).." "..random(self.region:animals(words:animals()))
 
   print(self:nameFirst(pattern1))
   print(self:nameFirst(pattern2))

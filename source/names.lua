@@ -7,22 +7,6 @@ gNames.humanNames = {
   "Simon","Antonio"
 }
 
-gNames.titles = {
-  "marquis","emir","khan","prince","elector",
-  "satrap","governor","boyar","jarl","earl","margrave",
-  "thane","magistrate","pasha","bey","shah","raj",
-
-  "prefect","bishop","cardinal","seer","oracle","sheppard","high priest",
-
-  "lion","serpent","hound","wolf","gryphon","bear","peacock"
-}
-
-gNames.cityTypes = {
-  "city of shadows","necropolis","holy seat","university city",
-  "city of learning","port city","trade city","city of industry",
-  "city of light","ruined city"
-}
-  
 gNames.vowels = {"a","e","i","o","u"}
 gNames.consonants = {"b","c","d","f","g","h","j","k","l","m","n","p","q","r","s","t","v","w","x","z"}
 gNames.punctuation = {"'","-"}

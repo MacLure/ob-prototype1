@@ -3,6 +3,7 @@ RegionGenerator = Class{}
 function RegionGenerator:init(params)
   local this = {}
   this.tags = params.tags
+  this.landscape = params.landscape
   this.regions = {}
 
   setmetatable(this, self)
@@ -17,9 +18,6 @@ function RegionGenerator:generateRegion()
 
   local animals = self:animals(words:animals())
   local substances = self:substances(words:substances())
-
-  -- printTable(animals)
-  -- printTable(substances)
 end
 
 function RegionGenerator:animals(list)
@@ -29,11 +27,15 @@ function RegionGenerator:animals(list)
     if containsFromArray(v.tags, self.tags) then
       table.insert(returnList, k)
     else
-      table.insert(returnList, "sea "..k)
+      table.insert(returnList, self:prependLandscape(k))
     end
   end
 
   return returnList
+end
+
+function RegionGenerator:prependLandscape(string)
+  return self.landscape.." "..string
 end
 
 function RegionGenerator:substances(list)

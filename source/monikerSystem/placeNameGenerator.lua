@@ -9,7 +9,7 @@ function PlaceNameGenerator:init(region)
 end
 
 function PlaceNameGenerator:simpleDescriptor(descriptor)
-  return placeName()..descriptor
+  return placeName().." "..descriptor
 end
 
 function PlaceNameGenerator:concatenatePlaceName(descriptor)
