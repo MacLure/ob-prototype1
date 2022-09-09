@@ -99,6 +99,7 @@ require 'source/monikerSystem/regionGenerator'
 require 'source/monikerSystem/region'
 require 'source/monikerSystem/factionGenerator'
 require 'source/monikerSystem/faction'
+require 'source/monikerSystem/personalTitleGenerator'
 
 require 'source/mapBuilder'
 

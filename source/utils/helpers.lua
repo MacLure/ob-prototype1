@@ -1,3 +1,11 @@
+-- STRING HELPERS
+
+function capitalize(str)
+  return (str:gsub("^%l", string.upper))
+end
+
+-- NUMBER HELPERS
+
 function wholeNumber(n)
   if n - math.floor(n) >= 0.5 then
     return math.ceil(n)
@@ -8,6 +16,10 @@ function wholeNumber(n)
   -- return n >= 0.0 and n-n% 1 or n-n%-1
 end
 
+function clamp(value, min, max)
+  return math.max(min, math.min(value, max))
+end
+
 function round(n) -- culd replace wholeNumber
   if n < 0 then
     return math.ceil(n - 0.5)
@@ -15,6 +27,27 @@ function round(n) -- culd replace wholeNumber
     return math.floor(n + 0.5)
   end
 end
+
+function randomFloat(min, max, precision)
+	local range = max - min
+	local offset = range * math.random()
+	local unrounded = min + offset
+
+	if not precision then
+		return unrounded
+	end
+
+	local powerOfTen = 10 ^ precision
+	return math.floor(unrounded * powerOfTen + 0.5) / powerOfTen
+end
+
+-- INPUT HELPERS
+
+function mousePosition()
+  return push:toGame(love.mouse.getPosition())
+end
+
+-- TABLE HELPERS
 
 function getIndex(table, item)
   local index={}
@@ -33,27 +66,15 @@ function contains(table, value)
   return false
 end
 
-function printWithShadow(text, x, y, width, alignment, color)
-  local textColor = color or {1,1,1}
-  love.graphics.setColor( 0,0,0,0.5 )
-  love.graphics.printf( text, x+1, y+1, width, alignment )
-  love.graphics.setColor( textColor, 1 )
-  love.graphics.printf( text, x, y, width, alignment )
-  love.graphics.setColor( 1,1,1,1 )
-end
-
-
-function tilesPerRow(tileWidth)
-  return math.ceil(VIRTUAL_WIDTH / tileWidth)
-end
-
-function tilesPerColumn(tileHeight)
-  return math.ceil(VIRTUAL_HEIGHT / tileHeight)
-end
-
-function getTile(map, rowSize, x, y)
-  x = x +1
-  return map[x + y * rowSize]
+function containsFromArray(tableToCheck, tableOfValues)
+  for i, v1 in ipairs(tableToCheck) do
+    for j, v2 in ipairs(tableOfValues) do
+      if v1 == v2 then
+        return true
+      end
+    end
+  end
+  return false
 end
 
 function GenerateTileIndexes(tileMap)
@@ -83,27 +104,27 @@ function GenerateTileIndexes(tileMap)
   return tiles
 end
 
-function getCharacterFrames(spritesheet, width, height)
-  local characterWidth = width or 16
-  local characterHeight = height or 24
-  local spritesheetWidth, speritesheetHeight = spritesheet:getDimensions()
-  gCharacterFrames = {}
 
-  for i = 0, speritesheetHeight /  characterHeight - 1 do
-    for j = 0, spritesheetWidth / characterWidth - 1 do
-  
-      local texture = love.graphics.newQuad(
-        j * characterWidth,
-        i * characterHeight,
-        characterWidth,
-        characterHeight,
-        spritesheetWidth,
-        speritesheetHeight)
+function printWithShadow(text, x, y, width, alignment, color)
+  local textColor = color or {1,1,1}
+  love.graphics.setColor( 0,0,0,0.5 )
+  love.graphics.printf( text, x+1, y+1, width, alignment )
+  love.graphics.setColor( textColor, 1 )
+  love.graphics.printf( text, x, y, width, alignment )
+  love.graphics.setColor( 1,1,1,1 )
+end
 
-      table.insert(gCharacterFrames, texture)
-    end
-  end
-  return gCharacterFrames
+function tilesPerRow(tileWidth)
+  return math.ceil(VIRTUAL_WIDTH / tileWidth)
+end
+
+function tilesPerColumn(tileHeight)
+  return math.ceil(VIRTUAL_HEIGHT / tileHeight)
+end
+
+function getTile(map, rowSize, x, y)
+  x = x +1
+  return map[x + y * rowSize]
 end
 
 function shallowClone(t)
@@ -124,14 +145,6 @@ function deepClone(t)
     end
   end
   return clone
-end
-
-function clamp(value, min, max)
-  return math.max(min, math.min(value, max))
-end
-
-function capitalize(str)
-  return (str:gsub("^%l", string.upper))
 end
 
 function shuffle(array)
@@ -163,23 +176,18 @@ function removeByValue(array, value)
   table.remove(array, index)
 end
 
-function mousePosition()
-  return push:toGame(love.mouse.getPosition())
-end
-
-function randomFloat(min, max, precision)
-	local range = max - min
-	local offset = range * math.random()
-	local unrounded = min + offset
-
-	if not precision then
-		return unrounded
-	end
-
-	local powerOfTen = 10 ^ precision
-	return math.floor(unrounded * powerOfTen + 0.5) / powerOfTen
-end
-
 function distance(x1,y1,x2,y2)
   return math.sqrt((x2 - x1) ^ 2 + (y2 - y1) ^ 2)
+end
+
+function randomFromKvp(kvp)
+  local randomIndex = math.random(1,#kvp)
+  local counter = 1
+  for k, v in pairs(kvp) do
+    if counter == randomIndex then
+      v.name = k
+      return v
+    end
+    randomIndex = randomIndex+1
+  end
 end

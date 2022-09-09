@@ -64,40 +64,6 @@ function love.load()
 
   words = WordRepository:init()
 
-  -- for i=1, 5 do
-  --   print(gNames.randomJapanesePlace())
-  -- end  print "--------------------------"
-  -- for i=1, 5 do
-  --   print(gNames.randomChinesePlace())
-  -- end  print "--------------------------"
-  -- for i=1, 5 do
-  --   print(gNames.randomGreekPlace())
-  -- end  print "--------------------------"
-  -- for i=1, 5 do
-  --   print(gNames.randomKoreanPlace())
-  -- end  print "--------------------------"
-  -- for i=1, 5 do
-  --   print(gNames.randomNahuatlPlace())
-  -- end  print "--------------------------"
-  -- for i=1, 5 do
-  --   print(gNames.randomGermanPlace())
-  -- end  print "--------------------------"
-  -- for i=1, 5 do
-  --   print(gNames.randomEnglishPlace())
-  -- end  print "--------------------------"
-  -- for i=1, 5 do
-  --   print(gNames.randomFrenchPlace())
-  -- end  print "--------------------------"
-  -- for i=1, 5 do
-  --   print(gNames.randomArabicPlace())
-  -- end  print "--------------------------"
-  -- for i=1, 5 do
-  --   print(gNames.randomBrazilianPlace())
-  -- end  print "--------------------------"
-  -- for i=1, 5 do
-  --   print(gNames.randomRussianPlace())
-  -- end  print "--------------------------"
-
   -- party:addUnit(unit2)
 
   -- unit2:removeCharacter(character3)
@@ -128,13 +94,17 @@ function love.load()
   end
   
 
-  monikerSystem = MonikerSystem:init()
-  monikerSystem:randomName()
+  regionGenerator = RegionGenerator:init({tags={"water"}})
+  regionGenerator:generateRegion()
+  personalTitleGenerator = PersonalTitleGenerator:init(regionGenerator)
+  personalTitleGenerator:randomName()
+
+
   print "--------------------------"
   factionNameGenerator = FactionNameGenerator:init()
   factionNameGenerator:randomName()
   print "--------------------------"
-  placeNameGenerator = PlaceNameGenerator:init()
+  placeNameGenerator = PlaceNameGenerator:init(regionGenerator)
   placeNameGenerator:randomName()
 
   push:resize(love.graphics.getDimensions( ))
