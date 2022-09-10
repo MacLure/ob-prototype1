@@ -44,16 +44,30 @@ end
 
 function WordRepository:animal() return randomFromKvp(self:animals()) end
 
-function WordRepository:adjectives()
+function WordRepository:characterAdjectives()
   return {
-    "foul","fair","great","brave","wise","pious","pure","devout","divine","lost","mad",
-    "ancient","elder","forgotten","eternal"
+    ["foul"] = { tags = {} },
+    ["fair"] = { tags = {} },
+    ["great"] = { tags = {} },
+    ["brave"] = { tags = {"strength"} },
+    ["strong"] = { tags = {"strength"} },
+    ["stout"] = { tags = {"strength"} },
+    ["wise"] = { tags = {"int"} },
+    ["learned"] = { tags = {"int"} },
+    ["pious"] = { tags = {"faith"} },
+    ["devout"] = { tags = {"faith"} },
+    ["pure"] = { tags = {} },
+    ["divine"] = { tags = {} },
+    ["lost"] = { tags = {} },
+    ["mad"] = { tags = {} },
+    ["ancient"] = { tags = {} },
+    ["elder"] = { tags = {} },
+    ["forgotten"] = { tags = {} },
+    ["eternal"] = { tags = {} },
   }
 end
 
-function WordRepository:adjective()
-  return random(self:adjectives())
-end
+function WordRepository:characterAdjective() return randomFromKvp(self:characterAdjectives()) end
 
 function WordRepository:landscapes()
   return {
@@ -181,7 +195,7 @@ function WordRepository:attribute() return random(self:attributes()) end
 function WordRepository:verbs()
   return {
     { sp = "slay", pp = "slayed", doer = "slayer", tags={} },
-    { sp = "slay", pp = "sought", doer = "seeker", tags={} },
+    { sp = "seek", pp = "sought", doer = "seeker", tags={} },
     { sp = "burn", pp = "burnt", doer = "burner", tags={} },
     { sp = "defile", pp = "defiled", doer = "defiler", tags={} },
     { sp = "gaze", pp = "gazed", doer = "gazer", tags={} },

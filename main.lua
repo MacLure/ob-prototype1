@@ -9,68 +9,7 @@ function love.load()
 
   stack = StateStack:init()
 
-  character1 = Character:init(
-    gCharacterTypes.knight
-  )
-  character2 = Character:init(
-    gCharacterTypes.knight
-  )
-  character3 = Character:init(
-    gCharacterTypes.cleric
-  )
-  character4 = Character:init(
-    gCharacterTypes.dragon
-  )
-  character5 = Character:init(
-    gCharacterTypes.ninja
-  )
-
-
-  character6 = Character:init(
-    gCharacterTypes.knight
-  )
-  character7 = Character:init(
-    gCharacterTypes.knight
-  )
-  character8 = Character:init(
-    gCharacterTypes.cleric
-  )
-  character9 = Character:init(
-    gCharacterTypes.dragon
-  )
-  character10 = Character:init(
-    gCharacterTypes.ninja
-  )
-
-  party = Party:init()
-
-  unit1 = Unit:init(party)
-  unit1:addCharacter(character1)
-  unit1:addCharacter(character2)
-  unit1:addCharacter(character3)
-  unit1:addCharacter(character4)
-  unit1:addCharacter(character5)
-  unit1:assignLeader(character1)
-
-  unit2 = Unit:init(party)
-  unit2:addCharacter(character6)
-  unit2:addCharacter(character7)
-  unit2:addCharacter(character8)
-  unit2:addCharacter(character9)
-  unit2:addCharacter(character10)
-  unit2:assignLeader(character6)
-
-  party:addUnit(unit1)
-
   words = WordRepository:init()
-
-  -- party:addUnit(unit2)
-
-  -- unit2:removeCharacter(character3)
-
-    -- print(#party.units[2].characters)
-    -- print(#party.reserveCharacters)
-
     
   function placeName()
     local list = {
@@ -92,32 +31,40 @@ function love.load()
   function humanName()
     return random(gNames.humanNames)
   end
+
+  function printList(list)
+    local output = ""
+    for i, item in ipairs(list) do
+      output = output..", "..item
+    end
+    print(output)
+  end
+  
+  personalNameGenerator = PersonalTitleGenerator:init()
+
+  region = Region:init({tags={"water"}, landscape="sea"})
+  -- placeNameGenerator = PlaceNameGenerator:init(region)
+  -- placeNameGenerator:randomName()
+  character = region:makeCharacter()
+  character:printDetails()
   
 
-  regionGenerator = RegionGenerator:init({tags={"water"}, landscape="sea"})
-  regionGenerator:generateRegion()
-  personalTitleGenerator = PersonalTitleGenerator:init(regionGenerator)
-  personalTitleGenerator:randomName()
+  -- print "--------------------------"
 
-  print "--------------------------"
-
-  regionGenerator2 = RegionGenerator:init({tags={"forest"}, landscape="forest"})
-  regionGenerator:generateRegion()
-  personalTitleGenerator = PersonalTitleGenerator:init(regionGenerator2)
-  personalTitleGenerator:randomName()
+  -- region2 = Region:init({tags={"forest"}, landscape="forest"})
+  -- placeNameGenerator2 = PlaceNameGenerator:init(region2)
+  -- placeNameGenerator2:randomName()
+  -- character = region:makeCharacter()
+  -- character:printDetails()
 
 
-
-  print "--------------------------"
-  factionNameGenerator = FactionNameGenerator:init()
-  factionNameGenerator:randomName()
-  print "--------------------------"
-  placeNameGenerator = PlaceNameGenerator:init(regionGenerator)
-  placeNameGenerator:randomName()
+  -- print "--------------------------"
+  -- factionNameGenerator = FactionNameGenerator:init()
+  -- factionNameGenerator:randomName()
+  -- print "--------------------------"
 
   push:resize(love.graphics.getDimensions( ))
 
-  -- local map = gMaps['map1']()
   stack:push(WorldMapState:init())
 end
 

@@ -1,15 +1,30 @@
 PersonalTitleGenerator = Class{}
 
-function PersonalTitleGenerator:init(region)
+function PersonalTitleGenerator:init()
   local this = {}
-  this.region = region
 
   setmetatable(this, self)
   return this
 end
 
-function PersonalTitleGenerator:concatenateTitle(title)
-  local name = random(gNames.humanNames)
+function PersonalTitleGenerator:animals(character)
+  local regionAnimals = character.region:animals()
+  return regionAnimals
+end
+
+function PersonalTitleGenerator:adjectives(character)
+  local adjectives = {}
+
+  for k,v in pairs(words:characterAdjectives()) do
+    if containsFromArray(v.tags, {character:orderedTraits()[1]}) then
+      table.insert(adjectives, k)
+    end
+  end
+
+  return adjectives
+end
+
+function PersonalTitleGenerator:concatenateTitle(name, title)
   local titleString = title
 
   if math.random(1,2) == 1 then
@@ -24,12 +39,12 @@ function PersonalTitleGenerator:concatenateTitle(title)
   end
 end
 
-function PersonalTitleGenerator:nameFirst(title)
-  return random(gNames.humanNames).." the "..title
+function PersonalTitleGenerator:nameFirst(name, title)
+  return name.." the "..title
 end
 
-function PersonalTitleGenerator:nameLast(title)
-  return title.." "..random(gNames.humanNames)
+function PersonalTitleGenerator:nameLast(name, title)
+  return title.." "..name
 end
 
 function PersonalTitleGenerator:appendPlaceName(title)
@@ -43,47 +58,50 @@ function PersonalTitleGenerator:appendPlaceName(title)
   end
 end
 
-function PersonalTitleGenerator:randomName()
+function PersonalTitleGenerator:randomName(character)
+  local animals = self:animals(character)
+  local adjectives = self:adjectives(character)
+
   local pattern1 = words:color()
-  local pattern2 = words:adjective()
+  local pattern2 = random(adjectives)
   local pattern3 = "un"..words:verb().pp
   local pattern4 = "twice-"..words:verb().pp
-  local pattern5 = words:less(random(self.region:substances(words:substances())))
-  local pattern6 = random(self.region:animals(words:animals()))
-  local pattern14 = random(self.region:animals(words:animals())).."-"..words:verb().pp
-  local pattern16 = random(self.region:substances(words:substances())).."-"..words:verb().pp
+  local pattern5 = words:less(random(character.region:substances(words:substances())))
+  local pattern6 = random(animals)
+  local pattern14 = random(animals).."-"..words:verb().pp
+  local pattern16 = random(character.region:substances(words:substances())).."-"..words:verb().pp
 
-  local pattern7 = words:color().." "..random(self.region:animals(words:animals()))
-  local pattern8 = words:adjective().." "..random(self.region:animals(words:animals()))
-  local pattern9 = words:relation().." of "..random(self.region:substances(words:substances()))
-  local pattern10 = words:relation().." of "..words:pluralize(random(self.region:animals(words:animals())))
-  local pattern11 = random(self.region:substances(words:substances())).."-"..words:simplePP(words:attribute())
-  local pattern12 = random(self.region:substances(words:substances())).."-"..words:simplePP(words:attribute()).." "..random(self.region:animals(words:animals()))
-  local pattern13 = random(self.region:animals(words:animals())).."-"..words:verb().doer
-  local pattern15 = random(self.region:substances(words:substances())).." "..words:verb().doer
-  local pattern18 = words:less(random(self.region:substances(words:substances()))).." "..words:relation()
-  local pattern19 = words:less(random(self.region:substances(words:substances()))).." "..random(self.region:animals(words:animals()))
+  local pattern7 = words:color().." "..random(animals)
+  local pattern8 = random(adjectives).." "..random(animals)
+  local pattern9 = words:relation().." of "..random(character.region:substances(words:substances()))
+  local pattern10 = words:relation().." of "..words:pluralize(random(animals))
+  local pattern11 = random(character.region:substances(words:substances())).."-"..words:simplePP(words:attribute())
+  local pattern12 = random(character.region:substances(words:substances())).."-"..words:simplePP(words:attribute()).." "..random(animals)
+  local pattern13 = random(animals).."-"..words:verb().doer
+  local pattern15 = random(character.region:substances(words:substances())).." "..words:verb().doer
+  local pattern18 = words:less(random(character.region:substances(words:substances()))).." "..words:relation()
+  local pattern19 = words:less(random(character.region:substances(words:substances()))).." "..random(animals)
 
-  print(self:nameFirst(pattern1))
-  print(self:nameFirst(pattern2))
-  print(self:nameFirst(pattern3))
-  print(self:nameFirst(pattern4))
-  print(self:nameFirst(pattern5))
-  print(self:nameFirst(pattern6))
-  print(self:nameFirst(pattern14))
-  print(self:nameFirst(pattern16))
+  print(self:nameFirst(character.CharacterName, pattern1))
+  print(self:nameFirst(character.CharacterName, pattern2))
+  print(self:nameFirst(character.CharacterName, pattern3))
+  print(self:nameFirst(character.CharacterName, pattern4))
+  print(self:nameFirst(character.CharacterName, pattern5))
+  print(self:nameFirst(character.CharacterName, pattern6))
+  print(self:nameFirst(character.CharacterName, pattern14))
+  print(self:nameFirst(character.CharacterName, pattern16))
 
-  print(self:concatenateTitle( pattern7 ))
-  print(self:concatenateTitle( pattern8 ))
-  print(self:concatenateTitle( pattern9 ))
-  print(self:concatenateTitle( pattern10 ))
-  print(self:concatenateTitle( pattern11 ))
-  print(self:concatenateTitle( pattern12 ))
-  print(self:concatenateTitle( pattern13 ))
-  print(self:concatenateTitle( pattern14 ))
-  print(self:concatenateTitle( pattern15 ))
+  print(self:concatenateTitle( character.CharacterName, pattern7 ))
+  print(self:concatenateTitle( character.CharacterName, pattern8 ))
+  print(self:concatenateTitle( character.CharacterName, pattern9 ))
+  print(self:concatenateTitle( character.CharacterName, pattern10 ))
+  print(self:concatenateTitle( character.CharacterName, pattern11 ))
+  print(self:concatenateTitle( character.CharacterName, pattern12 ))
+  print(self:concatenateTitle( character.CharacterName, pattern13 ))
+  print(self:concatenateTitle( character.CharacterName, pattern14 ))
+  print(self:concatenateTitle( character.CharacterName, pattern15 ))
 
-  print(self:concatenateTitle( pattern16 ))
-  print(self:concatenateTitle( pattern18 ))
-  print(self:concatenateTitle( pattern19 ))
+  print(self:concatenateTitle( character.CharacterName, pattern16 ))
+  print(self:concatenateTitle( character.CharacterName, pattern18 ))
+  print(self:concatenateTitle( character.CharacterName, pattern19 ))
 end

@@ -95,7 +95,6 @@ require 'source/monikerSystem/monikerSystem'
 require 'source/monikerSystem/factionNameGenerator'
 require 'source/monikerSystem/placeNameGenerator'
 
-require 'source/monikerSystem/regionGenerator'
 require 'source/monikerSystem/region'
 require 'source/monikerSystem/factionGenerator'
 require 'source/monikerSystem/faction'
@@ -108,8 +107,4 @@ require 'source/maps/map1'
 
 gTileSets = {
   ['field'] = love.graphics.newImage('source/assets/tilesets/fieldMap.png'),
-}
-
-gMaps = {
-  ['map1'] = map1
 }
