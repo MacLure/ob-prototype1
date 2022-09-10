@@ -24,6 +24,23 @@ function PersonalTitleGenerator:adjectives(character)
   return adjectives
 end
 
+function PersonalTitleGenerator:relations(character)
+  local relations = {}
+  local excludedGender = "male"
+  
+  if character.gender == "male" then
+    excludedGender = "female"
+  end
+
+  for k,v in pairs(words:relations()) do
+    if not containsFromArray(v.tags, {excludedGender}) then
+      table.insert(relations, k)
+    end
+  end
+
+  return relations
+end
+
 function PersonalTitleGenerator:concatenateTitle(name, title)
   local titleString = title
 
@@ -61,6 +78,7 @@ end
 function PersonalTitleGenerator:randomName(character)
   local animals = self:animals(character)
   local adjectives = self:adjectives(character)
+  local relations = self:relations(character)
 
   local pattern1 = words:color()
   local pattern2 = random(adjectives)
@@ -73,13 +91,13 @@ function PersonalTitleGenerator:randomName(character)
 
   local pattern7 = words:color().." "..random(animals)
   local pattern8 = random(adjectives).." "..random(animals)
-  local pattern9 = words:relation().." of "..random(character.region:substances(words:substances()))
-  local pattern10 = words:relation().." of "..words:pluralize(random(animals))
+  local pattern9 = random(relations).." of "..random(character.region:substances(words:substances()))
+  local pattern10 = random(relations).." of "..words:pluralize(random(animals))
   local pattern11 = random(character.region:substances(words:substances())).."-"..words:simplePP(words:attribute())
   local pattern12 = random(character.region:substances(words:substances())).."-"..words:simplePP(words:attribute()).." "..random(animals)
   local pattern13 = random(animals).."-"..words:verb().doer
   local pattern15 = random(character.region:substances(words:substances())).." "..words:verb().doer
-  local pattern18 = words:less(random(character.region:substances(words:substances()))).." "..words:relation()
+  local pattern18 = words:less(random(character.region:substances(words:substances()))).." "..random(relations)
   local pattern19 = words:less(random(character.region:substances(words:substances()))).." "..random(animals)
 
   print(self:nameFirst(character.CharacterName, pattern1))

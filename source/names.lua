@@ -1,10 +1,16 @@
 gNames = {}
 
-gNames.humanNames = {
-  "George","Judy","Rania","Samia","Alphonse",
-  "Carlos","Stella","Grace","Sheldon","Henrietta",
-  "Edvard","Mahmoud","Aisha","Maria","Lisette","Mitzi",
+gNames.humanMaleNames = {
+  "George","Alphonse",
+  "Carlos","Sheldon",
+  "Edvard","Mahmoud",
   "Simon","Antonio"
+}
+
+gNames.humanFemaleNames = {
+  "Judy","Rania","Samia",
+  "Stella","Grace","Henrietta",
+  "Aisha","Maria","Lisette","Mitzi",
 }
 
 gNames.vowels = {"a","e","i","o","u"}

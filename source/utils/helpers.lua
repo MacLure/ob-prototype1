@@ -74,7 +74,6 @@ function order(table)
   return table.sort(items, compare)
 end
 
-
 function containsFromArray(tableToCheck, tableOfValues)
   for i, v1 in ipairs(tableToCheck) do
     for j, v2 in ipairs(tableOfValues) do

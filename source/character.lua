@@ -11,8 +11,9 @@ function Character:init(params)
     faith = math.random(1,10),
   }
   this.alignment = math.random(1,10)
+  this.gender = this:randomGender()
 
-  this.CharacterName = humanName()
+  this.CharacterName = humanName(this.gender)
   this.className = this:class()
   this.name = personalNameGenerator:randomName(this)
 
@@ -30,10 +31,33 @@ function Character:orderedTraits()
   return getKeysSortedByValue(self.stats, sortByValue)
 end
 
+function Character:randomGender()
+  if math.random(1,2) == 1 then
+    return "male"
+  end
+  return "female"
+end
+
+function Character:class()
+  local classes = {
+    ["strength"] = "knight",
+    ["int"] = "mage",
+    ["faith"] = "cleric",
+  }
+
+  return(classes[self:orderedTraits()[1]])
+end
+
+
+
+
+
+
+
+
 function sortByValue(a,b)
   return a > b
 end
-
 
 function getKeysSortedByValue(tbl, sortFunction)
   local keys = {}
@@ -47,14 +71,3 @@ function getKeysSortedByValue(tbl, sortFunction)
 
   return keys
 end
-
-function Character:class()
-  local classes = {
-    ["strength"] = "knight",
-    ["int"] = "mage",
-    ["faith"] = "cleric",
-  }
-
-  return(classes[self:orderedTraits()[1]])
-end
-

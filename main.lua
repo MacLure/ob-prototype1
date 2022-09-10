@@ -28,8 +28,12 @@ function love.load()
     return random(list)()
   end
 
-  function humanName()
-    return random(gNames.humanNames)
+  function humanName(gender)
+    if gender == "male" then
+      return random(gNames.humanMaleNames)
+    else
+      return random(gNames.humanFemaleNames)
+    end
   end
 
   function printList(list)
@@ -41,21 +45,19 @@ function love.load()
   end
   
   personalNameGenerator = PersonalTitleGenerator:init()
+  placeNameGenerator = PlaceNameGenerator:init()
 
   region = Region:init({tags={"water"}, landscape="sea"})
-  -- placeNameGenerator = PlaceNameGenerator:init(region)
-  -- placeNameGenerator:randomName()
+  print(region.placeName)
   character = region:makeCharacter()
   character:printDetails()
-  
 
-  -- print "--------------------------"
+  print "--------------------------"
 
-  -- region2 = Region:init({tags={"forest"}, landscape="forest"})
-  -- placeNameGenerator2 = PlaceNameGenerator:init(region2)
-  -- placeNameGenerator2:randomName()
-  -- character = region:makeCharacter()
-  -- character:printDetails()
+  region2 = Region:init({tags={"forest"}, landscape="forest"})
+  print(region2.placeName)
+  character2 = region2:makeCharacter()
+  character2:printDetails()
 
 
   -- print "--------------------------"

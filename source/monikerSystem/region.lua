@@ -2,12 +2,13 @@ Region = Class{}
 
 function Region:init(params)
   local this = {}
+  setmetatable(this, self)
+
   this.tags = params.tags
   this.landscape = params.landscape
   this.isolatedness = math.random(1,10)
-  this.personalTitleGenerator = PersonalTitleGenerator:init(this)
+  this.placeName = placeName()
 
-  setmetatable(this, self)
   return this
 end
 

@@ -16,8 +16,6 @@ function WordRepository:color() return random(self:colors()) end
 
 function WordRepository:animals()
   return {
-    ["wolf"] = { tags = {} },
-    ["bear"] = { tags = {} },
     ["lion"] = { tags = {} },
     ["tiger"] = { tags = {} },
     ["maggot"] = { tags = {} },
@@ -27,11 +25,15 @@ function WordRepository:animals()
     ["hound"] = { tags = {} },
     ["spider"] = { tags = {} },
     ["slug"] = { tags = {} },
-    ["elk"] = { tags = {} },
+    ["frog"] = { tags = {} },
+    ["toad"] = { tags = {} },
     ["viper"] = { tags = {} },
     ["scorpion"] = { tags = {} },
     ["leech"] = { tags = {} },
-    ["fox"] = { tags = {} },
+    ["wolf"] = { tags = {"forest"} },
+    ["bear"] = { tags = {"forest"} },
+    ["fox"] = { tags = {"forest"} },
+    ["elk"] = { tags = {"forest"} },
     ["shark"] = { tags = {"water"} },
     ["fish"] = { tags = {"water"} },
     ["squid"] = { tags = {"water"} },
@@ -64,6 +66,7 @@ function WordRepository:characterAdjectives()
     ["elder"] = { tags = {} },
     ["forgotten"] = { tags = {} },
     ["eternal"] = { tags = {} },
+    ["heretic"] = { tags = {} },
   }
 end
 
@@ -79,17 +82,61 @@ function WordRepository:landscape() return random(self:landscapes()) end
 
 function WordRepository:relations()
   return {
-    "brother","sister","father","mother","son","daughter","servant","hand","keeper","scourge",
-    "lord","lady","prince","princess","priest","priestess","tyrant","consort","husband","wife",
-    "butcher","heretic","defender","ward","warden","patron","brute",
-    "marquis","emir","khan","elector",
-    "satrap","governor","boyar","jarl","earl","margrave",
-    "thane","magistrate","pasha","bey","shah","raj",
-    "prefect","bishop","cardinal","seer","oracle","sheppard","patriarch","matriarch"
+    ["brother"] = { tags = {"male"} },
+    ["sister"] = { tags = {"female"} },
+    ["father"] = { tags = {"male"} },
+    ["mother"] = { tags = {"male"} },
+    ["son"] = { tags = {"male"} },
+    ["daughter"] = { tags = {"male"} },
+    ["servant"] = { tags = {} },
+    ["hand"] = { tags = {} },
+    ["keeper"] = { tags = {} },
+    ["scourge"] = { tags = {} },
+    ["lord"] = { tags = {"male"} },
+    ["lady"] = { tags = {"female"} },
+    ["prince"] = { tags = {"male"} },
+    ["princess"] = { tags = {"female"} },
+    ["tyrant"] = { tags = {} },
+    ["consort"] = { tags = {} },
+    ["husband"] = { tags = {"male"} },
+    ["wife"] = { tags = {"female"} },
+    ["butcher"] = { tags = {} },
+    ["heretic"] = { tags = {"faith"} },
+    ["defender"] = { tags = {"knight"} },
+    ["ward"] = { tags = {} },
+    ["warden"] = { tags = {} },
+    ["patron"] = { tags = {} },
+    ["brute"] = { tags = {"strength"} },
+    ["marquis"] = { tags = {} },
+    ["emir"] = { tags = {} },
+    ["khan"] = { tags = {} },
+    ["elector"] = { tags = {} },
+    ["satrap"] = { tags = {} },
+    ["governor"] = { tags = {} },
+    ["boyar"] = { tags = {} },
+    ["jarl"] = { tags = {} },
+    ["earl"] = { tags = {} },
+    ["margrave"] = { tags = {} },
+    ["thane"] = { tags = {} },
+    ["magistrate"] = { tags = {} },
+    ["pasha"] = { tags = {} },
+    ["bey"] = { tags = {} },
+    ["pasha"] = { tags = {} },
+    ["shah"] = { tags = {} },
+    ["raja"] = { tags = {} },
+    ["prefect"] = { tags = {} },
+    ["cardinal"] = { tags = {"faith"} },
+    ["seer"] = { tags = {} },
+    ["oracle"] = { tags = {} },
+    ["sheppard"] = { tags = {"faith"} },
+    ["patriarch"] = { tags = {"male"} },
+    ["matriarch"] = { tags = {"female"} },
+    ["captain"] = { tags = {"water"} },
+    ["navigator"] = { tags = {"water"} },
   }
 end
 
-function WordRepository:relation() return random(self:relations()) end
+function WordRepository:relation() return randomFromKvp(self:relations()) end
 
 function WordRepository:socialGroups()
   return {
