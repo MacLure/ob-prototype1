@@ -39,31 +39,44 @@ function love.load()
   function printList(list)
     local output = ""
     for i, item in ipairs(list) do
-      output = output..", "..item
+      if #output < 1 then
+        output = item
+      else
+        output = output..", "..item
+      end
     end
     print(output)
   end
   
   personalNameGenerator = PersonalTitleGenerator:init()
   placeNameGenerator = PlaceNameGenerator:init()
+  factionNameGenerator = FactionNameGenerator:init()
 
+  print("------------------------------------------------------")
   region = Region:init({tags={"water"}, landscape="sea"})
-  print(region.placeName)
+  print("------------ "..region.placeName..", "..region.landscape.." region --------------")
+  printList(region:animals())
+  -- printList(wordNames(region:substances()))
+  printList(region:golems())
+
   character = region:makeCharacter()
   character:printDetails()
+  factionNameGenerator:randomName(region)
 
-  print "--------------------------"
+  location = region:makeLocation()
+  location:printDetails()
 
+  print("-------------------------------------------------------")
   region2 = Region:init({tags={"forest"}, landscape="forest"})
-  print(region2.placeName)
+  print("------------ "..region2.placeName..", "..region2.landscape.." region --------------")
+  printList(region2:animals())
+  printList(region2:golems())
+
   character2 = region2:makeCharacter()
   character2:printDetails()
+  factionNameGenerator:randomName(region2)
 
-
-  -- print "--------------------------"
-  -- factionNameGenerator = FactionNameGenerator:init()
-  -- factionNameGenerator:randomName()
-  -- print "--------------------------"
+  love.event.quit()
 
   push:resize(love.graphics.getDimensions( ))
 
@@ -98,4 +111,12 @@ function love.draw()
   stack:render(dt)
 
   push:apply('end')
+end
+
+function wordNames(list)
+  local names = {}
+  for k,v in pairs(list) do
+    table.insert(names, v.name)
+  end
+  return names
 end

@@ -6,17 +6,30 @@ function FactionNameGenerator:init()
   return this
 end
 
-function FactionNameGenerator:randomName()
-  local pattern1 = words:color().." "..words:pluralize(words:animal().name)
-  local pattern2 = words:landscape().." "..words:pluralize(words:animal().name)
-  local pattern3 = words:socialGroup().." of the "..words:animal().name
+function FactionNameGenerator:animals(region)
+  local regionAnimals = region:animals()
+  return regionAnimals
+end
+
+function FactionNameGenerator:landscape(region)
+  local landscape = region.landscape
+  return landscape
+end
+
+function FactionNameGenerator:randomName(region)
+  local animals = self:animals(region)
+  local landscape = self:landscape(region)
+
+  local pattern1 = words:color().." "..words:pluralize(random(animals))
+  local pattern2 = landscape.." "..words:pluralize(random(animals))
+  local pattern3 = words:socialGroup().." of the "..random(animals)
   local pattern4 = words:color().." "..words:socialGroup()
-  local pattern5 = words:pluralize(words:relation()).." of the "..words:landscape()
+  local pattern5 = words:pluralize(words:relation()).." of the "..landscape
   local pattern6 = words:color().." "..words:pluralize(words:attribute())
-  local pattern7 = words:substance().." "..words:pluralize(words:animal().name)
+  local pattern7 = words:substance().name.." "..words:pluralize(random(animals))
   local pattern8 = words:verb().pp
   local pattern9 = "un"..words:verb().pp
-  local pattern10 = words:substance().." "..words:pluralize(words:verb().doer)
+  local pattern10 = words:substance().name.." "..words:pluralize(words:verb().doer)
 
   print("the ".. pattern1)
   print("the ".. pattern2)
