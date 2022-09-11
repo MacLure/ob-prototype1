@@ -11,22 +11,19 @@ function love.load()
 
   words = WordRepository:init()
     
-  function placeName()
-    local list = {
-      gNames.randomJapanesePlace,
-      gNames.randomChinesePlace,
-      gNames.randomGreekPlace,
-      gNames.randomKoreanPlace,
-      gNames.randomNahuatlPlace,
-      gNames.randomGermanPlace,
-      gNames.randomEnglishPlace,
-      gNames.randomFrenchPlace,
-      gNames.randomArabicPlace,
-      gNames.randomBrazilianPlace,
-      gNames.randomRussianPlace
-    }
-    return random(list)()
-  end
+  placeNameGenerators = {
+    gNames.randomJapanesePlace,
+    gNames.randomChinesePlace,
+    gNames.randomGreekPlace,
+    gNames.randomKoreanPlace,
+    gNames.randomNahuatlPlace,
+    gNames.randomGermanPlace,
+    gNames.randomEnglishPlace,
+    gNames.randomFrenchPlace,
+    gNames.randomArabicPlace,
+    gNames.randomBrazilianPlace,
+    gNames.randomRussianPlace
+  }
 
   function humanName(gender)
     if gender == "male" then
@@ -52,35 +49,39 @@ function love.load()
   placeNameGenerator = PlaceNameGenerator:init()
   factionNameGenerator = FactionNameGenerator:init()
 
-  print("------------------------------------------------------")
-  region = Region:init({tags={"water"}, landscape="sea"})
-  print("------------ "..region.placeName..", "..region.landscape.." region --------------")
-  printList(region:animals())
-  -- printList(wordNames(region:substances()))
-  printList(region:golems())
-
-  character = region:makeCharacter()
-  character:printDetails()
-  factionNameGenerator:randomName(region)
-
-  location = region:makeLocation()
-  location:printDetails()
-
-  print("-------------------------------------------------------")
-  region2 = Region:init({tags={"forest"}, landscape="forest"})
-  print("------------ "..region2.placeName..", "..region2.landscape.." region --------------")
-  printList(region2:animals())
-  printList(region2:golems())
-
-  character2 = region2:makeCharacter()
-  character2:printDetails()
-  factionNameGenerator:randomName(region2)
+  regionParams = {tags={"water"}, landscape="sea"}
+  region2Params = {tags={"forest"}, landscape="forest"}
+  printRegionDetails(regionParams)
+  printRegionDetails(region2Params)
 
   love.event.quit()
 
   push:resize(love.graphics.getDimensions( ))
 
   stack:push(WorldMapState:init())
+end
+
+function printRegionDetails(regionParams)
+  local region = Region:init(regionParams)
+
+  print("------------ "..region.placeName..", "..region.landscape.." region --------------")
+  print("")
+  print("ANIMALS:")
+  printList(region:animals())
+  print("")
+  print("GOLEMS:")
+  printList(region:golems())
+  print("")
+  print("CHARACTERS:")
+  local character = region:makeCharacter()
+  character:printDetails()
+  print("FACTIONS:")
+  print(factionNameGenerator:randomName(region))
+  print("")
+  print("LOCATIONS:")
+  local location = region:makeLocation()
+  location:printDetails()
+  print("")
 end
 
 function love.keypressed(key)

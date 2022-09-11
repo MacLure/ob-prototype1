@@ -5,12 +5,13 @@ function Location:init(params)
   setmetatable(this, self)
 
   this.tags = params.tags
-  this.landscape = params.landscape
-  this.placeName = placeName()
+  this.region = params.region
+
+  this.placeName = placeNameGenerator:randomName(this.region)
 
   return this
 end
 
 function Location:printDetails()
-  print("OK")
+  print(self.placeName)
 end

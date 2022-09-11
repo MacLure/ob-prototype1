@@ -7,7 +7,8 @@ function Region:init(params)
   this.tags = params.tags
   this.landscape = params.landscape
   this.isolatedness = math.random(1,10)
-  this.placeName = placeName()
+  this.placeNameIndex = math.random(1, #placeNameGenerators)
+  this.placeName = placeNameGenerators[this.placeNameIndex]()
 
   return this
 end

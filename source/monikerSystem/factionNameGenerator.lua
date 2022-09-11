@@ -31,14 +31,18 @@ function FactionNameGenerator:randomName(region)
   local pattern9 = "un"..words:verb().pp
   local pattern10 = words:substance().name.." "..words:pluralize(words:verb().doer)
 
-  print("the ".. pattern1)
-  print("the ".. pattern2)
-  print("the ".. pattern3)
-  print("the ".. pattern4)
-  print("the ".. pattern5)
-  print("the ".. pattern6)
-  print("the ".. pattern7)
-  print("the ".. pattern8)
-  print("the ".. pattern9)
-  print("the ".. pattern10)
+  local possibleNames = {
+    "the ".. pattern1,
+    "the ".. pattern2,
+    "the ".. pattern3,
+    "the ".. pattern4,
+    "the ".. pattern5,
+    "the ".. pattern6,
+    "the ".. pattern7,
+    "the ".. pattern8,
+    "the ".. pattern9,
+    "the ".. pattern10
+  }
+
+  return random(possibleNames)
 end

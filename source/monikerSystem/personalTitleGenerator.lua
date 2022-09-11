@@ -41,31 +41,31 @@ function PersonalTitleGenerator:relations(character)
   return relations
 end
 
-function PersonalTitleGenerator:concatenateTitle(name, title)
+function PersonalTitleGenerator:concatenateTitle(character, title)
   local titleString = title
 
   if math.random(1,2) == 1 then
-    local newString = name.." the "..titleString
+    local newString = character.CharacterName.." the "..titleString
     if math.random(1,2) == 1 then
-      return self:appendPlaceName(newString)
+      return self:appendPlaceName(character, newString)
     else
       return newString
     end
   else
-    return titleString.." "..name
+    return titleString.." "..character.CharacterName
   end
 end
 
-function PersonalTitleGenerator:nameFirst(name, title)
-  return name.." the "..title
+function PersonalTitleGenerator:nameFirst(character, title)
+  return character.CharacterName.." the "..title
 end
 
-function PersonalTitleGenerator:nameLast(name, title)
-  return title.." "..name
+function PersonalTitleGenerator:nameLast(character, title)
+  return title.." "..character.CharacterName
 end
 
-function PersonalTitleGenerator:appendPlaceName(title)
-  local pattern1 = placeName()
+function PersonalTitleGenerator:appendPlaceName(character, title)
+  local pattern1 = placeNameGenerators[character.region.placeNameIndex]()
   local pattern2 = "the "..words:less(words:substance().name).." "..words:landscape()
 
   if math.random(1,2) == 1 then
@@ -88,7 +88,6 @@ function PersonalTitleGenerator:randomName(character)
   local pattern6 = random(animals)
   local pattern14 = random(animals).."-"..words:verb().pp
   local pattern16 = random(character.region:substances()).name.."-"..words:verb().pp
-
   local pattern7 = words:color().." "..random(animals)
   local pattern8 = random(adjectives).." "..random(animals)
   local pattern9 = random(relations).." of "..random(character.region:substances()).name
@@ -100,26 +99,27 @@ function PersonalTitleGenerator:randomName(character)
   local pattern18 = words:less(random(character.region:substances()).name).." "..random(relations)
   local pattern19 = words:less(random(character.region:substances()).name).." "..random(animals)
 
-  print(self:nameFirst(character.CharacterName, pattern1))
-  print(self:nameFirst(character.CharacterName, pattern2))
-  print(self:nameFirst(character.CharacterName, pattern3))
-  print(self:nameFirst(character.CharacterName, pattern4))
-  print(self:nameFirst(character.CharacterName, pattern5))
-  print(self:nameFirst(character.CharacterName, pattern6))
-  print(self:nameFirst(character.CharacterName, pattern14))
-  print(self:nameFirst(character.CharacterName, pattern16))
-
-  print(self:concatenateTitle( character.CharacterName, pattern7 ))
-  print(self:concatenateTitle( character.CharacterName, pattern8 ))
-  print(self:concatenateTitle( character.CharacterName, pattern9 ))
-  print(self:concatenateTitle( character.CharacterName, pattern10 ))
-  print(self:concatenateTitle( character.CharacterName, pattern11 ))
-  print(self:concatenateTitle( character.CharacterName, pattern12 ))
-  print(self:concatenateTitle( character.CharacterName, pattern13 ))
-  print(self:concatenateTitle( character.CharacterName, pattern14 ))
-  print(self:concatenateTitle( character.CharacterName, pattern15 ))
-
-  print(self:concatenateTitle( character.CharacterName, pattern16 ))
-  print(self:concatenateTitle( character.CharacterName, pattern18 ))
-  print(self:concatenateTitle( character.CharacterName, pattern19 ))
+  local possibleNames = {
+    self:nameFirst(character, pattern1),
+    self:nameFirst(character, pattern2),
+    self:nameFirst(character, pattern3),
+    self:nameFirst(character, pattern4),
+    self:nameFirst(character, pattern5),
+    self:nameFirst(character, pattern6),
+    self:nameFirst(character, pattern14),
+    self:nameFirst(character, pattern16),
+    self:concatenateTitle( character, pattern7 ),
+    self:concatenateTitle( character, pattern8 ),
+    self:concatenateTitle( character, pattern9 ),
+    self:concatenateTitle( character, pattern10 ),
+    self:concatenateTitle( character, pattern11 ),
+    self:concatenateTitle( character, pattern12 ),
+    self:concatenateTitle( character, pattern13 ),
+    self:concatenateTitle( character, pattern14 ),
+    self:concatenateTitle( character, pattern15 ),
+    self:concatenateTitle( character, pattern16 ),
+    self:concatenateTitle( character, pattern18 ),
+    self:concatenateTitle( character, pattern19 )
+  }
+  return random(possibleNames)
 end

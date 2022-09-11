@@ -21,10 +21,12 @@ function Character:init(params)
 end
 
 function Character:printDetails()
-  print(self.CharacterName, self.className)
+  print(self.name)
+  print(self.gender.." "..self.className)
+
   printTable(self.stats)
-  printTable(self:orderedTraits())
-  print(self:orderedTraits()[1], self.stats[self:orderedTraits()[1]])
+  -- printTable(self:orderedTraits())
+  -- print(self:orderedTraits()[1], self.stats[self:orderedTraits()[1]])
 end
 
 function Character:orderedTraits()
@@ -47,10 +49,6 @@ function Character:class()
 
   return(classes[self:orderedTraits()[1]])
 end
-
-
-
-
 
 
 
