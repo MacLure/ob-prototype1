@@ -98,6 +98,8 @@ function PersonalTitleGenerator:randomName(character)
   local pattern15 = random(character.region:substances()).name.." "..words:verb().doer
   local pattern18 = words:less(random(character.region:substances()).name).." "..random(relations)
   local pattern19 = words:less(random(character.region:substances()).name).." "..random(animals)
+  local pattern20 = words:abstract().."-bringer"
+  local pattern21 = "bringer of "..words:abstract()
 
   local possibleNames = {
     self:nameFirst(character, pattern1),
@@ -119,7 +121,9 @@ function PersonalTitleGenerator:randomName(character)
     self:concatenateTitle( character, pattern15 ),
     self:concatenateTitle( character, pattern16 ),
     self:concatenateTitle( character, pattern18 ),
-    self:concatenateTitle( character, pattern19 )
+    self:concatenateTitle( character, pattern19 ),
+    self:concatenateTitle( character, pattern20 ),
+    self:concatenateTitle( character, pattern21 )
   }
   return random(possibleNames)
 end

@@ -47,6 +47,14 @@ function Character:class()
     ["faith"] = "cleric",
   }
 
+
+  -- knight: str > 7, int > 4
+  -- brute: str > 7, int < 5
+  -- scholar: int > 5 < 7
+  -- mage int > 7
+  -- hunter:
+  -- cleric: faith 
+
   return(classes[self:orderedTraits()[1]])
 end
 

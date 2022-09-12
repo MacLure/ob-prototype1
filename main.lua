@@ -49,10 +49,12 @@ function love.load()
   placeNameGenerator = PlaceNameGenerator:init()
   factionNameGenerator = FactionNameGenerator:init()
 
-  regionParams = {tags={"water"}, landscape="sea"}
-  region2Params = {tags={"forest"}, landscape="forest"}
+  regionParams = {tags={"sea"}, landscape="sea"}
   printRegionDetails(regionParams)
+  region2Params = {tags={"forest"}, landscape="forest"}
   printRegionDetails(region2Params)
+  region3Params = {tags={"desert"}, landscape="desert"}
+  printRegionDetails(region3Params)
 
   love.event.quit()
 
@@ -64,7 +66,10 @@ end
 function printRegionDetails(regionParams)
   local region = Region:init(regionParams)
 
-  print("------------ "..region.placeName..", "..region.landscape.." region --------------")
+  print("------------ "..region.placeName..", "..region.regionStatement.." in the "..region.landscape.." --------------")
+  print("integratedness: "..region.integratedness, "population: "..region.population, "prosperity: "..region.prosperity)
+  print("topology: "..region.topology, "temperature: "..region.temperature, "vegetation: "..region.vegetation)
+
   print("")
   print("ANIMALS:")
   printList(region:animals())
