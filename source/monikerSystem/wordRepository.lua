@@ -27,9 +27,9 @@ function WordRepository:characterAdjectives()
     ["fair"] = { tags = {} },
     ["splendid"] = { tags = {} },
     ["great"] = { tags = {} },
-    ["brave"] = { tags = {"strength"} },
-    ["strong"] = { tags = {"strength"} },
-    ["stout"] = { tags = {"strength"} },
+    ["brave"] = { tags = {"str"} },
+    ["strong"] = { tags = {"str"} },
+    ["stout"] = { tags = {"str"} },
     ["wise"] = { tags = {"int"} },
     ["learned"] = { tags = {"int"} },
     ["pious"] = { tags = {"faith"} },
@@ -72,6 +72,16 @@ function WordRepository:characterAdjectives()
     ["calm"] = { tags = {} },
     ["serene"] = { tags = {} },
     ["sadistic"] = { tags = {} },
+    ["enlightened"] = { tags = {"int"} },
+    ["etherial"] = { tags = {} },
+    ["exquisite"] = { tags = {} },
+    ["faithful"] = { tags = {} },
+    ["impostor"] = { tags = {} },
+    ["usurper"] = { tags = {} },
+    ["mighty"] = { tags = {"str"} },
+    ["gallant"] = { tags = {} },
+    ["generous"] = { tags = {} },
+    ["innocent"] = { tags = {} },
   }
 end
 
@@ -113,6 +123,9 @@ function WordRepository:meteorologyList()
     ["moon"] = { tags = {} },
     ["night"] = { tags = {} },
     ["dawn"] = { tags = {} },
+    ["sunrise"] = { tags = {} },
+    ["sunset"] = { tags = {} },
+    ["dusk"] = { tags = {} },
     ["sun"] = { tags = {} },
     ["wind"] = { tags = {} },
     ["rain"] = { tags = {} },
@@ -140,6 +153,7 @@ function WordRepository:settlements()
     ["village"] = { tags = {} },
     ["castle"] = { tags = {} },
     ["fort"] = { tags = {} },
+    ["fortress"] = { tags = {} },
     ["estate"] = { tags = {} },
     ["necropolis"] = { tags = {} },
   }
@@ -192,6 +206,7 @@ function WordRepository:buildings()
     ["citadel"] = { tags = {} },
     ["lookout"] = { tags = {} },
     ["monument"] = { tags = {} },
+    ["fairgrounds"] = { tags = {} },
   }
 end
 
@@ -202,6 +217,9 @@ function WordRepository:buildingFeature()
   ["spire"] = { tags = {} },
   ["wall"] = { tags = {} },
   ["tower"] = { tags = {} },
+  ["rampart"] = { tags = {} },
+  ["gate"] = { tags = {} },
+  ["door"] = { tags = {} },
 end
 
 function WordRepository:buildingFeatures() return randomFromKvp(self:buildingFeature()).name end
@@ -222,6 +240,10 @@ function WordRepository:dwellings()
     ["grotto"] = { tags = {} },
     ["sanctuary"] = { tags = {} },
     ["cemetary"] = { tags = {} },
+    ["fissure"] = { tags = {} },
+    ["field"] = { tags = {} },
+    ["pasture"] = { tags = {} },
+    ["farmstead"] = { tags = {} },
     ["___ing grounds"] = { tags = {} },
   }
 end
@@ -275,6 +297,12 @@ function WordRepository:animals()
     ["sparrow"] = { tags = {}, attributes={} },
     ["raven"] = { tags = {}, attributes={"cold"} },
     ["crow"] = { tags = {}, attributes={} },
+    ["osprey"] = { tags = {}, attributes={} },
+    ["ox"] = { tags = {}, attributes={"plains"} },
+    ["lamb"] = { tags = {}, attributes={"plains"} },
+    ["panther"] = { tags = {}, attributes={"forest"} },
+    ["jaguar"] = { tags = {}, attributes={"forest"} },
+    ["giant ___"] = { tags = {}, attributes={} },
   }
 end
 
@@ -349,6 +377,7 @@ function WordRepository:events()
     ["trial"] = { tags = {} },
     ["day of ___"] = { tags = {} },
     ["sacriment"] = { tags = {} },
+    ["vigil"] = { tags = {} },
   }
 end
 
@@ -407,6 +436,8 @@ function WordRepository:crafts()
     ["silk"] = { tags = {} },
     ["glass"] = { tags = {} },
     ["candle"] = { tags = {} },
+    ["quill"] = { tags = {} },
+    ["filigree"] = { tags = {} },
   }
 end
 
@@ -435,8 +466,10 @@ function WordRepository:substances()
     ["grave"] = { tags = {"death"} },
     ["tomb"] = { tags = {"death"} },
     ["crypt"] = { tags = {"death"} },
+    ["gallow"] = { tags = {} },
     ["tide"] = { tags = {"sea"} },
     ["wave"] = { tags = {"sea"} },
+    ["spore"] = { tags = {"forest"} },
     ["coral"] = { tags = {"sea"}, golem=true},
     ["driftwood"] = { tags = {"sea"}, golem=true},
     ["kelp"] = { tags = {"sea"} },
@@ -466,6 +499,7 @@ function WordRepository:substances()
     ["wine"] = { tags = {} },
     ["carrion"] = { tags = {} },
     ["chain"] = { tags = {} },
+    ["fetter"] = { tags = {} },
     ["livestock"] = { tags = {} },
     ["crops"] = { tags = {} },
     ["corpse"] = { tags = {} },
@@ -607,11 +641,17 @@ function WordRepository:titles()
     ["exile"] = { tags = {"faith"} },
     ["heretic"] = { tags = {"faith"} },
     ["defender"] = { tags = {"knight"} },
-    ["brute"] = { tags = {"strength"} },
+    ["brute"] = { tags = {"str"} },
     ["seer"] = { tags = {} },
     ["oracle"] = { tags = {} },
     ["sheppard"] = { tags = {"faith"} },
-
+    ["knight-errant"] = { tags = {} },
+    ["ascetic"] = { tags = {} },
+    ["fanatic"] = { tags = {} },
+    ["hermit"] = { tags = {} },
+    ["salvager"] = { tags = {"sea"} },
+    ["__smith"] = { tags = {} },
+    ["guru"] = { tags = {"int"} },
   }
 end
 
@@ -641,6 +681,7 @@ function WordRepository:relations()
     ["kin"] = { tags = {} },
     ["bride"] = { tags = {"female"} },
     ["groom"] = { tags = {"male"} },
+    ["devotee"] = { tags = {} },
   }
 end
 
@@ -764,20 +805,36 @@ function WordRepository:verbs()
     { sp = "defy", pp = "defied", doer = "defier", tags={} },
     { sp = "devour", pp = "devoured", doer = "devourer", tags={} },
     { sp = "assail", pp = "assailed", doer = "assailant", tags={} },
+    { sp = "endure", pp = "assailed", doer = "assailant", tags={} },
+    { sp = "entangle", pp = "assailed", doer = "assailant", tags={} },
+    { sp = "corrupt", pp = "assailed", doer = "assailant", tags={} },
+    { sp = "excommunicate", pp = "assailed", doer = "assailant", tags={} },
+    { sp = "expose", pp = "exposed", doer = "exposer", tags={} },
+    { sp = "mend", pp = "mended", doer = "mender", tags={} },
+    { sp = "hunt", pp = "hunted", doer = "hunter", tags={} },
+    { sp = "take", pp = "taken", doer = "taker", tags={} },
+    { sp = "forbid", pp = "forbidden", doer = "forbidder", tags={} },
+    { sp = "kindle", pp = "kindled", doer = "kindler", tags={} },
+    { sp = "weave", pp = "weaved", doer = "weaver", tags={} },
+    { sp = "possess", pp = "possessed", doer = "possessor", tags={} },
   }
 end
 
 function WordRepository:verb() return random(self:verbs()) end
 
-function WordRepository:factionVerbs()
+function WordRepository:unclassified()
   return {
     "make an offering to",
     "swear allegiance to",
     "make a sacrifice to",
-  }
+    "decree",
+    "entreaty",
+    "accord",
+    "proclamation",
+    "pact",
+    "verdict"
+    }
 end
-
-
 
 function WordRepository:simplePP(word)
   local output = word
@@ -805,5 +862,6 @@ end
 function WordRepository:less(word)
   return word.."less"
 end
+
 
 
