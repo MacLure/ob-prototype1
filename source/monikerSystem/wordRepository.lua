@@ -6,6 +6,8 @@ function WordRepository:init()
   return this
 end
 
+-- GENERAL
+
 function WordRepository:colors()
   return {
     ["red"] = { tags = {} },
@@ -21,413 +23,6 @@ end
 
 function WordRepository:color() return randomFromKvp(self:colors()).name end
 
-function WordRepository:characterAdjectives()
-  return {
-    ["foul"] = { tags = {} },
-    ["fair"] = { tags = {} },
-    ["splendid"] = { tags = {} },
-    ["great"] = { tags = {} },
-    ["brave"] = { tags = {"str"} },
-    ["strong"] = { tags = {"str"} },
-    ["stout"] = { tags = {"str"} },
-    ["wise"] = { tags = {"int"} },
-    ["learned"] = { tags = {"int"} },
-    ["pious"] = { tags = {"faith"} },
-    ["devout"] = { tags = {"faith"} },
-    ["pure"] = { tags = {} },
-    ["divine"] = { tags = {} },
-    ["lost"] = { tags = {} },
-    ["mad"] = { tags = {} },
-    ["ancient"] = { tags = {} },
-    ["elder"] = { tags = {} },
-    ["forgotten"] = { tags = {} },
-    ["eternal"] = { tags = {} },
-    ["heretic"] = { tags = {} },
-    ["vigilant"] = { tags = {} },
-    ["heretic"] = { tags = {} },
-    ["resplendent"] = { tags = {} },
-    ["vigilant"] = { tags = {} },
-    ["steadfast"] = { tags = {} },
-    ["valiant"] = { tags = {} },
-    ["artful"] = { tags = {} },
-    ["solemn"] = { tags = {} },
-    ["lustrous"] = { tags = {} },
-    ["merciless"] = { tags = {} },
-    ["merciful"] = { tags = {} },
-    ["ardent"] = { tags = {} },
-    ["worthy"] = { tags = {} },
-    ["abhorrent"] = { tags = {} },
-    ["decadent"] = { tags = {} },
-    ["silent"] = { tags = {} },
-    ["austere"] = { tags = {} },
-    ["celestial"] = { tags = {} },
-    ["stalwart"] = { tags = {} },
-    ["clever"] = { tags = {"int"} },
-    ["beautiful"] = { tags = {} },
-    ["loyal"] = { tags = {} },
-    ["pious"] = { tags = {} },
-    ["vengeful"] = { tags = {} },
-    ["dutiful"] = { tags = {} },
-    ["eager"] = { tags = {} },
-    ["calm"] = { tags = {} },
-    ["serene"] = { tags = {} },
-    ["sadistic"] = { tags = {} },
-    ["enlightened"] = { tags = {"int"} },
-    ["etherial"] = { tags = {} },
-    ["exquisite"] = { tags = {} },
-    ["faithful"] = { tags = {} },
-    ["impostor"] = { tags = {} },
-    ["usurper"] = { tags = {} },
-    ["mighty"] = { tags = {"str"} },
-    ["gallant"] = { tags = {} },
-    ["generous"] = { tags = {} },
-    ["innocent"] = { tags = {} },
-    ["oathsworn"] = { tags = {} },
-    ["glorious"] = { tags = {} },
-    ["stalwart"] = { tags = {} },
-    ["grizzly"] = { tags = {} },
-    ["humble"] = { tags = {} },
-    ["imposing"] = { tags = {} },
-    ["obstinate"] = { tags = {} },
-    ["noble"] = { tags = {} },
-    ["ageless"] = { tags = {} },
-    ["pariah"] = { tags = {} },
-    ["penitent"] = { tags = {} },
-    ["volatile"] = { tags = {} },
-  }
-end
-
-function WordRepository:characterAdjective() return randomFromKvp(self:characterAdjectives()) end
-
-function WordRepository:landscapes()
-  return {
-    ["mountain"] = { tags = {} },
-    ["desert"] = { tags = {} },
-    ["forest"] = { tags = {} },
-    ["jungle"] = { tags = {} },
-    ["river"] = { tags = {} },
-    ["swamp"] = { tags = {} },
-    ["marsh"] = { tags = {} },
-    ["moor"] = { tags = {} },
-    ["bay"] = { tags = {} },
-    ["atoll"] = { tags = {} },
-    ["island"] = { tags = {} },
-    ["oasis"] = { tags = {} },
-    ["wadi"] = { tags = {} },
-    ["grove"] = { tags = {} },
-    ["crag"] = { tags = {} },
-    ["canyon"] = { tags = {} },
-    ["dune"] = { tags = {} },
-    ["steppe"] = { tags = {} },
-    ["rainforest"] = { tags = {} },
-    ["cloud forest"] = { tags = {} },
-    ["meadow"] = { tags = {} },
-    ["grassland"] = { tags = {} },
-    ["path"] = { tags = {} },
-  }
-end
-
-function WordRepository:landscape() return randomFromKvp(self:landscapes()).name end
-
-function WordRepository:meteorologyList()
-  local list = {
-    ["snow"] = { tags = {"cold"} },
-    ["frost"] = { tags = {"cold"} },
-    ["winter"] = { tags = {"cold"} },
-    ["star"] = { tags = {} },
-    ["moon"] = { tags = {} },
-    ["night"] = { tags = {} },
-    ["dawn"] = { tags = {} },
-    ["sunrise"] = { tags = {} },
-    ["sunset"] = { tags = {} },
-    ["dusk"] = { tags = {} },
-    ["sun"] = { tags = {} },
-    ["moonlight"] = { tags = {} },
-    ["sunlight"] = { tags = {} },
-    ["wind"] = { tags = {} },
-    ["rain"] = { tags = {} },
-    ["storm"] = { tags = {} },
-    ["sandstorm"] = { tags = {"desert"} },
-    ["blizzard"] = { tags = {"cold"} },
-    ["cloud"] = { tags = {} },
-    ["dew"] = { tags = {} },
-    ["fog"] = { tags = {"forest", "swamp"} },
-    ["mist"] = { tags = {"forest", "swamp", "mountain"} },
-    ["aurora"] = { tags = {"cold"} },
-  }
-  for k,v in pairs(list) do
-    v.name = k
-  end
-  return list
-end
-
-function WordRepository:meteorology() return randomFromKvp(self:meteorologyList()).name end
-
-function WordRepository:settlements()
-  return {
-    ["city"] = { tags = {} },
-    ["town"] = { tags = {} },
-    ["village"] = { tags = {} },
-    ["castle"] = { tags = {} },
-    ["fort"] = { tags = {} },
-    ["fortress"] = { tags = {} },
-    ["estate"] = { tags = {} },
-    ["necropolis"] = { tags = {} },
-  }
-end
-
-function WordRepository:settlement() return randomFromKvp(self:settlements()).name end
-
-function WordRepository:settlementDescriptors()
-  return {
-    ["port"] = { tags = {} },
-    ["trading"] = { tags = {} },
-    ["mining"] = { tags = {} },
-    ["farming"] = { tags = {} },
-    ["holy"] = { tags = {} },
-    ["royal"] = { tags = {} },
-    ["graven"] = { tags = {} },
-    ["hallowed"] = { tags = {} },
-    ["haunted"] = { tags = {} },
-    ["imperial"] = { tags = {} },
-    ["arcane"] = { tags = {} },
-    ["boreal"] = { tags = {} },
-    ["primordeal"] = { tags = {} },
-    ["overgrown"] = { tags = {} },
-  }
-end
-
-function WordRepository:settlementDescriptor() return randomFromKvp(self:settlementDescriptors()).name end
-
-function WordRepository:buildings()
-  return {
-    ["palace"] = { tags = {} },
-    ["university"] = { tags = {} },
-    ["academy"] = { tags = {} },
-    ["library"] = { tags = {} },
-    ["tower"] = { tags = {} },
-    ["dungeon"] = { tags = {} },
-    ["tomb"] = { tags = {} },
-    ["manor"] = { tags = {} },
-    ["church"] = { tags = {} },
-    ["temple"] = { tags = {} },
-    ["chapel"] = { tags = {} },
-    ["monestary"] = { tags = {} },
-    ["abbey"] = { tags = {} },
-    ["shrine"] = { tags = {} },
-    ["mine"] = { tags = {} },
-    ["quarry"] = { tags = {} },
-    ["mill"] = { tags = {} },
-    ["farm"] = { tags = {} },
-    ["sanctuary"] = { tags = {} },
-    ["bridge"] = { tags = {"river"} },
-    ["ruins"] = { tags = {} },
-    ["boneyard"] = { tags = {} },
-    ["charnal ground"] = { tags = {} },
-    ["forge"] = { tags = {} },
-    ["basilica"] = { tags = {} },
-    ["caravan"] = { tags = {} },
-    ["vault"] = { tags = {} },
-    ["citadel"] = { tags = {} },
-    ["lookout"] = { tags = {} },
-    ["monument"] = { tags = {} },
-    ["fairgrounds"] = { tags = {} },
-    ["lookout"] = { tags = {} },
-    ["estate"] = { tags = {} },
-  }
-end
-
-function WordRepository:building() return randomFromKvp(self:buildings()).name end
-
-function WordRepository:buildingFeature()
-  return {
-    ["bell"] = { tags = {} },
-    ["spire"] = { tags = {} },
-    ["wall"] = { tags = {} },
-    ["tower"] = { tags = {} },
-    ["rampart"] = { tags = {} },
-    ["gate"] = { tags = {} },
-    ["door"] = { tags = {} },
-    ["hall"] = { tags = {} },
-    ["column"] = { tags = {} },
-    ["reliquary"] = { tags = {} },
-    ["lantern"] = { tags = {} },
-    ["casket"] = { tags = {} },
-    ["sarcophagus"] = { tags = {} },
-    ["rune"] = { tags = {} },
-    ["urn"] = { tags = {} },
-    ["parapet"] = { tags = {} },
-  }
-end
-
-function WordRepository:buildingFeatures() return randomFromKvp(self:buildingFeature()).name end
-
-
-function WordRepository:dwellings()
-  return {
-    ["den"] = { tags = {} },
-    ["hovel"] = { tags = {} },
-    ["lair"] = { tags = {} },
-    ["cave"] = { tags = {} },
-    ["hideout"] = { tags = {} },
-    ["resting place"] = { tags = {} },
-    ["grave"] = { tags = {} },
-    ["gathering place"] = { tags = {} },
-    ["encampment"] = { tags = {} },
-    ["garden"] = { tags = {} },
-    ["grotto"] = { tags = {} },
-    ["sanctuary"] = { tags = {} },
-    ["cemetary"] = { tags = {} },
-    ["fissure"] = { tags = {} },
-    ["field"] = { tags = {} },
-    ["pasture"] = { tags = {} },
-    ["farmstead"] = { tags = {} },
-    ["___ing grounds"] = { tags = {} },
-    ["homestead"] = { tags = {} },
-    ["pit"] = { tags = {} },
-  }
-end
-
-function WordRepository:dwelling() return randomFromKvp(self:dwellings()).name end
-
-function WordRepository:animals()
-  return {
-    ["lion"] = { tags = {"plains"}, attributes={"mane","claw","tooth","paw"}, group="pride" },
-    ["lioness"] = { tags = {"plains"}, attributes={"mane","claw","tooth","paw"}, gender={"female"}, group="pride"  },
-    ["bull"] = { tags = {"plains"}, attributes={} },
-    ["hyena"] = { tags = {"plains"}, attributes={} },
-    ["tiger"] = { tags = {"forest"}, attributes={"claw","tooth","paw"} },
-    ["tigress"] = { tags = {"forest"}, attributes={"claw","tooth","paw"}, gender={"female"} },
-    ["snake"] = { tags = {}, attributes={"fang"} },
-    ["serpent"] = { tags = {}, attributes={"fang","tongue"} },
-    ["hawk"] = { tags = {}, attributes={"talon","feather"} },
-    ["hound"] = { tags = {}, attributes={"tooth"}, group="pack" },
-    ["spider"] = { tags = {}, attributes={"web"}, group="brood" },
-    ["slug"] = { tags = {}, attributes={} },
-    ["leech"] = { tags = {}, attributes={} },
-    ["maggot"] = { tags = {}, attributes={} },
-    ["frog"] = { tags = {}, attributes={} },
-    ["toad"] = { tags = {}, attributes={} },
-    ["viper"] = { tags = {}, attributes={"fang"}, group="" },
-    ["scarab"] = { tags = {"desert"}, attributes={} },
-    ["camel"] = { tags = {"desert"}, attributes={} },
-    ["scorpion"] = { tags = {"desert"}, attributes={"claw"} },
-    ["vulture"] = { tags = {"desert"}, attributes={"talon"} },
-    ["wolf"] = { tags = {"forest"}, attributes={"claw","fang","paw"}, group="pack" },
-    ["she-wolf"] = { tags = {"forest"}, attributes={"claw","fang","paw"}, gender={"female"}, group="pack" },
-    ["bear"] = { tags = {"forest"}, attributes={"claw"} },
-    ["owl"] = { tags = {"forest"}, attributes={} },
-    ["fox"] = { tags = {"forest"}, attributes={"tail"} },
-    ["elk"] = { tags = {"forest"}, attributes={"antler"} },
-    ["shark"] = { tags = {"sea"}, attributes={"fin","tooth"} },
-    ["fish"] = { tags = {"sea, river"}, attributes={}, group="school" },
-    ["squid"] = { tags = {"sea"}, attributes={"beak"} },
-    ["octopus"] = { tags = {"sea"}, attributes={"tentacle"} },
-    ["crab"] = { tags = {"sea"}, attributes={"claw"} },
-    ["lobster"] = { tags = {"sea"}, attributes={"claw"} },
-    ["barricuda"] = { tags = {"sea"}, attributes={"tooth"} },
-    ["whale"] = { tags = {"sea"}, attributes={} },
-    ["crocodile"] = { tags = {"river"}, attributes={} },
-    ["gryphon"] = { tags = {"desert", "mountain"}, attributes={} },
-    ["falcon"] = { tags = {}, attributes={} },
-    ["eagle"] = { tags = {}, attributes={} },
-    ["wyrm"] = { tags = {}, attributes={} },
-    ["rukh"] = { tags = {}, attributes={} },
-    ["kirin"] = { tags = {}, attributes={} },
-    ["sparrow"] = { tags = {}, attributes={} },
-    ["raven"] = { tags = {}, attributes={"cold"} },
-    ["crow"] = { tags = {}, attributes={} },
-    ["osprey"] = { tags = {}, attributes={} },
-    ["ox"] = { tags = {}, attributes={"plains"} },
-    ["lamb"] = { tags = {}, attributes={"plains"} },
-    ["panther"] = { tags = {}, attributes={"forest"} },
-    ["jaguar"] = { tags = {}, attributes={"forest"} },
-    ["giant ___"] = { tags = {}, attributes={} },
-    ["stag"] = { tags = {}, attributes={"forest"} },
-    ["antelope"] = { tags = {}, attributes={"plains"} },
-    ["drake"] = { tags = {}, attributes={} },
-    ["wyvern"] = { tags = {}, attributes={} },
-  }
-end
-
-function WordRepository:animal() return randomFromKvp(self:animals()) end
-
-function WordRepository:attributes()
-  return {
-    ["heart"] = { tags = {} },
-    ["soul"] = { tags = {} },
-    ["eye"] = { tags = {} },
-    ["face"] = { tags = {} },
-    ["name"] = { tags = {} },
-    ["blood"] = { tags = {} },
-    ["skull"] = { tags = {} },
-    ["bone"] = { tags = {} },
-  }
-end
-
-function WordRepository:attribute() return randomFromKvp(self:attributes()).name end
-
-function WordRepository:attires()
-  return {
-    ["mask"] = { tags = {} },
-    ["hood"] = { tags = {} },
-    ["cloak"] = { tags = {} },
-    ["veil"] = { tags = {} },
-    ["glove"] = { tags = {} },
-    ["shroud"] = { tags = {} },
-    ["insignia"] = { tags = {} },
-  }
-end
-
-function WordRepository:attire() return randomFromKvp(self:attires()).name end
-
-
-function WordRepository:equipments()
-  return {
-    ["crown"] = { tags = {} },
-    ["arrow"] = { tags = {} },
-    ["sword"] = { tags = {} },
-    ["spear"] = { tags = {} },
-    ["mace"] = { tags = {} },
-    ["hammer"] = { tags = {} },
-    ["shield"] = { tags = {} },
-    ["bow"] = { tags = {} },
-    ["banner"] = { tags = {} },
-    ["lance"] = { tags = {} },
-    ["blade"] = { tags = {} },
-    ["standard"] = { tags = {} },
-    ["scythe"] = { tags = {} },
-    ["harpoon"] = { tags = {} },
-    ["axe"] = { tags = {} },
-    ["torch"] = { tags = {} },
-  }
-end
-
-function WordRepository:equipment() return randomFromKvp(self:equipments()).name end
-
-function WordRepository:events()
-  return {
-    ["exorcism"] = { tags = {} },
-    ["ritual"] = { tags = {} },
-    ["festival"] = { tags = {} },
-    ["carnival"] = { tags = {} },
-    ["prayer"] = { tags = {} },
-    ["procession"] = { tags = {} },
-    ["coronation"] = { tags = {} },
-    ["sacrifice"] = { tags = {} },
-    ["feast"] = { tags = {} },
-    ["gala"] = { tags = {} },
-    ["assembly"] = { tags = {} },
-    ["funeral"] = { tags = {} },
-    ["hunt"] = { tags = {} },
-    ["trial"] = { tags = {} },
-    ["day of ___"] = { tags = {} },
-    ["sacriment"] = { tags = {} },
-    ["vigil"] = { tags = {} },
-  }
-end
-
-function WordRepository:event() return randomFromKvp(self:events()).name end
 
 function WordRepository:abstracts()
   local list = {
@@ -578,6 +173,139 @@ function WordRepository:substances()
 end
 
 function WordRepository:substance() return randomFromKvp(self:substances()) end
+
+-- CHARACTERS
+
+function WordRepository:characterAdjectives()
+  return {
+    ["foul"] = { tags = {} },
+    ["fair"] = { tags = {} },
+    ["splendid"] = { tags = {} },
+    ["great"] = { tags = {} },
+    ["brave"] = { tags = {"str"} },
+    ["strong"] = { tags = {"str"} },
+    ["stout"] = { tags = {"str"} },
+    ["wise"] = { tags = {"int"} },
+    ["learned"] = { tags = {"int"} },
+    ["pious"] = { tags = {"faith"} },
+    ["devout"] = { tags = {"faith"} },
+    ["pure"] = { tags = {} },
+    ["divine"] = { tags = {} },
+    ["lost"] = { tags = {} },
+    ["mad"] = { tags = {} },
+    ["ancient"] = { tags = {} },
+    ["elder"] = { tags = {} },
+    ["forgotten"] = { tags = {} },
+    ["eternal"] = { tags = {} },
+    ["heretic"] = { tags = {} },
+    ["vigilant"] = { tags = {} },
+    ["heretic"] = { tags = {} },
+    ["resplendent"] = { tags = {} },
+    ["vigilant"] = { tags = {} },
+    ["steadfast"] = { tags = {} },
+    ["valiant"] = { tags = {} },
+    ["artful"] = { tags = {} },
+    ["solemn"] = { tags = {} },
+    ["lustrous"] = { tags = {} },
+    ["merciless"] = { tags = {} },
+    ["merciful"] = { tags = {} },
+    ["ardent"] = { tags = {} },
+    ["worthy"] = { tags = {} },
+    ["abhorrent"] = { tags = {} },
+    ["decadent"] = { tags = {} },
+    ["silent"] = { tags = {} },
+    ["austere"] = { tags = {} },
+    ["celestial"] = { tags = {} },
+    ["stalwart"] = { tags = {} },
+    ["clever"] = { tags = {"int"} },
+    ["beautiful"] = { tags = {} },
+    ["loyal"] = { tags = {} },
+    ["pious"] = { tags = {} },
+    ["vengeful"] = { tags = {} },
+    ["dutiful"] = { tags = {} },
+    ["eager"] = { tags = {} },
+    ["calm"] = { tags = {} },
+    ["serene"] = { tags = {} },
+    ["sadistic"] = { tags = {} },
+    ["enlightened"] = { tags = {"int"} },
+    ["etherial"] = { tags = {} },
+    ["exquisite"] = { tags = {} },
+    ["faithful"] = { tags = {} },
+    ["impostor"] = { tags = {} },
+    ["usurper"] = { tags = {} },
+    ["mighty"] = { tags = {"str"} },
+    ["gallant"] = { tags = {} },
+    ["generous"] = { tags = {} },
+    ["innocent"] = { tags = {} },
+    ["oathsworn"] = { tags = {} },
+    ["glorious"] = { tags = {} },
+    ["stalwart"] = { tags = {} },
+    ["grizzly"] = { tags = {} },
+    ["humble"] = { tags = {} },
+    ["imposing"] = { tags = {} },
+    ["obstinate"] = { tags = {} },
+    ["noble"] = { tags = {} },
+    ["ageless"] = { tags = {} },
+    ["pariah"] = { tags = {} },
+    ["penitent"] = { tags = {} },
+    ["volatile"] = { tags = {} },
+  }
+end
+
+function WordRepository:characterAdjective() return randomFromKvp(self:characterAdjectives()) end
+
+function WordRepository:attributes()
+  return {
+    ["heart"] = { tags = {} },
+    ["soul"] = { tags = {} },
+    ["eye"] = { tags = {} },
+    ["face"] = { tags = {} },
+    ["name"] = { tags = {} },
+    ["blood"] = { tags = {} },
+    ["skull"] = { tags = {} },
+    ["bone"] = { tags = {} },
+  }
+end
+
+function WordRepository:attribute() return randomFromKvp(self:attributes()).name end
+
+function WordRepository:attires()
+  return {
+    ["mask"] = { tags = {} },
+    ["hood"] = { tags = {} },
+    ["cloak"] = { tags = {} },
+    ["veil"] = { tags = {} },
+    ["glove"] = { tags = {} },
+    ["shroud"] = { tags = {} },
+    ["insignia"] = { tags = {} },
+  }
+end
+
+function WordRepository:attire() return randomFromKvp(self:attires()).name end
+
+function WordRepository:equipments()
+  return {
+    ["crown"] = { tags = {} },
+    ["arrow"] = { tags = {} },
+    ["sword"] = { tags = {} },
+    ["spear"] = { tags = {} },
+    ["mace"] = { tags = {} },
+    ["hammer"] = { tags = {} },
+    ["shield"] = { tags = {} },
+    ["bow"] = { tags = {} },
+    ["banner"] = { tags = {} },
+    ["lance"] = { tags = {} },
+    ["blade"] = { tags = {} },
+    ["standard"] = { tags = {} },
+    ["scythe"] = { tags = {} },
+    ["harpoon"] = { tags = {} },
+    ["axe"] = { tags = {} },
+    ["torch"] = { tags = {} },
+  }
+end
+
+function WordRepository:equipment() return randomFromKvp(self:equipments()).name end
+
 
 function WordRepository:titles()
   return {
@@ -920,6 +648,288 @@ function WordRepository:verbs()
 end
 
 function WordRepository:verb() return random(self:verbs()) end
+
+
+-- LANDSCAPES AND NATURE
+
+function WordRepository:landscapes()
+  return {
+    ["mountain"] = { tags = {} },
+    ["desert"] = { tags = {} },
+    ["forest"] = { tags = {} },
+    ["jungle"] = { tags = {} },
+    ["river"] = { tags = {} },
+    ["swamp"] = { tags = {} },
+    ["marsh"] = { tags = {} },
+    ["moor"] = { tags = {} },
+    ["bay"] = { tags = {} },
+    ["atoll"] = { tags = {} },
+    ["island"] = { tags = {} },
+    ["oasis"] = { tags = {} },
+    ["wadi"] = { tags = {} },
+    ["grove"] = { tags = {} },
+    ["crag"] = { tags = {} },
+    ["canyon"] = { tags = {} },
+    ["dune"] = { tags = {} },
+    ["steppe"] = { tags = {} },
+    ["rainforest"] = { tags = {} },
+    ["cloud forest"] = { tags = {} },
+    ["meadow"] = { tags = {} },
+    ["grassland"] = { tags = {} },
+    ["path"] = { tags = {} },
+  }
+end
+
+function WordRepository:landscape() return randomFromKvp(self:landscapes()).name end
+
+function WordRepository:meteorologyList()
+  local list = {
+    ["snow"] = { tags = {"cold"} },
+    ["frost"] = { tags = {"cold"} },
+    ["winter"] = { tags = {"cold"} },
+    ["star"] = { tags = {} },
+    ["moon"] = { tags = {} },
+    ["night"] = { tags = {} },
+    ["dawn"] = { tags = {} },
+    ["sunrise"] = { tags = {} },
+    ["sunset"] = { tags = {} },
+    ["dusk"] = { tags = {} },
+    ["sun"] = { tags = {} },
+    ["moonlight"] = { tags = {} },
+    ["sunlight"] = { tags = {} },
+    ["wind"] = { tags = {} },
+    ["rain"] = { tags = {} },
+    ["storm"] = { tags = {} },
+    ["sandstorm"] = { tags = {"desert"} },
+    ["blizzard"] = { tags = {"cold"} },
+    ["cloud"] = { tags = {} },
+    ["dew"] = { tags = {} },
+    ["fog"] = { tags = {"forest", "swamp"} },
+    ["mist"] = { tags = {"forest", "swamp", "mountain"} },
+    ["aurora"] = { tags = {"cold"} },
+  }
+  for k,v in pairs(list) do
+    v.name = k
+  end
+  return list
+end
+
+
+function WordRepository:animals()
+  return {
+    ["lion"] = { tags = {"plains"}, attributes={"mane","claw","tooth","paw"}, group="pride" },
+    ["lioness"] = { tags = {"plains"}, attributes={"mane","claw","tooth","paw"}, gender={"female"}, group="pride"  },
+    ["bull"] = { tags = {"plains"}, attributes={} },
+    ["hyena"] = { tags = {"plains"}, attributes={} },
+    ["tiger"] = { tags = {"forest"}, attributes={"claw","tooth","paw"} },
+    ["tigress"] = { tags = {"forest"}, attributes={"claw","tooth","paw"}, gender={"female"} },
+    ["snake"] = { tags = {}, attributes={"fang"} },
+    ["serpent"] = { tags = {}, attributes={"fang","tongue"} },
+    ["hawk"] = { tags = {}, attributes={"talon","feather"} },
+    ["hound"] = { tags = {}, attributes={"tooth"}, group="pack" },
+    ["spider"] = { tags = {}, attributes={"web"}, group="brood" },
+    ["slug"] = { tags = {}, attributes={} },
+    ["leech"] = { tags = {}, attributes={} },
+    ["maggot"] = { tags = {}, attributes={} },
+    ["frog"] = { tags = {}, attributes={} },
+    ["toad"] = { tags = {}, attributes={} },
+    ["viper"] = { tags = {}, attributes={"fang"}, group="" },
+    ["scarab"] = { tags = {"desert"}, attributes={} },
+    ["camel"] = { tags = {"desert"}, attributes={} },
+    ["scorpion"] = { tags = {"desert"}, attributes={"claw"} },
+    ["vulture"] = { tags = {"desert"}, attributes={"talon"} },
+    ["wolf"] = { tags = {"forest"}, attributes={"claw","fang","paw"}, group="pack" },
+    ["she-wolf"] = { tags = {"forest"}, attributes={"claw","fang","paw"}, gender={"female"}, group="pack" },
+    ["bear"] = { tags = {"forest"}, attributes={"claw"} },
+    ["owl"] = { tags = {"forest"}, attributes={} },
+    ["fox"] = { tags = {"forest"}, attributes={"tail"} },
+    ["elk"] = { tags = {"forest"}, attributes={"antler"} },
+    ["shark"] = { tags = {"sea"}, attributes={"fin","tooth"} },
+    ["fish"] = { tags = {"sea, river"}, attributes={}, group="school" },
+    ["squid"] = { tags = {"sea"}, attributes={"beak"} },
+    ["octopus"] = { tags = {"sea"}, attributes={"tentacle"} },
+    ["crab"] = { tags = {"sea"}, attributes={"claw"} },
+    ["lobster"] = { tags = {"sea"}, attributes={"claw"} },
+    ["barricuda"] = { tags = {"sea"}, attributes={"tooth"} },
+    ["whale"] = { tags = {"sea"}, attributes={} },
+    ["crocodile"] = { tags = {"river"}, attributes={} },
+    ["gryphon"] = { tags = {"desert", "mountain"}, attributes={} },
+    ["falcon"] = { tags = {}, attributes={} },
+    ["eagle"] = { tags = {}, attributes={} },
+    ["wyrm"] = { tags = {}, attributes={} },
+    ["rukh"] = { tags = {}, attributes={} },
+    ["kirin"] = { tags = {}, attributes={} },
+    ["sparrow"] = { tags = {}, attributes={} },
+    ["raven"] = { tags = {}, attributes={"cold"} },
+    ["crow"] = { tags = {}, attributes={} },
+    ["osprey"] = { tags = {}, attributes={} },
+    ["ox"] = { tags = {}, attributes={"plains"} },
+    ["lamb"] = { tags = {}, attributes={"plains"} },
+    ["panther"] = { tags = {}, attributes={"forest"} },
+    ["jaguar"] = { tags = {}, attributes={"forest"} },
+    ["giant ___"] = { tags = {}, attributes={} },
+    ["stag"] = { tags = {}, attributes={"forest"} },
+    ["antelope"] = { tags = {}, attributes={"plains"} },
+    ["drake"] = { tags = {}, attributes={} },
+    ["wyvern"] = { tags = {}, attributes={} },
+  }
+end
+
+function WordRepository:animal() return randomFromKvp(self:animals()) end
+
+-- LOCATIONS
+
+function WordRepository:meteorology() return randomFromKvp(self:meteorologyList()).name end
+
+function WordRepository:settlements()
+  return {
+    ["city"] = { tags = {} },
+    ["town"] = { tags = {} },
+    ["village"] = { tags = {} },
+    ["castle"] = { tags = {} },
+    ["fort"] = { tags = {} },
+    ["fortress"] = { tags = {} },
+    ["estate"] = { tags = {} },
+    ["necropolis"] = { tags = {} },
+  }
+end
+
+function WordRepository:settlement() return randomFromKvp(self:settlements()).name end
+
+function WordRepository:settlementDescriptors()
+  return {
+    ["port"] = { tags = {} },
+    ["trading"] = { tags = {} },
+    ["mining"] = { tags = {} },
+    ["farming"] = { tags = {} },
+    ["holy"] = { tags = {} },
+    ["royal"] = { tags = {} },
+    ["graven"] = { tags = {} },
+    ["hallowed"] = { tags = {} },
+    ["haunted"] = { tags = {} },
+    ["imperial"] = { tags = {} },
+    ["arcane"] = { tags = {} },
+    ["boreal"] = { tags = {} },
+    ["primordeal"] = { tags = {} },
+    ["overgrown"] = { tags = {} },
+  }
+end
+
+function WordRepository:settlementDescriptor() return randomFromKvp(self:settlementDescriptors()).name end
+
+function WordRepository:buildings()
+  return {
+    ["palace"] = { tags = {} },
+    ["university"] = { tags = {} },
+    ["academy"] = { tags = {} },
+    ["library"] = { tags = {} },
+    ["tower"] = { tags = {} },
+    ["dungeon"] = { tags = {} },
+    ["tomb"] = { tags = {} },
+    ["manor"] = { tags = {} },
+    ["church"] = { tags = {} },
+    ["temple"] = { tags = {} },
+    ["chapel"] = { tags = {} },
+    ["monestary"] = { tags = {} },
+    ["abbey"] = { tags = {} },
+    ["shrine"] = { tags = {} },
+    ["mine"] = { tags = {} },
+    ["quarry"] = { tags = {} },
+    ["mill"] = { tags = {} },
+    ["farm"] = { tags = {} },
+    ["sanctuary"] = { tags = {} },
+    ["bridge"] = { tags = {"river"} },
+    ["ruins"] = { tags = {} },
+    ["boneyard"] = { tags = {} },
+    ["charnal ground"] = { tags = {} },
+    ["forge"] = { tags = {} },
+    ["basilica"] = { tags = {} },
+    ["caravan"] = { tags = {} },
+    ["vault"] = { tags = {} },
+    ["citadel"] = { tags = {} },
+    ["lookout"] = { tags = {} },
+    ["monument"] = { tags = {} },
+    ["fairgrounds"] = { tags = {} },
+    ["lookout"] = { tags = {} },
+    ["estate"] = { tags = {} },
+  }
+end
+
+function WordRepository:building() return randomFromKvp(self:buildings()).name end
+
+function WordRepository:buildingFeature()
+  return {
+    ["bell"] = { tags = {} },
+    ["spire"] = { tags = {} },
+    ["wall"] = { tags = {} },
+    ["tower"] = { tags = {} },
+    ["rampart"] = { tags = {} },
+    ["gate"] = { tags = {} },
+    ["door"] = { tags = {} },
+    ["hall"] = { tags = {} },
+    ["column"] = { tags = {} },
+    ["reliquary"] = { tags = {} },
+    ["lantern"] = { tags = {} },
+    ["casket"] = { tags = {} },
+    ["sarcophagus"] = { tags = {} },
+    ["rune"] = { tags = {} },
+    ["urn"] = { tags = {} },
+    ["parapet"] = { tags = {} },
+  }
+end
+
+function WordRepository:buildingFeatures() return randomFromKvp(self:buildingFeature()).name end
+
+function WordRepository:dwellings()
+  return {
+    ["den"] = { tags = {} },
+    ["hovel"] = { tags = {} },
+    ["lair"] = { tags = {} },
+    ["cave"] = { tags = {} },
+    ["hideout"] = { tags = {} },
+    ["resting place"] = { tags = {} },
+    ["grave"] = { tags = {} },
+    ["gathering place"] = { tags = {} },
+    ["encampment"] = { tags = {} },
+    ["garden"] = { tags = {} },
+    ["grotto"] = { tags = {} },
+    ["sanctuary"] = { tags = {} },
+    ["cemetary"] = { tags = {} },
+    ["fissure"] = { tags = {} },
+    ["field"] = { tags = {} },
+    ["pasture"] = { tags = {} },
+    ["farmstead"] = { tags = {} },
+    ["___ing grounds"] = { tags = {} },
+    ["homestead"] = { tags = {} },
+    ["pit"] = { tags = {} },
+  }
+end
+
+function WordRepository:dwelling() return randomFromKvp(self:dwellings()).name end
+
+function WordRepository:events()
+  return {
+    ["exorcism"] = { tags = {} },
+    ["ritual"] = { tags = {} },
+    ["festival"] = { tags = {} },
+    ["carnival"] = { tags = {} },
+    ["prayer"] = { tags = {} },
+    ["procession"] = { tags = {} },
+    ["coronation"] = { tags = {} },
+    ["sacrifice"] = { tags = {} },
+    ["feast"] = { tags = {} },
+    ["gala"] = { tags = {} },
+    ["assembly"] = { tags = {} },
+    ["funeral"] = { tags = {} },
+    ["hunt"] = { tags = {} },
+    ["trial"] = { tags = {} },
+    ["day of ___"] = { tags = {} },
+    ["sacriment"] = { tags = {} },
+    ["vigil"] = { tags = {} },
+  }
+end
+
+function WordRepository:event() return randomFromKvp(self:events()).name end
 
 function WordRepository:unclassified()
   return {

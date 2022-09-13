@@ -105,9 +105,6 @@ function PersonalTitleGenerator:randomName(character)
   local pattern24 = "font of ".."SUBSTANCE"
   local pattern23 = random(animals).."-killer"
 
-
-
-
   local possibleNames = {
     self:nameFirst(character, pattern1),
     self:nameFirst(character, pattern2),
