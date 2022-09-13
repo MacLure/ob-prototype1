@@ -42,7 +42,7 @@ end
 
 function Character:class()
   local classes = {
-    ["strength"] = "knight",
+    ["str"] = "knight",
     ["int"] = "mage",
     ["faith"] = "cleric",
   }
