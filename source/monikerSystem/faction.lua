@@ -2,14 +2,13 @@ Faction = Class{}
 
 function Faction:init(params)
   local this = {}
-  this.leader = ""
-  this.name = ""
-  this.unitTypes = {}
+  this.region = params.region
+  this.name = factionNameGenerator:randomName(this.region)
 
   setmetatable(this, self)
   return this
 end
 
-function Faction:printFaction()
-
+function Faction:printDetails()
+  print(self.name) 
 end

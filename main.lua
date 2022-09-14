@@ -66,7 +66,10 @@ end
 function printRegionDetails(regionParams)
   local region = Region:init(regionParams)
 
+  print("-----------------------------------------------------------------")
   print("------------ "..region.placeName..", "..region.regionStatement.." in the "..region.landscape.." --------------")
+  print("-----------------------------------------------------------------")
+
   print("integratedness: "..region.integratedness, "population: "..region.population, "prosperity: "..region.prosperity)
   print("topology: "..region.topology, "temperature: "..region.temperature, "vegetation: "..region.vegetation)
 
@@ -77,15 +80,26 @@ function printRegionDetails(regionParams)
   print("GOLEMS:")
   printList(region:golems())
   print("")
+  print("FACTIONS:")
+  local faction1 = region:makeFaction()
+  faction1:printDetails()
+  print("in conflict with")
+  local faction2 = region:makeFaction()
+  faction2:printDetails()
+  print("")
   print("CHARACTERS:")
   local character = region:makeCharacter()
   character:printDetails()
-  print("FACTIONS:")
-  print(factionNameGenerator:randomName(region))
-  print("")
   print("LOCATIONS:")
+  if math.random(1,2) == 1 then
+    occupyingFaction = faction1
+  else
+    occupyingFaction = faction2
+
+  end
   local location = region:makeLocation()
   location:printDetails()
+  print("occupied by ".. occupyingFaction.name)
   print("")
 end
 

@@ -149,6 +149,14 @@ function Region:makeCharacter()
   return character
 end
 
+
+function Region:makeFaction()
+  local faction = Faction:init({region= self})
+
+  return faction
+end
+
+
 function Region:makeLocation()
   local location = Location:init({region= self})
 

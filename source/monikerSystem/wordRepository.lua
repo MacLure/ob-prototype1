@@ -664,98 +664,185 @@ function WordRepository:role() return randomFromKvp(self:roles()).name end
 
 
 function WordRepository:verbs()
-  -- give verbs a name key so they can be searchable
   return {
-    { sp = "slay", pp = "slain", doer = "slayer", tags={} },
-    { sp = "seek", pp = "sought", doer = "seeker", tags={} },
-    { sp = "burn", pp = "burnt", doer = "burner", tags={} },
-    { sp = "defile", pp = "defiled", doer = "defiler", tags={} },
-    { sp = "gaze", pp = "gazed", doer = "gazer", tags={} },
-    { sp = "eat", pp = "eaten", doer = "eater", tags={} },
-    { sp = "tame", pp = "tamed", doer = "tamer", tags={} },
-    { sp = "trap", pp = "trapped", doer = "trapper" },
-    { sp = "drown", pp = "drowned", doer = "drowner", tags={"sea, river"} },
-    { sp = "conquer", pp = "conquered", doer = "conquerer", tags={} },
-    { sp = "watch", pp = "watched", doer = "watcher", tags={} },
-    { sp = "speak", pp = "spoken", doer = "speaker", tags={} },
-    { sp = "see", pp = "seen", doer = "seer", tags={} },
-    { sp = "bring", pp = "brought", doer = "bringer", tags={} },
-    { sp = "deliver", pp = "delivered", doer = "delivered", tags={} },
-    { sp = "forge", pp = "forged", doer = "forger", tags={} },
-    { sp = "crush", pp = "crushed", doer = "crusher", tags={} },
-    { sp = "strike", pp = "struck", doer = "striker", tags={} },
-    { sp = "drink", pp = "drunk", doer = "drinker", tags={} },
-    { sp = "soak", pp = "soaked", doer = "soaker", tags={} },
-    { sp = "keep", pp = "kept", doer = "keeper", tags={} },
-    { sp = "embrace", pp = "embraced", doer = "embracer", tags={} },
-    { sp = "defend", pp = "defended", doer = "defender", tags={} },
-    { sp = "protect", pp = "protected", doer = "protector", tags={} },
-    { sp = "bury", pp = "buried", doer = "burier", tags={} },
-    { sp = "bless", pp = "blessed", doer = "blesser", tags={} },
-    { sp = "curse", pp = "cursed", doer = "curser", tags={} },
-    { sp = "shun", pp = "shunned", doer = "shunner", tags={} },
-    { sp = "scorn", pp = "scorned", doer = "scorner", tags={} },
-    { sp = "exile", pp = "exiled", doer = "exiler", tags={} },
-    { sp = "abolish", pp = "abolished", doer = "abolisher", tags={} },
-    { sp = "absolve", pp = "absolved", doer = "absolver", tags={} },
-    { sp = "enchant", pp = "enchanted", doer = "enchanter", tags={} },
-    { sp = "conjur", pp = "conjured", doer = "conjurer", tags={} },
-    { sp = "summon", pp = "summoned", doer = "summoner", tags={} },
-    { sp = "ascend", pp = "ascended", doer = "ascender", tags={} },
-    { sp = "charm", pp = "charmed", doer = "charmer", tags={} },
-    { sp = "guide", pp = "guideed", doer = "guider", tags={} },
-    { sp = "adorn", pp = "adorned", doer = "adorner", tags={} },
-    { sp = "yield", pp = "yielded", doer = "yielder", tags={} },
-    { sp = "embrace", pp = "embraced", doer = "embracer", tags={} },
-    { sp = "condemn", pp = "condemnd", doer = "condemner", tags={} },
-    { sp = "deliver", pp = "delivered", doer = "deliverer", tags={} },
-    { sp = "despair", pp = "despaired", doer = "despairer", tags={} },
-    { sp = "renew", pp = "renewed", doer = "renewer", tags={} },
-    { sp = "enforce", pp = "renewed", doer = "renewer", tags={} },
-    { sp = "exalt", pp = "exalted", doer = "exalter", tags={} },
-    { sp = "favour", pp = "favoured", doer = "favourer", tags={} },
-    { sp = "anoint", pp = "anointed", doer = "anointer", tags={} },
-    { sp = "purify", pp = "purified", doer = "purifier", tags={} },
-    { sp = "redeem", pp = "redeemed", doer = "redeemer", tags={} },
-    { sp = "banish", pp = "banished", doer = "banisher", tags={} },
-    { sp = "blossom", pp = "blossomed", doer = "blossomer", tags={} },
-    { sp = "weave", pp = "weaved", doer = "weaver", tags={} },
-    { sp = "breathe", pp = "breathed", doer = "breather", tags={} },
-    { sp = "purge", pp = "purged", doer = "purger", tags={} },
-    { sp = "cleanse", pp = "cleansed", doer = "cleanser", tags={} },
-    { sp = "consecrate", pp = "consecrated", doer = "consecrator", tags={} },
-    { sp = "defy", pp = "defied", doer = "defier", tags={} },
-    { sp = "devour", pp = "devoured", doer = "devourer", tags={} },
-    { sp = "assail", pp = "assailed", doer = "assailant", tags={} },
-    { sp = "endure", pp = "assailed", doer = "assailant", tags={} },
-    { sp = "entangle", pp = "assailed", doer = "assailant", tags={} },
-    { sp = "corrupt", pp = "assailed", doer = "assailant", tags={} },
-    { sp = "excommunicate", pp = "assailed", doer = "assailant", tags={} },
-    { sp = "expose", pp = "exposed", doer = "exposer", tags={} },
-    { sp = "mend", pp = "mended", doer = "mender", tags={} },
-    { sp = "hunt", pp = "hunted", doer = "hunter", tags={} },
-    { sp = "take", pp = "taken", doer = "taker", tags={} },
-    { sp = "forbid", pp = "forbidden", doer = "forbidder", tags={} },
-    { sp = "kindle", pp = "kindled", doer = "kindler", tags={} },
-    { sp = "weave", pp = "weaved", doer = "weaver", tags={} },
-    { sp = "possess", pp = "possessed", doer = "possessor", tags={} },
-    { sp = "subdue", pp = "subdued", doer = "subduer", tags={} },
-    { sp = "bestow", pp = "bestowed", doer = "bestower", tags={} },
-    { sp = "preserve", pp = "preserved", doer = "preserver", tags={} },
-    { sp = "ensnare", pp = "ensnared", doer = "ensnarer", tags={} },
-    { sp = "deceive", pp = "deceived", doer = "deceiver", tags={} },
-    { sp = "inspire", pp = "inspired", doer = "inspirer", tags={} },
-    { sp = "punish", pp = "punished", doer = "punisher", tags={} },
-    { sp = "light", pp = "lighted", doer = "lighter", tags={} },
-    { sp = "mourn", pp = "mourned", doer = "mourner", tags={} },
-    { sp = "devastate", pp = "devastated", doer = "devastator", tags={} },
-    { sp = "nurture", pp = "nurtured", doer = "nurturer", tags={} },
-    { sp = "atone", pp = "atoned", doer = "atoner", tags={} },
-    { sp = "pierce", pp = "pierced", doer = "piercer", tags={} },
+    ["slay"] = { sp = "slay", pp = "slain", doer = "slayer", tags={} },
+    ["seek"] = { sp = "seek", pp = "sought", doer = "seeker", tags={} },
+    ["burn"] = { sp = "burn", pp = "burnt", doer = "burner", tags={} },
+    ["defile"] = { sp = "defile", pp = "defiled", doer = "defiler", tags={} },
+    ["gaze"] = { sp = "gaze", pp = "gazed", doer = "gazer", tags={} },
+    ["eat"] = { sp = "eat", pp = "eaten", doer = "eater", tags={} },
+    ["tame"] = { sp = "tame", pp = "tamed", doer = "tamer", tags={} },
+    ["trap"] = { sp = "trap", pp = "trapped", doer = "trapper" },
+    ["drown"] = { sp = "drown", pp = "drowned", doer = "drowner", tags={"sea, river"} },
+    ["conquer"] = { sp = "conquer", pp = "conquered", doer = "conquerer", tags={} },
+    ["watch"] = { sp = "watch", pp = "watched", doer = "watcher", tags={} },
+    ["speak"] = { sp = "speak", pp = "spoken", doer = "speaker", tags={} },
+    ["see"] = { sp = "see", pp = "seen", doer = "seer", tags={} },
+    ["bring"] = { sp = "bring", pp = "brought", doer = "bringer", tags={} },
+    ["deliver"] = { sp = "deliver", pp = "delivered", doer = "delivered", tags={} },
+    ["forge"] = { sp = "forge", pp = "forged", doer = "forger", tags={} },
+    ["crush"] = { sp = "crush", pp = "crushed", doer = "crusher", tags={} },
+    ["strike"] = { sp = "strike", pp = "struck", doer = "striker", tags={} },
+    ["drink"] = { sp = "drink", pp = "drunk", doer = "drinker", tags={} },
+    ["soak"] = { sp = "soak", pp = "soaked", doer = "soaker", tags={} },
+    ["keep"] = { sp = "keep", pp = "kept", doer = "keeper", tags={} },
+    ["embrace"] = { sp = "embrace", pp = "embraced", doer = "embracer", tags={} },
+    ["defend"] = { sp = "defend", pp = "defended", doer = "defender", tags={} },
+    ["protect"] = { sp = "protect", pp = "protected", doer = "protector", tags={} },
+    ["bury"] = { sp = "bury", pp = "buried", doer = "burier", tags={} },
+    ["bless"] = { sp = "bless", pp = "blessed", doer = "blesser", tags={} },
+    ["curse"] = { sp = "curse", pp = "cursed", doer = "curser", tags={} },
+    ["shun"] = { sp = "shun", pp = "shunned", doer = "shunner", tags={} },
+    ["scorn"] = { sp = "scorn", pp = "scorned", doer = "scorner", tags={} },
+    ["exile"] = { sp = "exile", pp = "exiled", doer = "exiler", tags={} },
+    ["abolish"] = { sp = "abolish", pp = "abolished", doer = "abolisher", tags={} },
+    ["absolve"] = { sp = "absolve", pp = "absolved", doer = "absolver", tags={} },
+    ["enchant"] = { sp = "enchant", pp = "enchanted", doer = "enchanter", tags={} },
+    ["conjur"] = { sp = "conjur", pp = "conjured", doer = "conjurer", tags={} },
+    ["summon"] = { sp = "summon", pp = "summoned", doer = "summoner", tags={} },
+    ["ascend"] = { sp = "ascend", pp = "ascended", doer = "ascender", tags={} },
+    ["charm"] = { sp = "charm", pp = "charmed", doer = "charmer", tags={} },
+    ["guide"] = { sp = "guide", pp = "guideed", doer = "guider", tags={} },
+    ["adorn"] = { sp = "adorn", pp = "adorned", doer = "adorner", tags={} },
+    ["yield"] = { sp = "yield", pp = "yielded", doer = "yielder", tags={} },
+    ["embrace"] = { sp = "embrace", pp = "embraced", doer = "embracer", tags={} },
+    ["condemn"] = { sp = "condemn", pp = "condemnd", doer = "condemner", tags={} },
+    ["deliver"] = { sp = "deliver", pp = "delivered", doer = "deliverer", tags={} },
+    ["despair"] = { sp = "despair", pp = "despaired", doer = "despairer", tags={} },
+    ["renew"] = { sp = "renew", pp = "renewed", doer = "renewer", tags={} },
+    ["enforce"] = { sp = "enforce", pp = "renewed", doer = "renewer", tags={} },
+    ["exalt"] = { sp = "exalt", pp = "exalted", doer = "exalter", tags={} },
+    ["favour"] = { sp = "favour", pp = "favoured", doer = "favourer", tags={} },
+    ["anoint"] = { sp = "anoint", pp = "anointed", doer = "anointer", tags={} },
+    ["purify"] = { sp = "purify", pp = "purified", doer = "purifier", tags={} },
+    ["redeem"] = { sp = "redeem", pp = "redeemed", doer = "redeemer", tags={} },
+    ["banish"] = { sp = "banish", pp = "banished", doer = "banisher", tags={} },
+    ["blossom"] = { sp = "blossom", pp = "blossomed", doer = "blossomer", tags={} },
+    ["weave"] = { sp = "weave", pp = "weaved", doer = "weaver", tags={} },
+    ["breathe"] = { sp = "breathe", pp = "breathed", doer = "breather", tags={} },
+    ["purge"] = { sp = "purge", pp = "purged", doer = "purger", tags={} },
+    ["cleanse"] = { sp = "cleanse", pp = "cleansed", doer = "cleanser", tags={} },
+    ["consecrate"] = { sp = "consecrate", pp = "consecrated", doer = "consecrator", tags={} },
+    ["defy"] = { sp = "defy", pp = "defied", doer = "defier", tags={} },
+    ["devour"] = { sp = "devour", pp = "devoured", doer = "devourer", tags={} },
+    ["assail"] = { sp = "assail", pp = "assailed", doer = "assailant", tags={} },
+    ["endure"] = { sp = "endure", pp = "assailed", doer = "assailant", tags={} },
+    ["entangle"] = { sp = "entangle", pp = "assailed", doer = "assailant", tags={} },
+    ["corrupt"] = { sp = "corrupt", pp = "assailed", doer = "assailant", tags={} },
+    ["excommunicate"] = { sp = "excommunicate", pp = "assailed", doer = "assailant", tags={} },
+    ["expose"] = { sp = "expose", pp = "exposed", doer = "exposer", tags={} },
+    ["mend"] = { sp = "mend", pp = "mended", doer = "mender", tags={} },
+    ["hunt"] = { sp = "hunt", pp = "hunted", doer = "hunter", tags={} },
+    ["take"] = { sp = "take", pp = "taken", doer = "taker", tags={} },
+    ["forbid"] = { sp = "forbid", pp = "forbidden", doer = "forbidder", tags={} },
+    ["kindle"] = { sp = "kindle", pp = "kindled", doer = "kindler", tags={} },
+    ["weave"] = { sp = "weave", pp = "weaved", doer = "weaver", tags={} },
+    ["possess"] = { sp = "possess", pp = "possessed", doer = "possessor", tags={} },
+    ["subdue"] = { sp = "subdue", pp = "subdued", doer = "subduer", tags={} },
+    ["bestow"] = { sp = "bestow", pp = "bestowed", doer = "bestower", tags={} },
+    ["preserve"] = { sp = "preserve", pp = "preserved", doer = "preserver", tags={} },
+    ["ensnare"] = { sp = "ensnare", pp = "ensnared", doer = "ensnarer", tags={} },
+    ["deceive"] = { sp = "deceive", pp = "deceived", doer = "deceiver", tags={} },
+    ["inspire"] = { sp = "inspire", pp = "inspired", doer = "inspirer", tags={} },
+    ["punish"] = { sp = "punish", pp = "punished", doer = "punisher", tags={} },
+    ["light"] = { sp = "light", pp = "lighted", doer = "lighter", tags={} },
+    ["mourn"] = { sp = "mourn", pp = "mourned", doer = "mourner", tags={} },
+    ["devastate"] = { sp = "devastate", pp = "devastated", doer = "devastator", tags={} },
+    ["nurture"] = { sp = "nurture", pp = "nurtured", doer = "nurturer", tags={} },
+    ["atone"] = { sp = "atone", pp = "atoned", doer = "atoner", tags={} },
+    ["pierce"] = { sp = "pierce", pp = "pierced", doer = "piercer", tags={} },
+
+    -- { sp = "slay", pp = "slain", doer = "slayer", tags={} },
+    -- { sp = "seek", pp = "sought", doer = "seeker", tags={} },
+    -- { sp = "burn", pp = "burnt", doer = "burner", tags={} },
+    -- { sp = "defile", pp = "defiled", doer = "defiler", tags={} },
+    -- { sp = "gaze", pp = "gazed", doer = "gazer", tags={} },
+    -- { sp = "eat", pp = "eaten", doer = "eater", tags={} },
+    -- { sp = "tame", pp = "tamed", doer = "tamer", tags={} },
+    -- { sp = "trap", pp = "trapped", doer = "trapper" },
+    -- { sp = "drown", pp = "drowned", doer = "drowner", tags={"sea, river"} },
+    -- { sp = "conquer", pp = "conquered", doer = "conquerer", tags={} },
+    -- { sp = "watch", pp = "watched", doer = "watcher", tags={} },
+    -- { sp = "speak", pp = "spoken", doer = "speaker", tags={} },
+    -- { sp = "see", pp = "seen", doer = "seer", tags={} },
+    -- { sp = "bring", pp = "brought", doer = "bringer", tags={} },
+    -- { sp = "deliver", pp = "delivered", doer = "delivered", tags={} },
+    -- { sp = "forge", pp = "forged", doer = "forger", tags={} },
+    -- { sp = "crush", pp = "crushed", doer = "crusher", tags={} },
+    -- { sp = "strike", pp = "struck", doer = "striker", tags={} },
+    -- { sp = "drink", pp = "drunk", doer = "drinker", tags={} },
+    -- { sp = "soak", pp = "soaked", doer = "soaker", tags={} },
+    -- { sp = "keep", pp = "kept", doer = "keeper", tags={} },
+    -- { sp = "embrace", pp = "embraced", doer = "embracer", tags={} },
+    -- { sp = "defend", pp = "defended", doer = "defender", tags={} },
+    -- { sp = "protect", pp = "protected", doer = "protector", tags={} },
+    -- { sp = "bury", pp = "buried", doer = "burier", tags={} },
+    -- { sp = "bless", pp = "blessed", doer = "blesser", tags={} },
+    -- { sp = "curse", pp = "cursed", doer = "curser", tags={} },
+    -- { sp = "shun", pp = "shunned", doer = "shunner", tags={} },
+    -- { sp = "scorn", pp = "scorned", doer = "scorner", tags={} },
+    -- { sp = "exile", pp = "exiled", doer = "exiler", tags={} },
+    -- { sp = "abolish", pp = "abolished", doer = "abolisher", tags={} },
+    -- { sp = "absolve", pp = "absolved", doer = "absolver", tags={} },
+    -- { sp = "enchant", pp = "enchanted", doer = "enchanter", tags={} },
+    -- { sp = "conjur", pp = "conjured", doer = "conjurer", tags={} },
+    -- { sp = "summon", pp = "summoned", doer = "summoner", tags={} },
+    -- { sp = "ascend", pp = "ascended", doer = "ascender", tags={} },
+    -- { sp = "charm", pp = "charmed", doer = "charmer", tags={} },
+    -- { sp = "guide", pp = "guideed", doer = "guider", tags={} },
+    -- { sp = "adorn", pp = "adorned", doer = "adorner", tags={} },
+    -- { sp = "yield", pp = "yielded", doer = "yielder", tags={} },
+    -- { sp = "embrace", pp = "embraced", doer = "embracer", tags={} },
+    -- { sp = "condemn", pp = "condemnd", doer = "condemner", tags={} },
+    -- { sp = "deliver", pp = "delivered", doer = "deliverer", tags={} },
+    -- { sp = "despair", pp = "despaired", doer = "despairer", tags={} },
+    -- { sp = "renew", pp = "renewed", doer = "renewer", tags={} },
+    -- { sp = "enforce", pp = "renewed", doer = "renewer", tags={} },
+    -- { sp = "exalt", pp = "exalted", doer = "exalter", tags={} },
+    -- { sp = "favour", pp = "favoured", doer = "favourer", tags={} },
+    -- { sp = "anoint", pp = "anointed", doer = "anointer", tags={} },
+    -- { sp = "purify", pp = "purified", doer = "purifier", tags={} },
+    -- { sp = "redeem", pp = "redeemed", doer = "redeemer", tags={} },
+    -- { sp = "banish", pp = "banished", doer = "banisher", tags={} },
+    -- { sp = "blossom", pp = "blossomed", doer = "blossomer", tags={} },
+    -- { sp = "weave", pp = "weaved", doer = "weaver", tags={} },
+    -- { sp = "breathe", pp = "breathed", doer = "breather", tags={} },
+    -- { sp = "purge", pp = "purged", doer = "purger", tags={} },
+    -- { sp = "cleanse", pp = "cleansed", doer = "cleanser", tags={} },
+    -- { sp = "consecrate", pp = "consecrated", doer = "consecrator", tags={} },
+    -- { sp = "defy", pp = "defied", doer = "defier", tags={} },
+    -- { sp = "devour", pp = "devoured", doer = "devourer", tags={} },
+    -- { sp = "assail", pp = "assailed", doer = "assailant", tags={} },
+    -- { sp = "endure", pp = "assailed", doer = "assailant", tags={} },
+    -- { sp = "entangle", pp = "assailed", doer = "assailant", tags={} },
+    -- { sp = "corrupt", pp = "assailed", doer = "assailant", tags={} },
+    -- { sp = "excommunicate", pp = "assailed", doer = "assailant", tags={} },
+    -- { sp = "expose", pp = "exposed", doer = "exposer", tags={} },
+    -- { sp = "mend", pp = "mended", doer = "mender", tags={} },
+    -- { sp = "hunt", pp = "hunted", doer = "hunter", tags={} },
+    -- { sp = "take", pp = "taken", doer = "taker", tags={} },
+    -- { sp = "forbid", pp = "forbidden", doer = "forbidder", tags={} },
+    -- { sp = "kindle", pp = "kindled", doer = "kindler", tags={} },
+    -- { sp = "weave", pp = "weaved", doer = "weaver", tags={} },
+    -- { sp = "possess", pp = "possessed", doer = "possessor", tags={} },
+    -- { sp = "subdue", pp = "subdued", doer = "subduer", tags={} },
+    -- { sp = "bestow", pp = "bestowed", doer = "bestower", tags={} },
+    -- { sp = "preserve", pp = "preserved", doer = "preserver", tags={} },
+    -- { sp = "ensnare", pp = "ensnared", doer = "ensnarer", tags={} },
+    -- { sp = "deceive", pp = "deceived", doer = "deceiver", tags={} },
+    -- { sp = "inspire", pp = "inspired", doer = "inspirer", tags={} },
+    -- { sp = "punish", pp = "punished", doer = "punisher", tags={} },
+    -- { sp = "light", pp = "lighted", doer = "lighter", tags={} },
+    -- { sp = "mourn", pp = "mourned", doer = "mourner", tags={} },
+    -- { sp = "devastate", pp = "devastated", doer = "devastator", tags={} },
+    -- { sp = "nurture", pp = "nurtured", doer = "nurturer", tags={} },
+    -- { sp = "atone", pp = "atoned", doer = "atoner", tags={} },
+    -- { sp = "pierce", pp = "pierced", doer = "piercer", tags={} },
   }
 end
 
-function WordRepository:verb() return random(self:verbs()) end
+-- function WordRepository:verb() return random(self:verbs()) end
+function WordRepository:verb() return randomFromKvp(self:verbs()) end
 
 
 -- LANDSCAPES AND NATURE
@@ -863,7 +950,6 @@ function WordRepository:animals()
     ["scorpion"] = { tags = {"desert"}, attributes={"claw"} },
     ["vulture"] = { tags = {"desert"}, attributes={"talon"} },
     ["wolf"] = { tags = {"forest"}, attributes={"claw","fang","paw"}, group="pack" },
-    ["she-wolf"] = { tags = {"forest"}, attributes={"claw","fang","paw"}, gender={"female"}, group="pack" },
     ["bear"] = { tags = {"forest"}, attributes={"claw"} },
     ["owl"] = { tags = {"forest"}, attributes={} },
     ["fox"] = { tags = {"forest"}, attributes={"tail"} },
@@ -1106,136 +1192,112 @@ function WordRepository:less(word)
   return word.."less"
 end
 
+-- gift
+-- reward
+-- bounty
+-- boon
+-- favour
+-- offering
+-- spoils
+
+-- endeavour
+
+-- lullaby
+-- requiem
+-- hymn
+-- rite
+-- sacrament
+-- liturgy
+-- incantation
+
+
+-- presence
+-- prophecy
+-- promise
+-- commission
+-- summons
+-- decree
+-- invocation
+-- tarrif
 
 
 
 
 
+-- link ("-link")
+
+-- pike
+-- greatsword
+-- greatshield
+
+-- robe
+-- cloak
+-- net
+-- helm
+
+
+
+-- balm
+-- potion
+-- poultice
+
+
+-- curtain
+-- throne
+-- treasury
+
+
+
+-- totem
+-- sight
+-- omen
+-- shard
 
 
 
 
+-- re__
+
+-- god-
+-- still-
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-gift
-reward
-bounty
-boon
-favour
-offering
-spoils
-
-endeavour
-
-lullaby
-requiem
-hymn
-rite
-sacrament
-liturgy
-incantation
-
-
-presence
-prophecy
-promise
-commission
-summons
-decree
-invocation
-tarrif
-
-
-
-
-
-link ("-link")
-
-pike
-greatsword
-greatshield
-
-robe
-cloak
-net
-helm
-
-
-
-balm
-potion
-poultice
-
-
-curtain
-throne
-treasury
-
-
-
-totem
-sight
-omen
-shard
-
-
-
-
-re__
-
-god-
-still-
-
-
-
-
-prowl
-purge
-restrain
-reclaim
-relent
-renounce
-revere
-revoke
-mend
-awaken
-safeguard
-scheme
-shatter
-slaughter
-smite
-smolder
-smuggle
-weave
-stitch
-quell
-spurn
-invoke
-subjugate
-exalt
-nurture
-vindicate
-tempt
-torment
-arrogant
-make
-vanquish
-abandon
-worship
-quell
-persecute
-
+-- prowl
+-- purge
+-- restrain
+-- reclaim
+-- relent
+-- renounce
+-- revere
+-- revoke
+-- mend
+-- awaken
+-- safeguard
+-- scheme
+-- shatter
+-- slaughter
+-- smite
+-- smolder
+-- smuggle
+-- weave
+-- stitch
+-- quell
+-- spurn
+-- invoke
+-- subjugate
+-- exalt
+-- nurture
+-- vindicate
+-- tempt
+-- torment
+-- arrogant
+-- make
+-- vanquish
+-- abandon
+-- worship
+-- quell
+-- persecute
 
 
