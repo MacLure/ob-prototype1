@@ -49,6 +49,12 @@ end
 
 -- TABLE HELPERS
 
+function tablelength(T)
+  local count = 0
+  for _ in pairs(T) do count = count + 1 end
+  return count
+end
+
 function getIndex(table, item)
   local index={}
   for k,v in pairs(table) do
@@ -189,13 +195,13 @@ function distance(x1,y1,x2,y2)
 end
 
 function randomFromKvp(kvp)
-  local randomIndex = math.random(1,#kvp)
+  local randomIndex = math.random(1,tablelength(kvp)-1)
   local counter = 1
   for k, v in pairs(kvp) do
     if counter == randomIndex then
       v.name = k
       return v
     end
-    randomIndex = randomIndex+1
+    counter = counter+1
   end
 end

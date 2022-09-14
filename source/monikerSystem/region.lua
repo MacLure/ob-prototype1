@@ -106,7 +106,8 @@ function Region:animals()
 
   for k,v in pairs(words:animals()) do
     if containsFromArray(v.tags, self.tags) then
-      table.insert(returnList, k)
+      v.name = k
+      table.insert(returnList, v)
     -- else
     --   table.insert(returnList, self:prependLandscape(k))
     end

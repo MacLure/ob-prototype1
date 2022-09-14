@@ -21,8 +21,7 @@ function WordRepository:colors()
   }
 end
 
-function WordRepository:color() return randomFromKvp(self:colors()).name end
-
+function WordRepository:color() return randomFromKvp(self:colors()) end
 
 function WordRepository:abstracts()
   local list = {
@@ -98,7 +97,7 @@ function WordRepository:abstracts()
   return list
 end
 
-function WordRepository:abstract() return randomFromKvp(self:abstracts()).name end
+function WordRepository:abstract() return randomFromKvp(self:abstracts()) end
 
 function WordRepository:crafts()
   return {
@@ -114,8 +113,7 @@ function WordRepository:crafts()
   }
 end
 
-function WordRepository:craft() return randomFromKvp(self:crafts()).name end
-
+function WordRepository:craft() return randomFromKvp(self:crafts()) end
 
 function WordRepository:substances()
   local list = {
@@ -336,7 +334,7 @@ function WordRepository:attributes()
   }
 end
 
-function WordRepository:attribute() return randomFromKvp(self:attributes()).name end
+function WordRepository:attribute() return randomFromKvp(self:attributes()) end
 
 function WordRepository:attires()
   return {
@@ -350,7 +348,7 @@ function WordRepository:attires()
   }
 end
 
-function WordRepository:attire() return randomFromKvp(self:attires()).name end
+function WordRepository:attire() return randomFromKvp(self:attires()) end
 
 function WordRepository:equipments()
   return {
@@ -373,52 +371,23 @@ function WordRepository:equipments()
   }
 end
 
-function WordRepository:equipment() return randomFromKvp(self:equipments()).name end
+function WordRepository:equipment() return randomFromKvp(self:equipments()) end
 
-
-function WordRepository:titles()
+function WordRepository:positions()
   return {
     ["servant"] = { tags = {} },
-    ["hand"] = { tags = {} },
-    ["lord"] = { tags = {}, gender = {"male"} },
-    ["lady"] = { tags = {}, gender = {"female"} },
-    ["prince"] = { tags = {}, gender = {"male"} },
-    ["princess"] = { tags = {}, gender = {"female"} },
-    ["tyrant"] = { tags = {} },
     ["ward"] = { tags = {} },
     ["warden"] = { tags = {} },
     ["patron"] = { tags = {"male"} },
     ["matron"] = { tags = {"female"} },
-    ["marquis"] = { tags = {} },
-    ["emir"] = { tags = {} },
-    ["khan"] = { tags = {} },
-    ["elector"] = { tags = {} },
-    ["satrap"] = { tags = {} },
-    ["governor"] = { tags = {} },
-    ["boyar"] = { tags = {} },
-    ["jarl"] = { tags = {} },
-    ["earl"] = { tags = {} },
-    ["margrave"] = { tags = {} },
-    ["thane"] = { tags = {} },
-    ["magistrate"] = { tags = {} },
-    ["pasha"] = { tags = {} },
-    ["bey"] = { tags = {} },
-    ["pasha"] = { tags = {} },
-    ["shah"] = { tags = {} },
-    ["raja"] = { tags = {} },
-    ["prefect"] = { tags = {} },
-    ["cardinal"] = { tags = {"faith"} },
     ["patriarch"] = { tags = {}, gender = {"male"} },
     ["matriarch"] = { tags = {}, gender = {"female"} },
     ["captain"] = { tags = {"sea"} },
     ["navigator"] = { tags = {"sea"} },
     ["sherpa"] = { tags = {} },
     ["guide"] = { tags = {} },
-    ["acolyte"] = { tags = {} },
-    ["vanguard"] = { tags = {} },
     ["scout"] = { tags = {} },
     ["engineer"] = { tags = {} },
-    ["mystic"] = { tags = {} },
     ["admiral"] = { tags = {} },
     ["miner"] = { tags = {} },
     ["artificer"] = { tags = {} },
@@ -426,38 +395,21 @@ function WordRepository:titles()
     ["voyager"] = { tags = {} },
     ["squire"] = { tags = {} },
     ["jailer"] = { tags = {} },
-    ["veteran"] = { tags = {} },
-    ["zealot"] = { tags = {} },
-    ["collector"] = { tags = {} },
-    ["prophet"] = { tags = {} },
-    ["heretic"] = { tags = {} },
     ["sentinel"] = { tags = {} },
     ["curator"] = { tags = {} },
     ["marshal"] = { tags = {} },
-    ["guardian"] = { tags = {} },
-    ["overseer"] = { tags = {} },
     ["page"] = { tags = {} },
     ["herald"] = { tags = {} },
-    ["apostle"] = { tags = {} },
     ["apothecary"] = { tags = {} },
-    ["elite"] = { tags = {} },
-    ["arbiter"] = { tags = {} },
-    ["archivist"] = { tags = {} },
-    ["archon"] = { tags = {} },
     ["archaeologist"] = { tags = {} },
     ["alchemist"] = { tags = {} },
     ["blacksmith"] = { tags = {} },
     ["healer"] = { tags = {} },
-    ["refugee"] = { tags = {} },
-    ["ancestor"] = { tags = {} },
-    ["consul"] = { tags = {} },
-    ["missionary"] = { tags = {} },
+    ["archivist"] = { tags = {} },
     ["bureaucrat"] = { tags = {} },
     ["gardener"] = { tags = {} },
     ["grave-keeper"] = { tags = {} },
-    ["brawler"] = { tags = {} },
     ["trapper"] = { tags = {} },
-    ["sojourner"] = { tags = {} },
     ["warrior"] = { tags = {} },
     ["inn-keeper"] = { tags = {} },
     ["tavern-keeper"] = { tags = {} },
@@ -467,11 +419,8 @@ function WordRepository:titles()
     ["vizier"] = { tags = {} },
     ["emissary"] = { tags = {} },
     ["sellsword"] = { tags = {} },
-    ["nomad"] = { tags = {} },
     ["bounty hunter"] = { tags = {} },
     ["shield-bearer"] = { tags = {} },
-    ["escort"] = { tags = {} },
-    ["aristocrat"] = { tags = {} },
     ["cartographer"] = { tags = {} },
     ["chancellor"] = { tags = {} },
     ["peddler"] = { tags = {} },
@@ -485,11 +434,8 @@ function WordRepository:titles()
     ["enchanter"] = { tags = {} },
     ["outrider"] = { tags = {} },
     ["denizen"] = { tags = {} },
-    ["celebrant"] = { tags = {} },
-    ["custodian"] = { tags = {} },
-    ["renegade"] = { tags = {} },
-    ["duelist"] = { tags = {} },
     ["apprentice"] = { tags = {} },
+    ["custodian"] = { tags = {} },
     ["sentry"] = { tags = {} },
     ["master"] = { tags = {} },
     ["monk"] = { tags = {} },
@@ -499,16 +445,6 @@ function WordRepository:titles()
     ["trainer"] = { tags = {} },
     ["thrull"] = { tags = {} },
     ["inquisitor"] = { tags = {} },
-    ["exile"] = { tags = {"faith"} },
-    ["heretic"] = { tags = {"faith"} },
-    ["defender"] = { tags = {"knight"} },
-    ["brute"] = { tags = {"str"} },
-    ["seer"] = { tags = {} },
-    ["oracle"] = { tags = {} },
-    ["sheppard"] = { tags = {"faith"} },
-    ["knight-errant"] = { tags = {} },
-    ["ascetic"] = { tags = {} },
-    ["fanatic"] = { tags = {} },
     ["hermit"] = { tags = {} },
     ["salvager"] = { tags = {"sea"} },
     ["__smith"] = { tags = {} },
@@ -521,7 +457,6 @@ function WordRepository:titles()
     ["courtier"] = { tags = {} },
     ["borderguard"] = { tags = {} },
     ["informant"] = { tags = {} },
-    ["partisan"] = { tags = {} },
     ["drifter"] = { tags = {} },
     ["pontiff"] = { tags = {} },
     ["missionary"] = { tags = {} },
@@ -546,7 +481,6 @@ function WordRepository:titles()
     ["mage"] = { tags = {} },
     ["constable"] = { tags = {} },
     ["farmer"] = { tags = {} },
-    ["__caller"] = { tags = {} },
     ["wizard"] = { tags = {} },
     ["__peddlar"] = { tags = {} },
     ["philosopher"] = { tags = {} },
@@ -558,6 +492,99 @@ function WordRepository:titles()
     ["usher"] = { tags = {} },
     ["borderguard"] = { tags = {} },
     ["__robber"] = { tags = {} },
+  }
+end
+
+function WordRepository:position() return randomFromKvp(self:positions()) end
+
+
+function WordRepository:titles()
+  return {
+    ["hand"] = { tags = {} },
+    ["lord"] = { tags = {}, gender = {"male"} },
+    ["lady"] = { tags = {}, gender = {"female"} },
+    ["prince"] = { tags = {}, gender = {"male"} },
+    ["princess"] = { tags = {}, gender = {"female"} },
+    ["tyrant"] = { tags = {} },
+    ["marquis"] = { tags = {} },
+    ["emir"] = { tags = {} },
+    ["khan"] = { tags = {} },
+    ["elector"] = { tags = {} },
+    ["satrap"] = { tags = {} },
+    ["governor"] = { tags = {} },
+    ["boyar"] = { tags = {} },
+    ["jarl"] = { tags = {} },
+    ["earl"] = { tags = {} },
+    ["margrave"] = { tags = {} },
+    ["thane"] = { tags = {} },
+    ["magistrate"] = { tags = {} },
+    ["pasha"] = { tags = {} },
+    ["bey"] = { tags = {} },
+    ["pasha"] = { tags = {} },
+    ["shah"] = { tags = {} },
+    ["raja"] = { tags = {} },
+    ["prefect"] = { tags = {} },
+    ["cardinal"] = { tags = {"faith"} },
+    ["acolyte"] = { tags = {} },
+    ["vanguard"] = { tags = {} },
+    ["mystic"] = { tags = {} },
+    ["veteran"] = { tags = {} },
+    ["zealot"] = { tags = {} },
+    ["collector"] = { tags = {} },
+    ["prophet"] = { tags = {} },
+    ["heretic"] = { tags = {} },
+    ["guardian"] = { tags = {} },
+    ["overseer"] = { tags = {} },
+    ["apostle"] = { tags = {} },
+    ["elite"] = { tags = {} },
+    ["arbiter"] = { tags = {} },
+    ["archon"] = { tags = {} },
+    ["refugee"] = { tags = {} },
+    ["ancestor"] = { tags = {} },
+    ["consul"] = { tags = {} },
+    ["missionary"] = { tags = {} },
+    ["brawler"] = { tags = {} },
+    ["sojourner"] = { tags = {} },
+    ["nomad"] = { tags = {} },
+    ["escort"] = { tags = {} },
+    ["aristocrat"] = { tags = {} },
+    ["celebrant"] = { tags = {} },
+    ["renegade"] = { tags = {} },
+    ["duelist"] = { tags = {} },
+    ["exile"] = { tags = {"faith"} },
+    ["heretic"] = { tags = {"faith"} },
+    ["defender"] = { tags = {"knight"} },
+    ["brute"] = { tags = {"str"} },
+    ["seer"] = { tags = {} },
+    ["oracle"] = { tags = {} },
+    ["sheppard"] = { tags = {"faith"} },
+    ["knight-errant"] = { tags = {} },
+    ["ascetic"] = { tags = {} },
+    ["fanatic"] = { tags = {} },
+    ["partisan"] = { tags = {} },
+    ["__caller"] = { tags = {} },
+    ["bandit"] = { tags = {} },
+    ["raider"] = { tags = {} },
+    ["pirate"] = { tags = {} },
+    ["guard"] = { tags = {} },
+    ["spy"] = { tags = {} },
+    ["thief"] = { tags = {} },
+    ["rebel"] = { tags = {} },
+    ["pilgrim"] = { tags = {"faith"} },
+    ["mercenary"] = { tags = {} },
+    ["highwayman"] = { tags = {}, gender = {"male"} },
+    ["highwaywoman"] = { tags = {}, gender = {"female"} },
+    ["grave-robber"] = { tags = {} },
+    ["crusader"] = { tags = {"faith"} },
+    ["inquisitor"] = { tags = {"faith"} },
+    ["agent"] = { tags = {} },
+    ["wanderer"] = { tags = {} },
+    ["dweller"] = { tags = {} },
+    ["scavenger"] = { tags = {} },
+    ["fugitive"] = { tags = {} },
+    ["slave"] = { tags = {} },
+    ["slaver"] = { tags = {} },
+    ["witch"] = { tags = {"int"}, gender = {"female"} },
   }
 end
 
@@ -600,7 +627,7 @@ function WordRepository:relations()
   }
 end
 
-function WordRepository:relation() return randomFromKvp(self:relations()).name end
+function WordRepository:relation() return randomFromKvp(self:relations()) end
 
 function WordRepository:socialGroups()
   return {
@@ -631,37 +658,7 @@ function WordRepository:socialGroups()
   }
 end
 
-function WordRepository:socialGroup() return randomFromKvp(self:socialGroups()).name end
-
-function WordRepository:roles()
-  return {
-    ["bandit"] = { tags = {} },
-    ["raider"] = { tags = {} },
-    ["pirate"] = { tags = {} },
-    ["guard"] = { tags = {} },
-    ["spy"] = { tags = {} },
-    ["thief"] = { tags = {} },
-    ["rebel"] = { tags = {} },
-    ["pilgrim"] = { tags = {"faith"} },
-    ["mercenary"] = { tags = {} },
-    ["highwayman"] = { tags = {}, gender = {"male"} },
-    ["highwaywoman"] = { tags = {}, gender = {"female"} },
-    ["grave-robber"] = { tags = {} },
-    ["crusader"] = { tags = {"faith"} },
-    ["inquisitor"] = { tags = {"faith"} },
-    ["agent"] = { tags = {} },
-    ["wanderer"] = { tags = {} },
-    ["dweller"] = { tags = {} },
-    ["scavenger"] = { tags = {} },
-    ["fugitive"] = { tags = {} },
-    ["slave"] = { tags = {} },
-    ["slaver"] = { tags = {} },
-    ["witch"] = { tags = {"int"}, gender = {"female"} },
-  }
-end
-
-function WordRepository:role() return randomFromKvp(self:roles()).name end
-
+function WordRepository:socialGroup() return randomFromKvp(self:socialGroups()) end
 
 function WordRepository:verbs()
   return {
@@ -885,9 +882,9 @@ function WordRepository:landscapes()
   }
 end
 
-function WordRepository:landscape() return randomFromKvp(self:landscapes()).name end
+function WordRepository:landscape() return randomFromKvp(self:landscapes()) end
 
-function WordRepository:meteorologyList()
+function WordRepository:meteorologies()
   local list = {
     ["snow"] = { tags = {"cold"} },
     ["frost"] = { tags = {"cold"} },
@@ -913,17 +910,19 @@ function WordRepository:meteorologyList()
     ["mist"] = { tags = {"forest", "swamp", "mountain"} },
     ["aurora"] = { tags = {"cold"} },
     ["sky"] = { tags = {} },
-    ["squall"] = { tags = {} },
+    ["squall"] = { tags = {"sea"} },
     ["gale"] = { tags = {} },
     ["tempest"] = { tags = {} },
     ["welkin"] = { tags = {} },
     ["thunder"] = { tags = {} },
   }
-  for k,v in pairs(list) do
-    v.name = k
-  end
+  -- for k,v in pairs(list) do
+  --   v.name = k
+  -- end
   return list
 end
+
+function WordRepository:meteorology() return randomFromKvp(self:meteorologies()) end
 
 
 function WordRepository:animals()
@@ -993,8 +992,6 @@ function WordRepository:animal() return randomFromKvp(self:animals()) end
 
 -- LOCATIONS
 
-function WordRepository:meteorology() return randomFromKvp(self:meteorologyList()).name end
-
 function WordRepository:settlements()
   return {
     ["city"] = { tags = {} },
@@ -1008,7 +1005,7 @@ function WordRepository:settlements()
   }
 end
 
-function WordRepository:settlement() return randomFromKvp(self:settlements()).name end
+function WordRepository:settlement() return randomFromKvp(self:settlements()) end
 
 function WordRepository:settlementDescriptors()
   return {
@@ -1030,7 +1027,7 @@ function WordRepository:settlementDescriptors()
   }
 end
 
-function WordRepository:settlementDescriptor() return randomFromKvp(self:settlementDescriptors()).name end
+function WordRepository:settlementDescriptor() return randomFromKvp(self:settlementDescriptors()) end
 
 function WordRepository:buildings()
   return {
@@ -1071,7 +1068,7 @@ function WordRepository:buildings()
   }
 end
 
-function WordRepository:building() return randomFromKvp(self:buildings()).name end
+function WordRepository:building() return randomFromKvp(self:buildings()) end
 
 function WordRepository:buildingFeature()
   return {
@@ -1094,7 +1091,7 @@ function WordRepository:buildingFeature()
   }
 end
 
-function WordRepository:buildingFeatures() return randomFromKvp(self:buildingFeature()).name end
+function WordRepository:buildingFeatures() return randomFromKvp(self:buildingFeature()) end
 
 function WordRepository:dwellings()
   return {
@@ -1122,7 +1119,7 @@ function WordRepository:dwellings()
   }
 end
 
-function WordRepository:dwelling() return randomFromKvp(self:dwellings()).name end
+function WordRepository:dwelling() return randomFromKvp(self:dwellings()) end
 
 function WordRepository:events()
   return {
@@ -1146,7 +1143,7 @@ function WordRepository:events()
   }
 end
 
-function WordRepository:event() return randomFromKvp(self:events()).name end
+function WordRepository:event() return randomFromKvp(self:events()) end
 
 function WordRepository:unclassified()
   return {
@@ -1191,6 +1188,44 @@ end
 function WordRepository:less(word)
   return word.."less"
 end
+
+function WordRepository:compoundWord()
+  local word1 = random({
+    self:color(),
+    self:abstract(),
+    self:craft(),
+    self:substance(),
+    self:attribute(),
+    self:attire(),
+    self:equipment(),
+    self:landscape(),
+    self:meteorology(),
+    self:animal(),
+    self:settlement(),
+    self:building(),
+    self:dwelling()
+  }).name
+
+  local word2 = random({
+    self:color(),
+    self:abstract(),
+    self:craft(),
+    self:substance(),
+    self:attribute(),
+    self:attire(),
+    self:equipment(),
+    self:landscape(),
+    self:meteorology(),
+    self:animal(),
+    self:settlement(),
+    self:building(),
+    self:dwelling()
+  }).name
+  return word1..word2
+end
+
+
+
 
 -- gift
 -- reward

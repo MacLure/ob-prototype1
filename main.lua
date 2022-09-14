@@ -56,6 +56,12 @@ function love.load()
   region3Params = {tags={"desert"}, landscape="desert"}
   printRegionDetails(region3Params)
 
+  print("------------------------------")
+
+  for i=1, 20, 1 do
+    print(words:compoundWord())
+  end
+
   love.event.quit()
 
   push:resize(love.graphics.getDimensions( ))
@@ -95,7 +101,6 @@ function printRegionDetails(regionParams)
     occupyingFaction = faction1
   else
     occupyingFaction = faction2
-
   end
   local location = region:makeLocation()
   location:printDetails()

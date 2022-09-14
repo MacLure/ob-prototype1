@@ -13,11 +13,12 @@ function PersonalTitleGenerator:animals(character)
 end
 
 function PersonalTitleGenerator:adjectives(character)
-  local adjectives = {""}
+  local adjectives = {}
 
   for k,v in pairs(words:characterAdjectives()) do
     if containsFromArray(v.tags, {character:orderedTraits()[1]}) then
-      table.insert(adjectives, k)
+      v.name = k
+      table.insert(adjectives, v)
     end
   end
 
@@ -34,7 +35,8 @@ function PersonalTitleGenerator:relations(character)
 
   for k,v in pairs(words:relations()) do
     if not containsFromArray(v.tags, {excludedGender}) then
-      table.insert(relations, k)
+      v.name = k
+      table.insert(relations, v)
     end
   end
 
@@ -66,7 +68,7 @@ end
 
 function PersonalTitleGenerator:appendPlaceName(character, title)
   local pattern1 = placeNameGenerators[character.region.placeNameIndex]()
-  local pattern2 = "the "..words:less(words:substance().name).." "..words:landscape()
+  local pattern2 = "the "..words:less(words:substance().name).." "..words:landscape().name
 
   if math.random(1,2) == 1 then
     return title.." of "..pattern1
@@ -80,30 +82,30 @@ function PersonalTitleGenerator:randomName(character)
   local adjectives = self:adjectives(character)
   local relations = self:relations(character)
 
-  local pattern1 = words:color()
-  local pattern2 = random(adjectives)
+  local pattern1 = words:color().name
+  local pattern2 = random(adjectives).name
   local pattern3 = "un"..words:verb().pp
   local pattern4 = "twice-"..words:verb().pp
   local pattern5 = words:less(random(character.region:substances()).name)
-  local pattern6 = random(animals)
-  local pattern14 = random(animals).."-"..words:verb().pp
+  local pattern6 = random(animals).name
+  local pattern14 = random(animals).name.."-"..words:verb().pp
   local pattern16 = random(character.region:substances()).name.."-"..words:verb().pp
-  local pattern7 = words:color().." "..random(animals)
-  local pattern8 = random(adjectives).." "..random(animals)
-  local pattern9 = random(relations).." of "..random(character.region:substances()).name
-  local pattern10 = random(relations).." of "..words:pluralize(random(animals))
-  local pattern11 = random(character.region:substances()).name.."-"..words:simplePP(words:attribute())
-  local pattern12 = random(character.region:substances()).name.."-"..words:simplePP(words:attribute()).." "..random(animals)
-  local pattern13 = random(animals).."-"..words:verb().doer
+  local pattern7 = words:color().name.." "..random(animals).name
+  local pattern8 = random(adjectives).name.." "..random(animals).name
+  local pattern9 = random(relations).name.." of "..random(character.region:substances()).name
+  local pattern10 = random(relations).name.." of "..words:pluralize(random(animals).name)
+  local pattern11 = random(character.region:substances()).name.."-"..words:simplePP(words:attribute().name)
+  local pattern12 = random(character.region:substances()).name.."-"..words:simplePP(words:attribute().name).." "..random(animals).name
+  local pattern13 = random(animals).name.."-"..words:verb().doer
   local pattern15 = random(character.region:substances()).name.." "..words:verb().doer
-  local pattern18 = words:less(random(character.region:substances()).name).." "..random(relations)
-  local pattern19 = words:less(random(character.region:substances()).name).." "..random(animals)
-  local pattern20 = words:abstract().."-bringer"
-  local pattern21 = "bringer of "..words:abstract()
-  local pattern22 = "errant "..random(animals)
-  local pattern23 = "wandering "..random(animals)
+  local pattern18 = words:less(random(character.region:substances()).name).." "..random(relations).name
+  local pattern19 = words:less(random(character.region:substances()).name).." "..random(animals).name
+  local pattern20 = words:abstract().name.."-bringer"
+  local pattern21 = "bringer of "..words:abstract().name
+  local pattern22 = "errant "..random(animals).name
+  local pattern23 = "wandering "..random(animals).name
   local pattern24 = "font of ".."SUBSTANCE"
-  local pattern23 = random(animals).."-killer"
+  local pattern23 = random(animals).name.."-killer"
 
   local possibleNames = {
     self:nameFirst(character, pattern1),
