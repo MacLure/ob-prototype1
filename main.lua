@@ -81,7 +81,11 @@ function printRegionDetails(regionParams)
 
   print("")
   print("ANIMALS:")
-  printList(region:animals())
+  local animals = {}
+  for k, v in pairs(region:animals()) do
+    table.insert(animals, v.name)
+  end
+  printList(animals)
   print("")
   print("GOLEMS:")
   printList(region:golems())

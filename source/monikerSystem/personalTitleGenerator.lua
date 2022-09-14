@@ -15,7 +15,7 @@ end
 function PersonalTitleGenerator:adjectives(character)
   local adjectives = {}
 
-  for k,v in pairs(words:characterAdjectives()) do
+  for k,v in pairs(words.characterAdjectives) do
     if containsFromArray(v.tags, {character:orderedTraits()[1]}) then
       v.name = k
       table.insert(adjectives, v)
@@ -33,7 +33,7 @@ function PersonalTitleGenerator:relations(character)
     excludedGender = "female"
   end
 
-  for k,v in pairs(words:relations()) do
+  for k,v in pairs(words.relations) do
     if not containsFromArray(v.tags, {excludedGender}) then
       v.name = k
       table.insert(relations, v)

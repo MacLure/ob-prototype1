@@ -20,7 +20,6 @@ function FactionNameGenerator:randomName(region)
   local animals = self:animals(region)
   local landscape = self:landscape(region)
 
-  printTable(random(animals))
   local pattern1 = words:color().name.." "..words:pluralize(random(animals).name)
   local pattern2 = landscape.." "..words:pluralize(random(animals).name)
   local pattern3 = words:socialGroup().name.." of the "..random(animals).name

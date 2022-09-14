@@ -104,7 +104,7 @@ end
 function Region:animals()
   local returnList = {}
 
-  for k,v in pairs(words:animals()) do
+  for k,v in pairs(words.animals) do
     if containsFromArray(v.tags, self.tags) then
       v.name = k
       table.insert(returnList, v)
@@ -119,8 +119,9 @@ end
 function Region:substances()
   local returnList = {}
 
-  for k,v in pairs(words:substances()) do
+  for k,v in pairs(words.substances) do
     if containsFromArray(v.tags, self.tags) then
+      v.name = k
       table.insert(returnList, v)
     end
   end
