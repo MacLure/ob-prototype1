@@ -6,7 +6,7 @@ function Character:init(params)
 
   this.region = params.region
   this.stats = {
-    strength = math.random(1,10),
+    str = math.random(1,10),
     int = math.random(1,10),
     faith = math.random(1,10),
   }

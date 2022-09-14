@@ -13,7 +13,7 @@ function PersonalTitleGenerator:animals(character)
 end
 
 function PersonalTitleGenerator:adjectives(character)
-  local adjectives = {}
+  local adjectives = {""}
 
   for k,v in pairs(words:characterAdjectives()) do
     if containsFromArray(v.tags, {character:orderedTraits()[1]}) then

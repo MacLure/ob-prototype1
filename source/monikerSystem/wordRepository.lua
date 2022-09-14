@@ -69,6 +69,31 @@ function WordRepository:abstracts()
     ["sorrow"] = { tags = {} },
     ["decay"] = { tags = {} },
     ["gloom"] = { tags = {} },
+    ["lore"] = { tags = {} },
+    ["profanity"] = { tags = {} },
+    ["relic"] = { tags = {} },
+    ["destitution"] = { tags = {} },
+    ["dissolution"] = { tags = {} },
+    ["darkness"] = { tags = {} },
+    ["retribution"] = { tags = {} },
+    ["agony"] = { tags = {} },
+    ["indignation"] = { tags = {} },
+    ["oblivion"] = { tags = {} },
+    ["rejuvination"] = { tags = {} },
+    ["restoration"] = { tags = {} },
+    ["ruin"] = { tags = {} },
+    ["tranquility"] = { tags = {} },
+    ["serenity"] = { tags = {} },
+    ["radiance"] = { tags = {} },
+    ["imprisonment"] = { tags = {} },
+    ["spendor"] = { tags = {} },
+    ["terror"] = { tags = {} },
+    ["duty"] = { tags = {} },
+    ["spite"] = { tags = {} },
+    ["discord"] = { tags = {} },
+    ["aggression"] = { tags = {} },
+    ["calamity"] = { tags = {} },
+    ["woe"] = { tags = {} },
   }
   return list
 end
@@ -85,6 +110,7 @@ function WordRepository:crafts()
     ["candle"] = { tags = {} },
     ["quill"] = { tags = {} },
     ["filigree"] = { tags = {} },
+    ["porcelain"] = { tags = {} },
   }
 end
 
@@ -95,6 +121,7 @@ function WordRepository:substances()
   local list = {
     ["moss"] = { tags = {"forest"}, golem=true},
     ["fern"] = { tags = {"forest"} },
+    ["vine"] = { tags = {"forest"} },
     ["brush"] = { tags = {"forest"} },
     ["tree"] = { tags = {"forest"} },
     ["root"] = { tags = {"forest"} },
@@ -163,6 +190,9 @@ function WordRepository:substances()
     ["opal"] = { tags = {} },
     ["marble"] = { tags = {} },
     ["nectar"] = { tags = {} },
+    ["rust"] = { tags = {} },
+    ["herb"] = { tags = {} },
+    ["seed"] = { tags = {} },
   }
 
   for k,v in pairs(list) do
@@ -249,6 +279,45 @@ function WordRepository:characterAdjectives()
     ["pariah"] = { tags = {} },
     ["penitent"] = { tags = {} },
     ["volatile"] = { tags = {} },
+    ["fell"] = { tags = {} },
+    ["pristine"] = { tags = {} },
+    ["profane"] = { tags = {} },
+    ["profound"] = { tags = {} },
+    ["ignorant"] = { tags = {} },
+    ["pure"] = { tags = {} },
+    ["putrid"] = { tags = {} },
+    ["radiant"] = { tags = {} },
+    ["righteous"] = { tags = {} },
+    ["watchful"] = { tags = {} },
+    ["worthy"] = { tags = {} },
+    ["regal"] = { tags = {} },
+    ["resilient"] = { tags = {} },
+    ["restless"] = { tags = {} },
+    ["weary"] = { tags = {} },
+    ["selfish"] = { tags = {} },
+    ["selfless"] = { tags = {} },
+    ["paragon of ____"] = { tags = {} },
+    ["belevolent"] = { tags = {} },
+    ["malignant"] = { tags = {} },
+    ["grotesque"] = { tags = {} },
+    ["monstrous"] = { tags = {} },
+    ["stern"] = { tags = {} },
+    ["sublime"] = { tags = {} },
+    ["swift"] = { tags = {} },
+    ["tainted"] = { tags = {} },
+    ["luminous"] = { tags = {} },
+    ["tempered"] = { tags = {} },
+    ["exalted"] = { tags = {} },
+    ["trustworthy"] = { tags = {} },
+    ["undead"] = { tags = {} },
+    ["unflinching"] = { tags = {} },
+    ["unsettled"] = { tags = {} },
+    ["fallen"] = { tags = {} },
+    ["harbinger of ___"] = { tags = {} },
+    ["venerable"] = { tags = {} },
+    ["voracious"] = { tags = {} },
+    ["implacable"] = { tags = {} },
+    ["wizened"] = { tags = {} },
   }
 end
 
@@ -457,6 +526,38 @@ function WordRepository:titles()
     ["pontiff"] = { tags = {} },
     ["missionary"] = { tags = {} },
     ["wayfarer"] = { tags = {} },
+    ["augur"] = { tags = {} },
+    ["peasant"] = { tags = {} },
+    ["ranger"] = { tags = {} },
+    ["hermit"] = { tags = {} },
+    ["recluse"] = { tags = {} },
+    ["elder"] = { tags = {} },
+    ["herbalist"] = { tags = {} },
+    ["custodian"] = { tags = {} },
+    ["outcast"] = { tags = {} },
+    ["skald"] = { tags = {} },
+    ["sorceror"] = { tags = {} },
+    ["asassin"] = { tags = {} },
+    ["smuggler"] = { tags = {} },
+    ["warlock"] = { tags = {} },
+    ["witch"] = { tags = {} },
+    ["foot soldier"] = { tags = {} },
+    ["__ catcher"] = { tags = {} },
+    ["mage"] = { tags = {} },
+    ["constable"] = { tags = {} },
+    ["farmer"] = { tags = {} },
+    ["__caller"] = { tags = {} },
+    ["wizard"] = { tags = {} },
+    ["__peddlar"] = { tags = {} },
+    ["philosopher"] = { tags = {} },
+    ["__dancer"] = { tags = {} },
+    ["adventurer"] = { tags = {} },
+    ["officiant"] = { tags = {} },
+    ["mariner"] = { tags = {} },
+    ["headmaster"] = { tags = {} },
+    ["usher"] = { tags = {} },
+    ["borderguard"] = { tags = {} },
+    ["__robber"] = { tags = {} },
   }
 end
 
@@ -493,6 +594,9 @@ function WordRepository:relations()
     ["attendant"] = { tags = {} },
     ["companion"] = { tags = {} },
     ["offspring"] = { tags = {} },
+    ["attendant"] = { tags = {} },
+    ["scion"] = { tags = {} },
+    ["mentor"] = { tags = {} },
   }
 end
 
@@ -521,6 +625,9 @@ function WordRepository:socialGroups()
     ["company"] = { tags = {} },
     ["patrol"] = { tags = {} },
     ["battalion"] = { tags = {} },
+    ["faithful"] = { tags = {} },
+    ["uprising"] = { tags = {} },
+    ["conclave"] = { tags = {} },
   }
 end
 
@@ -557,6 +664,7 @@ function WordRepository:role() return randomFromKvp(self:roles()).name end
 
 
 function WordRepository:verbs()
+  -- give verbs a name key so they can be searchable
   return {
     { sp = "slay", pp = "slain", doer = "slayer", tags={} },
     { sp = "seek", pp = "sought", doer = "seeker", tags={} },
@@ -676,7 +784,17 @@ function WordRepository:landscapes()
     ["cloud forest"] = { tags = {} },
     ["meadow"] = { tags = {} },
     ["grassland"] = { tags = {} },
-    ["path"] = { tags = {} },
+    ["wastes"] = { tags = {} },
+    ["wilderness"] = { tags = {} },
+    ["shoal"] = { tags = {} },
+    ["rapids"] = { tags = {} },
+    ["falls"] = { tags = {} },
+    ["tundra"] = { tags = {} },
+    ["depths"] = { tags = {} },
+    ["__lands"] = { tags = {} },
+    ["__realms"] = { tags = {} },
+    ["__scape"] = { tags = {} },
+    ["__territory"] = { tags = {} },
   }
 end
 
@@ -707,6 +825,12 @@ function WordRepository:meteorologyList()
     ["fog"] = { tags = {"forest", "swamp"} },
     ["mist"] = { tags = {"forest", "swamp", "mountain"} },
     ["aurora"] = { tags = {"cold"} },
+    ["sky"] = { tags = {} },
+    ["squall"] = { tags = {} },
+    ["gale"] = { tags = {} },
+    ["tempest"] = { tags = {} },
+    ["welkin"] = { tags = {} },
+    ["thunder"] = { tags = {} },
   }
   for k,v in pairs(list) do
     v.name = k
@@ -772,6 +896,10 @@ function WordRepository:animals()
     ["antelope"] = { tags = {}, attributes={"plains"} },
     ["drake"] = { tags = {}, attributes={} },
     ["wyvern"] = { tags = {}, attributes={} },
+    ["lynx"] = { tags = {}, attributes={} },
+    ["loon"] = { tags = {}, attributes={} },
+    ["songbird"] = { tags = {}, attributes={} },
+    ["crane"] = { tags = {}, attributes={} },
   }
 end
 
@@ -812,6 +940,7 @@ function WordRepository:settlementDescriptors()
     ["boreal"] = { tags = {} },
     ["primordeal"] = { tags = {} },
     ["overgrown"] = { tags = {} },
+    ["rustic"] = { tags = {} },
   }
 end
 
@@ -852,6 +981,7 @@ function WordRepository:buildings()
     ["fairgrounds"] = { tags = {} },
     ["lookout"] = { tags = {} },
     ["estate"] = { tags = {} },
+    ["hold"] = { tags = {} },
   }
 end
 
@@ -902,6 +1032,7 @@ function WordRepository:dwellings()
     ["___ing grounds"] = { tags = {} },
     ["homestead"] = { tags = {} },
     ["pit"] = { tags = {} },
+    ["cairn"] = { tags = {} },
   }
 end
 
@@ -974,3 +1105,137 @@ end
 function WordRepository:less(word)
   return word.."less"
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+gift
+reward
+bounty
+boon
+favour
+offering
+spoils
+
+endeavour
+
+lullaby
+requiem
+hymn
+rite
+sacrament
+liturgy
+incantation
+
+
+presence
+prophecy
+promise
+commission
+summons
+decree
+invocation
+tarrif
+
+
+
+
+
+link ("-link")
+
+pike
+greatsword
+greatshield
+
+robe
+cloak
+net
+helm
+
+
+
+balm
+potion
+poultice
+
+
+curtain
+throne
+treasury
+
+
+
+totem
+sight
+omen
+shard
+
+
+
+
+re__
+
+god-
+still-
+
+
+
+
+prowl
+purge
+restrain
+reclaim
+relent
+renounce
+revere
+revoke
+mend
+awaken
+safeguard
+scheme
+shatter
+slaughter
+smite
+smolder
+smuggle
+weave
+stitch
+quell
+spurn
+invoke
+subjugate
+exalt
+nurture
+vindicate
+tempt
+torment
+arrogant
+make
+vanquish
+abandon
+worship
+quell
+persecute
+
+
+
