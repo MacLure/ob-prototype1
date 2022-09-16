@@ -34,12 +34,17 @@ function Location:init(params)
   --  10: 
 
   this.placeName = placeNameGenerators[this.region.placeNameIndex]()
+  if this.settlementType == "wild" then
+    this.fullName = this:makeWildLocationName()
+  else
+    this.fullName = this:makeSettlementName()
+  end
 
   return this
 end
 
 function Location:printDetails()
-  print(self:makeSettlementName())
+  print(self.fullName)
 end
 
 function Location:makeSettlementName()
@@ -47,6 +52,16 @@ function Location:makeSettlementName()
     {
       name = self.placeName,
       settlementType = self.settlementType,
+      region = self.region
+    }
+  )
+end
+
+function Location:makeWildLocationName()
+  return placeNameGenerator:wildLocationName(
+    {
+      name = self.placeName,
+      settlementType = "wild",
       region = self.region
     }
   )

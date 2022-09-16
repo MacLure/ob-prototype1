@@ -8,7 +8,7 @@ function PersonalTitleGenerator:init()
 end
 
 function PersonalTitleGenerator:animals(character)
-  local regionAnimals = character.region:animals()
+  local regionAnimals = character.region.animals
   return regionAnimals
 end
 
@@ -90,20 +90,20 @@ function PersonalTitleGenerator:randomName(character)
   local pattern25 = "god-"..words:verb().pp
   local pattern26 = "still-"..words:verb().pp
 
-  local pattern5 = words:less(random(character.region:substances()).name)
+  local pattern5 = words:less(random(character.region.substances).name)
   local pattern6 = random(animals).name
   local pattern14 = random(animals).name.."-"..words:verb().pp
-  local pattern16 = random(character.region:substances()).name.."-"..words:verb().pp
+  local pattern16 = random(character.region.substances).name.."-"..words:verb().pp
   local pattern7 = words:color().name.." "..random(animals).name
   local pattern8 = random(adjectives).name.." "..random(animals).name
-  local pattern9 = random(relations).name.." of "..random(character.region:substances()).name
+  local pattern9 = random(relations).name.." of "..random(character.region.substances).name
   local pattern10 = random(relations).name.." of "..words:pluralize(random(animals).name)
-  local pattern11 = random(character.region:substances()).name.."-"..words:simplePP(words:attribute().name)
-  local pattern12 = random(character.region:substances()).name.."-"..words:simplePP(words:attribute().name).." "..random(animals).name
+  local pattern11 = random(character.region.substances).name.."-"..words:simplePP(words:attribute().name)
+  local pattern12 = random(character.region.substances).name.."-"..words:simplePP(words:attribute().name).." "..random(animals).name
   local pattern13 = random(animals).name.."-"..words:verb().doer
-  local pattern15 = random(character.region:substances()).name.." "..words:verb().doer
-  local pattern18 = words:less(random(character.region:substances()).name).." "..random(relations).name
-  local pattern19 = words:less(random(character.region:substances()).name).." "..random(animals).name
+  local pattern15 = random(character.region.substances).name.." "..words:verb().doer
+  local pattern18 = words:less(random(character.region.substances).name).." "..random(relations).name
+  local pattern19 = words:less(random(character.region.substances).name).." "..random(animals).name
   local pattern20 = words:abstract().name.."-bringer"
   local pattern21 = "bringer of "..words:abstract().name
   local pattern22 = "errant "..random(animals).name

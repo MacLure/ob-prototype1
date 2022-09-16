@@ -34,12 +34,12 @@ function PlaceNameGenerator:randomName(region)
   local pattern2 = words:building().name
   local pattern3 = words:verb().pp.." "..words:settlement().name
   local pattern4 = words:verb().pp.." "..words:building().name
-  local pattern5 = random(region:substances()).name.." "..words:building().name
-  local pattern6 = random(region:substances()).name.." "..words:settlement().name
+  local pattern5 = random(region.substances).name.." "..words:building().name
+  local pattern6 = random(region.substances).name.." "..words:settlement().name
   local pattern7 = words:color().name.." "..words:building().name
   local pattern8 = words:color().name.." "..words:settlement().name
-  local pattern9 = words:pluralize(random(region:animals()).name)
-  local pattern10 = words:pluralize(random(region:substances()).name)
+  local pattern9 = words:pluralize(random(region.animals).name)
+  local pattern10 = words:pluralize(random(region.substances).name)
 
   local possibleNames = {
     self:simpleDescriptor(pattern1, region),
@@ -70,42 +70,37 @@ function PlaceNameGenerator:settlementName(params)
     end
   end
 
-
   local possibleNames = {
     -- name..", the "..words:verb().pp.." "..settlementType,
-    -- name..", the "..random(region:substances()).name.." "..settlementType,
+    -- name..", the "..random(region.substances).name.." "..settlementType,
     -- name..", the "..words:color().name.." "..settlementType,
-    -- name..", the "..words:pluralize(random(region:animals()).name).." "..settlementType,
-    -- name..", the "..words:pluralize(random(region:substances()).name).." "..settlementType,
+    -- name..", the "..words:pluralize(random(region.animals).name).." "..settlementType,
+    -- name..", the "..words:pluralize(random(region.substances).name).." "..settlementType,
 
-    -- name..", "..settlementType.." of "..words:pluralize(random(region:animals()).name),
-    -- name..", "..settlementType.." of "..words:pluralize(random(region:substances()).name),
-    -- name..", "..settlementType.." of "..words:verb().pp.." "..words:pluralize(random(region:animals()).name),
-    -- name..", "..settlementType.." of "..words:verb().pp.." "..words:pluralize(random(region:substances()).name),
+    -- name..", "..settlementType.." of "..words:pluralize(random(region.animals).name),
+    -- name..", "..settlementType.." of "..words:pluralize(random(region.substances).name),
+    -- name..", "..settlementType.." of "..words:verb().pp.." "..words:pluralize(random(region:region.animals).name),
+    -- name..", "..settlementType.." of "..words:verb().pp.." "..words:pluralize(random(region.substances).name),
 
-    -- name..", "..words:verb().pp.." "..settlementType.." of "..words:pluralize(random(region:animals()).name),
+    -- name..", "..words:verb().pp.." "..settlementType.." of "..words:pluralize(random(region.animals).name),
 
     name..", "..random(descriptors).name.." "..settlementType,
     name..", "..region.landscape.." "..settlementType,
-
-    name..", "..random(descriptors).name.." "..settlementType.." of "..random(region:substances()).name,
-    name..", "..random(descriptors).name.." "..settlementType.." of "..words:pluralize(random(region:animals()).name),
-
-    name..", "..random(descriptors).name.." "..settlementType.." of "..words:pluralize(random(region:animals()).name),
-
+    name..", "..random(descriptors).name.." "..settlementType.." of "..random(region.substances).name,
+    name..", "..random(descriptors).name.." "..settlementType.." of "..words:pluralize(random(region.animals).name),
+    name..", "..random(descriptors).name.." "..settlementType.." of "..words:pluralize(random(region.animals).name),
     name..", "..settlementType.." of "..words:pluralize(WordRepository:position().name),
   }
 
   return random(possibleNames)
 end
 
-
 function PlaceNameGenerator:wildLocationName(params)
   local region = params.region
   local name = params.name
 
   local possibleNames = {
-    name..", "..name.." "..world:wildLocationName().name,
+    name.." "..words:wildLocation().name,
   }
 
   return random(possibleNames)

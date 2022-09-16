@@ -7,6 +7,7 @@ function Region:init(params)
   this.tags = params.tags
   this.landscape = params.landscape
 
+  -- MODIFIERS
   this.topology = math.random(1,10)
   this.temperature = math.random(1,10)
   this.vegetation = math.random(1,10)
@@ -20,6 +21,7 @@ function Region:init(params)
   this.prosperity = math.random(1,10)
   this.populationStatement = ""
 
+  -- NAMING
   this.placeNameIndex = math.random(1, #placeNameGenerators)
   this.placeName = placeNameGenerators[this.placeNameIndex]()
 
@@ -49,6 +51,32 @@ function Region:init(params)
     end
   end
 
+  this.animals = {}
+
+  for k,v in pairs(words.animals) do
+    if containsFromArray(v.tags, this.tags) then
+      v.name = k
+      table.insert(this.animals, v)
+    end
+  end
+
+  this.substances = {}
+  for k,v in pairs(words.substances) do
+    if containsFromArray(v.tags, this.tags) then
+      v.name = k
+      table.insert(this.substances, v)
+    end
+  end
+
+  this.golems = {}
+  for k,v in pairs(this.substances) do
+    if v.golem == true then
+      table.insert(this.golems, v.name.." golem")
+    end
+  end
+
+  -- LOCATIONS
+
   if this.population <= 4 then
     this.wildLocations = 4
     this.villages = 5
@@ -69,102 +97,28 @@ function Region:init(params)
     this.megacities = 1
   end
 
-  local villages = {}
-  local towns = {}
-  local cities = {}
-  local megacities = {}
-  local wildLocations = {}
+  -- FACTIONS
+  this.factions = {
+    this:makeFaction(),
+    this:makeFaction()
+  }
 
+  -- CHARACTERS
+  this.characters = {
+    this:makeCharacter(),
+    this:makeCharacter()
+  }
+
+  -- UNDECIDED
   -- values: learning, light, dark, fire, industry
-
--- 1-1 - unpopulated
--- 1-5 - fronteir region
--- 1-10 hidden kingdom
-
--- 5-1 - unclaimed lands
--- 5-5 - lesser province
--- 5-10 independent kingdom
-
--- 10-1 - depopulated region
--- 10-5 - depopulated region
--- 10-10 - capitol
-
--- 1,1,-10 unpopulated, unconnected, bad fortunes - untouched foul lands
--- 1,1,0 unpopulated, unconnected, neutral fortunes - wild lands
--- 1,1,10 unpopulated, unconnected, rich - untouched sacred lands
--- 1,5,-10 unpopulated, connected, bad fortunes - unpopulated/deserted province
--- 1,5,0 unpopulated, connected, neutral fortunes - 
--- 1,5,10 unpopulated, connected, rich -
--- 1,10,-10 unpopulated, very connected, bad fortunes - unpopulated/deserted heartland
--- 1,10,0 unpopulated, very connected, neutral fortunes - abandoned province
--- 1,10,10 unpopulated, very connected, rich - 
-
--- 5,1,-10 populated, unconnected, bad fortunes
--- 5,1,0 populated, unconnected, neutral fortunes - isolated kingdom
--- 5,1,10 populated, unconnected, rich - wealthy isolated kingdom
--- 5,5,-10 populated, connected, bad fortunes - plague/war/famine-stricken
--- 5,5,0 populated, connected, neutral fortunes - province
--- 5,5,10 populated, connected, rich - rich province
--- 5,10,-10 populated, very connected, bad fortunes - plague/war/famine-stricken
--- 5,10,0 populated, very connected, neutral fortunes - heartland
--- 5,10,10 populated, very connected, rich - rich heartland
-
--- 10,1,-10 highly populated, unconnected, bad fortunes
--- 10,1,0 highly populated, unconnected, neutral fortunes
--- 10,1,10 highly populated, unconnected, rich
--- 10,5,-10 highly populated, connected, bad fortunes - plague/war/famine-stricken
--- 10,5,0 highly populated, connected, neutral fortunes
--- 10,5,10 highly populated, connected, rich
--- 10,10,-10 highly populated, very connected, bad fortunes - plague/war/famine-stricken
--- 10,10,0 highly populated, very connected, neutral fortunes
--- 10,10,10 highly populated, very connected, rich - 
-
-
-
-
-
+  -- stories:
+  -- entrenched faction vs. internal challenger faction
+  --  rebellion/insurrection/uprising/movement/undead
+  --  invading faction
+  --  raiders/other culture
+  -- two external factions competing for hegemony
 
   return this
-end
-
-function Region:animals()
-  local returnList = {}
-
-  for k,v in pairs(words.animals) do
-    if containsFromArray(v.tags, self.tags) then
-      v.name = k
-      table.insert(returnList, v)
-    -- else
-    --   table.insert(returnList, self:prependLandscape(k))
-    end
-  end
-
-  return returnList
-end
-
-function Region:substances()
-  local returnList = {}
-
-  for k,v in pairs(words.substances) do
-    if containsFromArray(v.tags, self.tags) then
-      v.name = k
-      table.insert(returnList, v)
-    end
-  end
-
-  return returnList
-end
-
-function Region:golems()
-  local returnList = {}
-
-  for k,v in pairs(self:substances()) do
-    if v.golem == true then
-      table.insert(returnList, v.name.." golem")
-    end
-  end
-
-  return returnList
 end
 
 function Region:prependLandscape(string)
@@ -177,15 +131,13 @@ function Region:makeCharacter()
   return character
 end
 
-
 function Region:makeFaction()
   local faction = Faction:init({region= self})
 
   return faction
 end
 
-
-function Region:makeLocation(settlementTypeName)
+function Region:makeSettlement(settlementTypeName)
   settlementType = words.settlements[settlementTypeName]
   settlementType.name = settlementTypeName
 
@@ -197,12 +149,11 @@ function Region:makeLocation(settlementTypeName)
   )
 end
 
-
 function Region:makeWildLocation()
   return Location:init(
     {
       region = self,
-      settlementType = settlementType
+      settlementType = "wild"
     }
   )
 end
@@ -230,19 +181,19 @@ function Region:printLocations()
     occupyingFaction = faction2
   end
   for i=1, self.villages, 1 do
-    local location = self:makeLocation("village")
+    local location = self:makeSettlement("village")
     location:printDetails()
   end
   for i=1, self.towns, 1 do
-    local location = self:makeLocation("town")
+    local location = self:makeSettlement("town")
     location:printDetails()
   end
   for i=1, self.cities, 1 do
-    local location = self:makeLocation("city")
+    local location = self:makeSettlement("city")
     location:printDetails()
   end
   for i=1, self.megacities, 1 do
-    local location = self:makeLocation("city")
+    local location = self:makeSettlement("city")
     location:printDetails()
   end
   for i=1, self.wildLocations, 1 do
@@ -251,4 +202,3 @@ function Region:printLocations()
   end
     -- print("occupied by ".. occupyingFaction.name)
 end
-

@@ -45,22 +45,27 @@ function printRegionDetails(regionParams)
   print("")
   print("ANIMALS:")
   local animals = {}
-  for k, v in pairs(region:animals()) do
+  for k, v in pairs(region.animals) do
     table.insert(animals, v.name)
   end
   printList(animals)
   print("")
   print("GOLEMS:")
-  printList(region:golems())
+  printList(region.golems)
   print("")
   print("FACTIONS:")
-  local faction1 = region:makeFaction()
-  faction1:printDetails()
-  print("in conflict with")
-  local faction2 = region:makeFaction()
-  faction2:printDetails()
+  for k, faction in pairs(region.factions) do
+    print(faction.name)
+  end
+  -- local faction1 = region:makeFaction()
+  -- faction1:printDetails()
+  -- local faction2 = region:makeFaction()
+  -- faction2:printDetails()
   print("")
-  region:printCharacters()
+  for k, character in pairs(region.characters) do
+    print(character.name)
+  end
+  -- region:printCharacters()
   print("")
   region:printLocations()
   print("")
@@ -90,14 +95,6 @@ end
 
 function love.draw()
 
-end
-
-function wordNames(list)
-  local names = {}
-  for k,v in pairs(list) do
-    table.insert(names, v.name)
-  end
-  return names
 end
 
 function humanName(gender)

@@ -7,7 +7,7 @@ function FactionNameGenerator:init()
 end
 
 function FactionNameGenerator:animals(region)
-  local regionAnimals = region:animals()
+  local regionAnimals = region.animals
   return regionAnimals
 end
 

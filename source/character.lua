@@ -21,12 +21,8 @@ function Character:init(params)
 end
 
 function Character:printDetails()
-  print(self.name)
-  print(self.gender.." "..self.className)
-
-  printTable(self.stats)
-  -- printTable(self:orderedTraits())
-  -- print(self:orderedTraits()[1], self.stats[self:orderedTraits()[1]])
+  print(self.name..", "..self.gender.." "..self.className)
+  -- printTable(self.stats)
 end
 
 function Character:orderedTraits()
@@ -47,19 +43,8 @@ function Character:class()
     ["faith"] = "cleric",
   }
 
-
-  -- knight: str > 7, int > 4
-  -- brute: str > 7, int < 5
-  -- scholar: int > 5 < 7
-  -- mage int > 7
-  -- hunter:
-  -- cleric: faith 
-
   return(classes[self:orderedTraits()[1]])
 end
-
-
-
 
 function sortByValue(a,b)
   return a > b
