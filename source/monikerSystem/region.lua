@@ -49,6 +49,32 @@ function Region:init(params)
     end
   end
 
+  if this.population <= 4 then
+    this.wildLocations = 4
+    this.villages = 5
+    this.towns = 1
+    this.cities = 0
+    this.megacities = 0
+  elseif this.population <= 8 then
+    this.wildLocations = 4
+    this.villages = 3
+    this.towns = 5
+    this.cities = 2
+    this.megacities = 0
+  else
+    this.wildLocations = 4
+    this.villages = 2
+    this.towns = 5
+    this.cities = 2
+    this.megacities = 1
+  end
+
+  local villages = {}
+  local towns = {}
+  local cities = {}
+  local megacities = {}
+  local wildLocations = {}
+
   -- values: learning, light, dark, fire, industry
 
 -- 1-1 - unpopulated
@@ -159,8 +185,70 @@ function Region:makeFaction()
 end
 
 
-function Region:makeLocation()
-  local location = Location:init({region= self})
+function Region:makeLocation(settlementTypeName)
+  settlementType = words.settlements[settlementTypeName]
+  settlementType.name = settlementTypeName
 
-  return location
+  return Location:init(
+    {
+      region = self,
+      settlementType = settlementType
+    }
+  )
 end
+
+
+function Region:makeWildLocation()
+  return Location:init(
+    {
+      region = self,
+      settlementType = settlementType
+    }
+  )
+end
+
+function Region:printHeadline()
+  print("-----------------------------------------------------------------")
+  print(self.placeName..", "..self.regionStatement.." in the "..self.landscape)
+  print("")
+  print("integratedness: "..self.integratedness, "population: "..self.population, "prosperity: "..self.prosperity)
+  print("topology: "..self.topology, "temperature: "..self.temperature, "vegetation: "..self.vegetation)
+  print("-----------------------------------------------------------------")
+end
+
+function Region:printCharacters()
+  print("CHARACTERS:")
+  local character = self:makeCharacter()
+  character:printDetails()
+end
+
+function Region:printLocations()
+  print("LOCATIONS:")
+  if math.random(1,2) == 1 then
+    occupyingFaction = faction1
+  else
+    occupyingFaction = faction2
+  end
+  for i=1, self.villages, 1 do
+    local location = self:makeLocation("village")
+    location:printDetails()
+  end
+  for i=1, self.towns, 1 do
+    local location = self:makeLocation("town")
+    location:printDetails()
+  end
+  for i=1, self.cities, 1 do
+    local location = self:makeLocation("city")
+    location:printDetails()
+  end
+  for i=1, self.megacities, 1 do
+    local location = self:makeLocation("city")
+    location:printDetails()
+  end
+  for i=1, self.wildLocations, 1 do
+    local location = self:makeWildLocation()
+    location:printDetails()
+  end
+    -- print("occupied by ".. occupyingFaction.name)
+end
+

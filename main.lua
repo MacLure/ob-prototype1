@@ -4,10 +4,6 @@ function love.load()
   require 'source/startup/resources'
   math.randomseed(os.time())
   love.keyboard.keysPressed = {}
-  debug = false
-  camera = Camera:init()
-
-  stack = StateStack:init()
 
   words = WordRepository:init()
     
@@ -25,60 +21,27 @@ function love.load()
     gNames.randomRussianPlace
   }
 
-  function humanName(gender)
-    if gender == "male" then
-      return random(gNames.humanMaleNames)
-    else
-      return random(gNames.humanFemaleNames)
-    end
-  end
-
-  function printList(list)
-    local output = ""
-    for i, item in ipairs(list) do
-      if #output < 1 then
-        output = item
-      else
-        output = output..", "..item
-      end
-    end
-    print(output)
-  end
-  
   personalNameGenerator = PersonalTitleGenerator:init()
   placeNameGenerator = PlaceNameGenerator:init()
   factionNameGenerator = FactionNameGenerator:init()
 
-  regionParams = {tags={"sea"}, landscape="sea"}
-  printRegionDetails(regionParams)
-  region2Params = {tags={"forest"}, landscape="forest"}
-  printRegionDetails(region2Params)
-  region3Params = {tags={"desert"}, landscape="desert"}
-  printRegionDetails(region3Params)
+  local regions = {
+    {tags={"sea"}, landscape="sea"},
+    {tags={"forest"}, landscape="forest"},
+    {tags={"desert"}, landscape="desert"}
+  }
 
-  print("------------------------------")
-
-  for i=1, 20, 1 do
-    print(words:compoundWord())
+  for i, region in pairs(regions) do
+    printRegionDetails(region)
   end
 
   love.event.quit()
-
-  push:resize(love.graphics.getDimensions( ))
-
-  stack:push(WorldMapState:init())
 end
 
 function printRegionDetails(regionParams)
   local region = Region:init(regionParams)
 
-  print("-----------------------------------------------------------------")
-  print("------------ "..region.placeName..", "..region.regionStatement.." in the "..region.landscape.." --------------")
-  print("-----------------------------------------------------------------")
-
-  print("integratedness: "..region.integratedness, "population: "..region.population, "prosperity: "..region.prosperity)
-  print("topology: "..region.topology, "temperature: "..region.temperature, "vegetation: "..region.vegetation)
-
+  region:printHeadline()
   print("")
   print("ANIMALS:")
   local animals = {}
@@ -97,18 +60,9 @@ function printRegionDetails(regionParams)
   local faction2 = region:makeFaction()
   faction2:printDetails()
   print("")
-  print("CHARACTERS:")
-  local character = region:makeCharacter()
-  character:printDetails()
-  print("LOCATIONS:")
-  if math.random(1,2) == 1 then
-    occupyingFaction = faction1
-  else
-    occupyingFaction = faction2
-  end
-  local location = region:makeLocation()
-  location:printDetails()
-  print("occupied by ".. occupyingFaction.name)
+  region:printCharacters()
+  print("")
+  region:printLocations()
   print("")
 end
 
@@ -125,7 +79,7 @@ function love.keyboard.wasPressed(key)
 end
 
 function love.update(dt)
-  stack:update(dt)
+  -- stack:update(dt)
 
   if love.keyboard.wasPressed('escape') then   
     love.event.quit()
@@ -135,11 +89,7 @@ function love.update(dt)
 end
 
 function love.draw()
-  push:apply('start')
 
-  stack:render(dt)
-
-  push:apply('end')
 end
 
 function wordNames(list)
@@ -148,4 +98,24 @@ function wordNames(list)
     table.insert(names, v.name)
   end
   return names
+end
+
+function humanName(gender)
+  if gender == "male" then
+    return random(gNames.humanMaleNames)
+  else
+    return random(gNames.humanFemaleNames)
+  end
+end
+
+function printList(list)
+  local output = ""
+  for i, item in ipairs(list) do
+    if #output < 1 then
+      output = item
+    else
+      output = output..", "..item
+    end
+  end
+  print(output)
 end

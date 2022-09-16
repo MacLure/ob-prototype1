@@ -86,6 +86,10 @@ function PersonalTitleGenerator:randomName(character)
   local pattern2 = random(adjectives).name
   local pattern3 = "un"..words:verb().pp
   local pattern4 = "twice-"..words:verb().pp
+  local pattern24 = "re-"..words:verb().pp
+  local pattern25 = "god-"..words:verb().pp
+  local pattern26 = "still-"..words:verb().pp
+
   local pattern5 = words:less(random(character.region:substances()).name)
   local pattern6 = random(animals).name
   local pattern14 = random(animals).name.."-"..words:verb().pp
@@ -116,6 +120,10 @@ function PersonalTitleGenerator:randomName(character)
     self:nameFirst(character, pattern6),
     self:nameFirst(character, pattern14),
     self:nameFirst(character, pattern16),
+    self:nameFirst(character, pattern24),
+    self:nameFirst(character, pattern25),
+    self:nameFirst(character, pattern26),
+
     self:concatenateTitle( character, pattern7 ),
     self:concatenateTitle( character, pattern8 ),
     self:concatenateTitle( character, pattern9 ),

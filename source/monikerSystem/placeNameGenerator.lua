@@ -1,5 +1,11 @@
 PlaceNameGenerator = Class{}
 
+-- Realm Name
+-- Region Name
+-- Settlement Name
+-- Dwelling Name
+-- Geographical area name
+
 function PlaceNameGenerator:init()
   local this = {}
 
@@ -49,3 +55,59 @@ function PlaceNameGenerator:randomName(region)
   }
   return random(possibleNames)
 end
+
+
+function PlaceNameGenerator:settlementName(params)
+  local region = params.region
+  local settlementType = params.settlementType.name
+  local name = params.name
+
+  local descriptors = {}
+  for k,v in pairs(words.settlementDescriptions) do
+    if containsFromArray(v.tags, {settlementType}) then
+      v.name = k
+      table.insert(descriptors, v)
+    end
+  end
+
+
+  local possibleNames = {
+    -- name..", the "..words:verb().pp.." "..settlementType,
+    -- name..", the "..random(region:substances()).name.." "..settlementType,
+    -- name..", the "..words:color().name.." "..settlementType,
+    -- name..", the "..words:pluralize(random(region:animals()).name).." "..settlementType,
+    -- name..", the "..words:pluralize(random(region:substances()).name).." "..settlementType,
+
+    -- name..", "..settlementType.." of "..words:pluralize(random(region:animals()).name),
+    -- name..", "..settlementType.." of "..words:pluralize(random(region:substances()).name),
+    -- name..", "..settlementType.." of "..words:verb().pp.." "..words:pluralize(random(region:animals()).name),
+    -- name..", "..settlementType.." of "..words:verb().pp.." "..words:pluralize(random(region:substances()).name),
+
+    -- name..", "..words:verb().pp.." "..settlementType.." of "..words:pluralize(random(region:animals()).name),
+
+    name..", "..random(descriptors).name.." "..settlementType,
+    name..", "..region.landscape.." "..settlementType,
+
+    name..", "..random(descriptors).name.." "..settlementType.." of "..random(region:substances()).name,
+    name..", "..random(descriptors).name.." "..settlementType.." of "..words:pluralize(random(region:animals()).name),
+
+    name..", "..random(descriptors).name.." "..settlementType.." of "..words:pluralize(random(region:animals()).name),
+
+    name..", "..settlementType.." of "..words:pluralize(WordRepository:position().name),
+  }
+
+  return random(possibleNames)
+end
+
+
+function PlaceNameGenerator:wildLocationName(params)
+  local region = params.region
+  local name = params.name
+
+  local possibleNames = {
+    name..", "..name.." "..world:wildLocationName().name,
+  }
+
+  return random(possibleNames)
+end
+
