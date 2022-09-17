@@ -100,8 +100,8 @@ function PersonalTitleGenerator:randomName(character)
   local pattern10 = random(relations).name.." of "..words:pluralize(random(animals).name)
   local pattern11 = random(character.region.substances).name.."-"..words:simplePP(words:attribute().name)
   local pattern12 = random(character.region.substances).name.."-"..words:simplePP(words:attribute().name).." "..random(animals).name
-  local pattern13 = random(animals).name.."-"..words:verb().doer
-  local pattern15 = random(character.region.substances).name.." "..words:verb().doer
+  local pattern13 = random(animals).name.."-"..words:doer(words:verb())
+  local pattern15 = random(character.region.substances).name.." "..words:doer(words:verb())
   local pattern18 = words:less(random(character.region.substances).name).." "..random(relations).name
   local pattern19 = words:less(random(character.region.substances).name).." "..random(animals).name
   local pattern20 = words:abstract().name.."-bringer"

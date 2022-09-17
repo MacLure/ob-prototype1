@@ -169,8 +169,9 @@ end
 
 function Region:printCharacters()
   print("CHARACTERS:")
-  local character = self:makeCharacter()
-  character:printDetails()
+  for k, character in pairs(self.characters) do
+    character:printDetails()
+  end
 end
 
 function Region:printLocations()

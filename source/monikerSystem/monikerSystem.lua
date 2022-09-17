@@ -30,13 +30,13 @@ function MonikerSystem:randomName()
   print(random(gNames.humanNames).." the "..words:substance().."-"..words:simplePP(words:attribute()))
   print(random(gNames.humanNames).." the "..words:substance().."-"..words:simplePP(words:attribute()).." "..words:animal().." of "..placeName())
 
-  print(random(gNames.humanNames).." the "..words:animal().."-"..words:verb().doer)
+  print(random(gNames.humanNames).." the "..words:animal().."-"..words:doer(words:verb()))
   print(random(gNames.humanNames).." the "..words:animal().."-"..words:verb().pp)
 
-  print(words:animal().." "..words:verb().doer.." "..random(gNames.humanNames))
+  print(words:animal().." "..words:doer(words:verb()).." "..random(gNames.humanNames))
   print(random(gNames.humanNames).." the "..words:animal().."-"..words:verb().pp)
 
-  print(words:substance().." "..words:verb().doer.." "..random(gNames.humanNames))
+  print(words:substance().." "..words:doer(words:verb()).." "..random(gNames.humanNames))
   print(random(gNames.humanNames).." the "..words:substance().."-"..words:verb().pp)
 
   print(random(gNames.humanNames).." the ".."un"..words:verb().pp)

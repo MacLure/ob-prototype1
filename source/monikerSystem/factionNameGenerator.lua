@@ -30,7 +30,7 @@ function FactionNameGenerator:randomName(region)
     -- words:substance().name.." "..words:pluralize(random(animals).name),
     -- words:verb().pp,
     -- "un"..words:verb().pp,
-    -- words:substance().name.." "..words:pluralize(words:verb().doer),
+    -- words:substance().name.." "..words:pluralize(words:doer(words:verb()),
 
     random(animals).name.."-"..words:verb().pp.." "..words:socialGroup().name,
     words:color().name.." "..words:socialGroup().name,

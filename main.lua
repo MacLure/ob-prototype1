@@ -57,15 +57,8 @@ function printRegionDetails(regionParams)
   for k, faction in pairs(region.factions) do
     print(faction.name)
   end
-  -- local faction1 = region:makeFaction()
-  -- faction1:printDetails()
-  -- local faction2 = region:makeFaction()
-  -- faction2:printDetails()
   print("")
-  for k, character in pairs(region.characters) do
-    print(character.name)
-  end
-  -- region:printCharacters()
+  region:printCharacters()
   print("")
   region:printLocations()
   print("")
