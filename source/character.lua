@@ -6,6 +6,7 @@ function Character:init(params)
 
   this.region = params.region
   this.faction = params.faction
+  this.location = params.location
   this.stats = {
     str = math.random(1,10),
     int = math.random(1,10),

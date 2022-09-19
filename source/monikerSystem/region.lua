@@ -98,6 +98,11 @@ function Region:init(params)
   end
 
   -- FACTIONS
+
+  this.availableAttributes = {}
+    
+    -- cloned
+
   this.factions = {
     this:makeFaction(),
     this:makeFaction()
@@ -149,7 +154,8 @@ function Region:makeSettlement(settlementTypeName)
   return Location:init(
     {
       region = self,
-      settlementType = settlementType
+      settlementType = settlementType,
+      faction = random(self.factions)
     }
   )
 end
@@ -158,7 +164,8 @@ function Region:makeWildLocation()
   return Location:init(
     {
       region = self,
-      settlementType = "wild"
+      settlementType = "wild",
+      faction = random(self.factions)
     }
   )
 end

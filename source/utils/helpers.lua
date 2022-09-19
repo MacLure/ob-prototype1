@@ -63,6 +63,15 @@ function getIndex(table, item)
   return index[item]
 end
 
+function cloned(table)
+  clonedTable = {}
+  for k, v in ipairs(table) do
+      b[k] = v
+  end
+  return clonedTable
+end
+
+
 function contains(table, value)
   for index, v in ipairs(table) do
     if v == value then

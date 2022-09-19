@@ -6,6 +6,8 @@ function Location:init(params)
 
   this.tags = params.tags
   this.region = params.region
+  this.faction = params.faction
+
   this.settlementType = params.settlementType
   this.size = math.random(1, 10)
 
@@ -40,11 +42,15 @@ function Location:init(params)
     this.fullName = this:makeSettlementName()
   end
 
+  this.character = this:makeCharacter()
+
   return this
 end
 
 function Location:printDetails()
   print(self.fullName)
+  print("held by: "..self.character.name.." of "..self.faction.name.."]")
+  print("")
 end
 
 function Location:makeSettlementName()
@@ -65,4 +71,16 @@ function Location:makeWildLocationName()
       region = self.region
     }
   )
+end
+
+function Location:makeCharacter()
+  local character = Character:init({
+    region= self.region,
+    faction = self.faction,
+    location = self
+  })
+
+  self.character = character
+
+  return character
 end

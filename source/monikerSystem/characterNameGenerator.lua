@@ -59,13 +59,13 @@ function CharacterNameGenerator:relations(character)
   return relations
 end
 
-function CharacterNameGenerator:concatenateTitle(character, title)
+function CharacterNameGenerator:concatenateTitle(character, title, location)
   local titleString = title
 
   if math.random(1,2) == 1 then
     local newString = character.CharacterName.." the "..titleString
     if math.random(1,2) == 1 then
-      return self:appendPlaceName(character, newString)
+      return self:appendPlaceName(character, newString, location)
     else
       return newString
     end
@@ -82,8 +82,14 @@ function CharacterNameGenerator:nameLast(character, title)
   return title.." "..character.CharacterName
 end
 
-function CharacterNameGenerator:appendPlaceName(character, title)
-  local pattern1 = placeNameGenerators[character.region.placeNameIndex]()
+function CharacterNameGenerator:appendPlaceName(character, title, location)
+  local pattern1
+  if location then
+    pattern1 = location.placeName
+  else
+    pattern1 = placeNameGenerators[character.region.placeNameIndex]()
+  end
+
   local pattern2 = "the "..words:less(words:substance().name).." "..words:landscape().name
 
   if math.random(1,2) == 1 then
@@ -103,6 +109,8 @@ function CharacterNameGenerator:nameCharacter(character)
   local adjectives = self:adjectives(character)
   local socialGroup = factionCharacteristics.socialGroup
   local relation = random(self:relations(character))
+
+  local location = character.location
 
   if socialGroup.member then
     relation = words.relations[socialGroup.member]
@@ -156,22 +164,22 @@ function CharacterNameGenerator:nameCharacter(character)
     self:nameFirst(character, pattern26),
     self:nameFirst(character, pattern27),
 
-    self:concatenateTitle( character, pattern7 ),
-    self:concatenateTitle( character, pattern8 ),
-    self:concatenateTitle( character, pattern9 ),
-    self:concatenateTitle( character, pattern10 ),
-    self:concatenateTitle( character, pattern11 ),
-    self:concatenateTitle( character, pattern12 ),
-    self:concatenateTitle( character, pattern13 ),
-    self:concatenateTitle( character, pattern14 ),
-    self:concatenateTitle( character, pattern15 ),
-    self:concatenateTitle( character, pattern16 ),
-    self:concatenateTitle( character, pattern18 ),
-    self:concatenateTitle( character, pattern19 ),
-    self:concatenateTitle( character, pattern20 ),
-    self:concatenateTitle( character, pattern21 ),
-    self:concatenateTitle( character, pattern22 ),
-    self:concatenateTitle( character, pattern23 )
+    self:concatenateTitle( character, pattern7, location ),
+    self:concatenateTitle( character, pattern8, location ),
+    self:concatenateTitle( character, pattern9, location ),
+    self:concatenateTitle( character, pattern10, location ),
+    self:concatenateTitle( character, pattern11, location ),
+    self:concatenateTitle( character, pattern12, location ),
+    self:concatenateTitle( character, pattern13, location ),
+    self:concatenateTitle( character, pattern14, location ),
+    self:concatenateTitle( character, pattern15, location ),
+    self:concatenateTitle( character, pattern16, location ),
+    self:concatenateTitle( character, pattern18, location ),
+    self:concatenateTitle( character, pattern19, location ),
+    self:concatenateTitle( character, pattern20, location ),
+    self:concatenateTitle( character, pattern21, location ),
+    self:concatenateTitle( character, pattern22, location ),
+    self:concatenateTitle( character, pattern23, location )
   }
 
 
