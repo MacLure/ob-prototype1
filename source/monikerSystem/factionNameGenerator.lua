@@ -16,31 +16,46 @@ function FactionNameGenerator:landscape(region)
   return landscape
 end
 
-function FactionNameGenerator:randomName(region)
-  local animals = self:animals(region)
-  local landscape = self:landscape(region)
+function FactionNameGenerator:setFactionAttributes(faction)
+  faction.characteristics.animal = random(self:animals(faction.region))
+  faction.characteristics.color = words:color()
+  faction.characteristics.landscape = self:landscape(faction.region)
+  faction.characteristics.verb = words:verb()
+  faction.characteristics.socialGroup = words:socialGroup()
+  
+  if faction.characteristics.socialGroup.member then
+    local member = words.relations[faction.characteristics.socialGroup.member]
+    if member.gender then
+      faction.characteristics.gender = member.gender 
+    end
+  end
+end
+
+function FactionNameGenerator:nameFaction(faction)
+  -- local region = faction.region
+  local factionCharacteristics = faction.characteristics
+  local animal = factionCharacteristics.animal
+  local color = factionCharacteristics.color
+  local landscape = factionCharacteristics.landscape
+  local verb = factionCharacteristics.verb
+  local socialGroup = factionCharacteristics.socialGroup
 
   local possibleNames = {
     -- words:color().name.." "..words:pluralize(random(animals).name),
-    -- landscape.." "..words:pluralize(random(animals).name),
-    -- words:socialGroup().name.." of the "..random(animals).name,
-    -- words:color().name.." "..words:socialGroup().name,
     -- words:pluralize(words:relation().name).." of the "..landscape,
     -- words:color().name.." "..words:pluralize(words:attribute().name),
     -- words:substance().name.." "..words:pluralize(random(animals).name),
-    -- words:verb().pp,
-    -- "un"..words:verb().pp,
     -- words:substance().name.." "..words:pluralize(words:doer(words:verb()),
 
-    random(animals).name.."-"..words:verb().pp.." "..words:socialGroup().name,
-    words:color().name.." "..words:socialGroup().name,
-    words:socialGroup().name.." of the "..random(animals).name,
-    words:socialGroup().name.." of the "..words:color().name.." "..random(animals).name,
-    "un"..words:verb().pp,
-    words:verb().pp,
-    words:socialGroup().name.." of the "..landscape,
-    landscape.." "..words:socialGroup().name
+    animal.name.."-"..verb.pp.." "..socialGroup.name,
+    color.name.." "..socialGroup.name,
+    socialGroup.name.." of the "..animal.name,
+    socialGroup.name.." of the "..color.name.." "..animal.name,
+    "un"..verb.pp,
+    verb.pp,
+    socialGroup.name.." of the "..landscape,
+    landscape.." "..socialGroup.name
   }
 
-  return "the "..random(possibleNames)
+  faction.name = "the "..random(possibleNames)
 end

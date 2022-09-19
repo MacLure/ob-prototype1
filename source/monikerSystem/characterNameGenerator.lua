@@ -1,18 +1,18 @@
-PersonalTitleGenerator = Class{}
+CharacterNameGenerator = Class{}
 
-function PersonalTitleGenerator:init()
+function CharacterNameGenerator:init()
   local this = {}
 
   setmetatable(this, self)
   return this
 end
 
-function PersonalTitleGenerator:animals(character)
-  local regionAnimals = character.region.animals
-  return regionAnimals
-end
+-- function CharacterNameGenerator:animals(character)
+--   local regionAnimals = character.region.animals
+--   return regionAnimals
+-- end
 
-function PersonalTitleGenerator:adjectives(character)
+function CharacterNameGenerator:adjectives(character)
   local adjectives = {}
 
   for k,v in pairs(words.characterAdjectives) do
@@ -25,7 +25,7 @@ function PersonalTitleGenerator:adjectives(character)
   return adjectives
 end
 
-function PersonalTitleGenerator:relations(character)
+function CharacterNameGenerator:relations(character)
   local relations = {}
   local excludedGender = "male"
   
@@ -43,7 +43,7 @@ function PersonalTitleGenerator:relations(character)
   return relations
 end
 
-function PersonalTitleGenerator:concatenateTitle(character, title)
+function CharacterNameGenerator:concatenateTitle(character, title)
   local titleString = title
 
   if math.random(1,2) == 1 then
@@ -58,15 +58,15 @@ function PersonalTitleGenerator:concatenateTitle(character, title)
   end
 end
 
-function PersonalTitleGenerator:nameFirst(character, title)
+function CharacterNameGenerator:nameFirst(character, title)
   return character.CharacterName.." the "..title
 end
 
-function PersonalTitleGenerator:nameLast(character, title)
+function CharacterNameGenerator:nameLast(character, title)
   return title.." "..character.CharacterName
 end
 
-function PersonalTitleGenerator:appendPlaceName(character, title)
+function CharacterNameGenerator:appendPlaceName(character, title)
   local pattern1 = placeNameGenerators[character.region.placeNameIndex]()
   local pattern2 = "the "..words:less(words:substance().name).." "..words:landscape().name
 
@@ -77,12 +77,23 @@ function PersonalTitleGenerator:appendPlaceName(character, title)
   end
 end
 
-function PersonalTitleGenerator:randomName(character)
-  local animals = self:animals(character)
+function CharacterNameGenerator:nameCharacter(character)
+  local factionCharacteristics = character.faction.characteristics
+  local animal = factionCharacteristics.animal
+  local color = factionCharacteristics.color
   local adjectives = self:adjectives(character)
-  local relations = self:relations(character)
+  local socialGroup = factionCharacteristics.socialGroup
+  local relation = random(self:relations(character))
 
-  local pattern1 = words:color().name
+  if animal.attributes then
+    local attributes = animal.attributes
+  end
+
+  if socialGroup.member then
+    relation = words.relations[socialGroup.member]
+  end
+
+  local pattern1 = color.name
   local pattern2 = random(adjectives).name
   local pattern3 = "un"..words:verb().pp
   local pattern4 = "twice-"..words:verb().pp
@@ -91,25 +102,25 @@ function PersonalTitleGenerator:randomName(character)
   local pattern26 = "still-"..words:verb().pp
 
   local pattern5 = words:less(random(character.region.substances).name)
-  local pattern6 = random(animals).name
-  local pattern14 = random(animals).name.."-"..words:verb().pp
+  local pattern6 = animal.name
+  local pattern14 = animal.name.."-"..words:verb().pp
   local pattern16 = random(character.region.substances).name.."-"..words:verb().pp
-  local pattern7 = words:color().name.." "..random(animals).name
-  local pattern8 = random(adjectives).name.." "..random(animals).name
-  local pattern9 = random(relations).name.." of "..random(character.region.substances).name
-  local pattern10 = random(relations).name.." of "..words:pluralize(random(animals).name)
+  local pattern7 = color.name.." "..animal.name
+  local pattern8 = random(adjectives).name.." "..animal.name
+  local pattern9 = relation.name.." of "..random(character.region.substances).name
+  local pattern10 = relation.name.." of "..words:pluralize(animal.name)
   local pattern11 = random(character.region.substances).name.."-"..words:simplePP(words:attribute().name)
-  local pattern12 = random(character.region.substances).name.."-"..words:simplePP(words:attribute().name).." "..random(animals).name
-  local pattern13 = random(animals).name.."-"..words:doer(words:verb())
+  local pattern12 = random(character.region.substances).name.."-"..words:simplePP(words:attribute().name).." "..animal.name
+  local pattern13 = animal.name.."-"..words:doer(words:verb())
   local pattern15 = random(character.region.substances).name.." "..words:doer(words:verb())
-  local pattern18 = words:less(random(character.region.substances).name).." "..random(relations).name
-  local pattern19 = words:less(random(character.region.substances).name).." "..random(animals).name
+  local pattern18 = words:less(random(character.region.substances).name).." "..relation.name
+  local pattern19 = words:less(random(character.region.substances).name).." "..animal.name
   local pattern20 = words:abstract().name.."-bringer"
   local pattern21 = "bringer of "..words:abstract().name
-  local pattern22 = "errant "..random(animals).name
-  local pattern23 = "wandering "..random(animals).name
+  local pattern22 = "errant "..animal.name
+  local pattern23 = "wandering "..animal.name
   local pattern24 = "font of ".."SUBSTANCE"
-  local pattern23 = random(animals).name.."-killer"
+  local pattern23 = animal.name.."-killer"
 
   local possibleNames = {
     self:nameFirst(character, pattern1),
@@ -142,5 +153,5 @@ function PersonalTitleGenerator:randomName(character)
     self:concatenateTitle( character, pattern23 )
 
   }
-  return random(possibleNames)
+  character.name = random(possibleNames)
 end

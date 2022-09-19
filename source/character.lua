@@ -5,24 +5,30 @@ function Character:init(params)
   setmetatable(this, self)
 
   this.region = params.region
+  this.faction = params.faction
   this.stats = {
     str = math.random(1,10),
     int = math.random(1,10),
     faith = math.random(1,10),
   }
   this.alignment = math.random(1,10)
-  this.gender = this:randomGender()
+
+  print(this.faction.name)
+  if this.faction.characteristics.gender then
+    this.gender = this.faction.characteristics.gender
+  else
+    this.gender = this:randomGender()
+  end
 
   this.CharacterName = humanName(this.gender)
   this.className = this:class()
-  this.name = personalNameGenerator:randomName(this)
+  characterNameGenerator:nameCharacter(this)
 
   return this
 end
 
 function Character:printDetails()
   print(self.name..", "..self.gender.." "..self.className)
-  -- printTable(self.stats)
 end
 
 function Character:orderedTraits()

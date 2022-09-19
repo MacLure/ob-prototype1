@@ -97,7 +97,7 @@ require 'source/monikerSystem/placeNameGenerator'
 require 'source/monikerSystem/region'
 require 'source/monikerSystem/factionNameGenerator'
 require 'source/monikerSystem/faction'
-require 'source/monikerSystem/personalTitleGenerator'
+require 'source/monikerSystem/characterNameGenerator'
 require 'source/monikerSystem/location'
 
 require 'source/mapBuilder'

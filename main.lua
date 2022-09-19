@@ -21,7 +21,7 @@ function love.load()
     gNames.randomRussianPlace
   }
 
-  personalNameGenerator = PersonalTitleGenerator:init()
+  characterNameGenerator = CharacterNameGenerator:init()
   placeNameGenerator = PlaceNameGenerator:init()
   factionNameGenerator = FactionNameGenerator:init()
 

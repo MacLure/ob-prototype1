@@ -103,11 +103,17 @@ function Region:init(params)
     this:makeFaction()
   }
 
+
   -- CHARACTERS
   this.characters = {
-    this:makeCharacter(),
-    this:makeCharacter()
+    -- this:makeCharacter(),
+    -- this:makeCharacter()
   }
+
+
+  for i, faciton in pairs(this.factions) do
+    table.insert(this.characters, faciton:makeCharacter())
+  end
 
   -- UNDECIDED
   -- values: learning, light, dark, fire, industry

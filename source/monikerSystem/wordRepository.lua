@@ -106,77 +106,91 @@ end
 -- GENERAL
 
 WordRepository.colors = {
-  ["red"] = { tags = {} },
-  ["blue"] = { tags = {} },
   ["black"] = { tags = {} },
   ["white"] = { tags = {} },
+  ["grey"] = { tags = {} },
+  ["red"] = { tags = {} },
+  ["scarlet"] = { tags = {} },
+  ["crimson"] = { tags = {} },
+  ["blue"] = { tags = {} },
   ["yellow"] = { tags = {} },
   ["green"] = { tags = {} },
   ["golden"] = { tags = {} },
   ["silver"] = { tags = {} },
+  ["vermillion"] = { tags = {} },
 }
 
 WordRepository.abstracts = {
-  -- positive
-  ["grace"] = { tags = {} },
-  ["light"] = { tags = {} },
+  -- light
+  ["grace"] = { tags = {}, adj="graceful" },
+  ["light"] = { tags = {}, verb="light" },
   ["hope"] = { tags = {} },
+  ["radiance"] = { tags = {}, adj="radiant" },
+  ["retribution"] = { tags = {} },
+
+  -- dark
+  ["darkness"] = { tags = {}, adj="dark" },
+  ["shadow"] = { tags = {}, adj="shadowy" },
+  ["gloom"] = { tags = {}, adj="gloomy" },
+  ["sorrow"] = { tags = {}, adj="sorrowful" },
+  ["woe"] = { tags = {}, adj="woeful" },
+
+  -- death
+  ["death"] = { tags = {}, adj="dead" },
+
+  -- decay
+  ["rot"] = { tags = {}, adj="rotten" },
+  ["decay"] = { tags = {}, verb="decay" },
+  ["disease"] = { tags = {}, adj="diseased" },
+  ["plague"] = { tags = {} },
+  ["pox"] = { tags = {} },
+  ["oblivion"] = { tags = {} },
+  ["destitution"] = { tags = {}, adj="destitute" },
+  ["ruin"] = { tags = {}, verb="ruin" },
+
+  -- chaos
+  ["dissolution"] = { tags = {} },
+  ["strife"] = { tags = {} },
+  ["disorder"] = { tags = {} },
+  ["destruction"] = { tags = {}, verb="destroy" },
+  ["discord"] = { tags = {} },
+  ["mayhem"] = { tags = {} },
+  ["calamity"] = { tags = {}, adj="calamitous" },
+  ["drought"] = { tags = {} },
+
+  -- order
   ["accord"] = { tags = {} },
   ["authority"] = { tags = {} },
-  ["honour"] = { tags = {} },
-  ["light"] = { tags = {} },
+  ["honour"] = { tags = {}, adj="honorable" },
   ["mercy"] = { tags = {}, adj="merciful" },
   ["justice"] = { tags = {}, adj="just" },
   ["heritage"] = { tags = {} },
   ["tradition"] = { tags = {} },
   ["preservation"] = { tags = {}, verb="preserve" },
   ["lore"] = { tags = {} },
-  ["rejuvination"] = { tags = {}, verb="rejuvinate" },
-  ["restoration"] = { tags = {}, verb="restore" },
-  ["tranquility"] = { tags = {}, adj = "tranquil" },
-  ["serenity"] = { tags = {}, adj="serene" },
-  ["radiance"] = { tags = {}, adj="radiant" },
-  ["splendor"] = { tags = {}, adj="splendid" },
+  ["duty"] = { tags = {}, adj="dutiful" },
 
-  -- negative
-  ["death"] = { tags = {}, adj="dead" },
-  ["shadow"] = { tags = {}, adj="shadowy" },
-  ["woe"] = { tags = {}, adj="woeful" },
-  ["gloom"] = { tags = {}, adj="gloomy" },
-  ["sorrow"] = { tags = {}, adj="sorrowful" },
-  ["rot"] = { tags = {}, adj="rotten" },
-  ["decay"] = { tags = {}, verb="decay" },
-  ["drought"] = { tags = {} },
-  ["ruin"] = { tags = {}, verb="ruin" },
-  ["disease"] = { tags = {}, adj="diseased" },
-  ["plague"] = { tags = {} },
-  ["pox"] = { tags = {} },
-  ["perdition"] = { tags = {} },
-  ["retribution"] = { tags = {} },
-  ["profanity"] = { tags = {}, adj="profane" },
-  ["darkness"] = { tags = {}, adj="dark" },
-  ["abomination"] = { tags = {}, adj="abominable" },
+  -- savagery
   ["fear"] = { tags = {}, verb="fear" },
   ["terror"] = { tags = {} },
   ["agony"] = { tags = {} },
   ["servitude"] = { tags = {}, verb="serve" },
   ["imprisonment"] = { tags = {} },
-  ["destitution"] = { tags = {}, adj="destitute" },
-  ["dissolution"] = { tags = {} },
-  ["darkness"] = { tags = {}, adj="dark" },
-  ["oblivion"] = { tags = {} },
-  ["spite"] = { tags = {}, adj="spiteful" },
-  ["discord"] = { tags = {} },
   ["aggression"] = { tags = {} },
-  ["destruction"] = { tags = {}, verb="destroy" },
   ["wrath"] = { tags = {}, adj="wrathful" },
+  ["cruelty"] = { tags = {}, adj="cruel" },
+  ["spite"] = { tags = {}, adj="spiteful" },
   ["anguish"] = { tags = {} },
-  ["strife"] = { tags = {} },
-  ["disorder"] = { tags = {} },
-  ["mayhem"] = { tags = {} },
-  ["calamity"] = { tags = {}, adj="calamitous" },
+  ["perdition"] = { tags = {} },
+  ["profanity"] = { tags = {}, adj="profane" },
 
-  -- neutral
+
+  ["abomination"] = { tags = {}, adj="abominable" },
+  ["rejuvination"] = { tags = {}, verb="rejuvinate" },
+  ["restoration"] = { tags = {}, verb="restore" },
+  ["tranquility"] = { tags = {}, adj = "tranquil" },
+  ["serenity"] = { tags = {}, adj="serene" },
+  ["splendor"] = { tags = {}, adj="splendid" },
   ["war"] = { tags = {}},
   ["battle"] = { tags = {} },
   ["mirage"] = { tags = {"desert"} },
@@ -185,7 +199,27 @@ WordRepository.abstracts = {
   ["revolt"] = { tags = {} },
   ["relic"] = { tags = {} },
   ["indignation"] = { tags = {}, adj="indignant" },
-  ["duty"] = { tags = {}, adj="dutiful" },
+
+  -- growth
+-- mutation
+-- affliction
+-- might
+-- memory
+-- benefaction
+-- bounty
+-- omen
+-- peace
+-- dread
+-- frenzy
+-- savagery
+-- destiny
+-- filth
+-- drudgery
+-- fury
+-- predation
+-- sorcery
+-- balance
+-- horror
 }
 
 WordRepository.crafts = {
@@ -203,44 +237,64 @@ WordRepository.crafts = {
 WordRepository.substances = {
   -- countable
   ["fern"] = { tags = {"forest"} },
-  ["vine"] = { tags = {"forest"} },
-  ["tree"] = { tags = {"forest"} },
-  ["root"] = { tags = {"forest"} },
-  ["leaf"] = { tags = {"forest"} },
+  ["vine"] = { tags = {"jungle",} },
+  ["tree"] = { tags = {"forest","jungle"} },
+  ["root"] = { tags = {"forest","jungle"} },
+  ["leaf"] = { tags = {"forest","jungle"} },
   ["briar"] = { tags = {"forest"} },
   ["thorn"] = { tags = {"forest"} },
   ["thistle"] = { tags = {"forest"} },
-  ["branch"] = { tags = {"forest"} },
+  ["branch"] = { tags = {"forest","jungle"} },
+  ["spore"] = { tags = {"forest","jungle"} },
+  ["flower"] = { tags = {} },
+  ["sprout"] = { tags = {"forest","jungle"} },
+  ["seed"] = { tags = {} },
+  ["herb"] = { tags = {} },
+  ["rose"] = { tags = {} },
+  ["jasmine"] = { tags = {} },
+  ["orchid"] = { tags = {} },
+  ["juniper"] = { tags = {} },
+  ["lotus"] = { tags = {} },
+  ["laurel"] = { tags = {} },
+  ["pine"] = { tags = {} },
+  ["cedar"] = { tags = {} },
+  ["willow"] = { tags = {} },
+  ["conifer"] = { tags = {} },
+
   ["fire"] = { tags = {"fire"} },
   ["ash"] = { tags = {"fire","death"}, golem=true},
+  ["flame"] = { tags = {} },
+
   ["grave"] = { tags = {"death"} },
   ["tomb"] = { tags = {"death"} },
   ["crypt"] = { tags = {"death"} },
   ["gallow"] = { tags = {} },
+  ["corpse"] = { tags = {} },
+
   ["tide"] = { tags = {"sea"} },
   ["wave"] = { tags = {"sea"} },
-  ["spore"] = { tags = {"forest"} },
   ["pearl"] = { tags = {"sea"} },
   ["barnacle"] = { tags = {"sea", golem=true} },
+
   ["mangrove"] = { tags = {"swamp"} },
   ["reed"] = { tags = {"swamp"} },
-  ["flame"] = { tags = {} },
+
   ["plume"] = { tags = {} },
-  ["rose"] = { tags = {} },
   ["chain"] = { tags = {} },
   ["fetter"] = { tags = {} },
-  ["crop"] = { tags = {} },
-  ["corpse"] = { tags = {} },
   ["crystal"] = { tags = {} },
-  ["flower"] = { tags = {} },
-  ["sprout"] = { tags = {"forest"} },
-  ["herb"] = { tags = {} },
-  ["seed"] = { tags = {} },
+  
+  ["crop"] = { tags = {} },
   ["tax"] = { tags = {} },
   ["tithe"] = { tags = {} },
   ["alm"] = { tags = {} },
 
   -- uncountable
+  ["fleece"] = { tags = {} },
+  ["bamboo"] = { tags = {"forest"} },
+  ["foliage"] = { tags = {"forest"} },
+  ["ebony"] = { tags = {} },
+  ["ivy"] = { tags = {} },
   ["moss"] = { tags = {"forest"}, golem=true},
   ["brush"] = { tags = {"forest"} },
   ["wood"] = { tags = {"forest"}, golem=true},
@@ -268,19 +322,15 @@ WordRepository.substances = {
   ["dirt"] = { tags = {} },
   ["dung"] = { tags = {} },
   ["wine"] = { tags = {} },
-  ["carrion"] = { tags = {} },
+  ["carrion"] = { tags = {}, golem=true },
   ["livestock"] = { tags = {} },
   ["ink"] = { tags = {"sea"} },
-  ["jasmine"] = { tags = {} },
-  ["orchid"] = { tags = {} },
-  ["juniper"] = { tags = {} },
-  ["lotus"] = { tags = {} },
   ["ivory"] = { tags = {} },
-  ["granite"] = { tags = {} },
+  ["granite"] = { tags = {}, golem=true },
   ["opal"] = { tags = {} },
-  ["marble"] = { tags = {} },
+  ["marble"] = { tags = {}, golem=true },
   ["nectar"] = { tags = {} },
-  ["rust"] = { tags = {} },
+  ["rust"] = { tags = {}, golem=true },
 }
 
 WordRepository.characterAdjectives = {
@@ -392,6 +442,30 @@ WordRepository.characterAdjectives = {
   ["fallen"] = { tags = {}, verb="fall" },
   ["harbinger of ___"] = { tags = {} },
   ["voracious"] = { tags = {} },
+
+
+-- aggressive
+-- natural
+-- unnatural
+-- ascetic
+-- auspicious
+-- cadaverous
+-- defiant
+-- deranged
+-- diligent
+-- sacred
+-- eccentric
+-- etherial
+-- feral
+-- ferocious
+-- fertile
+-- fungal
+-- forbidden
+-- gluttonous
+-- grim
+-- weak
+-- indomitable
+-- boundless
 }
 
 WordRepository.attributes = {
@@ -532,20 +606,23 @@ WordRepository.positions = {
   ["sheppard"] = { tags = {"faith"} },
   ["ascetic"] = { tags = {} },
   ["wanderer"] = { tags = {} },
-  ["highwayman"] = { tags = {}, gender = {"male"} },
-  ["highwaywoman"] = { tags = {}, gender = {"female"} },
+  ["highwayman"] = { tags = {}, gender = "male" },
+  ["highwaywoman"] = { tags = {}, gender = "female" },
   ["grave-robber"] = { tags = {} },
-  ["crusader"] = { tags = {"faith"} },
   ["scavenger"] = { tags = {} },
   ["fugitive"] = { tags = {} },
+  ["bandit"] = { tags = {} },
+  ["raider"] = { tags = {} },
+  ["pirate"] = { tags = {} },
+
 
   -- tied to s.t.
   ["ward"] = { tags = {} },
   ["warden"] = { tags = {} },
-  ["patron"] = { tags = {"male"} },
-  ["matron"] = { tags = {"female"} },
-  ["patriarch"] = { tags = {}, gender = {"male"} },
-  ["matriarch"] = { tags = {}, gender = {"female"} },
+  ["patron"] = { tags = "male" },
+  ["matron"] = { tags = "female" },
+  ["patriarch"] = { tags = {}, gender = "male" },
+  ["matriarch"] = { tags = {}, gender = "female" },
   ["squire"] = { tags = {} },
   ["counselor"] = { tags = {} },
   ["sentinel"] = { tags = {} },
@@ -581,14 +658,49 @@ WordRepository.positions = {
   ["foot soldier"] = { tags = {} },
   ["constable"] = { tags = {} },
   ["borderguard"] = { tags = {} },
+  ["crusader"] = { tags = {"faith"} },
+
+  ["progenitor"] = { tags = {} },
+  ["__ collector"] = { tags = {} },
+  ["herder"] = { tags = {} },
+  ["__herd"] = { tags = {} },
+  ["socialite"] = { tags = {} },
+  ["pugilist"] = { tags = {} },
+  ["caretaker"] = { tags = {} },
+  ["hunter"] = { tags = {}, gender="male" },
+  ["huntress"] = { tags = {}, gender="female" },
+  ["woodcutter"] = { tags = {} },
+  ["bard"] = { tags = {} },
+  ["bootlegger"] = { tags = {} },
+  ["smuggler"] = { tags = {} },
+  ["duelist"] = { tags = {} },
+  ["court ___"] = { tags = {} },
+  ["arch__"] = { tags = {} },
+  ["__ leader"] = { tags = {} },
+  ["fugitive"] = { tags = {} },
+  ["sorceror"] = { tags = {} },
+  ["supplicant"] = { tags = {} },
+  ["ritualist"] = { tags = {} },
+  ["artisan"] = { tags = {} },
+  ["__ wrangler"] = { tags = {} },
+  ["lich"] = { tags = {} },
+  ["paladin"] = { tags = {} },
+  ["forager"] = { tags = {} },
+  ["archer"] = { tags = {} },
+  ["chancellor"] = { tags = {} },
+  ["hag"] = { tags = {} },
+  ["dissident"] = { tags = {} },
+  ["innkeeper"] = { tags = {} },
+  ["handservant"] = { tags = {} },
+  ["herder"] = { tags = {} },
 }
 
 WordRepository.titles = {
   ["hand"] = { tags = {} },
-  ["lord"] = { tags = {}, gender = {"male"} },
-  ["lady"] = { tags = {}, gender = {"female"} },
-  ["prince"] = { tags = {}, gender = {"male"} },
-  ["princess"] = { tags = {}, gender = {"female"} },
+  ["lord"] = { tags = {}, gender = "male" },
+  ["lady"] = { tags = {}, gender = "female" },
+  ["prince"] = { tags = {}, gender = "male" },
+  ["princess"] = { tags = {}, gender = "female" },
   ["tyrant"] = { tags = {} },
   ["marquis"] = { tags = {} },
   ["emir"] = { tags = {} },
@@ -643,9 +755,6 @@ WordRepository.titles = {
   ["fanatic"] = { tags = {} },
   ["partisan"] = { tags = {} },
   ["__caller"] = { tags = {} },
-  ["bandit"] = { tags = {} },
-  ["raider"] = { tags = {} },
-  ["pirate"] = { tags = {} },
   ["guard"] = { tags = {} },
   ["spy"] = { tags = {} },
   ["thief"] = { tags = {} },
@@ -657,30 +766,31 @@ WordRepository.titles = {
   ["dweller"] = { tags = {} },
   ["slave"] = { tags = {} },
   ["slaver"] = { tags = {} },
-  ["witch"] = { tags = {"int"}, gender = {"female"} },
+  ["witch"] = { tags = {"int"}, gender = "female" },
 }
 
 WordRepository.relations = {
   -- family
-  ["brother"] = { tags = {}, gender = {"male"} },
-  ["sister"] = { tags = {}, gender = {"female"} },
-  ["father"] = { tags = {}, gender = {"male"} },
-  ["mother"] = { tags = {}, gender = {"female"} },
-  ["son"] = { tags = {}, gender = {"male"} },
-  ["daughter"] = { tags = {}, gender = {"female"} },
+  ["brother"] = { tags = {}, gender = "male" },
+  ["sister"] = { tags = {}, gender = "female" },
+  ["father"] = { tags = {}, gender = "male" },
+  ["mother"] = { tags = {}, gender = "female" },
+  ["son"] = { tags = {}, gender = "male" },
+  ["daughter"] = { tags = {}, gender = "female" },
   ["child"] = { tags = {}, gender = {} },
   ["consort"] = { tags = {} },
-  ["husband"] = { tags = {}, gender = {"male"} },
-  ["wife"] = { tags = {}, gender = {"female"} },
+  ["husband"] = { tags = {}, gender = "male" },
+  ["wife"] = { tags = {}, gender = "female" },
+  ["bride"] = { tags = {},gender= "female" },
+  ["groom"] = { tags = {}, gender = "male" },
   ["descendent"] = { tags = {} },
   ["retainer"] = { tags = {} },
   ["bodyguard"] = { tags = {} },
   ["kin"] = { tags = {} },
-  ["bride"] = { tags = {"female"} },
-  ["groom"] = { tags = {"male"} },
   ["orphan"] = { tags = {} },
   ["offspring"] = { tags = {} },
   ["scion"] = { tags = {} },
+  ["priest"] = { tags = {} },
 
   -- ally
   ["liege"] = { tags = {} },
@@ -692,6 +802,7 @@ WordRepository.relations = {
   ["attendant"] = { tags = {} },
   ["companion"] = { tags = {} },
   ["mentor"] = { tags = {} },
+  ["loyalist"] = { tags = {} },
 
   -- antagonist
   ["scourge"] = { tags = {} },
@@ -701,16 +812,16 @@ WordRepository.relations = {
 
 WordRepository.socialGroups = {
   -- bond
-  ["brotherhood"] = { tags = {}, gender = {"male"}, relation="brother" },
-  ["sisterhood"] = { tags = {}, gender = {"female"}, relation="sister" },
+  ["brotherhood"] = { tags = {}, gender = "male", member="brother" },
+  ["sisterhood"] = { tags = {}, gender = "female", member="sister" },
   ["house"] = { tags = {} },
   ["clan"] = { tags = {} },
   ["tribe"] = { tags = {} },
-  ["fellowship"] = { tags = {}, relation="fellow" },
-  ["company"] = { tags = {}, relation="companion" },
+  ["fellowship"] = { tags = {}, member="fellow" },
+  ["company"] = { tags = {}, member="companion" },
 
   -- official
-  ["priesthood"] = { tags = {}, gender = {"male"}, relation="priest" },
+  ["priesthood"] = { tags = {}, member="priest" },
   ["militia"] = { tags = {} },
   ["guild"] = { tags = {} },
   ["conclave"] = { tags = {} },
@@ -735,84 +846,82 @@ WordRepository.verbs = {
   -- active
   ["slay"] = { pp = "slain", tags={} },
   ["burn"] = { pp = "burnt", tags={} },
-  ["defile"] = { pp = "defiled", tags={} },
+  ["defile"] = { pp = "defiled", tags={}, noun="defilement" },
   ["tame"] = { pp = "tamed", tags={} },
-  ["trap"] = { pp = "trapped", doer = "trapper", tags={} },
+  ["trap"] = { pp = "trapped", doer = "trapper", tags={}, noun="trap" },
   ["drown"] = { pp = "drowned", tags={"sea, river"} },
-  ["conquer"] = { pp = "conquered", doer = "conqueror", tags={} },
+  ["conquer"] = { pp = "conquered", doer = "conqueror", noun="conquest", tags={} },
   ["crush"] = { pp = "crushed", tags={} },
   ["strike"] = { pp = "struck", tags={} },
-  ["gaze"] = { pp = "gazed", tags={} },
+  ["gaze"] = { pp = "gazed", tags={}, noun="gaze" },
   ["watch"] = { pp = "watched", tags={} },
   ["bring"] = { pp = "brought", tags={} },
-  ["drink"] = { pp = "drunk", tags={} },
+  ["drink"] = { pp = "drunk", noun="drink", tags={} },
   ["keep"] = { pp = "kept",  tags={} },
-  ["defend"] = { pp = "defended", tags={} },
-  ["protect"] = { pp = "protected", doer = "protector", tags={} },
-  ["scorn"] = { pp = "scorned", tags={} },
-  ["exile"] = { pp = "exiled", tags={} },
+  ["defend"] = { pp = "defended", noun="defense", tags={} },
+  ["protect"] = { pp = "protected", doer = "protector", noun="protection", tags={} },
+  ["scorn"] = { pp = "scorned", noun="scorn", tags={} },
+  ["exile"] = { pp = "exiled", noun="exile", tags={} },
   ["abolish"] = { pp = "abolished", tags={} },
-  ["charm"] = { pp = "charmed", tags={} },
-  ["enforce"] = { pp = "renewed", tags={} },
-  ["purify"] = { pp = "purified", tags={} },
+  ["charm"] = { pp = "charmed", noun="charm", tags={} },
+  ["enforce"] = { pp = "enforced", tags={} },
+  ["purify"] = { pp = "purified", noun="purity", tags={} },
   ["weave"] = { pp = "weaved", tags={} },
-  ["breathe"] = { pp = "breathed", tags={} },
+  ["breathe"] = { pp = "breathed", noun="breath", tags={} },
   ["mourn"] = { pp = "mourned", tags={} },
-  ["devastate"] = { pp = "devastated", doer = "devastator", tags={} },
+  ["devastate"] = { pp = "devastated", noun="devastation", doer = "devastator", tags={} },
   ["subdue"] = { pp = "subdued", tags={} },
-  ["weave"] = { pp = "weaved", tags={} },
   ["mend"] = { pp = "mended", tags={} },
-  ["hunt"] = { pp = "hunted", tags={} },
+  ["hunt"] = { pp = "hunted", noun="hunt", tags={} },
   ["assail"] = { pp = "assailed", doer = "assailant", tags={} },
-  ["defy"] = { pp = "defied", tags={} },
+  ["defy"] = { pp = "defied", noun="defiance", tags={} },
 
   -- both
   ["seek"] = { pp = "sought", tags={} },
   ["speak"] = { pp = "spoken", tags={} },
-  ["deliver"] = { pp = "delivered", tags={} },
-  ["forge"] = { pp = "forged", tags={} },
-  ["bury"] = { pp = "buried", tags={} },
-  ["embrace"] = { pp = "embraced", tags={} },
+  ["deliver"] = { pp = "delivered", noun="deliverance", tags={} },
+  ["forge"] = { pp = "forged", noun="forge", tags={} },
+  ["bury"] = { pp = "buried", noun="burial", tags={} },
+  ["embrace"] = { pp = "embraced", noun="embrace", tags={} },
   ["shun"] = { pp = "shunned", doer = "shunner", tags={} },
-  ["absolve"] = { pp = "absolved", tags={} },
-  ["enchant"] = { pp = "enchanted", tags={} },
-  ["conjur"] = { pp = "conjured", tags={} },
+  ["absolve"] = { pp = "absolved", noun="absolution", tags={} },
+  ["enchant"] = { pp = "enchanted", noun="enchantment", tags={} },
+  ["conjur"] = { pp = "conjured", noun="conjuration", tags={} },
   ["summon"] = { pp = "summoned", tags={} },
-  ["deliver"] = { pp = "delivered", tags={} },
-  ["renew"] = { pp = "renewed", tags={} },
-  ["exalt"] = { pp = "exalted",  tags={} },
-  ["favour"] = { pp = "favoured", tags={} },
+  ["renew"] = { pp = "renewed", noun="renewal", tags={} },
+  ["exalt"] = { pp = "exalted", noun="exaltation",  tags={} },
+  ["favour"] = { pp = "favoured", noun="favour", tags={} },
   ["anoint"] = { pp = "anointed", tags={} },
-  ["banish"] = { pp = "banished", tags={} },
-  ["punish"] = { pp = "punished", tags={} },
-  ["light"] = { pp = "lighted", tags={} },
+  ["banish"] = { pp = "banished", noun="banishment", tags={} },
+  ["punish"] = { pp = "punished", noun="punishment", tags={} },
+  ["light"] = { pp = "lighted", noun="light", tags={} },
   ["bestow"] = { pp = "bestowed", tags={} },
-  ["preserve"] = { pp = "preserved", tags={} },
-  ["ensnare"] = { pp = "ensnared", tags={} },
-  ["deceive"] = { pp = "deceived", tags={} },
-  ["possess"] = { pp = "possessed", doer = "possessor", tags={} },
+  ["preserve"] = { pp = "preserved", noun="preservation", tags={} },
+  ["ensnare"] = { pp = "ensnared", noun="snare", tags={} },
+  ["deceive"] = { pp = "deceived", noun="deception", tags={} },
+  ["possess"] = { pp = "possessed", noun="possession", doer = "possessor", tags={} },
   ["take"] = { pp = "taken", tags={} },
-  ["corrupt"] = { pp = "corrupted", doer = "corruptor", tags={} },
-  ["excommunicate"] = { pp = "excommunicateed", doer = "excommunicator", tags={} },
+  ["corrupt"] = { pp = "corrupted", doer = "corruptor", noun="corruption", tags={} },
+  ["excommunicate"] = { pp = "excommunicateed", doer = "excommunicator", noun="excommunication", tags={} },
   ["purge"] = { pp = "purged", tags={} },
   ["cleanse"] = { pp = "cleansed", tags={} },
-  ["consecrate"] = { pp = "consecrated", doer = "consecrator", tags={} },
+  ["consecrate"] = { pp = "consecrated", doer = "consecrator", noun="consecration", tags={} },
 
   -- passive
   ["eat"] = { pp = "eaten", tags={} },
   ["see"] = { pp = "seen", tags={} },
   ["soak"] = { pp = "soaked", tags={} },
-  ["bless"] = { pp = "blessed", tags={} },
-  ["curse"] = { pp = "cursed", tags={} },
-  ["ascend"] = { pp = "ascended", tags={} },
+  ["bless"] = { pp = "blessed", noun="blessing", tags={} },
+  ["curse"] = { pp = "cursed", noun="curse", tags={} },
+  ["ascend"] = { pp = "ascended", noun="ascension", tags={} },
   ["guide"] = { pp = "guided", doer = "guide", tags={} },
-  ["adorn"] = { pp = "adorned", tags={} },
-  ["condemn"] = { pp = "condemnd", tags={} },
-  ["redeem"] = { pp = "redeemed", tags={} },
+  ["adorn"] = { pp = "adorned", noun="adornment", tags={} },
+  ["condemn"] = { pp = "condemnd", noun="condemnation", tags={} },
+  ["redeem"] = { pp = "redeemed", noun="redemption", tags={} },
   ["nurture"] = { pp = "nurtured", tags={} },
-  ["atone"] = { pp = "atoned", tags={} },
+  ["atone"] = { pp = "atoned", noun="atonement", tags={} },
   ["pierce"] = { pp = "pierced", tags={} },
-  ["inspire"] = { pp = "inspired", tags={} },
+  ["inspire"] = { pp = "inspired", noun="inspiration", tags={} },
   ["forbid"] = { pp = "forbidden", doer = "forbidder", tags={} },
   ["kindle"] = { pp = "kindled", tags={} },
   ["entangle"] = { pp = "entangled", tags={} },
@@ -820,10 +929,101 @@ WordRepository.verbs = {
 
   -- other
   ["yield"] = { pp = "yielded", tags={} },
-  ["despair"] = { pp = "despaired", tags={} },
-  ["blossom"] = { pp = "blossomed", tags={} },
-  ["endure"] = { pp = "endured", tags={} },
+  ["despair"] = { pp = "despaired", noun="despair", tags={} },
+  ["blossom"] = { pp = "blossomed", noun="blossom", tags={} },
+  ["endure"] = { pp = "endured", noun="endurance", tags={} },
   ["expose"] = { pp = "exposed", tags={} },
+
+  -- awaken
+-- devastate
+-- tend
+-- rend
+-- attune
+-- bequeath
+-- bind
+-- birth
+-- vex
+-- blossom
+-- enrage
+-- cultivate
+-- prowl
+-- purge
+-- restrain
+-- reclaim
+-- relent
+-- renounce
+-- revere
+-- revoke
+-- mend
+-- awaken
+-- safeguard
+-- scheme
+-- shatter
+-- slaughter
+-- smite
+-- smolder
+-- smuggle
+-- weave
+-- stitch
+-- quell
+-- spurn
+-- invoke
+-- subjugate
+-- exalt
+-- nurture
+-- vindicate
+-- tempt
+-- torment
+-- arrogant
+-- make
+-- vanquish
+-- abandon
+-- worship
+-- quell
+-- persecute
+-- nurture
+-- cherish
+-- cling
+-- cloak (pp v.)
+-- commune
+-- creep
+-- cultivate
+-- ignite
+-- deny
+-- usurp
+-- taint
+-- desecrate
+-- rampage
+-- mangle
+-- dwell
+-- hex
+-- claim, reclaim
+-- enlist
+-- enshrine
+-- entangle
+-- witness
+-- mourn
+-- invoke
+-- fester
+-- fracture
+-- forbid
+-- nourish
+-- gild
+-- crawl
+-- shriek
+-- gnaw
+-- germinate
+-- gorge
+-- till
+-- rampage
+-- flay
+-- heal
+-- infest
+-- dream
+-- intrepid
+-- beckon
+-- bite
+-- prowl
 }
 
 WordRepository.landscapes = {
@@ -846,7 +1046,6 @@ WordRepository.landscapes = {
   ["bay"] = { tags = {} },
   ["island"] = { tags = {} },
 
-
   -- small-scale
   ["falls"] = { tags = {} },
   ["shoal"] = { tags = {} },
@@ -864,6 +1063,15 @@ WordRepository.landscapes = {
   ["marsh"] = { tags = {} },
   ["moor"] = { tags = {} },
 
+  ["highlands"] = { tags = {} },
+  ["borderland"] = { tags = {} },
+  ["grove"] = { tags = {} },
+  ["lagoon"] = { tags = {} },
+  ["glade"] = { tags = {} },
+  ["creek"] = { tags = {} },
+  ["volcano"] = { tags = {} },
+  ["spring"] = { tags = {} },
+  ["hotspring"] = { tags = {} },
 
   -- suffixes
   ["__lands"] = { tags = {} },
@@ -915,32 +1123,60 @@ WordRepository.animals = {
   -- dangerousness
   -- foodchain?
 
+  -- cats
   ["lion"] = { tags = {"plains"}, attributes={"mane","claw","tooth","paw"}, group="pride" },
-  ["lioness"] = { tags = {"plains"}, attributes={"mane","claw","tooth","paw"}, gender={"female"}, group="pride"  },
-  ["bull"] = { tags = {"plains"}, attributes={} },
-  ["hyena"] = { tags = {"plains"}, attributes={} },
-  ["tiger"] = { tags = {"forest"}, attributes={"claw","tooth","paw"} },
-  ["tigress"] = { tags = {"forest"}, attributes={"claw","tooth","paw"}, gender={"female"} },
+  ["lioness"] = { tags = {"plains"}, attributes={"mane","claw","tooth","paw"}, gender="female", group="pride"  },
+  ["panther"] = { tags = {"forest"}, attributes={"tooth"} },
+  ["jaguar"] = { tags = {"forest"}, attributes={"tooth"} },
+  ["lynx"] = { tags = {}, attributes={} },
+  ["tiger"] = { tags = {"forest","jungle"}, attributes={"claw","tooth","paw"} },
+  ["tigress"] = { tags = {"forest","jungle"}, attributes={"claw","tooth","paw"}, gender="female" },
+
+  -- snakes
   ["snake"] = { tags = {}, attributes={"fang"} },
   ["serpent"] = { tags = {}, attributes={"fang","tongue"} },
-  ["hawk"] = { tags = {}, attributes={"talon","feather"} },
-  ["hound"] = { tags = {}, attributes={"tooth"}, group="pack" },
-  ["spider"] = { tags = {}, attributes={"web"}, group="brood" },
-  ["slug"] = { tags = {}, attributes={} },
-  ["leech"] = { tags = {}, attributes={} },
-  ["maggot"] = { tags = {}, attributes={} },
-  ["frog"] = { tags = {}, attributes={} },
-  ["toad"] = { tags = {}, attributes={} },
+  ["asp"] = { tags = {}, attributes={} },
+  ["cobra"] = { tags = {}, attributes={} },
   ["viper"] = { tags = {}, attributes={"fang"}, group="" },
-  ["scarab"] = { tags = {"desert"}, attributes={} },
-  ["camel"] = { tags = {"desert"}, attributes={} },
-  ["scorpion"] = { tags = {"desert"}, attributes={"claw"} },
-  ["vulture"] = { tags = {"desert"}, attributes={"talon"} },
+
+  -- dogs
+  ["hound"] = { tags = {}, attributes={"tooth"}, group="pack" },
   ["wolf"] = { tags = {"forest"}, attributes={"claw","fang","paw"}, group="pack" },
-  ["bear"] = { tags = {"forest"}, attributes={"claw"} },
-  ["owl"] = { tags = {"forest"}, attributes={} },
   ["fox"] = { tags = {"forest"}, attributes={"tail"} },
-  ["elk"] = { tags = {"forest"}, attributes={"antler"} },
+
+  -- insects
+  ["spider"] = { tags = {}, attributes={"web"}, group="brood" },
+  ["scorpion"] = { tags = {"desert"}, attributes={"claw"} },
+  ["maggot"] = { tags = {}, attributes={} },
+  ["beetle"] = { tags = {}, attributes={} },
+  ["bee"] = { tags = {}, attributes={} },
+  ["hornet"] = { tags = {}, attributes={} },
+  ["wasp"] = { tags = {}, attributes={} },
+  ["scarab"] = { tags = {"desert"}, attributes={} },
+
+  -- birds
+  ["hawk"] = { tags = {}, attributes={"talon","feather"} },
+  ["falcon"] = { tags = {}, attributes={"feather"} },
+  ["eagle"] = { tags = {}, attributes={"feather"} },
+  ["sparrow"] = { tags = {}, attributes={"feather"} },
+  ["raven"] = { tags = {"cold"}, attributes={"feather"} },
+  ["crow"] = { tags = {}, attributes={"feather"} },
+  ["osprey"] = { tags = {}, attributes={"feather"} },
+  ["vulture"] = { tags = {"desert"}, attributes={"talon"} },
+  ["owl"] = { tags = {"forest"}, attributes={} },
+  ["loon"] = { tags = {}, attributes={"feather"} },
+  ["songbird"] = { tags = {}, attributes={"feather"} },
+  ["crane"] = { tags = {}, attributes={"feather"} },
+
+  -- mythical
+  ["wyrm"] = { tags = {}, attributes={} },
+  ["gryphon"] = { tags = {"desert", "mountain"}, attributes={} },
+  ["rukh"] = { tags = {}, attributes={"feather"} },
+  ["kirin"] = { tags = {}, attributes={} },
+  ["drake"] = { tags = {}, attributes={} },
+  ["wyvern"] = { tags = {}, attributes={} },
+
+  -- sea
   ["shark"] = { tags = {"sea"}, attributes={"fin","tooth"} },
   ["fish"] = { tags = {"sea, river"}, attributes={}, group="school" },
   ["squid"] = { tags = {"sea"}, attributes={"beak"} },
@@ -949,35 +1185,45 @@ WordRepository.animals = {
   ["lobster"] = { tags = {"sea"}, attributes={"claw"} },
   ["barricuda"] = { tags = {"sea"}, attributes={"tooth"} },
   ["whale"] = { tags = {"sea"}, attributes={} },
+
+  -- reptiles
   ["crocodile"] = { tags = {"river"}, attributes={"tooth"} },
-  ["gryphon"] = { tags = {"desert", "mountain"}, attributes={} },
-  ["falcon"] = { tags = {}, attributes={"feather"} },
-  ["eagle"] = { tags = {}, attributes={"feather"} },
-  ["wyrm"] = { tags = {}, attributes={} },
-  ["rukh"] = { tags = {}, attributes={"feather"} },
-  ["kirin"] = { tags = {}, attributes={} },
-  ["sparrow"] = { tags = {}, attributes={"feather"} },
-  ["raven"] = { tags = {"cold"}, attributes={"feather"} },
-  ["crow"] = { tags = {}, attributes={"feather"} },
-  ["osprey"] = { tags = {}, attributes={"feather"} },
+  ["lizard"] = { tags = {}, attributes={} },
+  ["frog"] = { tags = {}, attributes={} },
+  ["toad"] = { tags = {}, attributes={} },
+  ["turtle"] = { tags = {}, attributes={} },
+  ["tortoise"] = { tags = {}, attributes={} },
+
   ["ox"] = { tags = {"plains"}, attributes={"horn"} },
-  ["lamb"] = { tags = {"plains"}, attributes={} },
-  ["panther"] = { tags = {"forest"}, attributes={"tooth"} },
-  ["jaguar"] = { tags = {"forest"}, attributes={"tooth"} },
-  ["giant ___"] = { tags = {}, attributes={} },
+  ["bull"] = { tags = {"plains"}, attributes={} },
   ["stag"] = { tags = {"forest"}, attributes={"antler"} },
   ["antelope"] = { tags = {"plains"}, attributes={"horn"} },
-  ["drake"] = { tags = {}, attributes={} },
-  ["wyvern"] = { tags = {}, attributes={} },
-  ["lynx"] = { tags = {}, attributes={} },
-  ["loon"] = { tags = {}, attributes={"feather"} },
-  ["songbird"] = { tags = {}, attributes={"feather"} },
-  ["crane"] = { tags = {}, attributes={"feather"} },
+  ["elk"] = { tags = {"forest"}, attributes={"antler"} },
+  ["lamb"] = { tags = {"plains"}, attributes={} },
+  ["camel"] = { tags = {"desert"}, attributes={} },
+  ["giant ___"] = { tags = {}, attributes={} },
+  ["mammoth"] = { tags = {}, attributes={} },
+  ["aurochs"] = { tags = {}, attributes={} },
+  ["boar"] = { tags = {}, attributes={} },
+  ["squirrel"] = { tags = {}, attributes={} },
+  ["sheep"] = { tags = {}, attributes={} },
+  ["bear"] = { tags = {"forest"}, attributes={"claw"} },
+  ["slug"] = { tags = {}, attributes={} },
+  ["leech"] = { tags = {}, attributes={} },
+  ["rat"] = { tags = {}, attributes={} },
+  ["hyena"] = { tags = {"plains"}, attributes={} },
+  ["ape"] = { tags = {}, attributes={} },
+
+-- dire-wolf
+-- emperor-
+-- great-
 }
 
 WordRepository.settlementDescriptions = {
   -- describe landscape
   ["boreal"] = { tags = {"city"} },
+  ["autumnal"] = { tags = {"city"} },
+  ["verdant"] = { tags = {"city"} },
 
   -- describe role
   ["mining"] = { tags = {"village","town"} },
@@ -1002,7 +1248,7 @@ WordRepository.settlementDescriptions = {
 WordRepository.settlements = {
     --   1: small village
     ["village"] = { tags = {} },
-
+    ["hamlet"] = { tags = {} },
     --   5: medium town
     ["town"] = { tags = {} },
   
@@ -1030,6 +1276,10 @@ WordRepository.settlements = {
     -- citadel
     -- palace
     -- cistern
+    -- ["black market"] = { tags = {} },
+    -- ["well"] = { tags = {} },
+    -- ["crossroads"] = { tags = {} },
+    -- ["catacombs"] = { tags = {} },
     -- sewers
 }
 
@@ -1054,17 +1304,22 @@ WordRepository.buildings = {
   -- --   1: farm
   ["farm"] = { tags = {} },
   ["mill"] = { tags = {} },
+  ["excavation"] = { tags = {} },
   ["mine"] = { tags = {} },
   ["quarry"] = { tags = {} },
   ["forge"] = { tags = {} },
   ["caravan"] = { tags = {} },
+  ["cache"] = { tags = {} },
   ["vault"] = { tags = {} },
   -- --   5: estate
+  ["vinyard"] = { tags = {} },
+  ["hatchery"] = { tags = {} },
   ["estate"] = { tags = {} },
 
   -- --   10: palace
   ["manor"] = { tags = {} },
   ["palace"] = { tags = {} },
+
 
   -- -- dwelling
   -- --  1: 
@@ -1090,6 +1345,7 @@ WordRepository.buildings = {
   -- ["boneyard"] = { tags = {} },
   -- ["charnal ground"] = { tags = {} },
 
+  -- ["promenade"] = { tags = {} },
   -- ["fairgrounds"] = { tags = {} },
   -- ["monument"] = { tags = {} },
   -- ["bridge"] = { tags = {"river"} },
@@ -1329,36 +1585,30 @@ end
 
 
 
+
 -- abominable
 
-
+-- autumn
 
 -- abundance
 -- abundant
 
-
--- growth
--- mutation
--- affliction
--- might
--- memory
--- benefaction
--- bounty
--- omen
--- peace
--- dread
--- frenzy
--- savagery
-
 -- draught (potion)
 -- infusion
-
 
 -- charm (n.)
 -- antique
 -- trophy
 -- loom
 -- book
+-- emerald
+-- ruby
+-- sapphire
+-- methyst
+-- geode
+-- leather
+-- plunder
+
 
 -- cowl
 -- veil
@@ -1367,90 +1617,32 @@ end
 -- wand
 -- cane
 
+-- scar (attribute)
+-- mark
+-- sigil
 
-
--- progenitor
--- __ collector
--- herder
--- __herd
--- socialite
--- pugilist
--- caretaker
--- hunter/tress
--- woodcutter
--- bard
--- researcher
--- bootlegger
--- smuggler
--- duelist
--- court ___
-
-
--- chancellor
 
 -- clan
 -- court
-
-
+-- __folk
+-- entourage
+-- swarm
 
 -- fearie
 -- dryad
-
-
+-- ghoul
+-- familiar
 
 -- novice
 -- adept
 -- master
 -- accomplished
 
-
-
-
--- autumn/autimnal
-
-
--- lizard
--- mammoth
--- ape
--- aurochs
--- beetle
--- bee
--- hornet
--- wasp
--- boar
--- squirrel
-
-
-
-
--- black market
--- borderland
--- well
--- crossroads
--- grove
--- lagoon
--- catacomb
--- glade
--- creek
-
--- willow
--- bamboo
--- foliage
--- conifer
-
-
 -- shell
 -- bramble
 -- dust
-
-
-
--- aggressive
--- natural
--- unnatural
--- ascetic
--- auspicious
--- cadaverous
+-- fossil
+-- grass
 
 
 -- -- desciptors by landscape
@@ -1460,65 +1652,7 @@ end
 -- arctic
 -- timber
 
-
--- awaken
--- devastate
--- tend
--- rend
--- attune
--- bequeath
--- bind
--- birth
--- vex
--- blossom
--- enrage
--- cultivate
--- prowl
--- purge
--- restrain
--- reclaim
--- relent
--- renounce
--- revere
--- revoke
--- mend
--- awaken
--- safeguard
--- scheme
--- shatter
--- slaughter
--- smite
--- smolder
--- smuggle
--- weave
--- stitch
--- quell
--- spurn
--- invoke
--- subjugate
--- exalt
--- nurture
--- vindicate
--- tempt
--- torment
--- arrogant
--- make
--- vanquish
--- abandon
--- worship
--- quell
--- persecute
--- nurture
--- cherish
--- cling
--- cloak (pp v.)
--- commune
--- creep
--- cultivate
--- ignite
--- deny
--- usurp
--- taint
+-- autumn/autimnal
 
 -- the___
 -- wild
@@ -1538,9 +1672,40 @@ end
 -- -clad
 -- -branch
 -- -bond
+-- __'s path
+-- doom---
+-- brood--(mother, lord)
+-- dueling grounds
+-- -blast
+-- earth-
+-- -shaker
+-- war-
+-- -bark
+-- under-
+-- over-
+-- far-
+-- -regent
+-- glimmer-
+-- -stone
+-- rot-(animal)
+-- sundew
+-- moondew
+-- grave ___
+-- grave__ _animal
+-- all-__ing
+-- __chant
+-- gutter __
+-- -kin
+-- lifeforce
 
 
--- -- way of naming religions / deities
+-- adjectives for classes:
+-- druidic clerical knightly,...
+
+-- __ instinct
+
+
+-- way of naming religions / deities
 
 
 
