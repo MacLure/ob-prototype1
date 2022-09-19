@@ -89,13 +89,13 @@ function love.draw()
 
 end
 
-function humanName(gender)
-  if gender == "male" then
-    return random(gNames.humanMaleNames)
-  else
-    return random(gNames.humanFemaleNames)
-  end
-end
+-- function humanName(gender)
+--   if gender == "male" then
+--     return random(gNames.humanMaleNames)
+--   else
+--     return random(gNames.humanFemaleNames)
+--   end
+-- end
 
 function printList(list)
   local output = ""

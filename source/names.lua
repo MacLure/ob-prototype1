@@ -1,18 +1,5 @@
 gNames = {}
 
-gNames.humanMaleNames = {
-  "George","Alphonse",
-  "Carlos","Sheldon",
-  "Edvard","Mahmoud",
-  "Simon","Antonio"
-}
-
-gNames.humanFemaleNames = {
-  "Judy","Rania","Samia",
-  "Stella","Grace","Henrietta",
-  "Aisha","Maria","Lisette","Mitzi",
-}
-
 gNames.vowels = {"a","e","i","o","u"}
 gNames.consonants = {"b","c","d","f","g","h","j","k","l","m","n","p","q","r","s","t","v","w","x","z"}
 gNames.punctuation = {"'","-"}

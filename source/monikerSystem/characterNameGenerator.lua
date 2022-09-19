@@ -2,15 +2,31 @@ CharacterNameGenerator = Class{}
 
 function CharacterNameGenerator:init()
   local this = {}
-
   setmetatable(this, self)
+
+  this.humanMaleNames = {
+    "George","Alphonse",
+    "Carlos","Sheldon",
+    "Edvard","Mahmoud",
+    "Simon","Antonio"
+  }
+  
+  this.humanFemaleNames = {
+    "Judy","Rania","Samia",
+    "Stella","Grace","Henrietta",
+    "Aisha","Maria","Lisette","Mitzi",
+  }
+
   return this
 end
 
--- function CharacterNameGenerator:animals(character)
---   local regionAnimals = character.region.animals
---   return regionAnimals
--- end
+function CharacterNameGenerator:humanName(gender)
+  if gender == "male" then
+    return random(self.humanMaleNames)
+  else
+    return random(self.humanFemaleNames)
+  end
+end
 
 function CharacterNameGenerator:adjectives(character)
   local adjectives = {}

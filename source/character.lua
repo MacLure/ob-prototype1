@@ -19,7 +19,7 @@ function Character:init(params)
     this.gender = this:randomGender()
   end
 
-  this.CharacterName = humanName(this.gender)
+  this.CharacterName = characterNameGenerator:humanName(this.gender)
   this.className = this:class()
   characterNameGenerator:nameCharacter(this)
 

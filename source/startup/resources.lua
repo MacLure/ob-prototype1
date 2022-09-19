@@ -91,9 +91,7 @@ require 'source/characterTypes'
 
 require 'source/monikerSystem/wordRepository'
 require 'source/settlementGenerator'
-require 'source/monikerSystem/monikerSystem'
 require 'source/monikerSystem/placeNameGenerator'
-
 require 'source/monikerSystem/region'
 require 'source/monikerSystem/faction'
 require 'source/monikerSystem/characterNameGenerator'
