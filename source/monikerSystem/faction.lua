@@ -6,6 +6,7 @@ function Faction:init(params)
 
   this.region = params.region
   this.characteristics = {}
+  this.characters = {}
   this:setFactionAttributes()
   this:setName()
   -- light <-> darkness
@@ -39,6 +40,13 @@ function Faction:setFactionAttributes()
       characteristics.gender = member.gender 
     end
   end
+
+  if #characteristics.animal.attributes > 0 then
+    characteristics.animalAttributes = {}
+    for i, attribute in pairs(characteristics.animal.attributes) do
+      table.insert(characteristics.animalAttributes, attribute)
+    end
+  end
 end
 
 function Faction:setName()
@@ -52,7 +60,6 @@ function Faction:setName()
   local possibleNames = {
     -- words:color().name.." "..words:pluralize(random(animals).name),
     -- words:pluralize(words:relation().name).." of the "..landscape,
-    -- words:color().name.." "..words:pluralize(words:attribute().name),
     -- words:substance().name.." "..words:pluralize(random(animals).name),
     -- words:substance().name.." "..words:pluralize(words:doer(words:verb()),
 
@@ -66,6 +73,11 @@ function Faction:setName()
     landscape.." "..socialGroup.name
   }
 
+  if self.characteristics.animalAttributes then
+    table.insert(possibleNames, color.name.." "..words:pluralize(random(characteristics.animalAttributes)))
+    table.insert(possibleNames, socialGroup.name.." of the "..color.name.." "..random(characteristics.animalAttributes))
+  end
+
   self.name = "the "..random(possibleNames)
 end
 
@@ -74,6 +86,8 @@ function Faction:makeCharacter()
     region= self.region,
     faction = self
   })
+
+  table.insert(self.characters, character)
 
   return character
 end

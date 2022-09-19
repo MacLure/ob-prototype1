@@ -41,7 +41,6 @@ function printRegionDetails(regionParams)
   local region = Region:init(regionParams)
 
   region:printHeadline()
-  print("")
   print("ANIMALS:")
   local animals = {}
   for k, v in pairs(region.animals) do
@@ -51,13 +50,6 @@ function printRegionDetails(regionParams)
   print("")
   print("GOLEMS:")
   printList(region.golems)
-  print("")
-  print("FACTIONS:")
-  for k, faction in pairs(region.factions) do
-    print(faction.name)
-  end
-  print("")
-  region:printCharacters()
   print("")
   region:printLocations()
   print("")
@@ -76,8 +68,6 @@ function love.keyboard.wasPressed(key)
 end
 
 function love.update(dt)
-  -- stack:update(dt)
-
   if love.keyboard.wasPressed('escape') then   
     love.event.quit()
   end
@@ -85,17 +75,7 @@ function love.update(dt)
   love.keyboard.keysPressed = {}
 end
 
-function love.draw()
-
-end
-
--- function humanName(gender)
---   if gender == "male" then
---     return random(gNames.humanMaleNames)
---   else
---     return random(gNames.humanFemaleNames)
---   end
--- end
+function love.draw() end
 
 function printList(list)
   local output = ""

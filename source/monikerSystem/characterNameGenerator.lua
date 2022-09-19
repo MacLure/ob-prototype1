@@ -96,17 +96,20 @@ end
 function CharacterNameGenerator:nameCharacter(character)
   local factionCharacteristics = character.faction.characteristics
   local animal = factionCharacteristics.animal
+  local animalAttributes = factionCharacteristics.animalAttributes
+  local animalAttribute = words:attribute().name
+
   local color = factionCharacteristics.color
   local adjectives = self:adjectives(character)
   local socialGroup = factionCharacteristics.socialGroup
   local relation = random(self:relations(character))
 
-  if animal.attributes then
-    local attributes = animal.attributes
-  end
-
   if socialGroup.member then
     relation = words.relations[socialGroup.member]
+  end
+
+  if factionCharacteristics.animalAttributes then
+    animalAttribute = random(factionCharacteristics.animalAttributes)
   end
 
   local pattern1 = color.name
@@ -116,6 +119,7 @@ function CharacterNameGenerator:nameCharacter(character)
   local pattern24 = "re-"..words:verb().pp
   local pattern25 = "god-"..words:verb().pp
   local pattern26 = "still-"..words:verb().pp
+  local pattern27 = color.name.."-"..animalAttribute
 
   local pattern5 = words:less(random(character.region.substances).name)
   local pattern6 = animal.name
@@ -135,7 +139,7 @@ function CharacterNameGenerator:nameCharacter(character)
   local pattern21 = "bringer of "..words:abstract().name
   local pattern22 = "errant "..animal.name
   local pattern23 = "wandering "..animal.name
-  local pattern24 = "font of ".."SUBSTANCE"
+  local pattern24 = "font of ".."ABSTRACT"
   local pattern23 = animal.name.."-killer"
 
   local possibleNames = {
@@ -150,6 +154,7 @@ function CharacterNameGenerator:nameCharacter(character)
     self:nameFirst(character, pattern24),
     self:nameFirst(character, pattern25),
     self:nameFirst(character, pattern26),
+    self:nameFirst(character, pattern27),
 
     self:concatenateTitle( character, pattern7 ),
     self:concatenateTitle( character, pattern8 ),
@@ -167,7 +172,8 @@ function CharacterNameGenerator:nameCharacter(character)
     self:concatenateTitle( character, pattern21 ),
     self:concatenateTitle( character, pattern22 ),
     self:concatenateTitle( character, pattern23 )
-
   }
+
+
   character.name = random(possibleNames)
 end

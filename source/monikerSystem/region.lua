@@ -105,14 +105,13 @@ function Region:init(params)
 
 
   -- CHARACTERS
-  this.characters = {
-    -- this:makeCharacter(),
-    -- this:makeCharacter()
-  }
+  this.characters = {}
 
 
   for i, faciton in pairs(this.factions) do
-    table.insert(this.characters, faciton:makeCharacter())
+    for i=1, 5, 1 do
+      table.insert(this.characters, faciton:makeCharacter())
+    end
   end
 
   -- UNDECIDED
@@ -171,6 +170,15 @@ function Region:printHeadline()
   print("integratedness: "..self.integratedness, "population: "..self.population, "prosperity: "..self.prosperity)
   print("topology: "..self.topology, "temperature: "..self.temperature, "vegetation: "..self.vegetation)
   print("-----------------------------------------------------------------")
+  print("")
+  print("FACTIONS:")
+  for i, faction in pairs(self.factions) do
+    print("----- "..faction.name.." -----")
+    for j, character in pairs(faction.characters) do
+      character:printDetails()
+    end
+    print("")
+  end
 end
 
 function Region:printCharacters()
