@@ -13,7 +13,6 @@ function Character:init(params)
   }
   this.alignment = math.random(1,10)
 
-  print(this.faction.name)
   if this.faction.characteristics.gender then
     this.gender = this.faction.characteristics.gender
   else

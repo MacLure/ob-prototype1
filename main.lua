@@ -23,7 +23,6 @@ function love.load()
 
   characterNameGenerator = CharacterNameGenerator:init()
   placeNameGenerator = PlaceNameGenerator:init()
-  factionNameGenerator = FactionNameGenerator:init()
 
   local regions = {
     {tags={"sea"}, landscape="sea"},
