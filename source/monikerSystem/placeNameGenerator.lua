@@ -32,8 +32,8 @@ end
 function PlaceNameGenerator:randomName(region)
   local pattern1 = words:settlement().name
   local pattern2 = words:building().name
-  local pattern3 = words:verb().pp.." "..words:settlement().name
-  local pattern4 = words:verb().pp.." "..words:building().name
+  local pattern3 = words:pastParticiple(words:verb()).." "..words:settlement().name
+  local pattern4 = words:pastParticiple(words:verb()).." "..words:building().name
   local pattern5 = random(region.substances).name.." "..words:building().name
   local pattern6 = random(region.substances).name.." "..words:settlement().name
   local pattern7 = words:color().name.." "..words:building().name
@@ -71,7 +71,7 @@ function PlaceNameGenerator:settlementName(params)
   end
 
   local possibleNames = {
-    -- name..", the "..words:verb().pp.." "..settlementType,
+    -- name..", the "..words:pastParticiple(words:verb()).." "..settlementType,
     -- name..", the "..random(region.substances).name.." "..settlementType,
     -- name..", the "..words:color().name.." "..settlementType,
     -- name..", the "..words:pluralize(random(region.animals).name).." "..settlementType,
@@ -79,10 +79,10 @@ function PlaceNameGenerator:settlementName(params)
 
     -- name..", "..settlementType.." of "..words:pluralize(random(region.animals).name),
     -- name..", "..settlementType.." of "..words:pluralize(random(region.substances).name),
-    -- name..", "..settlementType.." of "..words:verb().pp.." "..words:pluralize(random(region:region.animals).name),
-    -- name..", "..settlementType.." of "..words:verb().pp.." "..words:pluralize(random(region.substances).name),
+    -- name..", "..settlementType.." of "..words:pastParticiple(words:verb()).." "..words:pluralize(random(region:region.animals).name),
+    -- name..", "..settlementType.." of "..words:pastParticiple(words:verb()).." "..words:pluralize(random(region.substances).name),
 
-    -- name..", "..words:verb().pp.." "..settlementType.." of "..words:pluralize(random(region.animals).name),
+    -- name..", "..words:pastParticiple(words:verb()).." "..settlementType.." of "..words:pluralize(random(region.animals).name),
 
     name..", "..random(descriptors).name.." "..settlementType,
     name..", "..region.landscape.." "..settlementType,

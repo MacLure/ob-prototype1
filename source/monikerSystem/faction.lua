@@ -63,12 +63,12 @@ function Faction:setName()
     -- words:substance().name.." "..words:pluralize(random(animals).name),
     -- words:substance().name.." "..words:pluralize(words:doer(words:verb()),
 
-    animal.name.."-"..verb.pp.." "..socialGroup.name,
+    animal.name.."-"..words:pastParticiple(verb).." "..socialGroup.name,
     color.name.." "..socialGroup.name,
     socialGroup.name.." of the "..animal.name,
     socialGroup.name.." of the "..color.name.." "..animal.name,
-    "un"..verb.pp,
-    verb.pp,
+    "un"..words:pastParticiple(verb),
+    words:pastParticiple(verb),
     socialGroup.name.." of the "..landscape,
     landscape.." "..socialGroup.name
   }

@@ -4,22 +4,27 @@ function Region:init(params)
   local this = {}
   setmetatable(this, self)
 
-  this.tags = params.tags
-  this.landscape = params.landscape
-
   -- MODIFIERS
   this.topology = math.random(1,10)
   this.temperature = math.random(1,10)
   this.vegetation = math.random(1,10)
 
-  if this.temperature <= 4 then
-    table.insert(this.tags, "cold")
-  end
-
   this.integratedness = math.random(1,10)
   this.population = math.random(1,10)
   this.prosperity = math.random(1,10)
   this.populationStatement = ""
+
+  this.tags = params.tags or {}
+  this.landscape = params.landscape
+
+
+  if this.temperature <= 4 then
+    table.insert(this.tags, "cold")
+  end
+
+  if this.temperature >= 6 and this.landscape == "forest" then
+    this.landscape = "jungle"
+  end
 
   -- NAMING
   this.placeNameIndex = math.random(1, #placeNameGenerators)
@@ -45,7 +50,7 @@ function Region:init(params)
     if this.population >= 8 then
       this.regionStatement = "hidden kingdom"
     elseif this.population >= 4 then
-      this.regionStatement = "fronteir region"
+      this.regionStatement = "frontier region"
     else
       this.regionStatement = "untouched region"
     end
@@ -53,18 +58,26 @@ function Region:init(params)
 
   this.animals = {}
 
-  for k,v in pairs(words.animals) do
-    if containsFromArray(v.tags, this.tags) then
-      v.name = k
-      table.insert(this.animals, v)
+  for k,animal in pairs(words.animals) do
+    -- if containsFromArray(animal.tags, this.landscape) then
+    --   animal.name = k
+    --   table.insert(this.animals, animal)
+    -- end
+    if contains(animal.tags, this.landscape) then
+      animal.name = k
+      table.insert(this.animals, animal)
     end
   end
 
   this.substances = {}
-  for k,v in pairs(words.substances) do
-    if containsFromArray(v.tags, this.tags) then
-      v.name = k
-      table.insert(this.substances, v)
+  for k,substance in pairs(words.substances) do
+    -- if containsFromArray(v.tags, this.tags) then
+    --   v.name = k
+    --   table.insert(this.substances, v)
+    -- end
+    if contains(substance.tags, this.landscape) then
+      substance.name = k
+      table.insert(this.substances, substance)
     end
   end
 

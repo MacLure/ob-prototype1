@@ -25,9 +25,10 @@ function love.load()
   placeNameGenerator = PlaceNameGenerator:init()
 
   local regions = {
-    {tags={"sea"}, landscape="sea"},
-    {tags={"forest"}, landscape="forest"},
-    {tags={"desert"}, landscape="desert"}
+    {landscape="sea"},
+    {landscape="forest"},
+    {landscape="desert"},
+    {landscape="plains"}
   }
 
   for i, region in pairs(regions) do

@@ -122,23 +122,23 @@ function CharacterNameGenerator:nameCharacter(character)
 
   local pattern1 = color.name
   local pattern2 = random(adjectives).name
-  local pattern3 = "un"..words:verb().pp
-  local pattern4 = "twice-"..words:verb().pp
-  local pattern24 = "re-"..words:verb().pp
-  local pattern25 = "god-"..words:verb().pp
-  local pattern26 = "still-"..words:verb().pp
+  local pattern3 = "un"..words:pastParticiple(words:verb())
+  local pattern4 = "twice-"..words:pastParticiple(words:verb())
+  local pattern24 = "re-"..words:pastParticiple(words:verb())
+  local pattern25 = "god-"..words:pastParticiple(words:verb())
+  local pattern26 = "still-"..words:pastParticiple(words:verb())
   local pattern27 = color.name.."-"..animalAttribute
 
   local pattern5 = words:less(random(character.region.substances).name)
   local pattern6 = animal.name
-  local pattern14 = animal.name.."-"..words:verb().pp
-  local pattern16 = random(character.region.substances).name.."-"..words:verb().pp
+  local pattern14 = animal.name.."-"..words:pastParticiple(words:verb())
+  local pattern16 = random(character.region.substances).name.."-"..words:pastParticiple(words:verb())
   local pattern7 = color.name.." "..animal.name
   local pattern8 = random(adjectives).name.." "..animal.name
   local pattern9 = relation.name.." of "..random(character.region.substances).name
   local pattern10 = relation.name.." of "..words:pluralize(animal.name)
-  local pattern11 = random(character.region.substances).name.."-"..words:simplePP(words:attribute().name)
-  local pattern12 = random(character.region.substances).name.."-"..words:simplePP(words:attribute().name).." "..animal.name
+  local pattern11 = random(character.region.substances).name.."-"..words:attribute().name.."ed"
+  local pattern12 = random(character.region.substances).name.."-"..words:attribute().name.."ed".." "..animal.name
   local pattern13 = animal.name.."-"..words:doer(words:verb())
   local pattern15 = random(character.region.substances).name.." "..words:doer(words:verb())
   local pattern18 = words:less(random(character.region.substances).name).." "..relation.name
