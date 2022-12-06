@@ -1,11 +1,11 @@
 FieldState = Class{}
 
-function FieldState:init(stack, mapDef)
+function FieldState:new(stack, mapDef)
   local this = {
     mapDef = mapDef
   }
   
-  this.map = Map:init(this.mapDef)
+  this.map = Map:new(this.mapDef)
 
 
   setmetatable(this, self)

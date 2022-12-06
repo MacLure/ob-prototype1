@@ -1,6 +1,6 @@
 Region = Class{}
 
-function Region:init(params)
+function Region:new(params)
   local this = {}
   setmetatable(this, self)
 
@@ -149,13 +149,13 @@ function Region:prependLandscape(string)
 end
 
 function Region:makeCharacter()
-  local character = Character:init({region= self})
+  local character = Character:new({region= self})
 
   return character
 end
 
 function Region:makeFaction()
-  local faction = Faction:init({region= self})
+  local faction = Faction:new({region= self})
 
   return faction
 end
@@ -164,7 +164,7 @@ function Region:makeSettlement(settlementTypeName)
   settlementType = words.settlements[settlementTypeName]
   settlementType.name = settlementTypeName
 
-  return Location:init(
+  return Location:new(
     {
       region = self,
       settlementType = settlementType,
@@ -174,7 +174,7 @@ function Region:makeSettlement(settlementTypeName)
 end
 
 function Region:makeWildLocation()
-  return Location:init(
+  return Location:new(
     {
       region = self,
       settlementType = "wild",

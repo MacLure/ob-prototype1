@@ -1,6 +1,6 @@
 ProgressBar = Class{}
 
-function ProgressBar:init(params)
+function ProgressBar:new(params)
   params = params or {}
 
   local this = {

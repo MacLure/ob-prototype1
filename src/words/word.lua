@@ -1,6 +1,6 @@
 Word = Class{}
 
-function Word:init()
+function Word:new()
   local this = {}
   setmetatable(this, self)
   return this

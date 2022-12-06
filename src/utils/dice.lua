@@ -1,6 +1,6 @@
 Dice = Class{}
 
-function Dice:init(diceStr)
+function Dice:new(diceStr)
   local this = {
     dice = {}
   }

@@ -1,6 +1,6 @@
 Location = Class{}
 
-function Location:init(params)
+function Location:new(params)
   local this = {}
   setmetatable(this, self)
 
@@ -74,7 +74,7 @@ function Location:makeWildLocationName()
 end
 
 function Location:makeCharacter()
-  local character = Character:init({
+  local character = Character:new({
     region= self.region,
     faction = self.faction,
     location = self

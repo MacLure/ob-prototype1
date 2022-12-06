@@ -72,7 +72,7 @@ local function new(class)
 	-- constructor call
 	return setmetatable(class, {__call = function(c, ...)
 		local o = setmetatable({}, c)
-		o:init(...)
+		o:new(...)
 		return o
 	end})
 end

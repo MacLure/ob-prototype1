@@ -1,6 +1,6 @@
 Tween = Class{}
 
-function Tween:init(start, finish, totalDuration, tweenF)
+function Tween:new(start, finish, totalDuration, tweenF)
 	local this = {
 		tweenF = tweenF or Tween.linear,
 		distance = finish - start,

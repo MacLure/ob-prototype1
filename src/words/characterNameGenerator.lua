@@ -1,6 +1,6 @@
 CharacterNameGenerator = Class{}
 
-function CharacterNameGenerator:init()
+function CharacterNameGenerator:new()
   local this = {}
   setmetatable(this, self)
 

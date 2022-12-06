@@ -1,9 +1,9 @@
 EncounterState = Class{}
 
-function EncounterState:init(stack, def)
+function EncounterState:new(stack, def)
   local this = {}
   
-  this.playerPanel = Panel:init(
+  this.playerPanel = Panel:new(
     {},
     {
       x= 100,
@@ -13,7 +13,7 @@ function EncounterState:init(stack, def)
     }
   )
 
-  this.storyPanel = Panel:init(
+  this.storyPanel = Panel:new(
     {},
     {
       x= 100,

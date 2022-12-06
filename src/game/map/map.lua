@@ -1,6 +1,6 @@
 Map = Class{}
 
-function Map:init(mapDef)
+function Map:new(mapDef)
   local layer = mapDef.layers[1]
 
   local this = {
@@ -64,8 +64,8 @@ function Map:coordToIndex(x, y)
 end
 
 function Map:render()
-  local tileLeft, tileBottom = self:pointToTile(camera.x, camera.y + VIRTUAL_HEIGHT)
-  local tileRight, tileTop = self:pointToTile(camera.x + VIRTUAL_WIDTH, camera.y)
+  local tileLeft, tileBottom = self:pointToTile(camera.x, camera.y + gameHeight)
+  local tileRight, tileTop = self:pointToTile(camera.x + gameWidth, camera.y)
 
   self.tilesetBatch:clear()
 

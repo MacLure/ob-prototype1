@@ -51,7 +51,7 @@ function push:setupScreen(WWIDTH, WHEIGHT, RWIDTH, RHEIGHT, settings)
     highdpi = self._highdpi
   })
 
-  self:initValues()
+  self:newValues()
 
   if self._canvas then
     self:setupCanvas({ "default" }) --setup canvas
@@ -109,7 +109,7 @@ function push:setShader(name, shader)
   end
 end
 
-function push:initValues()
+function push:newValues()
   self._PSCALE = (not love11 and self._highdpi) and getDPI() or 1
   
   self._SCALE = {
@@ -258,7 +258,7 @@ function push:switchFullscreen(winw, winh)
   self._RWIDTH = self._fullscreen and windowWidth or winw or self._WINWIDTH
   self._RHEIGHT = self._fullscreen and windowHeight or winh or self._WINHEIGHT
   
-  self:initValues()
+  self:newValues()
   
   love.window.setFullscreen(self._fullscreen, "desktop")
   if not self._fullscreen and (winw or winh) then
@@ -270,7 +270,7 @@ function push:resize(w, h)
   if self._highdpi then w, h = w / self._PSCALE, h / self._PSCALE end
   self._RWIDTH = w
   self._RHEIGHT = h
-  self:initValues()
+  self:newValues()
 end
 
 function push:getWidth() return self._WWIDTH end

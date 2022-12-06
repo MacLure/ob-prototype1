@@ -64,3 +64,7 @@ gBattleSprites = {
 gTileSets = {
   ['field'] = love.graphics.newImage('assets/tilesets/fieldMap.png'),
 }
+
+gSfx = {}
+
+gMusic = {}

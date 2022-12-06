@@ -1,6 +1,6 @@
 Camera = Class{}
 
-function Camera:init()
+function Camera:new()
   local this = {
     x = 0,
     y = 0,
@@ -22,11 +22,11 @@ end
 
 function Camera:set()
   love.graphics.push()
-  love.graphics.translate(VIRTUAL_WIDTH/2, VIRTUAL_HEIGHT/2)
+  love.graphics.translate(gameWidth/2, gameHeight/2)
   love.graphics.rotate(-self.rotation)
   love.graphics.scale(1 / self.scaleX, 1 / self.scaleY)
   love.graphics.shear(self.shearX, self.shearY)
-  love.graphics.translate(-VIRTUAL_WIDTH/2, -VIRTUAL_HEIGHT/2)
+  love.graphics.translate(-gameWidth/2, -gameHeight/2)
   love.graphics.translate(-self.x, -self.y)
 end
 

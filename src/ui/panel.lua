@@ -1,6 +1,6 @@
 Panel = Class{}
 
-function Panel:init(params, dimensions, color)
+function Panel:new(params, dimensions, color)
   local this = {
     quads = {},
     tiles = {},

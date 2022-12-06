@@ -1,9 +1,9 @@
 BattleState = Class{}
 
-function BattleState:init(stack, def)
+function BattleState:new(stack, def)
   local this = {}
   
-  this.playerPanel = Panel:init(
+  this.playerPanel = Panel:new(
     {},
     {
       x= 100,
@@ -13,7 +13,7 @@ function BattleState:init(stack, def)
     }
   )
 
-  this.enemyPanel = Panel:init(
+  this.enemyPanel = Panel:new(
     {},
     {
       x= 200,
@@ -24,7 +24,7 @@ function BattleState:init(stack, def)
     {0.5,0.01,0.01}
   )
 
-  this.storyPanel = Panel:init(
+  this.storyPanel = Panel:new(
     {},
     {
       x= 100,

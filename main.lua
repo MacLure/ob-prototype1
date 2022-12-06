@@ -1,37 +1,27 @@
 function love.load()
-  require 'dependencies'
-  -- require 'source/startup/setupResolution'
-  -- require 'source/startup/resources'
   math.randomseed(os.time())
-
   love.graphics.setDefaultFilter('nearest', 'nearest')
+  
+  require 'dependencies'
 
-  local pixelScaleIndex = 1
-  local pixelScales = {
-    {640, 360},
-    {512, 288},
-    {427, 240},
-    {320, 240},
-    {256, 192},
-    {128, 96},
+  displayManager = DisplayManager:new()
+  AudioManager = AudioManager:new()
+  Event = EventSystem:new()
+
+  displayManager:setDisplay()
+  
+  gameStateMachine = StateMachine:new {
+    ['battle'] = function() return BattleState:new() end,
+    ['encounter'] = function() return EncounterState:new() end,
+    ['field'] = function() return FieldState:new() end,
+    ['worldmap'] = function() return WorldMapState:new() end,
   }
-  
-  local WINDOW_WIDTH, WINDOW_HEIGHT = 1280, 720
-  VIRTUAL_WIDTH, VIRTUAL_HEIGHT = unpack(pixelScales[pixelScaleIndex])
-  
-  Push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
-    vsync = false,
-    fullscreen = true,
-    resizable = true,
-    pixelperfect = true,
-    stretched = true
-  })  
-  
 
+  gameStateMachine:change('worldmap')
 
   love.keyboard.keysPressed = {}
 
-  words = WordRepository:init()
+  words = WordRepository:new()
     
   placeNameGenerators = {
     gNames.randomJapanesePlace,
@@ -47,8 +37,8 @@ function love.load()
     gNames.randomRussianPlace
   }
 
-  characterNameGenerator = CharacterNameGenerator:init()
-  placeNameGenerator = PlaceNameGenerator:init()
+  characterNameGenerator = CharacterNameGenerator:new()
+  placeNameGenerator = PlaceNameGenerator:new()
 
   local regions = {
     {landscape="sea"},
@@ -61,11 +51,11 @@ function love.load()
     printRegionDetails(region)
   end
 
-  love.event.quit()
+  -- love.event.quit()
 end
 
 function printRegionDetails(regionParams)
-  local region = Region:init(regionParams)
+  local region = Region:new(regionParams)
 
   region:printHeadline()
   print("ANIMALS:")
@@ -99,10 +89,16 @@ function love.update(dt)
     love.event.quit()
   end
 
+  gameStateMachine:update(dt)
+
   love.keyboard.keysPressed = {}
 end
 
-function love.draw() end
+function love.draw()
+  Push:apply('start')
+  gameStateMachine:render()
+  Push:apply('end')
+end
 
 function printList(list)
   local output = ""

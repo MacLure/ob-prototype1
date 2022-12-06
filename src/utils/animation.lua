@@ -1,6 +1,6 @@
 Animation = Class{}
 
-function Animation:init(frames, loop, spf)
+function Animation:new(frames, loop, spf)
   if loop == nil or loop == true then
     loop = true
   end

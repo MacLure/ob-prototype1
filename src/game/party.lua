@@ -1,6 +1,6 @@
 Party = Class{}
 
-function Party:init()
+function Party:new()
   local this = {
     reserveCharacters = {},
     units = {},

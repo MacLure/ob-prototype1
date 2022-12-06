@@ -1,49 +1,46 @@
 WorldMapState = Class{}
 
-function WorldMapState:init(stack, def)
-  local this = {
-    worldMapX = 350,
-    worldMapY = 100,
-    mapSize = 240,
-    activeMapSize = 200,
-    subMapSize = 40,
-    hoverIndex = nil,
-    placeName = gNames.randomJapanesePlace(),
-    placeTypes = {
-      "Unclaimed Lands",
-      "Abandoned Lands",
-      "Pilgrimmage Route",
-      "Cursed Lands",
-      "Bandit-Controlled Territory",
-      "Empire-Held Territory",
-      "Imperial Heartland",
-      "Independent Kingdom",
-      "The Holy City",
-    },
-    randomPlaceNames = {
-      gNames.randomJapanesePlace,
-      gNames.randomChinesePlace,
-      gNames.randomKoreanPlace,
-      gNames.randomNahuatlPlace,
-      gNames.randomGermanPlace,
-      gNames.randomEnglishPlace,
-      gNames.randomFrenchPlace,
-      gNames.randomArabicPlace,
-      gNames.randomBrazilianPlace
-    },
-    markers = {},
-    nodes = {},
-    shader = gShaders['worldMap']
-  }
+function WorldMapState:new(stack, def)
+  local this = {}
+  setmetatable(this, self)
 
+  this.worldMapX = 350
+  this.worldMapY = 100
+  this.mapSize = 240
+  this.activeMapSize = 200
+  this.subMapSize = 40
+  this.hoverIndex = nil
+  this.placeName = gNames.randomJapanesePlace()
+  this.placeTypes = {
+    "Unclaimed Lands",
+    "Abandoned Lands",
+    "Pilgrimmage Route",
+    "Cursed Lands",
+    "Bandit-Controlled Territory",
+    "Empire-Held Territory",
+    "Imperial Heartland",
+    "Independent Kingdom",
+    "The Holy City",
+  }
+  this.randomPlaceNames = {
+    gNames.randomJapanesePlace,
+    gNames.randomChinesePlace,
+    gNames.randomKoreanPlace,
+    gNames.randomNahuatlPlace,
+    gNames.randomGermanPlace,
+    gNames.randomEnglishPlace,
+    gNames.randomFrenchPlace,
+    gNames.randomArabicPlace,
+    gNames.randomBrazilianPlace
+  }
+  this.markers = {}
+  this.nodes = {}
+  this.shader = gShaders['worldMap']
   this.activeMapX = this.worldMapX + (this.mapSize - this.activeMapSize) / 2
   this.activeMapY = this.worldMapY + (this.mapSize - this.activeMapSize) / 2
 
-  -- this.map = noise.perlinNoise(this.mapSize, this.mapSize)
-
+  this.map = noise.perlinNoise(this.mapSize, this.mapSize)
   -- this.map = noise.voronoi(200,200, 20)
-
-  setmetatable(this, self)
   
   this:generateMap()
   this:generateLocations()
@@ -51,11 +48,11 @@ function WorldMapState:init(stack, def)
   return this
 end
 
-function WorldMapState:enter(dt)
+function WorldMapState:enter()
 
 end
 
-function WorldMapState:exit(dt)
+function WorldMapState:exit()
 
 end
 
@@ -171,7 +168,7 @@ function WorldMapState:generateLocations()
   for i = 1, #self.markers do
     local fieldNoiseMap = self:generateSubMap(self.markers[i])
     local fieldMap = mapBuilder(fieldNoiseMap)
-    self.markers[i].subMap = Map:init(fieldMap)
+    self.markers[i].subMap = Map:new(fieldMap)
 
     self.markers[i].iconX = self.markers[i].x - iconOffset
     self.markers[i].iconY = self.markers[i].y - iconOffset
@@ -187,8 +184,8 @@ function WorldMapState:render(dt)
   local y = 0
   local x = 0
 
-  -- love.graphics.draw(mapEdge, worldMapX -32, worldMapY-6)
-  -- love.graphics.draw(mapEdge, worldMapX + mapSize+32, worldMapY-6, 0, -1, 1)
+  love.graphics.draw(mapEdge, worldMapX -32, worldMapY-6)
+  love.graphics.draw(mapEdge, worldMapX + mapSize+32, worldMapY-6, 0, -1, 1)
     
   love.graphics.setShader(self.shader)
   love.graphics.draw(self.mapImage, worldMapX, worldMapY)
@@ -212,11 +209,13 @@ function WorldMapState:render(dt)
     )
   end
 
-    --   love.graphics.rectangle(
-    --   "line",
-    --   self.activeMapX,
-    --   self.activeMapY,
-    --   self.activeMapSize,
-    --   self.activeMapSize
-    -- )
+      love.graphics.rectangle(
+      "line",
+      self.activeMapX,
+      self.activeMapY,
+      self.activeMapSize,
+      self.activeMapSize
+    )
+
+    love.graphics.setColor(1,1,1)
 end

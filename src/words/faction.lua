@@ -1,6 +1,6 @@
 Faction = Class{}
 
-function Faction:init(params)
+function Faction:new(params)
   local this = {}
   setmetatable(this, self)
 
@@ -82,7 +82,7 @@ function Faction:setName()
 end
 
 function Faction:makeCharacter()
-  local character = Character:init({
+  local character = Character:new({
     region= self.region,
     faction = self
   })

@@ -1,6 +1,6 @@
 Character = Class{}
 
-function Character:init(params)
+function Character:new(params)
   local this = {}
   setmetatable(this, self)
 

@@ -6,7 +6,7 @@ PlaceNameGenerator = Class{}
 -- Dwelling Name
 -- Geographical area name
 
-function PlaceNameGenerator:init()
+function PlaceNameGenerator:new()
   local this = {}
 
   setmetatable(this, self)

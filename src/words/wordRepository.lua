@@ -1,6 +1,6 @@
 WordRepository = Class{}
 
-function WordRepository:init()
+function WordRepository:new()
   local this = {}
   setmetatable(this, self)
   return this

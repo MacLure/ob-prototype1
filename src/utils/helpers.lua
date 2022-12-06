@@ -138,11 +138,11 @@ function printWithShadow(text, x, y, width, alignment, color)
 end
 
 function tilesPerRow(tileWidth)
-  return math.ceil(VIRTUAL_WIDTH / tileWidth)
+  return math.ceil(gameWidth / tileWidth)
 end
 
 function tilesPerColumn(tileHeight)
-  return math.ceil(VIRTUAL_HEIGHT / tileHeight)
+  return math.ceil(gameHeight / tileHeight)
 end
 
 function getTile(map, rowSize, x, y)

@@ -1,6 +1,6 @@
 StateMachine = Class{}
 
-function StateMachine:init(states)
+function StateMachine:new(states)
 	local this = {
 		empty = {
 			render = function() end,

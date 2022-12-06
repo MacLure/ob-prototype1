@@ -1,6 +1,6 @@
 Unit = Class{}
 
-function Unit:init(party)
+function Unit:new(party)
   local this = {
     characters = {},
     leader = {},
