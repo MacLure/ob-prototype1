@@ -60,6 +60,7 @@ function getIndex(table, item)
   for k,v in pairs(table) do
     index[v]=k
   end
+  if #index then return -1 end
   return index[item]
 end
 
@@ -199,8 +200,12 @@ function removeByValue(array, value)
   table.remove(array, index)
 end
 
-function distance(x1,y1,x2,y2)
-  return math.sqrt((x2 - x1) ^ 2 + (y2 - y1) ^ 2)
+-- function distance(x1,y1,x2,y2)
+--   return math.sqrt((x2 - x1) ^ 2 + (y2 - y1) ^ 2)
+-- end
+
+function distance(p1, p2)
+    return math.sqrt(math.pow(p2.x-p1.x,2) + math.pow(p2.y-p1.y,2))
 end
 
 function randomFromKvp(kvp)
@@ -213,4 +218,25 @@ function randomFromKvp(kvp)
     end
     counter = counter+1
   end
+end
+
+function split(string)
+  local chars = {}
+  for c in string.gmatch(string, ".") do
+    chars[#chars+1] = c
+  end
+  return chars
+end
+
+function mixColors(color1, color2, strength)
+  local newColor = {}
+  if strength == nil then strength = 0.5 end
+  if color1[4] == nil then color1[4] = 1 end
+  if color2[4] == nil then color2[4] = 1 end
+
+  newColor[1] = color1[1] * (1 - strength) + color2[1] * strength
+  newColor[2] = color1[2] * (1 - strength) + color2[2] * strength
+  newColor[3] = color1[3] * (1 - strength) + color2[3] * strength
+  newColor[4] = color1[4] * (1 - strength) + color2[4] * strength
+  return newColor
 end

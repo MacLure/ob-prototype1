@@ -115,56 +115,56 @@ noise.addLandFeature = function(ImageData)
   end
 end
 
-noise.perlinNoise = function(width, height)
-  local random = math.random()
-  local noise = love.math.noise
-  local dots = {}		-- build the noise dots here
+-- noise.perlinNoise = function(width, height)
+--   local random = math.random()
+--   local noise = love.math.noise
+--   local dots = {}		-- build the noise dots here
 
-  local V_adj = 0.1		-- arrow keys adjust the tl corner position in 2D noise space
-  local H_adj = 0.1
+--   local V_adj = 0.1		-- arrow keys adjust the tl corner position in 2D noise space
+--   local H_adj = 0.1
 
-  local V_start =  math.random(1000)		-- starting position in noise space
-  local H_start =  math.random(1000)
+--   local V_start =  math.random(1000)		-- starting position in noise space
+--   local H_start =  math.random(1000)
 
-  local V_span = 1				--  this is the number span of image
-  local H_span = 1
+--   local V_span = 1				--  this is the number span of image
+--   local H_span = 1
 
-  local V_inc = V_span/height
-  local H_inc = H_span/width
+--   local V_inc = V_span/height
+--   local H_inc = H_span/width
 
-  local X_pos = 44			-- indent the active draw space
-  local Y_pos = 44
+--   local X_pos = 44			-- indent the active draw space
+--   local Y_pos = 44
 
-    for i=1, width*height do 											-- points is a table of tables {x_init, y_init, r, g, b}
-      dots[i] = {X_pos,Y_pos,0,0,0} 			-- create once and reuse
-    end
+--     for i=1, width*height do 											-- points is a table of tables {x_init, y_init, r, g, b}
+--       dots[i] = {X_pos,Y_pos,0,0,0} 			-- create once and reuse
+--     end
     
-    local rgb, index -- start drawing at beginning of buffer
-    for y = 1,height do
-      for x = 1,width do
-        index = (y-1)*height + x
-        rgb = noise( (x*H_inc + H_start), (y*V_inc + V_start) ) * 0.55   			-- greyscale value in noise space
-            + noise( 2.7*(x*H_inc + H_start), 2.7*(y*V_inc + V_start) ) * 0.54	-- add some higher order "harmonics"
-            + noise( 3.7*(x*H_inc + H_start), 3.7*(y*V_inc + V_start) ) * 0.10
-            - noise( 6.7*(x*H_inc + H_start), 5.7*(y*V_inc + V_start) ) * 0.20  -- the harmonics can be variant in x,y !!
+--     local rgb, index -- start drawing at beginning of buffer
+--     for y = 1,height do
+--       for x = 1,width do
+--         index = (y-1)*height + x
+--         rgb = noise( (x*H_inc + H_start), (y*V_inc + V_start) ) * 0.55   			-- greyscale value in noise space
+--             + noise( 2.7*(x*H_inc + H_start), 2.7*(y*V_inc + V_start) ) * 0.54	-- add some higher order "harmonics"
+--             + noise( 3.7*(x*H_inc + H_start), 3.7*(y*V_inc + V_start) ) * 0.10
+--             - noise( 6.7*(x*H_inc + H_start), 5.7*(y*V_inc + V_start) ) * 0.20  -- the harmonics can be variant in x,y !!
         
-        dots[index][1] = X_pos + x
-        dots[index][2] = Y_pos + y
-        dots[index][3] = rgb
-      end
-    end
+--         dots[index][1] = X_pos + x
+--         dots[index][2] = Y_pos + y
+--         dots[index][3] = rgb
+--       end
+--     end
     
-    love.graphics.setColor(1,1,1,1)
-    local perlinMap = love.image.newImageData(width,height)
-    for x=0,width-1 do
-      for y=0,height-1 do
-        local index = x + y*height +1
-        perlinMap:setPixel(x, y, dots[index][3],dots[index][3],dots[index][3])
-      end
-    end
+--     love.graphics.setColor(1,1,1,1)
+--     local perlinMap = love.image.newImageData(width,height)
+--     for x=0,width-1 do
+--       for y=0,height-1 do
+--         local index = x + y*height +1
+--         perlinMap:setPixel(x, y, dots[index][3],dots[index][3],dots[index][3])
+--       end
+--     end
 
-    return perlinMap
-end
+--     return perlinMap
+-- end
 
 noise.addRivers = function (ImageData)
   local riverNoise = noise.perlinNoise()

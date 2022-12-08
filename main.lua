@@ -47,9 +47,9 @@ function love.load()
     {landscape="plains"}
   }
 
-  for i, region in pairs(regions) do
-    printRegionDetails(region)
-  end
+  -- for i, region in pairs(regions) do
+  --   printRegionDetails(region)
+  -- end
 
   -- love.event.quit()
 end
@@ -92,6 +92,10 @@ function love.update(dt)
   gameStateMachine:update(dt)
 
   love.keyboard.keysPressed = {}
+end
+
+function love.resize(w, h)
+  Push:resize(w, h)
 end
 
 function love.draw()
