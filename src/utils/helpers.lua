@@ -44,7 +44,7 @@ end
 -- INPUT HELPERS
 
 function mousePosition()
-  return push:toGame(love.mouse.getPosition())
+  return Push:toGame(love.mouse.getPosition())
 end
 
 -- TABLE HELPERS

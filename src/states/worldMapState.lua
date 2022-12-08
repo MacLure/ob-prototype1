@@ -13,15 +13,14 @@ function WorldMapState:new(stack, def)
     this.worldMapSize.y - this.mapMargin*2
   )
 
-  this.hoverIndex = nil
-
   this.iconOffset = math.floor(worldMapSwords:getWidth() / 2)
   this.nodes = {}
   this.shader = gShaders['worldMap']
-  this.points = generate_poisson(this.activeMapSize.x, this.activeMapSize.y, 48, 30)
 
   this:generateMap()
   this:generateLocations()
+
+  this.hoverIndex = -1
 
   return this
 end
@@ -35,25 +34,26 @@ function WorldMapState:exit()
 end
 
 function WorldMapState:update(dt)
+  local mouseX, mouseY = mousePosition()
+  local offsetX = self.worldMapPosition.x + self.mapMargin
+  local offsetY = self.worldMapPosition.y + self.mapMargin
 
-end
+  self.hoverIndex = -1
 
-function WorldMapState:handleInput(dt)
+  for i, node in pairs(self.nodes) do
+    if mouseX >= offsetX + node.position.x - self.iconOffset and
+      mouseY >= offsetY + node.position.y - self.iconOffset and
+      mouseX <= offsetX + node.position.x + self.iconOffset and
+      mouseY <= offsetY + node.position.y + self.iconOffset
+      then
+        self.hoverIndex = i
+      else
+    end
+  end
+
   if love.keyboard.wasPressed('space') then
     self:generateMap()
     self:generateLocations()
-  end
-
-  local mouseX, mouseY = mousePosition()
-
-  for k,v in pairs(self.markers) do
-    if mouseX > v.iconX and mouseX < v.iconX+14 and
-    mouseY > v.iconY and mouseY < v.iconY+14 then
-      self.hoverIndex = k
-      return
-    else
-      self.hoverIndex = nil
-    end
   end
 end
 
@@ -63,6 +63,7 @@ function WorldMapState:generateMap()
 end
 
 function WorldMapState:generateLocations()
+  self.points = generate_poisson(self.activeMapSize.x, self.activeMapSize.y, 48, 30)
   self.nodes = {}
 
   for k, point in pairs(self.points) do
@@ -87,11 +88,8 @@ function WorldMapState:render(dt)
     )
   end
 
-  -- love.graphics.rectangle(
-  --   "line",
-  --   self.worldMapPosition.x + self.mapMargin,
-  --   self.worldMapPosition.y + self.mapMargin,
-  --   self.activeMapSize.x,
-  --   self.activeMapSize.y
-  -- )
+  if self.hoverIndex ~= -1 then
+    love.graphics.printf( self.hoverIndex,
+    self.worldMapPosition.x + self.worldMapSize.x + 48, 50, 128, "center" )
+  end
 end
