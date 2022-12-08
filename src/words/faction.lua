@@ -56,13 +56,12 @@ function Faction:setName()
   local landscape = characteristics.landscape
   local verb = characteristics.verb
   local socialGroup = characteristics.socialGroup
-
+  
   local possibleNames = {
     -- words:color().name.." "..words:pluralize(random(animals).name),
     -- words:pluralize(words:relation().name).." of the "..landscape,
     -- words:substance().name.." "..words:pluralize(random(animals).name),
     -- words:substance().name.." "..words:pluralize(words:doer(words:verb()),
-
     animal.name.."-"..words:pastParticiple(verb).." "..socialGroup.name,
     color.name.." "..socialGroup.name,
     socialGroup.name.." of the "..animal.name,

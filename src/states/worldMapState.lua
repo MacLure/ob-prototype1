@@ -7,6 +7,8 @@ function WorldMapState:new(stack, def)
   this.worldMapPosition = Vector:new(50, 50)
   this.worldMapSize = Vector:new(540, 240)
   this.mapMargin = 24
+  this.hoverIndex = -1
+  this.showDomainMap = false
 
   this.activeMapSize = Vector:new(
     this.worldMapSize.x - this.mapMargin*2,
@@ -19,8 +21,6 @@ function WorldMapState:new(stack, def)
 
   this:generateMap()
   this:generateLocations()
-
-  this.hoverIndex = -1
 
   return this
 end
@@ -55,11 +55,29 @@ function WorldMapState:update(dt)
     self:generateMap()
     self:generateLocations()
   end
+
+  if love.keyboard.wasPressed('v') then
+    self.showDomainMap = not self.showDomainMap
+  end
 end
 
 function WorldMapState:generateMap()
   self.map = perlinNoise(self.worldMapSize)
   self.mapImage = love.graphics.newImage(self.map)
+
+  local domainImageData = love.image.newImageData(self.worldMapSize.x, self.worldMapSize.y)
+  self.domainMap = voronoi(self.worldMapSize, 10)
+  for y = 0, #self.domainMap do
+    for x = 0, #self.domainMap[y] do
+      domainImageData:setPixel(
+          x, y,
+          self.domainMap[y][x][1],
+          self.domainMap[y][x][2],
+          self.domainMap[y][x][3]
+        )
+    end
+  end
+  self.domainMapImage = love.graphics.newImage(domainImageData)
 end
 
 function WorldMapState:generateLocations()
@@ -68,12 +86,14 @@ function WorldMapState:generateLocations()
 
   for k, point in pairs(self.points) do
     table.insert(self.nodes, {
-      position = point
+      position = point,
+      region = Region:new({landscape = random(landscapes)}),
+      color = self.domainMap[math.floor(point.y + self.mapMargin)][math.floor(point.x + self.mapMargin)]
     })
   end
 end
 
-function WorldMapState:render(dt)
+function WorldMapState:render()
   love.graphics.draw(mapEdge, self.worldMapPosition.x -32, self.worldMapPosition.y-6)
   love.graphics.draw(mapEdge, self.worldMapPosition.x + self.worldMapSize.x+32, self.worldMapPosition.y-6, 0, -1, 1)
     
@@ -81,7 +101,12 @@ function WorldMapState:render(dt)
   love.graphics.draw(self.mapImage, self.worldMapPosition.x, self.worldMapPosition.y)
   love.graphics.setShader()
 
+  if self.showDomainMap then
+    love.graphics.draw(self.domainMapImage, self.worldMapPosition.x, self.worldMapPosition.y)
+  end
+
   for k,node in pairs(self.nodes) do
+    love.graphics.setColor(node.color)
     love.graphics.draw(worldMapSwords,
       self.worldMapPosition.x + self.mapMargin + node.position.x - self.iconOffset,
       self.worldMapPosition.y + self.mapMargin + node.position.y - self.iconOffset
@@ -89,7 +114,26 @@ function WorldMapState:render(dt)
   end
 
   if self.hoverIndex ~= -1 then
-    love.graphics.printf( self.hoverIndex,
-    self.worldMapPosition.x + self.worldMapSize.x + 48, 50, 128, "center" )
+    love.graphics.setColor(0.2,0.2,0.2)
+    love.graphics.rectangle("fill", self.worldMapPosition.x + self.worldMapSize.x + 48, 50, 500, 400)
+    self:displayRegionDetails(self.nodes[self.hoverIndex].region)
+  end
+end
+
+function WorldMapState:displayRegionDetails(region)
+  local width = 500
+  local xPos = self.worldMapPosition.x + self.worldMapSize.x + 48 + 4
+  local yPos = 50 + 4
+  local lineheight = 18
+  love.graphics.setColor(1,1,1)
+  love.graphics.printf( self.nodes[self.hoverIndex].region.placeName,
+  xPos, yPos, width, "left" )
+
+  yPos = yPos + lineheight
+
+  for i, faction in pairs(region.factions) do
+    love.graphics.printf( faction.name,
+    xPos, yPos, width, "left" )
+    yPos = yPos + lineheight
   end
 end

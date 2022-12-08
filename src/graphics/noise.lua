@@ -190,41 +190,6 @@ noise.addRivers = function (ImageData)
   end
 end
 
-noise.voronoi = function(width, height, numPoints)
-  local noiseMap = love.image.newImageData(width, height)
-  local points = {}
-  local numPoints = numPoints or 2
-  
-  for i = 1, numPoints do
-    table.insert(points, {math.random(width-1), math.random(height-1)})
-  end
-
-  local lowest, highest = 1,0
-
-  for x = 0, width -1 do
-    for y = 0, height -1 do
-        local distances = {}
-      for j = 1, #points do
-        local value = distance(x, y, points[j][1], points[j][2])
-        table.insert(distances, value)
-      end
-
-      table.sort(distances)
-      local n = 1
-  
-      if distances[1] < lowest then lowest = distances[1] end
-      if distances[#distances] > highest then highest = distances[#distances] end
-
-      local noise = distances[n]/highest*3
-
-      local index = y * width + x +1
-      noiseMap:setPixel(x, y, noise, noise, noise)
-    end
-  end
-
-  return noiseMap
-end
-
 noise.createSubMap = function(map, x, y, width, height)
   local newNoiseMap = love.image.newImageData(width,height)
 

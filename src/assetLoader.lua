@@ -1,8 +1,13 @@
 gFonts = {
-  ['default'] = love.graphics.newFont('assets/fonts/Reactor7.ttf', 16),
-  ['default-large'] = love.graphics.newFont('assets/fonts/Reactor7.ttf', 32),
-  ['default-small'] = love.graphics.newFont('assets/fonts/Reactor7.ttf', 8)
+  ['default'] = love.graphics.newFont('assets/fonts/Reactor7.ttf', 16)
 }
+imageFont = love.graphics.newImageFont(
+  "assets/fonts/imageFont.png",
+  " abcdefghijklmnopqrstuvwxyz" ..
+  "ABCDEFGHIJKLMNOPQRSTUVWXYZ0" ..
+  "123456789.,!?-+/():;%&`'*#=[]\""
+)
+
 
 gPanels = {
   ['panel'] = love.graphics.newImage('assets/ui/panel.png')

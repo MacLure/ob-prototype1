@@ -4,6 +4,9 @@ function Region:new(params)
   local this = {}
   setmetatable(this, self)
 
+  if not params then
+    params = {}
+  end
   -- MODIFIERS
   this.topology = math.random(1,10)
   this.temperature = math.random(1,10)
@@ -63,6 +66,7 @@ function Region:new(params)
     --   animal.name = k
     --   table.insert(this.animals, animal)
     -- end
+
     if contains(animal.tags, this.landscape) then
       animal.name = k
       table.insert(this.animals, animal)

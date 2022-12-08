@@ -17,8 +17,6 @@ function love.load()
     ['worldmap'] = function() return WorldMapState:new() end,
   }
 
-  gameStateMachine:change('worldmap')
-
   love.keyboard.keysPressed = {}
 
   words = WordRepository:new()
@@ -46,6 +44,13 @@ function love.load()
     {landscape="desert"},
     {landscape="plains"}
   }
+
+  landscapes = {"sea","forest","desert","plains", "jungle"}
+
+  love.graphics.setFont(imageFont)
+
+
+  gameStateMachine:change('worldmap')
 
   -- for i, region in pairs(regions) do
   --   printRegionDetails(region)
