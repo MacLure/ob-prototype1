@@ -70,6 +70,8 @@ gTileSets = {
   ['field'] = love.graphics.newImage('assets/tilesets/fieldMap.png'),
 }
 
+gShaders = {}
+
 gSfx = {}
 
 gMusic = {}

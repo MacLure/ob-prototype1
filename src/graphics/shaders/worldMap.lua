@@ -1,5 +1,3 @@
-gShaders = {}
-
 gShaders['worldMap'] = love.graphics.newShader[[
   vec4 effect(vec4 color, Image texture, vec2 uvs, vec2 pixcoord)
   {

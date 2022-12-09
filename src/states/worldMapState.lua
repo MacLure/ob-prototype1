@@ -33,8 +33,6 @@ function WorldMapState:new(stack, def)
   this.regions = {}
   this.domains = {}
 
-  this.shader = gShaders['worldMap']
-
   this.progressManager = ProgressManager:new({
     mapState = this
   })
@@ -113,13 +111,13 @@ function WorldMapState:generateMap()
   local topography = perlinNoise(self.worldMapSize)
   self.topographyImage = love.graphics.newImage(topography)
 
-  local temperature = perlinNoise(self.worldMapSize, {
+  local temperature = temperaturePerlin(self.worldMapSize, {
     color1 = color.blue,
     color2 = color.orange
   })
   self.temperatureImage = love.graphics.newImage(temperature)
 
-  local rainfall = perlinNoise(self.worldMapSize, {
+  local rainfall = temperaturePerlin(self.worldMapSize, {
     color1 = color.blue,
     color2 = color.white
   })
@@ -200,7 +198,7 @@ function WorldMapState:render()
   love.graphics.draw(mapEdge, self.worldMapPosition.x -32, self.worldMapPosition.y-6)
   love.graphics.draw(mapEdge, self.worldMapPosition.x + self.worldMapSize.x+32, self.worldMapPosition.y-6, 0, -1, 1)
     
-  love.graphics.setShader(self.shader)
+  love.graphics.setShader(gShaders['worldMap'])
   love.graphics.draw(self.topographyImage, self.worldMapPosition.x, self.worldMapPosition.y)
   love.graphics.setShader()
 
@@ -215,9 +213,14 @@ function WorldMapState:render()
     )
     end
   elseif self.displayLayer == "temp" then
+    love.graphics.setShader(gShaders['temperature'])
     love.graphics.draw(self.temperatureImage, self.worldMapPosition.x, self.worldMapPosition.y)
+    love.graphics.setShader()
+  
   elseif self.displayLayer == "rain" then
+    love.graphics.setShader(gShaders['rainfall'])
     love.graphics.draw(self.rainfallImage, self.worldMapPosition.x, self.worldMapPosition.y)
+    love.graphics.setShader()
   end
 
   for i,domain in pairs(self.progressManager.domains) do
