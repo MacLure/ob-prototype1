@@ -7,6 +7,11 @@ function Region:new(params)
   if not params then
     params = {}
   end
+
+  this.worldMapPosition = params.worldMapPosition
+  this.color = params.color
+  this.cleared = false
+
   -- MODIFIERS
   this.topology = math.random(1,10)
   this.temperature = math.random(1,10)
@@ -19,7 +24,6 @@ function Region:new(params)
 
   this.tags = params.tags or {}
   this.landscape = params.landscape
-
 
   if this.temperature <= 4 then
     table.insert(this.tags, "cold")
@@ -185,6 +189,11 @@ function Region:makeWildLocation()
       faction = random(self.factions)
     }
   )
+end
+
+function Region:clear()
+  print(self.placeName .. " cleared")
+  self.cleared = true
 end
 
 function Region:printHeadline()

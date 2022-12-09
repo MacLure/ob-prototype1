@@ -18,6 +18,7 @@ function love.load()
   }
 
   love.keyboard.keysPressed = {}
+  love.mouse.clicked = nil
 
   words = WordRepository:new()
     
@@ -48,7 +49,6 @@ function love.load()
   landscapes = {"sea","forest","desert","plains", "jungle"}
 
   love.graphics.setFont(imageFont)
-
 
   gameStateMachine:change('worldmap')
 
@@ -89,6 +89,10 @@ function love.keyboard.wasPressed(key)
   end
 end
 
+function love.mousepressed( x, y, button, istouch, presses )
+  love.mouse.clicked = Vector:new(x, y)
+end
+
 function love.update(dt)
   if love.keyboard.wasPressed('escape') then   
     love.event.quit()
@@ -97,6 +101,7 @@ function love.update(dt)
   gameStateMachine:update(dt)
 
   love.keyboard.keysPressed = {}
+  love.mouse.clicked = nil
 end
 
 function love.resize(w, h)

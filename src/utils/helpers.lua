@@ -101,6 +101,16 @@ function containsFromArray(tableToCheck, tableOfValues)
   return false
 end
 
+function filter(table, filterFunction)
+  local out = {}
+
+  for k, v in pairs(table) do
+    if filterFunction(v, k, table) then out[k] = v end
+  end
+
+  return out
+end
+
 function GenerateTileIndexes(tileMap)
   local tiles = {}
 

@@ -53,7 +53,7 @@ function voronoiImageFromPoints(size, points)
 
   for i = 1, #featurePoints do
     -- featurePoints[i] = Vector:new(math.random(1, size.x), math.random(1, size.y))
-    featurePointValues[i] = {math.random(), math.random(), math.random()}
+    featurePointValues[i] = domainColors[i]
   end
 
   for y = 0, size.y-1 do
