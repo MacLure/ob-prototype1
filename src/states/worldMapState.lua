@@ -173,9 +173,17 @@ function WorldMapState:render()
 
   for k,region in pairs(self.regions) do
     love.graphics.setColor(region.color)
+    local scale = 1
+
+    if region:isLast() then
+      scale = 1.5
+    end
+
     love.graphics.draw(worldMapSwords,
       self.worldMapPosition.x + self.mapMargin + region.worldMapPosition.x - self.iconOffset,
-      self.worldMapPosition.y + self.mapMargin + region.worldMapPosition.y - self.iconOffset
+      self.worldMapPosition.y + self.mapMargin + region.worldMapPosition.y - self.iconOffset,
+      0,
+      scale,scale
     )
   end
 
@@ -210,6 +218,13 @@ function WorldMapState:displayDomainDetails(domain)
     xPos, yPos, width, "left"
   )
 
+  if domain.cleared then
+    love.graphics.setColor(0,1,0)
+    love.graphics.printf("cleared",
+      xPos, yPos, width-6, "right"
+    )
+  end
+
   yPos = yPos + lineheight
 end
 
@@ -229,8 +244,16 @@ function WorldMapState:displayRegionDetails(region)
     xPos, yPos, width, "left"
   )
 
+  if region.cleared then
+    love.graphics.setColor(0,1,0)
+    love.graphics.printf("cleared",
+      xPos, yPos, width-6, "right"
+    )
+  end
+
   yPos = yPos + lineheight
 
+  love.graphics.setColor(1,1,1)
   for i, faction in pairs(region.factions) do
     love.graphics.printf( faction.name,
     xPos, yPos, width, "left" )

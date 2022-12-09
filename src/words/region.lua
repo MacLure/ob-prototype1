@@ -194,6 +194,13 @@ end
 function Region:clear()
   print(self.placeName .. " cleared")
   self.cleared = true
+  if self:isLast() then
+    self.domain:clear()
+  end
+end
+
+function Region:isLast()
+  return self == self.domain.regions[#self.domain.regions]
 end
 
 function Region:printHeadline()

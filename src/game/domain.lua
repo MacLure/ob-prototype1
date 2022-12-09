@@ -38,8 +38,9 @@ function Domain:clear()
   self.cleared = true
 
   local nextDomain = self:domainsByDistance()[1]
-
   table.insert(self.nextDomains, nextDomain)
+
+  print(self.domainName.." cleared")
 end
 
 function Domain:clearedDomains()
