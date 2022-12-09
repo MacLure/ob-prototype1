@@ -32,7 +32,7 @@ function love.load()
     gNames.randomEnglishPlace,
     gNames.randomFrenchPlace,
     gNames.randomArabicPlace,
-    gNames.randomBrazilianPlace,
+    -- gNames.randomBrazilianPlace,
     gNames.randomRussianPlace
   }
 

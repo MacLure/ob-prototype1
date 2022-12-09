@@ -11,7 +11,7 @@ function Domain:new(params)
   this.color = params.color
   this.regions = {}
   this.cleared = false
-  this.domains = params.domains
+  this.progressManager = params.progressManager
 
   return this
 end
@@ -23,15 +23,17 @@ function Domain:addRegion(region)
   region.placeName = region.nameGenerator()
 end
 
-function Domain:orderRegionsByDistance(point)
+function Domain:orderRegionsByDistance(point, direction)
   local function compareDistance(a, b)
     local distanceA = point:distanceFrom(a.worldMapPosition)
     local distanceB = point:distanceFrom(b.worldMapPosition)
-    return distanceA < distanceB
+    if direction == "near" then
+      return distanceA < distanceB
+    end
+    return distanceA > distanceB
   end
 
-  table.sort(self.regions, compareDistance)
-  return orderedRegions
+  local table = table.sort(self.regions, compareDistance)
 end
 
 function Domain:clear()
@@ -40,22 +42,19 @@ function Domain:clear()
   local nextDomain = self:domainsByDistance()[1]
   table.insert(self.nextDomains, nextDomain)
 
+  for i, domain in pairs(self.nextDomains) do
+    domain:orderRegionsByDistance(self.regions[#self.regions].worldMapPosition, "near")
+    table.insert(self.progressManager.activeDomains, domain)
+    removeByValue(self.progressManager.activeDomains, self)
+  end
+
   print(self.domainName.." cleared")
-end
-
-function Domain:clearedDomains()
-  self.domains.
-  self.cleared = true
-
-  local nextDomain = self:domainsByDistance()[1]
-
-  table.insert(self.nextDomains, nextDomain)
 end
 
 function Domain:domainsByDistance()
   local orderedDomains = {}
 
-  local availableDomains = filter(self.domains, function(domain) return not domain.cleared end)
+  local availableDomains = filter(self.progressManager.domains, function(domain) return not domain.cleared end)
 
   for i, candidateDomain in pairs(availableDomains) do
     if candidateDomain ~= self then

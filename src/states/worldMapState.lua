@@ -22,7 +22,7 @@ function WorldMapState:new(stack, def)
   this.worldMapSize = Vector:new(540, 240)
   this.mapMargin = 24
   this.hoverIndex = -1
-  this.showDomainMap = false
+  this.displayLayer = nil
 
   this.activeMapSize = Vector:new(
     this.worldMapSize.x - this.mapMargin*2,
@@ -35,11 +35,13 @@ function WorldMapState:new(stack, def)
 
   this.shader = gShaders['worldMap']
 
+  this.progressManager = ProgressManager:new({
+    mapState = this
+  })
+
   this:generateMap()
   this:generateDomains()
   this:generateRegions()
-
-  this.leftmostDomain:orderRegionsByDistance(this.leftmostDomain.nextDomains[1].worldMapPosition)    
 
   return this
 end
@@ -62,7 +64,7 @@ function WorldMapState:update(dt)
   local offsetY = self.worldMapPosition.y + self.mapMargin
   self.hoverIndex = -1
 
-  for i, region in pairs(self.regions) do
+  for i, region in pairs(self.progressManager.regions) do
     if mouseX >= offsetX + region.worldMapPosition.x - self.iconOffset and
       mouseY >= offsetY + region.worldMapPosition.y - self.iconOffset and
       mouseX <= offsetX + region.worldMapPosition.x + self.iconOffset and
@@ -70,7 +72,7 @@ function WorldMapState:update(dt)
       then
         self.hoverIndex = i
         if love.mouse.clicked then
-          self.regions[i]:clear()
+          self.progressManager.regions[i]:clear()
         end
       else
     end
@@ -83,17 +85,48 @@ function WorldMapState:update(dt)
   end
 
   if love.keyboard.wasPressed('v') then
-    self.showDomainMap = not self.showDomainMap
+    if self.displayLayer == "domain" then
+      self.displayLayer = nil
+    else
+      self.displayLayer = "domain"
+    end
+  end
+
+  if love.keyboard.wasPressed('t') then
+    if self.displayLayer == "temp" then
+      self.displayLayer = nil
+    else
+      self.displayLayer = "temp"
+    end
+  end
+
+  if love.keyboard.wasPressed('r') then
+    if self.displayLayer == "rain" then
+      self.displayLayer = nil
+    else
+      self.displayLayer = "rain"
+    end
   end
 end
 
 function WorldMapState:generateMap()
-  self.map = perlinNoise(self.worldMapSize)
-  self.mapImage = love.graphics.newImage(self.map)
+  local topography = perlinNoise(self.worldMapSize)
+  self.topographyImage = love.graphics.newImage(topography)
+
+  local temperature = perlinNoise(self.worldMapSize, {
+    color1 = color.blue,
+    color2 = color.orange
+  })
+  self.temperatureImage = love.graphics.newImage(temperature)
+
+  local rainfall = perlinNoise(self.worldMapSize, {
+    color1 = color.blue,
+    color2 = color.white
+  })
+  self.rainfallImage = love.graphics.newImage(rainfall)
 end
 
 function WorldMapState:generateDomains()
-  self.domains = {}
   self.domainImageData = love.image.newImageData(self.worldMapSize.x, self.worldMapSize.y)
   self.domainPoints = generate_poisson(self.activeMapSize.x, self.activeMapSize.y, 112, 30)
 
@@ -114,41 +147,53 @@ function WorldMapState:generateDomains()
   for k, point in pairs(self.domainPoints) do
     local domain = Domain:new(
       {
-        domains = self.domains,
+        domains = self.progressManager.domains,
         worldMapPosition = Vector:new(point.x, point.y),
         nameGenerator = random(placeNameGenerators),
-        color = self.domainMap[math.floor(point.y + self.mapMargin)][math.floor(point.x + self.mapMargin)]
+        color = self.domainMap[math.floor(point.y + self.mapMargin)][math.floor(point.x + self.mapMargin)],
+        mapState = self,
+        progressManager = self.progressManager
       })
-    table.insert(self.domains, domain)
+    table.insert(self.progressManager.domains, domain)
   end
 
-  table.sort(self.domains, function(a, b)return a.worldMapPosition.x < b.worldMapPosition.x end)
-  self.leftmostDomain = self.domains[1]
-  self.rightmostDomain = self.domains[#self.domains]
+  table.sort(self.progressManager.domains, function(a, b)return a.worldMapPosition.x < b.worldMapPosition.x end)
+  self.firstDomain = self.progressManager.domains[1]
+  self.rightmostDomain = self.progressManager.domains[#self.progressManager.domains]
 
-  table.insert(self.leftmostDomain.nextDomains, self.leftmostDomain:domainsByDistance()[1])
-  table.insert(self.leftmostDomain.nextDomains, self.leftmostDomain:domainsByDistance()[2])
+  table.insert(self.progressManager.activeDomains, self.firstDomain)
+  table.insert(self.firstDomain.nextDomains, self.firstDomain:domainsByDistance()[1])
+  table.insert(self.firstDomain.nextDomains, self.firstDomain:domainsByDistance()[2])
 end
 
 function WorldMapState:generateRegions()
-  self.regions = {}
   self.points = generate_poisson(self.activeMapSize.x, self.activeMapSize.y, 48, 30)
 
   for k, point in pairs(self.points) do
     local region = Region:new({
       landscape = random(landscapes),
-      worldMapPosition = point,
-      color = self.domainMap[math.floor(point.y + self.mapMargin)][math.floor(point.x + self.mapMargin)]
+      worldMapPosition = Vector:new(point.x, point.y),
+      color = self.domainMap[math.floor(point.y + self.mapMargin)][math.floor(point.x + self.mapMargin)],
+      progressManager = self.progressManager
     })
 
-    table.insert(self.regions, region)
+    table.insert(self.progressManager.regions, region)
 
-    for i, domain in pairs(self.domains) do
+    for i, domain in pairs(self.progressManager.domains) do
       if region.color == domain.color then
         domain:addRegion(region)
       end
     end
   end
+
+  local point1 = self.firstDomain.nextDomains[1].worldMapPosition
+  local point2 = self.firstDomain.nextDomains[2].worldMapPosition 
+ 
+  local direction = point1:directionTo(point2)
+  local distance = point1:distanceFrom(point2) / 2
+
+  self.centerPoint = point1:add(direction:multiply(distance))
+  self.firstDomain:orderRegionsByDistance(self.centerPoint)
 end
 
 function WorldMapState:render()
@@ -156,49 +201,57 @@ function WorldMapState:render()
   love.graphics.draw(mapEdge, self.worldMapPosition.x + self.worldMapSize.x+32, self.worldMapPosition.y-6, 0, -1, 1)
     
   love.graphics.setShader(self.shader)
-  love.graphics.draw(self.mapImage, self.worldMapPosition.x, self.worldMapPosition.y)
+  love.graphics.draw(self.topographyImage, self.worldMapPosition.x, self.worldMapPosition.y)
   love.graphics.setShader()
 
-  if self.showDomainMap then
+  if self.displayLayer == "domain" then
     love.graphics.draw(self.domainMapImage, self.worldMapPosition.x, self.worldMapPosition.y)
-    for i, domain  in pairs(self.leftmostDomain.nextDomains) do
+    for i, domain  in pairs(self.firstDomain.nextDomains) do
       love.graphics.line(
-        self.leftmostDomain.worldMapPosition.x + self.worldMapPosition.x + self.mapMargin,
-        self.leftmostDomain.worldMapPosition.y + self.worldMapPosition.y + self.mapMargin,
+        self.firstDomain.worldMapPosition.x + self.worldMapPosition.x + self.mapMargin,
+        self.firstDomain.worldMapPosition.y + self.worldMapPosition.y + self.mapMargin,
         domain.worldMapPosition.x + self.worldMapPosition.x + self.mapMargin,
         domain.worldMapPosition.y + self.worldMapPosition.y + self.mapMargin
     )
     end
+  elseif self.displayLayer == "temp" then
+    love.graphics.draw(self.temperatureImage, self.worldMapPosition.x, self.worldMapPosition.y)
+  elseif self.displayLayer == "rain" then
+    love.graphics.draw(self.rainfallImage, self.worldMapPosition.x, self.worldMapPosition.y)
   end
 
-  for k,region in pairs(self.regions) do
-    love.graphics.setColor(region.color)
-    local scale = 1
+  for i,domain in pairs(self.progressManager.domains) do
+    for j,region in pairs(domain.regions) do
+      love.graphics.setColor(region.color)
+      local scale = 1
 
-    if region:isLast() then
-      scale = 1.5
+      if region:isLast() then
+        scale = 1.5
+      end
+
+      love.graphics.draw(worldMapSwords,
+        self.worldMapPosition.x + self.mapMargin + region.worldMapPosition.x - self.iconOffset,
+        self.worldMapPosition.y + self.mapMargin + region.worldMapPosition.y - self.iconOffset,
+        0,
+        scale,scale
+      )
     end
-
-    love.graphics.draw(worldMapSwords,
-      self.worldMapPosition.x + self.mapMargin + region.worldMapPosition.x - self.iconOffset,
-      self.worldMapPosition.y + self.mapMargin + region.worldMapPosition.y - self.iconOffset,
-      0,
-      scale,scale
-    )
   end
 
   love.graphics.setColor(1,1,1)
-  for i, region in pairs(self.leftmostDomain.regions) do
-    love.graphics.printf( i,
-      region.worldMapPosition.x + self.worldMapPosition.x + self.mapMargin,
-      region.worldMapPosition.y + self.worldMapPosition.y + self.mapMargin,
-      32, "left"
-    )
+  for i, domain in pairs(self.progressManager.activeDomains) do
+    for j, region in pairs(domain.regions) do
+      love.graphics.printf( j,
+        region.worldMapPosition.x + self.worldMapPosition.x + self.mapMargin,
+        region.worldMapPosition.y + self.worldMapPosition.y + self.mapMargin,
+        32, "left"
+      )
+    end
   end
 
   if self.hoverIndex ~= -1 then
-    self:displayRegionDetails(self.regions[self.hoverIndex])
-    self:displayDomainDetails(self.regions[self.hoverIndex].domain)
+    self:displayRegionDetails(self.progressManager.regions[self.hoverIndex])
+    self:displayDomainDetails(self.progressManager.regions[self.hoverIndex].domain)
   end
 end
 
@@ -224,7 +277,6 @@ function WorldMapState:displayDomainDetails(domain)
       xPos, yPos, width-6, "right"
     )
   end
-
   yPos = yPos + lineheight
 end
 
