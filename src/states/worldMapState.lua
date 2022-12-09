@@ -66,7 +66,10 @@ function WorldMapState:generateMap()
   self.mapImage = love.graphics.newImage(self.map)
 
   local domainImageData = love.image.newImageData(self.worldMapSize.x, self.worldMapSize.y)
-  self.domainMap = voronoi(self.worldMapSize, 10)
+
+  self.domainPoints = generate_poisson(self.activeMapSize.x, self.activeMapSize.y, 112, 30)
+  self.domainMap = voronoiImageFromPoints(self.worldMapSize, self.domainPoints)
+
   for y = 0, #self.domainMap do
     for x = 0, #self.domainMap[y] do
       domainImageData:setPixel(
@@ -81,6 +84,25 @@ function WorldMapState:generateMap()
 end
 
 function WorldMapState:generateLocations()
+  self.domains = {}
+
+  for k, point in pairs(self.domainPoints) do
+    local domain = Domain:new({
+      worldMapPosition = Vector:new(point.x, point.y),
+      nameGenerator = random(placeNameGenerators)
+    })
+    table.insert(self.domains, domain)
+  end
+
+  table.sort(self.domains, function(a, b)return a.worldMapPosition.x < b.worldMapPosition.x end)
+  self.leftmostDomain = self.domains[1]
+  self.rightmostDomain = self.domains[#self.domains]
+
+  local candidateDomains = domainsByDistance(self.leftmostDomain, self.domains)
+
+  table.insert(self.leftmostDomain.nextDomains, candidateDomains[1])
+  table.insert(self.leftmostDomain.nextDomains, candidateDomains[2])
+
   self.points = generate_poisson(self.activeMapSize.x, self.activeMapSize.y, 48, 30)
   self.nodes = {}
 
@@ -93,6 +115,28 @@ function WorldMapState:generateLocations()
   end
 end
 
+
+function domainsByDistance(domain, domains)
+  local orderedDomains = {}
+
+  for i, candidateDomain in pairs(domains) do
+    if candidateDomain ~= domain then
+      if not contains(orderedDomains, candidateDomain) then
+        table.insert(orderedDomains, candidateDomain)
+      end
+    end
+  end
+
+  local function compareDistance(a, b)
+    local distanceA = domain.worldMapPosition:distanceFrom(a.worldMapPosition)
+    local distanceB = domain.worldMapPosition:distanceFrom(b.worldMapPosition)
+    return distanceA < distanceB
+  end
+  
+  table.sort(orderedDomains, compareDistance)
+  return orderedDomains
+end
+
 function WorldMapState:render()
   love.graphics.draw(mapEdge, self.worldMapPosition.x -32, self.worldMapPosition.y-6)
   love.graphics.draw(mapEdge, self.worldMapPosition.x + self.worldMapSize.x+32, self.worldMapPosition.y-6, 0, -1, 1)
@@ -103,6 +147,14 @@ function WorldMapState:render()
 
   if self.showDomainMap then
     love.graphics.draw(self.domainMapImage, self.worldMapPosition.x, self.worldMapPosition.y)
+    for i, domain  in pairs(self.leftmostDomain.nextDomains) do
+      love.graphics.line(
+        self.leftmostDomain.worldMapPosition.x + self.worldMapPosition.x + self.mapMargin,
+        self.leftmostDomain.worldMapPosition.y + self.worldMapPosition.y + self.mapMargin,
+        domain.worldMapPosition.x + self.worldMapPosition.x + self.mapMargin,
+        domain.worldMapPosition.y + self.worldMapPosition.y + self.mapMargin
+    )
+    end
   end
 
   for k,node in pairs(self.nodes) do
