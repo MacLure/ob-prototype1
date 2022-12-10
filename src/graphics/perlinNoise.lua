@@ -14,9 +14,9 @@ function perlinNoise(size, params)
     for x = 1, size.x do
       index = (y-1) * size.x + x
       value = noise((x * inc.x + start.x), (y * inc.y + start.y)) * 0.55   			-- greyscale value in noise space
-      + noise(2.7 * (x * inc.x + start.x), 2.7 * (y * inc.y + start.y) ) * 0.54	-- add some higher order "harmonics"
-      + noise(3.7 * (x * inc.x + start.x), 3.7 * (y * inc.y + start.y) ) * 0.10
-      - noise(6.7 * (x * inc.x + start.x), 6.7 * (y * inc.y + start.y) ) * 0.20  -- the harmonics can be variant in x,y !!
+      + noise(2 * (x * inc.x + start.x), 2 * (y * inc.y + start.y) ) * 0.54	-- add some higher order "harmonics"
+      + noise(3 * (x * inc.x + start.x), 3 * (y * inc.y + start.y) ) * 0.10
+      - noise(6 * (x * inc.x + start.x), 6 * (y * inc.y + start.y) ) * 0.20  -- the harmonics can be variant in x,y !!
   
       local color = mixColors(color1, color2, value)
       perlinMap:setPixel(

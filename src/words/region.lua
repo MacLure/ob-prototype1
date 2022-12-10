@@ -9,12 +9,29 @@ function Region:new(params)
   end
 
   this.worldMapPosition = params.worldMapPosition
+  this.elevation = params.elevation
+  this.temperature = params.temperature
+  this.rainfall = params.rainfall
+  for k, v in pairs(landscapeList) do
+    if v({
+      elevation = this.elevation,
+      temperature = this.temperature,
+      rainfall = this.rainfall
+    }) then
+      this.landscape = k
+      break
+    end
+  end
+
+  if not this.landscape then
+    this.landscape = "forest"
+  end
+
   this.color = params.color
   this.cleared = false
 
   -- MODIFIERS
   this.topology = math.random(1,10)
-  this.temperature = math.random(1,10)
   this.vegetation = math.random(1,10)
 
   this.integratedness = math.random(1,10)
@@ -23,14 +40,9 @@ function Region:new(params)
   this.populationStatement = ""
 
   this.tags = params.tags or {}
-  this.landscape = params.landscape
 
   if this.temperature <= 4 then
     table.insert(this.tags, "cold")
-  end
-
-  if this.temperature >= 6 and this.landscape == "forest" then
-    this.landscape = "jungle"
   end
 
   -- NAMING
@@ -66,10 +78,10 @@ function Region:new(params)
   this.animals = {}
 
   for k,animal in pairs(words.animals) do
-    -- if containsFromArray(animal.tags, this.landscape) then
-    --   animal.name = k
-    --   table.insert(this.animals, animal)
-    -- end
+    if containsFromArray(animal.tags, {this.landscape}) then
+      animal.name = k
+      table.insert(this.animals, animal)
+    end
 
     if contains(animal.tags, this.landscape) then
       animal.name = k
@@ -77,6 +89,12 @@ function Region:new(params)
     end
   end
 
+  if #this.animals < 1 then
+    local animal = words.animals["wolf"]
+    animal.name = "wolf"
+    this.animals = {animal}
+  end
+  
   this.substances = {}
   for k,substance in pairs(words.substances) do
     -- if containsFromArray(v.tags, this.tags) then
@@ -88,6 +106,13 @@ function Region:new(params)
       table.insert(this.substances, substance)
     end
   end
+
+  if #this.substances < 1 then
+    local substance = words.substances["leaf"]
+    substance.name = "leaf"
+    this.substances = {substance}
+  end
+  
 
   this.golems = {}
   for k,v in pairs(this.substances) do

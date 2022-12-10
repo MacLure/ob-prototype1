@@ -20,7 +20,7 @@ function clamp(value, min, max)
   return math.max(min, math.min(value, max))
 end
 
-function round(n) -- culd replace wholeNumber
+function round(n) -- could replace wholeNumber
   if n < 0 then
     return math.ceil(n - 0.5)
   else

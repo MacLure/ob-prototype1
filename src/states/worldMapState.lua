@@ -108,20 +108,14 @@ function WorldMapState:update(dt)
 end
 
 function WorldMapState:generateMap()
-  local topography = perlinNoise(self.worldMapSize)
-  self.topographyImage = love.graphics.newImage(topography)
+  self.elevation = perlinNoise(self.worldMapSize)
+  self.elevationImage = love.graphics.newImage(self.elevation)
 
-  local temperature = temperaturePerlin(self.worldMapSize, {
-    color1 = color.blue,
-    color2 = color.orange
-  })
-  self.temperatureImage = love.graphics.newImage(temperature)
+  self.temperature = temperaturePerlin(self.worldMapSize)
+  self.temperatureImage = love.graphics.newImage(self.temperature)
 
-  local rainfall = temperaturePerlin(self.worldMapSize, {
-    color1 = color.blue,
-    color2 = color.white
-  })
-  self.rainfallImage = love.graphics.newImage(rainfall)
+  self.rainfall = temperaturePerlin(self.worldMapSize)
+  self.rainfallImage = love.graphics.newImage(self.rainfall)
 end
 
 function WorldMapState:generateDomains()
@@ -169,7 +163,9 @@ function WorldMapState:generateRegions()
 
   for k, point in pairs(self.points) do
     local region = Region:new({
-      landscape = random(landscapes),
+      elevation = round(self.elevation:getPixel(point.x+self.mapMargin ,point.y+self.mapMargin)*100 - 30),
+      temperature = round(self.temperature:getPixel(point.x+self.mapMargin, point.y+self.mapMargin)*100),
+      rainfall = round(self.rainfall:getPixel(point.x+self.mapMargin, point.y+self.mapMargin)*100),
       worldMapPosition = Vector:new(point.x, point.y),
       color = self.domainMap[math.floor(point.y + self.mapMargin)][math.floor(point.x + self.mapMargin)],
       progressManager = self.progressManager
@@ -199,7 +195,7 @@ function WorldMapState:render()
   love.graphics.draw(mapEdge, self.worldMapPosition.x + self.worldMapSize.x+32, self.worldMapPosition.y-6, 0, -1, 1)
     
   love.graphics.setShader(gShaders['worldMap'])
-  love.graphics.draw(self.topographyImage, self.worldMapPosition.x, self.worldMapPosition.y)
+  love.graphics.draw(self.elevationImage, self.worldMapPosition.x, self.worldMapPosition.y)
   love.graphics.setShader()
 
   if self.displayLayer == "domain" then
@@ -309,9 +305,19 @@ function WorldMapState:displayRegionDetails(region)
   yPos = yPos + lineheight
 
   love.graphics.setColor(1,1,1)
-  for i, faction in pairs(region.factions) do
-    love.graphics.printf( faction.name,
-    xPos, yPos, width, "left" )
-    yPos = yPos + lineheight
-  end
+  -- for i, faction in pairs(region.factions) do
+  --   love.graphics.printf( faction.name,
+  --   xPos, yPos, width, "left" )
+  --   yPos = yPos + lineheight
+  -- end
+
+  love.graphics.printf( "temperature: "..region.temperature, xPos, yPos, width, "left" )
+  yPos = yPos + lineheight
+  love.graphics.printf( "rainfall: "..region.rainfall, xPos, yPos, width, "left" )
+  yPos = yPos + lineheight
+  love.graphics.printf( "elevation: "..region.elevation, xPos, yPos, width, "left" )
+  yPos = yPos + lineheight
+  love.graphics.printf( region.landscape, xPos, yPos, width, "left" )
+  yPos = yPos + lineheight
+
 end

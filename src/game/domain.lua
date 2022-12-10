@@ -37,6 +37,7 @@ function Domain:orderRegionsByDistance(point, direction)
 end
 
 function Domain:clear()
+  if self.cleared then return end
   self.cleared = true
 
   local nextDomain = self:domainsByDistance()[1]
@@ -54,7 +55,12 @@ end
 function Domain:domainsByDistance()
   local orderedDomains = {}
 
-  local availableDomains = filter(self.progressManager.domains, function(domain) return not domain.cleared end)
+  local availableDomains = filter(
+    self.progressManager.domains,
+    function(domain)
+      return not domain.cleared and not contains(self.progressManager.activeDomains, domain)
+    end
+  )
 
   for i, candidateDomain in pairs(availableDomains) do
     if candidateDomain ~= self then
